@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BattleTest : MonoBehaviour
 {
-    private int m_maxEnemCnt = 10;
+    private int m_maxEnemCnt = 30;
     private int m_actvEnemCnt = 0;
 
 
-    private int m_maxPlanetHP = 50;
-    private int m_curPlanetHP = 50;
+    private int m_maxPlanetHP = 2000;
+    private int m_curPlanetHP = 2000;
 
     private int m_gearCnt = 20;
     private int m_eleCircuitCnt = 20;
@@ -40,7 +40,7 @@ public class BattleTest : MonoBehaviour
 
             BattleGameObjectMgr.Inst.UpdateEnemyCnt(m_maxEnemCnt, m_actvEnemCnt);
 
-            m_curPlanetHP -= 5;
+            m_curPlanetHP -= 20;
 
             if (m_curPlanetHP < 0)
                 m_curPlanetHP = m_maxPlanetHP;

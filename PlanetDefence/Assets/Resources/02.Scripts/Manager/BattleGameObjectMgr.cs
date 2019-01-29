@@ -85,7 +85,7 @@ public class BattleGameObjectMgr : MonoBehaviour
     public void UpdateEnemyCnt(int maxEnemyCnt, int destroyedEnemyCnt)
     {
         m_enemyCntCtrl.MaxEnemyCnt = maxEnemyCnt;
-        m_enemyCntCtrl.DestroyedEnemyCnt = destroyedEnemyCnt;           
+        m_enemyCntCtrl.DestroyedEnemyCnt = destroyedEnemyCnt;
     }
 
     public void UpdatePlanetHP(int maxHP, int curHP)

@@ -58,6 +58,6 @@ public class PlanetHPCtrl : MonoBehaviour
 
         m_barImg.fillAmount = m_curRatio;
 
-        m_hpTxt.text = m_curHP.ToString() + " / " + m_maxHP.ToString();
+        m_hpTxt.text = "HP : " + m_curHP.ToString() + " / " + m_maxHP.ToString();
     }
 }

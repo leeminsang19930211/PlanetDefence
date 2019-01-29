@@ -52,6 +52,9 @@ TagManager:
   - name: BackGround
     uniqueID: 2704018043
     locked: 0
+  - name: GameObject_Back
+    uniqueID: 3271386761
+    locked: 0
   - name: GameObject
     uniqueID: 4153457833
     locked: 0
