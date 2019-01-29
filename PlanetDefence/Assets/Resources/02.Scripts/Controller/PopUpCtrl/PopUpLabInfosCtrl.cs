@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopUpLabInfoExitCtrl : MonoBehaviour
+public class PopUpLabInfosCtrl : MonoBehaviour
 {
     public void OnClick()
     {
-        BattleGameObjectMgr.Inst.PopUpLabInfoExit();
+        BattleGameObjectMgr.Inst.PopUpLabInfos();
     }
 }

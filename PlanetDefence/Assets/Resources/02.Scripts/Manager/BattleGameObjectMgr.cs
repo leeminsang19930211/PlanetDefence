@@ -33,20 +33,22 @@ public class BattleGameObjectMgr : MonoBehaviour
     private GameObject m_laboratoryPopUp = null;
     private GameObject m_labScroll = null;
     private GameObject m_repairScroll = null;
-    private GameObject m_labInfoScroll = null;
     private GameObject m_rightArrow = null;
     private GameObject m_leftArrow = null;
+
+    private GameObject[] m_LabButtons;
+    private GameObject[] m_LabInfoScrolls;
 
     public Vector3 PlanetPos
     {
         get
         {
-           return  m_planetTransform.position;
+            return m_planetTransform.position;
         }
     }
 
     public void Init()
-    {      
+    {
         m_mainCameraCtrl = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<MainCameraCtrl>();
         m_enemyCntCtrl = GameObject.FindGameObjectWithTag("ENEMY_CNT")?.GetComponent<EnemyCntCtrl>();
         m_planetHpCtrl = GameObject.FindGameObjectWithTag("PLANET_HP")?.GetComponent<PlanetHPCtrl>();
@@ -60,9 +62,11 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_laboratoryPopUp = GameObject.FindGameObjectWithTag("LABORATORY_POPUP");
         m_labScroll = GameObject.Find("LabScroll");
         m_repairScroll = GameObject.Find("RepairScroll");
-        m_labInfoScroll = GameObject.Find("LabInfoScroll");
         m_rightArrow = GameObject.Find("RightArrow");
         m_leftArrow = GameObject.Find("LeftArrow");
+
+        m_LabButtons = GameObject.FindGameObjectsWithTag("LABBUTTON");
+        m_LabInfoScrolls = GameObject.FindGameObjectsWithTag("LABINFO");
 
         m_laboratoryPopUp.SetActive(false);
     }
@@ -116,14 +120,16 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_leftArrow.SetActive(false);
         m_labScroll.SetActive(true);
         m_repairScroll.SetActive(false);
-        m_labInfoScroll.SetActive(false);
+        foreach (GameObject m_LabInfoScroll in m_LabInfoScrolls)
+        {
+            m_LabInfoScroll.SetActive(false);
+        }
     }
 
     public void PopUpRepair()
     {
         m_labScroll.SetActive(false);
         m_repairScroll.SetActive(true);
-        m_labInfoScroll.SetActive(false);
     }
 
     public void PopUpExit()
@@ -133,13 +139,19 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_leftArrow.SetActive(true);
     }
 
-    public void PopUpLabInfo()
+    // test
+    public void PopUpLabInfos()
     {
-        m_labInfoScroll.SetActive(true);
-    }
+        int ButtonIndex;
 
-    public void PopUpLabInfoExit()
-    {
-        m_labInfoScroll.SetActive(false);
+        for (int i = 0; i < m_LabButtons.Length; i++)
+        {
+            if (this.gameObject == m_LabButtons[i])
+            {
+                ButtonIndex = i;
+
+                m_LabInfoScrolls[ButtonIndex].SetActive(true);
+            }
+        }
     }
 }
