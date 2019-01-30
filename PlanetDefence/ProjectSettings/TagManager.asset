@@ -12,6 +12,10 @@ TagManager:
   - PLANET
   - LABORATORY_POPUP
   - LAB
+  - LABINFO
+  - LABBUTTON
+  - TURRET_SUPPORT
+  - NORMAL_TURRET
   layers:
   - Default
   - TransparentFX

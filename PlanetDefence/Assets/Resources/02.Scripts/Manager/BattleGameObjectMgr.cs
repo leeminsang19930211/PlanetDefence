@@ -55,10 +55,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_resourceCtrl = GameObject.FindGameObjectWithTag("RESOURCE")?.GetComponent<ResourceCtrl>();
         m_miniPlanetCtrl = GameObject.FindGameObjectWithTag("MINIPLANET")?.GetComponent<MiniPlanetCtrl>();
         m_planetTransform = GameObject.FindGameObjectWithTag("PLANET")?.GetComponent<Transform>();
-    }
 
-    public void Start()
-    {
         m_laboratoryPopUp = GameObject.FindGameObjectWithTag("LABORATORY_POPUP");
         m_labScroll = GameObject.Find("LabScroll");
         m_repairScroll = GameObject.Find("RepairScroll");

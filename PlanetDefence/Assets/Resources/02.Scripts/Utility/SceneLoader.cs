@@ -31,7 +31,6 @@ public class SceneLoader : MonoBehaviour
         {
             SceneManager.LoadScene("Lobby");
             GlobalGameObjectMgr.Inst.DontDestroyOnLoad("Battle");
-
         }
         else
         {

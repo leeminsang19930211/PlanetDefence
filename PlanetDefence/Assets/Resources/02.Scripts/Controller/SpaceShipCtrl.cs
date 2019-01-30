@@ -204,6 +204,6 @@ public class SpaceShipCtrl : MonoBehaviour
         if (curDist == 0)
             return 0;
 
-        return stdDist / curDist;
+        return 1f; // 테스트용
     }
 }

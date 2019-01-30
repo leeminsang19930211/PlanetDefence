@@ -30,6 +30,7 @@ public class LoadingBarCtrl: MonoBehaviour
         StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/Lobby", "Lobby"));
         StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/Choice", "Choice"));
         StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/Battle", "Battle"));
+        StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/Turrets", "Turrets"));
 
         // 로딩바 테스트용으로 속도 늦추기
         //m_requests.Add(Resources.LoadAsync("99.External/Standard Assets"));
@@ -41,12 +42,15 @@ public class LoadingBarCtrl: MonoBehaviour
         m_progressImage.fillAmount = progress;
 
 #if UNITY_EDITOR || UNITY_STANDALONE
-        if (Input.GetKeyDown(KeyCode.Return))
+
+        if (progress >= 1f)
         {
-           if(progress >=  1f)
-           {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                BeforeChaningScene();
+
                 SceneLoader.LoadScene("Lobby");
-           }
+            }
         }
 
 #else
@@ -98,5 +102,10 @@ public class LoadingBarCtrl: MonoBehaviour
         }
 
         return sum / m_maxRsrc;
+    }
+
+    private void BeforeChaningScene()
+    {
+
     }
 }
