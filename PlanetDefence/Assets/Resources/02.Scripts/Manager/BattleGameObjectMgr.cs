@@ -50,7 +50,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
-    public void Init()
+    public void Awake()
     {
         m_mainCameraCtrl = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<MainCameraCtrl>();
         m_enemyCntCtrl = GameObject.FindGameObjectWithTag("ENEMY_CNT")?.GetComponent<EnemyCntCtrl>();

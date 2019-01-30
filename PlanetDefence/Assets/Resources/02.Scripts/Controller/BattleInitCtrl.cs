@@ -11,7 +11,7 @@ public class BattleInitCtrl : MonoBehaviour
 
         GlobalGameObjectMgr.Inst.MoveGameObjectToScene("Battle", "Battle");
 
-        BattleGameObjectMgr.Inst.Init();
+        //BattleGameObjectMgr.Inst.Init();
 
         GameObject turrets = GlobalGameObjectMgr.Inst.FindGameObject("Turrets");
 
