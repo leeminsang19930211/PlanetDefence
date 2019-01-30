@@ -9,13 +9,23 @@ public class CardCtrl : MonoBehaviour
     public Transform Contents;
 
     private string sCardPrefabDir;
-    Object[] Cards;
+    private Object[] Cards;
+    private GameObject[] CardsClone;
 
-    Ray ray;
-    RaycastHit hit;
+    private Ray ray;
+    private RaycastHit hit;
 
-    void ChoiceRandomCard(CardType eEvnetType)
+    [SerializeField]
+    private int nCardNum = 3;
+
+    private bool ChoiceRandomCard(CardType eEvnetType)
     {
+        for (int i = 0; i < nCardNum; i++)
+        {
+            if (CardsClone[i])
+                return false;
+        }
+
         if (eEvnetType == CardType.Normal)
         {
             sCardPrefabDir = "03.Prefabs/Card/Normal";
@@ -32,36 +42,58 @@ public class CardCtrl : MonoBehaviour
         Cards = Resources.LoadAll(sCardPrefabDir);
         int nMaxCards = Cards.Length;
         RandomInstanceCardCreate(nMaxCards);
+
+        return true;
     }
 
-    void RandomInstanceCardCreate(int nCardNum)
+    private void RandomInstanceCardCreate(int nMaxNum)
     {
-        for(int i = 0; i< 3; i++)
+        for (int i = 0; i< nCardNum; i++)
         {
-            int nRandomInt = Random.Range(0, nCardNum);
+            int nRandomInt = Random.Range(0, nMaxNum);
             GameObject CardPrefab = MonoBehaviour.Instantiate((GameObject)Cards[nRandomInt]);
             CardPrefab.name = "Card";
             CardPrefab.transform.SetParent(Contents);
+            CardsClone[i] = CardPrefab;
+        }
+    }
+
+    public void DeleteCards()
+    {
+        for (int i = 0; i < nCardNum; i++)
+        {
+            Destroy(CardsClone[i]);
+            CardsClone[i] = null;
         }
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        //Test
+        if (Input.GetKeyDown(KeyCode.A))
         {
             ChoiceRandomCard(CardType.Normal);
         }
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out hit, 10.0f))
-            {
-                if (hit.collider.tag == "Card")
-                {
-                    Debug.Log("Load");
-                }
-            }
+            DeleteCards();
         }
+    }
+    
+    void Awake()
+    {
+        CardsClone = new GameObject[nCardNum];
+        CardsClone.Initialize();
+    }
+
+    void OnEnable()
+    {
+        ChoiceRandomCard(CardType.Normal);
+    }
+
+    void OnDisable()
+    {
+        //DeleteCards();
     }
 
 }

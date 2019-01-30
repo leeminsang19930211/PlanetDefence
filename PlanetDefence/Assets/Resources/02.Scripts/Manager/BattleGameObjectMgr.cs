@@ -30,11 +30,14 @@ public class BattleGameObjectMgr : MonoBehaviour
     private MiniPlanetCtrl m_miniPlanetCtrl = null;
     private Transform m_planetTransform = null;
 
+
     private GameObject m_laboratoryPopUp = null;
     private GameObject m_labScroll = null;
     private GameObject m_repairScroll = null;
     private GameObject m_rightArrow = null;
     private GameObject m_leftArrow = null;
+    private GameObject m_ButtonLabFake = null;
+    private GameObject m_ButtonRepairFake = null;
 
     private GameObject[] m_LabButtons;
     private GameObject[] m_LabInfoScrolls;
@@ -61,6 +64,8 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_repairScroll = GameObject.Find("RepairScroll");
         m_rightArrow = GameObject.Find("RightArrow");
         m_leftArrow = GameObject.Find("LeftArrow");
+        m_ButtonLabFake = GameObject.Find("Button_Lab_fake");
+        m_ButtonRepairFake = GameObject.Find("Button_Repair_fake");
 
         m_LabButtons = GameObject.FindGameObjectsWithTag("LABBUTTON");
         m_LabInfoScrolls = GameObject.FindGameObjectsWithTag("LABINFO");
@@ -117,6 +122,8 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_leftArrow.SetActive(false);
         m_labScroll.SetActive(true);
         m_repairScroll.SetActive(false);
+        m_ButtonLabFake.SetActive(true);
+        m_ButtonRepairFake.SetActive(false);
         foreach (GameObject m_LabInfoScroll in m_LabInfoScrolls)
         {
             m_LabInfoScroll.SetActive(false);
@@ -127,6 +134,8 @@ public class BattleGameObjectMgr : MonoBehaviour
     {
         m_labScroll.SetActive(false);
         m_repairScroll.SetActive(true);
+        m_ButtonLabFake.SetActive(false);
+        m_ButtonRepairFake.SetActive(true);
     }
 
     public void PopUpExit()
@@ -137,18 +146,55 @@ public class BattleGameObjectMgr : MonoBehaviour
     }
 
     // test
-    public void PopUpLabInfos()
+
+    public void PopUpLabInfos(GameObject ThisLabButton)
     {
-        int ButtonIndex;
+        int LabButtonIdx = System.Array.IndexOf(m_LabButtons, ThisLabButton);
 
-        for (int i = 0; i < m_LabButtons.Length; i++)
+        m_LabInfoScrolls[LabButtonIdx].SetActive(true);
+
+    }
+
+    public void LabInfosExit()
+    {
+        for (int i = 0; i < m_LabInfoScrolls.Length; i++)
         {
-            if (this.gameObject == m_LabButtons[i])
-            {
-                ButtonIndex = i;
+            m_LabInfoScrolls[i].SetActive(false);
+        }
+    }
 
-                m_LabInfoScrolls[ButtonIndex].SetActive(true);
+    public void LabInfosNext()
+    {
+        for (int i = 0; i < m_LabInfoScrolls.Length; i++)
+        {
+            if (m_LabInfoScrolls[i].activeSelf == true)
+            {
+                int LabInfoIdx = i;
+
+                m_LabInfoScrolls[LabInfoIdx].SetActive(false);
+                m_LabInfoScrolls[LabInfoIdx + 1].SetActive(true);
+
+                return;
             }
+
+        }
+
+    }
+
+    public void LabInfosPrev()
+    {
+        for (int i = 0; i < m_LabInfoScrolls.Length; i++)
+        {
+            if (m_LabInfoScrolls[i].activeSelf == true)
+            {
+                int LabInfoIdx = i;
+
+                m_LabInfoScrolls[LabInfoIdx].SetActive(false);
+                m_LabInfoScrolls[LabInfoIdx - 1].SetActive(true);
+
+                return;
+            }
+
         }
     }
 }
