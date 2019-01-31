@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToLobbyButtonCtrl : MonoBehaviour
+public class ToLobby_CancelButtonCtrl : MonoBehaviour
 {
     public void OnClick()
     {
-        BattleGameObjectMgr.Inst.PopUpToLobby();
-
-        
+        BattleGameObjectMgr.Inst.PopDownToLobby();
     }
 }

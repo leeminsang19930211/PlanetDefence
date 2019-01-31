@@ -42,7 +42,8 @@ public class SpaceShipCtrl : MonoBehaviour
         }
     }
 
-    private void Awake()
+    // 자식 우주선에서 호출해줄것
+    protected void Init()
     {
         m_stateProcs[(int)STATE.FALLING] = StateProc_Falling;
         m_stateProcs[(int)STATE.STAYING] = StateProc_Staying;

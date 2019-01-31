@@ -6,7 +6,7 @@ public class SpaceShipAACtrl : SpaceShipCtrl
 { 
     void Start()
     {
-        
+        base.Init();
     }
 
     void Update()

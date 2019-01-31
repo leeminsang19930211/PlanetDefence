@@ -27,26 +27,41 @@ public class TurretMgr : MonoBehaviour
     private List<TurretSupportCtrl> m_turretSupportCtrs = new List<TurretSupportCtrl>();
     private Dictionary<string, GameObject> m_turrets = new Dictionary<string, GameObject>();
 
-    public void Init()
+
+    public void Instance()
+    {
+        if (m_inst == null)
+        {
+            GameObject container = new GameObject();
+            container.name = "TurretMgr";
+            m_inst = container.AddComponent<TurretMgr>() as TurretMgr;
+            DontDestroyOnLoad(container);
+        }
+    }
+
+    public void Awake()
+    {
+        GameObject turrets = GlobalGameObjectMgr.Inst.FindGameObject("Turrets");
+
+        // 테스트 환경 용.씬에서 직접 프리팹을 추가해서 테스트 하는경우에는 GlobalGameObjectMgr.Inst 에 추가가 안되있다
+        if (turrets == null)
+        {
+            turrets = GameObject.Find("Turrets");
+        }
+
+        if (turrets)
+        {
+            // 잠깐 TurretMgr에서 검색할수 있도록 켰다 끈다
+            turrets.SetActive(true);
+            Init();
+            turrets.SetActive(false);
+        }
+    }
+
+    private void Init()
     {
         AddTurret("NormalTurret");
-
-        GameObject[] turretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
-
-        for(int i=0; i< turretSupports.Length; ++i)
-        {
-            TurretSupportCtrl ctrl = turretSupports[i].GetComponent<TurretSupportCtrl>();
-
-            if (ctrl == null)
-            {
-                Debug.LogError("Finding turretSupportsCtrl failed");
-                continue;
-            }
-
-            ctrl.Idx = i;
-
-            m_turretSupportCtrs.Add(ctrl);
-        }
+        AddTurretSupports();
     }
 
     public bool CreateTurretOnTurretSupport(string turretName)
@@ -110,5 +125,25 @@ public class TurretMgr : MonoBehaviour
            
         m_turrets.Add(name, turret);
         return true;
+    }
+
+    private void AddTurretSupports()
+    {
+        GameObject[] turretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
+
+        for (int i = 0; i < turretSupports.Length; ++i)
+        {
+            TurretSupportCtrl ctrl = turretSupports[i].GetComponent<TurretSupportCtrl>();
+
+            if (ctrl == null)
+            {
+                Debug.LogError("Finding turretSupportsCtrl failed");
+                continue;
+            }
+
+            ctrl.Idx = i;
+
+            m_turretSupportCtrs.Add(ctrl);
+        }
     }
 }

@@ -30,6 +30,7 @@ public class BattleGameObjectMgr : MonoBehaviour
     private MiniPlanetCtrl m_miniPlanetCtrl = null;
     private Transform m_planetTransform = null;
 
+    private GameObject m_toLobbyPopUpPanel = null;
 
     private GameObject m_laboratoryPopUp = null;
     private GameObject m_labScroll = null;
@@ -50,6 +51,17 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
+    public void Instance()
+    {
+        if (m_inst == null)
+        {
+            GameObject container = new GameObject();
+            container.name = "BattleGameObjectMgr";
+            m_inst = container.AddComponent<BattleGameObjectMgr>() as BattleGameObjectMgr;
+            DontDestroyOnLoad(container);
+        }
+    }
+
     public void Awake()
     {
         m_mainCameraCtrl = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<MainCameraCtrl>();
@@ -58,6 +70,9 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_resourceCtrl = GameObject.FindGameObjectWithTag("RESOURCE")?.GetComponent<ResourceCtrl>();
         m_miniPlanetCtrl = GameObject.FindGameObjectWithTag("MINIPLANET")?.GetComponent<MiniPlanetCtrl>();
         m_planetTransform = GameObject.FindGameObjectWithTag("PLANET")?.GetComponent<Transform>();
+
+        m_toLobbyPopUpPanel = GameObject.Find("ToLobbyPopUpPanel");
+        PopDownToLobby();
 
         m_laboratoryPopUp = GameObject.FindGameObjectWithTag("LABORATORY_POPUP");
         m_labScroll = GameObject.Find("LabScroll");
@@ -143,6 +158,16 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_laboratoryPopUp.SetActive(false);
         m_rightArrow.SetActive(true);
         m_leftArrow.SetActive(true);
+    }
+
+    public void PopUpToLobby()
+    {
+        m_toLobbyPopUpPanel.SetActive(true);
+    }
+
+    public void PopDownToLobby()
+    {
+        m_toLobbyPopUpPanel.SetActive(false);
     }
 
     // test

@@ -31,6 +31,7 @@ public class LoadingBarCtrl: MonoBehaviour
         StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/Choice", "Choice"));
         StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/Battle", "Battle"));
         StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/Turrets", "Turrets"));
+        StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/SpaceShips", "SpaceShips"));
 
         // 로딩바 테스트용으로 속도 늦추기
         //m_requests.Add(Resources.LoadAsync("99.External/Standard Assets"));
