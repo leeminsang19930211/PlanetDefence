@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 700662154087287818}
   - component: {fileID: 4356518684219879248}
   m_Layer: 0
-  m_Name: 1
+  m_Name: One
   m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda5a2e0b8d966d439bf4b96e340e081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sCardName: 1
+  sCardName: One
   eCardType: 1
   Waves:
   - eMobType: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}

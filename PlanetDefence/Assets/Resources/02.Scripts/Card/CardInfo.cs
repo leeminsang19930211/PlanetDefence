@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//승완 작업 -------Start-------- 190131 
 public enum CardType
 {
     None,
@@ -36,7 +37,10 @@ public class CardInfo : MonoBehaviour
     public void Selected()
     {
         FindObjectOfType<CardCtrl>().DeleteCards();
-
+        GlobalGameObjectMgr.SelectedCard = this;
+        GlobalGameObjectMgr.bSelected = true;
         SceneLoader.LoadScene("Battle");
+        Debug.Log(GlobalGameObjectMgr.SelectedCard.sCardName);
     }
 }
+//승완 작업 --------End--------- 190131 
