@@ -51,6 +51,12 @@ public class BattleGameObjectMgr : MonoBehaviour
     private GameObject[] m_BuildButtons;
     private GameObject[] m_BuildInfoScrolls;
 
+    // 추가
+    private GameObject m_RemoveInfoScroll;
+    private GameObject m_RemoveWarning;
+    private GameObject[] m_TurretSupports;
+
+
     public Vector3 PlanetPos
     {
         get
@@ -97,8 +103,13 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_LabInfoScrolls = GameObject.FindGameObjectsWithTag("LABINFO");
         m_RepairButtons = GameObject.FindGameObjectsWithTag("REPAIRBUTTON");
         m_RepairInfoScrolls = GameObject.FindGameObjectsWithTag("REPAIRINFO");
-        //m_BuildButtons = GameObject.FindGameObjectsWithTag("BUILDBUTTON");
-        //m_BuildInfoScrolls = GameObject.FindGameObjectsWithTag("BUILDINFO");
+        m_BuildButtons = GameObject.FindGameObjectsWithTag("BUILDBUTTON");
+        m_BuildInfoScrolls = GameObject.FindGameObjectsWithTag("BUILDINFO");
+
+        // 추가
+        m_RemoveInfoScroll = GameObject.FindGameObjectWithTag("REMOVEINFO");
+        m_RemoveWarning = GameObject.Find("RemoveWarningPanel");
+        m_TurretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
 
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);
@@ -178,7 +189,6 @@ public class BattleGameObjectMgr : MonoBehaviour
     {
         m_laboratoryPopUp.SetActive(false);
 
-        // 추가
         m_buildPopUp.SetActive(false);
 
         m_rightArrow.SetActive(true);
@@ -195,8 +205,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_toLobbyPopUpPanel.SetActive(false);
     }
 
-    // test
-
+    
     public void PopUpLabInfos(GameObject ThisLabButton)
     {
         int LabButtonIdx = System.Array.IndexOf(m_LabButtons, ThisLabButton);
@@ -300,6 +309,8 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
+    // 추가
+
     public void PopUpBuild()
     {
         m_buildPopUp.SetActive(true);
@@ -307,5 +318,91 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_leftArrow.SetActive(false);
         m_buildScroll.SetActive(true);
         m_ButtonBuildFake.SetActive(true);
+        foreach (GameObject m_BuildInfoScroll in m_BuildInfoScrolls)
+        {
+            m_BuildInfoScroll.SetActive(false);
+        }
+        m_RemoveInfoScroll.SetActive(false);
+        m_RemoveWarning.SetActive(false);
+
+    }
+
+    public void PopUpBuildInfos(GameObject ThisBuildButton)
+    {
+        int BuildButtonIdx = System.Array.IndexOf(m_BuildButtons, ThisBuildButton);
+
+        m_BuildInfoScrolls[BuildButtonIdx].SetActive(true);
+
+    }
+
+    public void BuildInfosExit()
+    {
+        for (int i = 0; i < m_BuildInfoScrolls.Length; i++)
+        {
+            m_BuildInfoScrolls[i].SetActive(false);
+            m_RemoveInfoScroll.SetActive(false);
+        }
+    }
+
+    public void BuildInfosNext()
+    {
+        for (int i = 0; i < m_BuildInfoScrolls.Length; i++)
+        {
+            if (m_BuildInfoScrolls[i].activeSelf == true)
+            {
+                int BuildInfoIdx = i;
+
+                m_BuildInfoScrolls[BuildInfoIdx].SetActive(false);
+                m_BuildInfoScrolls[BuildInfoIdx + 1].SetActive(true);
+
+                return;
+            }
+
+        }
+
+    }
+
+    public void BuildInfosPrev()
+    {
+        for (int i = 0; i < m_BuildInfoScrolls.Length; i++)
+        {
+            if (m_BuildInfoScrolls[i].activeSelf == true)
+            {
+                int BuildInfoIdx = i;
+
+                m_BuildInfoScrolls[BuildInfoIdx].SetActive(false);
+                m_BuildInfoScrolls[BuildInfoIdx - 1].SetActive(true);
+
+                return;
+            }
+
+        }
+    }
+
+    public void PopUpRemoveInfo()
+    {
+        m_RemoveInfoScroll.SetActive(true);
+    }
+
+    public void RemoveInfotoBuild()
+    {
+        m_RemoveInfoScroll.SetActive(false);
+        m_BuildInfoScrolls[0].SetActive(true);
+    }
+
+    public void BuildtoRemoveInfo()
+    {
+        m_BuildInfoScrolls[0].SetActive(false);
+        m_RemoveInfoScroll.SetActive(true);
+    }
+
+    public void PopUpRemoveWarning()
+    {
+        m_RemoveWarning.SetActive(true);
+    }
+
+    public void ExitRemoveWarning()
+    {
+        m_RemoveWarning.SetActive(false);
     }
 }
