@@ -61,6 +61,7 @@ public class TurretMgr : MonoBehaviour
     private void Init()
     {
         AddTurret("NormalTurret");
+        AddTurret("LaserTurret");
         AddTurretSupports();
     }
 

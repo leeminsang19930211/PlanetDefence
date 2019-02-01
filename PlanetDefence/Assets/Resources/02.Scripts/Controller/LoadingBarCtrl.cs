@@ -25,7 +25,7 @@ public class LoadingBarCtrl: MonoBehaviour
     void Start()
     {
         Image[] images = GetComponentsInChildren<Image>();
-        m_progressImage = images[0];  // 첫번째 이미지가 ProgressImage 이다
+        m_progressImage = images[1];  // 첫번째 이미지가 ProgressImage 이다
 
         StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/Lobby", "Lobby"));
         StartCoroutine("LoadPrefab", new LoadInfo("03.Prefabs/Earlier/Choice", "Choice"));
