@@ -25,15 +25,14 @@ public class TurretMgr : MonoBehaviour
     private int m_focusedTurretSupportIdx = -1; // 클릭하여 현재 포커싱 된 터렛 지지대의 인덱스이다
 
     private List<TurretSupportCtrl> m_turretSupportCtrs = new List<TurretSupportCtrl>();
-    private Dictionary<string, GameObject> m_turrets = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> m_sourceTurrets = new Dictionary<string, GameObject>();
 
-
-    public void Instance()
+    public void Instantiate()
     {
         if (m_inst == null)
         {
             GameObject container = new GameObject();
-            container.name = "TurretMgr";
+            container.name = "BattleGameObjectMgr";
             m_inst = container.AddComponent<TurretMgr>() as TurretMgr;
             DontDestroyOnLoad(container);
         }
@@ -53,23 +52,30 @@ public class TurretMgr : MonoBehaviour
         {
             // 잠깐 TurretMgr에서 검색할수 있도록 켰다 끈다
             turrets.SetActive(true);
-            Init();
+            SetUpTurrets();
             turrets.SetActive(false);
         }
     }
 
-    private void Init()
+    private void SetUpTurrets()
     {
         AddTurret("NormalTurret");
         AddTurret("LaserTurret");
         AddTurretSupports();
     }
 
+    // Turrets 프리팹에 있는 터렛 이름을 입력하면 현재 포커시된 터렛 지지대 위에 그 터렛을 만들어준다.
     public bool CreateTurretOnTurretSupport(string turretName)
     {
         if(m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
         {
             Debug.Log("the focus idx is out of the range");
+            return false;
+        }
+
+        if(CheckTurretOnTurretSupport() == true)
+        {
+            Debug.Log("the turret support has a turret");
             return false;
         }
         
@@ -81,15 +87,70 @@ public class TurretMgr : MonoBehaviour
 
         GameObject turret = null;
             
-        if(false ==  m_turrets.TryGetValue(turretName, out turret))
+        if(false ==  m_sourceTurrets.TryGetValue(turretName, out turret))
         {
             Debug.Log("Finding turret in the Dictionary failed");
             return false;
         }
 
-        Instantiate<GameObject>(turret, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0,0,0));
+        Transform parentTrsf = GameObject.Find("BattleStatic")?.GetComponent<Transform>();
 
-        return false;
+        if (parentTrsf == null)
+        {
+            Debug.Log("The BattleStatic inst is not found");
+            return false;
+        }
+
+        float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
+
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretInst = Instantiate(turret, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0,0, angle), parentTrsf);
+
+        return true;
+    }
+
+    // 현재 포커싱된 터렛 지지대 위에 터렛을 삭제한다
+    public bool RemoveTurretOnTurretSupport()
+    {
+        if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
+        {
+            Debug.Log("the focus idx is out of the range");
+            return false;
+        }
+
+        if (CheckTurretOnTurretSupport() == false)
+        {
+            Debug.Log("the turret support has a no turret");
+            return false;
+        }
+
+        if (m_turretSupportCtrs[m_focusedTurretSupportIdx].Focus == false)
+        {
+            Debug.Log("the turret support is not focused");
+            return false;
+        }
+
+        Destroy(m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretInst);
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretInst = null;
+
+        return true;
+    }
+
+    // 현재 포커싱된 터렛 지지대 위에 터렛이 있으면 true를 반환한다
+    public bool CheckTurretOnTurretSupport()
+    {
+        if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
+        {
+            Debug.Log("the focus idx is out of the range");
+            return false;
+        }
+
+        if (m_turretSupportCtrs[m_focusedTurretSupportIdx].Focus == false)
+        {
+            Debug.Log("the turret support is not focused");
+            return false;
+        }
+
+        return m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretInst != null;
     }
 
     // 터렛 지지대가 눌릴때 호출해야 하는 함수이다. 호출해서 자신이 포커싱 된것을 알려줘야한다.
@@ -124,7 +185,7 @@ public class TurretMgr : MonoBehaviour
             return false;
         }
            
-        m_turrets.Add(name, turret);
+        m_sourceTurrets.Add(name, turret);
         return true;
     }
 

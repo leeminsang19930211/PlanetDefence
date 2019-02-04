@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 300272482493833380}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.25, y: 2.25, z: 1}
   m_Children: []
   m_Father: {fileID: 7342356059077564409}
   m_RootOrder: 1
@@ -66,8 +66,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -141509463
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a3773102a8119e74f8a6bafdfad2b04b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 7342356059920019020}
   - component: {fileID: 7342356059920018994}
   - component: {fileID: 7342356059920018995}
+  - component: {fileID: 3149483283944660306}
   m_Layer: 0
   m_Name: NormalTurret
   m_TagString: NORMAL_TURRET
@@ -230,3 +231,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3149483283944660306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342356059920019021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefe9f011802274488dd138b06a2ab17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_distFromTurretSupport: 70

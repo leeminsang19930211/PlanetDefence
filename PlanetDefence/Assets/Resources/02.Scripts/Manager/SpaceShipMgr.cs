@@ -41,12 +41,12 @@ public class SpaceShipMgr : MonoBehaviour
 
     private Dictionary<string, GameObject> m_spaceShips = new Dictionary<string, GameObject>();
 
-    public void Instance()
+    public void Instantiate()
     {
         if (m_inst == null)
         {
             GameObject container = new GameObject();
-            container.name = "SpaceShipMgr";
+            container.name = "BattleGameObjectMgr";
             m_inst = container.AddComponent<SpaceShipMgr>() as SpaceShipMgr;
             DontDestroyOnLoad(container);
         }
@@ -66,9 +66,16 @@ public class SpaceShipMgr : MonoBehaviour
         {
             // 잠깐 SpaceShipMgr에서 검색할수 있도록 켰다 끈다
             spaceShips.SetActive(true);
-            Init();
+            SetUpSpaceShips();
             spaceShips.SetActive(false);
         }
+    }
+
+    private void SetUpSpaceShips()
+    {
+        AddSpaceShip("SpaceShip_Red");
+        AddSpaceShip("SpaceShip_Green");
+        AddSpaceShip("SpaceShip_Blue");
     }
 
     public void StartCreatingWaves(WavesMob[] waveInfos)
@@ -127,26 +134,27 @@ public class SpaceShipMgr : MonoBehaviour
 
         int curSapceShipNum = 0;
 
-        while(curSapceShipNum < wrappedWaveInfo.spaceShipNum)
+        Transform parentTrsf = GameObject.Find("BattleStatic")?.GetComponent<Transform>();
+
+        if (parentTrsf != null)
         {
-            // TEMP : 위치 임시로 해놓음
-            float randY = Random.Range(1, 1.5f) * 600f;
-            GameObject obj = Instantiate(wrappedWaveInfo.spaceShip,new Vector3(0, 1200f, 0), Quaternion.Euler(0,0,0));
-            obj.GetComponent<SpaceShipCtrl>().m_fallingDists[0] = randY;
+            while (curSapceShipNum < wrappedWaveInfo.spaceShipNum)
+            {
+                // TEMP : 위치 임시로 해놓음
+                GameObject obj = null;
 
+                float randY = Random.Range(1, 1.5f) * 600f;
+                obj = Instantiate(wrappedWaveInfo.spaceShip, new Vector3(0, 1200f, 0), Quaternion.Euler(0,0,0), parentTrsf);
+                obj.GetComponent<SpaceShipCtrl>().m_fallingDists[0] = randY;
 
-            curSapceShipNum += 1;
+                curSapceShipNum += 1;
 
-            yield return new WaitForSeconds(wrappedWaveInfo.delay);
-        }
+                yield return new WaitForSeconds(wrappedWaveInfo.delay);
+            }
+        }  
     }
 
-    private void Init()
-    {
-        AddSpaceShip("SpaceShip_Red");
-        AddSpaceShip("SpaceShip_Green");
-        AddSpaceShip("SpaceShip_Blue");
-    }
+
 
     private bool AddSpaceShip(string name)
     {

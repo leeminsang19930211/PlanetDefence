@@ -8,7 +8,5 @@ public class ChoiceInitCtrl : MonoBehaviour
     {
         GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", false);
         GlobalGameObjectMgr.Inst.SetGameObectActive("Choice", true);
-
-        GlobalGameObjectMgr.Inst.MoveGameObjectToScene("Choice", "Choice");
     }
 }

@@ -20,17 +20,15 @@ public class SceneLoader : MonoBehaviour
         else if (m_curScene == "Lobby" && nextScene == "Choice")
         {          
             SceneManager.LoadScene("Choice");
-            GlobalGameObjectMgr.Inst.DontDestroyOnLoad("Lobby");
         }
         else if(m_curScene == "Choice" && nextScene == "Battle")
         {            
             SceneManager.LoadScene("Battle");    
-            GlobalGameObjectMgr.Inst.DontDestroyOnLoad("Choice");
         }
         else if(m_curScene == "Battle" && nextScene == "Lobby")
         {
             SceneManager.LoadScene("Lobby");
-            GlobalGameObjectMgr.Inst.DontDestroyOnLoad("Battle");
+            GlobalGameObjectMgr.Inst.SetGameObectActive("BattleStatic", false);
         }
         else
         {

@@ -10,13 +10,15 @@ public class TurretSupportCtrl : MonoBehaviour
 
     public int Idx { get; set; } = -1;
     public bool Focus { get; set; } = false;
+    public GameObject TurretInst { get; set; } = null;
+
     public Vector3 SetUpPos
     {
         get
         { 
             if(m_trasf)
             {
-                return m_trasf.position + m_DeltaFromSetUpPos;
+                return m_trasf.position;
             }
 
             return Vector3.zero;

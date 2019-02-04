@@ -65,7 +65,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
-    public void Instance()
+    public void Instantiate()
     {
         if (m_inst == null)
         {
@@ -87,7 +87,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_toLobbyPopUpPanel = GameObject.Find("ToLobbyPopUpPanel");
         PopDownToLobby();
-
 
         m_laboratoryPopUp = GameObject.FindGameObjectWithTag("LABORATORY_POPUP");
         m_buildPopUp = GameObject.FindGameObjectWithTag("BUILD_POPUP");
@@ -204,8 +203,7 @@ public class BattleGameObjectMgr : MonoBehaviour
     {
         m_toLobbyPopUpPanel.SetActive(false);
     }
-
-    
+   
     public void PopUpLabInfos(GameObject ThisLabButton)
     {
         int LabButtonIdx = System.Array.IndexOf(m_LabButtons, ThisLabButton);

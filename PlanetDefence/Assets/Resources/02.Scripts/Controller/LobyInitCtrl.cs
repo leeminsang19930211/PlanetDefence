@@ -8,8 +8,6 @@ public class LobyInitCtrl : MonoBehaviour
     {
         GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", false);
         GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", true);
-
-        GlobalGameObjectMgr.Inst.MoveGameObjectToScene("Lobby", "Lobby");
     }
 
 }

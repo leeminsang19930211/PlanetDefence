@@ -61,9 +61,14 @@ public class BattleTest : MonoBehaviour
             BattleGameObjectMgr.Inst.UpdateCoinCnt(m_coinCnt);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             TurretMgr.Inst.CreateTurretOnTurretSupport("LaserTurret");
         }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            TurretMgr.Inst.RemoveTurretOnTurretSupport();
+        }
+
     }
 }
