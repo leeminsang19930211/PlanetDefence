@@ -385,12 +385,12 @@ public class BattleGameObjectMgr : MonoBehaviour
     public void RemoveInfotoBuild()
     {
         m_RemoveInfoScroll.SetActive(false);
-        m_BuildInfoScrolls[0].SetActive(true);
+        m_BuildInfoScrolls[23].SetActive(true);
     }
 
     public void BuildtoRemoveInfo()
     {
-        m_BuildInfoScrolls[0].SetActive(false);
+        m_BuildInfoScrolls[23].SetActive(false);
         m_RemoveInfoScroll.SetActive(true);
     }
 
