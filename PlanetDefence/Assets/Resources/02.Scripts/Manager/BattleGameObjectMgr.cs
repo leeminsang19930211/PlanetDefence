@@ -114,6 +114,11 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_buildPopUp.SetActive(false);
     }
 
+    public void FlashMiniPlanet(MiniPlanetCtrl.AREA_DIR area)
+    {
+        m_miniPlanetCtrl.FlashArea(area);
+    }
+
     public void RotateCameraToRight()
     {
         m_mainCameraCtrl.RotateToRight();

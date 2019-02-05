@@ -64,6 +64,25 @@ public class TurretMgr : MonoBehaviour
         AddTurretSupports();
     }
 
+    public bool HitTurret(int turretIdx, int damage)
+    {
+        if(turretIdx < 0 || turretIdx >= m_turretSupportCtrs.Count)
+        {
+            Debug.Log("the focus idx is out of the range");
+            return false;
+        }
+
+        if(m_turretSupportCtrs[turretIdx].TurretCtrl == null )
+        {
+            Debug.Log("the turretCtrl is null");
+            return false;
+        }
+
+        m_turretSupportCtrs[turretIdx].TurretCtrl.Hit(damage);
+
+        return true;
+    }
+
     // Turrets 프리팹에 있는 터렛 이름을 입력하면 현재 포커시된 터렛 지지대 위에 그 터렛을 만들어준다.
     public bool CreateTurretOnTurretSupport(string turretName)
     {
@@ -93,7 +112,7 @@ public class TurretMgr : MonoBehaviour
             return false;
         }
 
-        Transform parentTrsf = GameObject.Find("BattleStatic")?.GetComponent<Transform>();
+        Transform parentTrsf = GameObject.FindGameObjectWithTag("BATTLESTATIC")?.GetComponent<Transform>();
 
         if (parentTrsf == null)
         {

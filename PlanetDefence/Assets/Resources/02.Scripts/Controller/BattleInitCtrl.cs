@@ -6,14 +6,10 @@ public class BattleInitCtrl : MonoBehaviour
 {
     private void Awake()
     {
-        GlobalGameObjectMgr.Inst.SetGameObectActive("Choice", false);
-        GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", true);
-        GlobalGameObjectMgr.Inst.SetGameObectActive("BattleStatic", true);
-
-        if(GlobalGameObjectMgr.Inst.Battling == false)
+        if(GlobalGameObjectMgr.Inst.Battle == false)
         {
             // TEMP : 나중에 배틀이 정말 끝난는지 판단하여 작성해야함. 
-            GlobalGameObjectMgr.Inst.Battling = true;
+            GlobalGameObjectMgr.Inst.Battle = true;
 
             // Awake 함수 호출을 위해 여기서 인스탄트한다
             BattleGameObjectMgr.Inst.Instantiate();

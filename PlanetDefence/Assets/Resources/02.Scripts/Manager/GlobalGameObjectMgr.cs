@@ -22,7 +22,9 @@ public class GlobalGameObjectMgr : MonoBehaviour
 
     private Dictionary<string, GameObject> m_gameObjects = new Dictionary<string, GameObject>();
 
-    public bool Battling { get; set; } = false; // Battle 씬에서 전투가 끝났는지 아닌지 여부를 판단하기 위한 값
+    public int MaxDay { get; set; } = 50; // 50은 임시 값
+    public int CurDay { get; set; } = 0;
+    public bool Battle { get; set; } = false; // Battle 씬에서 전투가 끝났는지 아닌지 여부를 판단하기 위한 값
 
     public static GlobalGameObjectMgr Inst
     {

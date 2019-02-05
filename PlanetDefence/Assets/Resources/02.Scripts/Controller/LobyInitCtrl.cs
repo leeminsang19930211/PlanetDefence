@@ -6,8 +6,7 @@ public class LobyInitCtrl : MonoBehaviour
 {
     private void Awake()
     {
-        GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", false);
-        GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", true);
+
     }
 
 }

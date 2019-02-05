@@ -16,6 +16,13 @@ TagManager:
   - LABBUTTON
   - TURRET_SUPPORT
   - NORMAL_TURRET
+  - BUILD_POPUP
+  - BUILDINFO
+  - REPAIRINFO
+  - REMOVEINFO
+  - REPAIRBUTTON
+  - BUILDBUTTON
+  - BATTLESTATIC
   layers:
   - Default
   - TransparentFX
@@ -56,9 +63,15 @@ TagManager:
   - name: BackGround
     uniqueID: 2704018043
     locked: 0
-  - name: GameObject_Back
+  - name: Turret_Step0
     uniqueID: 3271386761
     locked: 0
-  - name: GameObject
+  - name: Turret_Step1
     uniqueID: 4153457833
+    locked: 0
+  - name: TurretHpBar_Back
+    uniqueID: 71970953
+    locked: 0
+  - name: TurretHpBar_Front
+    uniqueID: 1955051215
     locked: 0

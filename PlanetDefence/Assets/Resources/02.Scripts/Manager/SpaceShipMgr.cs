@@ -134,7 +134,7 @@ public class SpaceShipMgr : MonoBehaviour
 
         int curSapceShipNum = 0;
 
-        Transform parentTrsf = GameObject.Find("BattleStatic")?.GetComponent<Transform>();
+        Transform parentTrsf = GameObject.FindGameObjectWithTag("BATTLESTATIC")?.GetComponent<Transform>();
 
         if (parentTrsf != null)
         {

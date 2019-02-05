@@ -6,7 +6,6 @@ public class ChoiceInitCtrl : MonoBehaviour
 {
     private void Awake()
     {
-        GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", false);
-        GlobalGameObjectMgr.Inst.SetGameObectActive("Choice", true);
+ 
     }
 }

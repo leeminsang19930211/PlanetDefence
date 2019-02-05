@@ -59,6 +59,9 @@ public class BattleTest : MonoBehaviour
             BattleGameObjectMgr.Inst.UpdateJunkCnt(m_gearCnt);
             BattleGameObjectMgr.Inst.UpdateEleCircuitCnt(m_eleCircuitCnt);
             BattleGameObjectMgr.Inst.UpdateCoinCnt(m_coinCnt);
+
+            TurretMgr.Inst.HitTurret(0, 10);
+            BattleGameObjectMgr.Inst.FlashMiniPlanet(MiniPlanetCtrl.AREA_DIR.LEFT);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
