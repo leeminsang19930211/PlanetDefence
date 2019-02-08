@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fallingSpeed: 200
-  m_revolvingSpeed: 20
+  m_revolvingSpeed: 10
   m_fallingDists:
   - 400
   - 400
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fallingSpeed: 200
-  m_revolvingSpeed: 20
+  m_revolvingSpeed: 10
   m_fallingDists:
   - 400
   - 400
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fallingSpeed: 200
-  m_revolvingSpeed: 20
+  m_revolvingSpeed: 10
   m_fallingDists:
   - 400
   - 400

@@ -65,6 +65,14 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
+    public Vector3 PlanetUp
+    {
+        get
+        {
+            return m_planetTransform.up;
+        }
+    }
+
     public void Instantiate()
     {
         if (m_inst == null)

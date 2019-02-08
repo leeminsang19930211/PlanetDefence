@@ -6,6 +6,6 @@ public class CreateTurretCtrl : MonoBehaviour
 {
     public void OnClick()
     {
-        TurretMgr.Inst.CreateTurretOnTurretSupport("NormalTurret");
+        TurretMgr.Inst.CreateTurretOnTurretSupport("Turret_Lv1_Missile");
     }
 }

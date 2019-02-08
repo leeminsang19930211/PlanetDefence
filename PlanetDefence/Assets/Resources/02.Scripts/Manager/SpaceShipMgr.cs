@@ -39,7 +39,8 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
-    private Dictionary<string, GameObject> m_spaceShips = new Dictionary<string, GameObject>();
+    private LinkedList<SpaceShipCtrl> m_copySpaceShips = new LinkedList<SpaceShipCtrl>();
+    private Dictionary<string, GameObject> m_sourceSpaceShips = new Dictionary<string, GameObject>();
 
     public void Instantiate()
     {
@@ -95,7 +96,23 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
-    public GameObject FindSpaceShipByEnum(MobType type )
+    public SpaceShipCtrl FindFirstTargetInFan(float minAngle, float maxAngle)
+    {
+        foreach(SpaceShipCtrl ctrl in m_copySpaceShips)
+        {
+            if (minAngle <= ctrl.AngleFromPlanetUp && maxAngle >= ctrl.AngleFromPlanetUp)
+                return ctrl;
+        }
+
+        return null;
+    }
+
+    public void RemoveSpaceShip(SpaceShipCtrl ctrl)
+    {
+        m_copySpaceShips.Remove(ctrl);
+    }
+
+    private GameObject FindSpaceShipByEnum(MobType type )
     {
         string typeStr = "";
 
@@ -114,12 +131,12 @@ public class SpaceShipMgr : MonoBehaviour
 
         GameObject spaceShip = null;
 
-        m_spaceShips.TryGetValue(typeStr, out spaceShip);
+        m_sourceSpaceShips.TryGetValue(typeStr, out spaceShip);
   
         return spaceShip;
     }
 
-    public IEnumerator CreateWave(WrappedWaveInfo wrappedWaveInfo)
+    private IEnumerator CreateWave(WrappedWaveInfo wrappedWaveInfo)
     {
         if (wrappedWaveInfo.spaceShip == null)
             yield return null;
@@ -141,20 +158,16 @@ public class SpaceShipMgr : MonoBehaviour
             while (curSapceShipNum < wrappedWaveInfo.spaceShipNum)
             {
                 // TEMP : 위치 임시로 해놓음
-                GameObject obj = null;
-
-                float randY = Random.Range(1, 1.5f) * 600f;
-                obj = Instantiate(wrappedWaveInfo.spaceShip, new Vector3(0, 1200f, 0), Quaternion.Euler(0,0,0), parentTrsf);
-                obj.GetComponent<SpaceShipCtrl>().m_fallingDists[0] = randY;
-
+                SpaceShipCtrl ctrl = null;
+                ctrl = Instantiate(wrappedWaveInfo.spaceShip, new Vector3(0, 1000f, 0), Quaternion.Euler(0, 0, 0), parentTrsf)?.GetComponent<SpaceShipCtrl>();
+                m_copySpaceShips.AddLast(ctrl);
+              
                 curSapceShipNum += 1;
 
                 yield return new WaitForSeconds(wrappedWaveInfo.delay);
             }
         }  
     }
-
-
 
     private bool AddSpaceShip(string name)
     {
@@ -167,7 +180,7 @@ public class SpaceShipMgr : MonoBehaviour
             return false;
         }
 
-        m_spaceShips.Add(name, spaceShip);
+        m_sourceSpaceShips.Add(name, spaceShip);
 
         return true;
     }

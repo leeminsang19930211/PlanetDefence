@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 6968288826387335938}
   - component: {fileID: 8068745204091561621}
   m_Layer: 0
-  m_Name: NormalTurret
+  m_Name: Turret_Lv1_Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,6 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 100
   m_curHP: 100
+  m_angleForTargetting: 0
+  m_fireDelay: 0
   m_bodyDistFromTurretSupport: 170
   m_hpBarDistFromTurretSupport: 25
   m_body: {fileID: 7342356059920019021}

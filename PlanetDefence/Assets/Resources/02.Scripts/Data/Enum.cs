@@ -28,3 +28,18 @@ public enum BuyErr
    AlreadySetUp,         // 터렛이 이미 설치되있는 경우
    NotEnoughRsrc,        // 자원이 모자른 경우
 }
+
+public enum Bullet
+{
+    Lv1_Missile,
+    Lv1_Laser,
+}
+
+public enum PlanetArea
+{
+    Up,
+    Left,
+    Down,
+    Right,
+    outside,
+}

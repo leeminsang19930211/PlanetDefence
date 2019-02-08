@@ -59,7 +59,7 @@ public class TurretMgr : MonoBehaviour
 
     private void SetUpTurrets()
     {
-        AddTurret("NormalTurret");
+        AddTurret("Turret_Lv1_Missile");
         AddTurret("LaserTurret");
         AddTurretSupports();
     }
@@ -122,7 +122,8 @@ public class TurretMgr : MonoBehaviour
 
         float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
 
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretInst = Instantiate(turret, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0,0, angle), parentTrsf);
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = Instantiate(turret, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0,0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Area = IdxToArea(m_focusedTurretSupportIdx);
 
         return true;
     }
@@ -148,8 +149,8 @@ public class TurretMgr : MonoBehaviour
             return false;
         }
 
-        Destroy(m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretInst);
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretInst = null;
+        Destroy(m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.gameObject);
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = null;
 
         return true;
     }
@@ -169,7 +170,7 @@ public class TurretMgr : MonoBehaviour
             return false;
         }
 
-        return m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretInst != null;
+        return m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl != null;
     }
 
     // 터렛 지지대가 눌릴때 호출해야 하는 함수이다. 호출해서 자신이 포커싱 된것을 알려줘야한다.
@@ -226,5 +227,24 @@ public class TurretMgr : MonoBehaviour
 
             m_turretSupportCtrs.Add(ctrl);
         }
+    }
+
+    private PlanetArea IdxToArea(int idx)
+    {
+        int num = idx / 5; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
+
+        switch (num)
+        {
+            case 0:
+                return PlanetArea.Up;
+            case 1:
+                return PlanetArea.Left;
+            case 2:
+                return PlanetArea.Down;
+            case 3:
+                return PlanetArea.Right;
+        }
+
+        return PlanetArea.outside;
     }
 }

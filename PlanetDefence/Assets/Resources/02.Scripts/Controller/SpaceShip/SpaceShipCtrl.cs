@@ -7,7 +7,7 @@ public class SpaceShipCtrl : MonoBehaviour
 {
     public enum STATE
     {
-        FALLING, 
+        FALLING,
         STAYING,
         REVOLVING,
         LANDING,
@@ -24,7 +24,7 @@ public class SpaceShipCtrl : MonoBehaviour
     private float m_stayingTimeAcc = 0;
     private float m_revolvingSpeedScalar = 0;   // 행성 원점으로부터 현재 거리에따라 스피드에 곱해져야 하는 값
     private float m_revolvingAngleAcc = 0;
-    private STATE m_state = STATE.END; 
+    private STATE m_state = STATE.END;
     private Vector3 m_fallingTargetPos = Vector3.zero;
     private Vector3 m_startPos = Vector3.zero;
     private Transform m_transform = null;
@@ -32,12 +32,33 @@ public class SpaceShipCtrl : MonoBehaviour
     private delegate void StateProc();
     private readonly StateProc[] m_stateProcs = new StateProc[(int)STATE.END];
 
+    public Vector3 Pos
+    {
+        get
+        {
+            return m_transform.position;
+        }
+    }
+
+    public float AngleFromPlanetUp
+    {
+        get
+        {
+            Vector3 toSpaceShip = m_transform.position - BattleGameObjectMgr.Inst.PlanetPos;
+
+            return MyMath.LeftAngle180(BattleGameObjectMgr.Inst.PlanetUp, toSpaceShip);           
+        }
+    }
+
     /* events */
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "PLANET")
         {
             BeforeDestruction();
+
+            SpaceShipMgr.Inst.RemoveSpaceShip(this);
+
             Destroy(gameObject);
         }
     }

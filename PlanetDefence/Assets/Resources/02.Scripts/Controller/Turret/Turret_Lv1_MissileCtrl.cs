@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalTurretCtrl : TurretCtrl
+public class Turret_Lv1_MissileCtrl : TurretCtrl
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,12 @@ public class NormalTurretCtrl : TurretCtrl
     void Update()
     {
         
+    }
+
+    protected override void CreateBullet() 
+    {
+        SpaceShipCtrl ctrl =  SpaceShipMgr.Inst.FindFirstTargetInFan(m_minAngleForTargeting, m_maxAngleForTargeting);
+
+
     }
 }
