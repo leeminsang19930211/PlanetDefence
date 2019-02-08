@@ -39,7 +39,6 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
-    private LinkedList<SpaceShipCtrl> m_copySpaceShips = new LinkedList<SpaceShipCtrl>();
     private Dictionary<string, GameObject> m_sourceSpaceShips = new Dictionary<string, GameObject>();
 
     public void Instantiate()
@@ -74,9 +73,8 @@ public class SpaceShipMgr : MonoBehaviour
 
     private void SetUpSpaceShips()
     {
-        AddSpaceShip("SpaceShip_Red");
-        AddSpaceShip("SpaceShip_Green");
-        AddSpaceShip("SpaceShip_Blue");
+        AddSpaceShip("SpaceShip_Normal");
+        AddSpaceShip("SpaceShip_Dummy");
     }
 
     public void StartCreatingWaves(WavesMob[] waveInfos)
@@ -96,20 +94,43 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
-    public SpaceShipCtrl FindFirstTargetInFan(float minAngle, float maxAngle)
+    public SpaceShipCtrl FindFirstTargetInFan(float minAngle, float maxAngle, Vector3 from, float minDist)
     {
-        foreach(SpaceShipCtrl ctrl in m_copySpaceShips)
+        SpaceShipCtrl target = null;
+
+        GameObject[] dummyList = GameObject.FindGameObjectsWithTag("SPACESHIP_DUMMY");
+
+        target = FindFirstTargetInFan(dummyList, minAngle, maxAngle, from,  minDist);
+
+        if (target != null)
+            return target; // 더미가 있으면 무조건 더미먼저
+
+        GameObject[] normalList = GameObject.FindGameObjectsWithTag("SPACESHIP_NORMAL");
+
+        target = FindFirstTargetInFan(normalList, minAngle, maxAngle, from, minDist);
+
+        return target;
+    }
+
+    private SpaceShipCtrl FindFirstTargetInFan(GameObject[] spaceShipList, float minAngle, float maxAngle, Vector3 from, float minDist)
+    {
+        if (spaceShipList == null)
+            return null;
+
+        foreach (GameObject spcShip in spaceShipList)
         {
+            SpaceShipCtrl ctrl = spcShip.GetComponent<SpaceShipCtrl>();
+
+            if ((ctrl.Pos - from).magnitude < minDist)
+            {
+                continue;
+            }
+              
             if (minAngle <= ctrl.AngleFromPlanetUp && maxAngle >= ctrl.AngleFromPlanetUp)
                 return ctrl;
         }
 
         return null;
-    }
-
-    public void RemoveSpaceShip(SpaceShipCtrl ctrl)
-    {
-        m_copySpaceShips.Remove(ctrl);
     }
 
     private GameObject FindSpaceShipByEnum(MobType type )
@@ -119,13 +140,10 @@ public class SpaceShipMgr : MonoBehaviour
         switch (type)
         {
             case MobType.Normal:
-                typeStr = "SpaceShip_Red";
+                typeStr = "SpaceShip_Normal";
                 break;
             case MobType.Kamikaze:
-                typeStr = "SpaceShip_Green";
-                break;
-            case MobType.Pirate:
-                typeStr = "SpaceShip_Blue";
+                typeStr = "SpaceShip_Dummy";
                 break;
         }
 
@@ -160,8 +178,7 @@ public class SpaceShipMgr : MonoBehaviour
                 // TEMP : 위치 임시로 해놓음
                 SpaceShipCtrl ctrl = null;
                 ctrl = Instantiate(wrappedWaveInfo.spaceShip, new Vector3(0, 1000f, 0), Quaternion.Euler(0, 0, 0), parentTrsf)?.GetComponent<SpaceShipCtrl>();
-                m_copySpaceShips.AddLast(ctrl);
-              
+                             
                 curSapceShipNum += 1;
 
                 yield return new WaitForSeconds(wrappedWaveInfo.delay);

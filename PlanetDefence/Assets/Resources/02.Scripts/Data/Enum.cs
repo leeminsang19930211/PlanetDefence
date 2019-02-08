@@ -33,6 +33,7 @@ public enum Bullet
 {
     Lv1_Missile,
     Lv1_Laser,
+    end,
 }
 
 public enum PlanetArea

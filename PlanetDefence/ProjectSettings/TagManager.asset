@@ -23,6 +23,8 @@ TagManager:
   - REPAIRBUTTON
   - BUILDBUTTON
   - BATTLESTATIC
+  - SPACESHIP_NORMAL
+  - SPACESHIP_DUMMY
   layers:
   - Default
   - TransparentFX
@@ -68,6 +70,12 @@ TagManager:
     locked: 0
   - name: Turret_Step1
     uniqueID: 4153457833
+    locked: 0
+  - name: Bullet0
+    uniqueID: 2045242963
+    locked: 0
+  - name: Bullet1
+    uniqueID: 3175762473
     locked: 0
   - name: TurretHpBar_Back
     uniqueID: 71970953

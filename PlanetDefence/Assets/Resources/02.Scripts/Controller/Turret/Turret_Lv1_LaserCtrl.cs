@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret_Lv1_MissileCtrl : TurretCtrl
+public class Turret_Lv1_LaserCtrl : TurretCtrl
 {
     // Start is called before the first frame update
     void Start()
@@ -15,4 +15,5 @@ public class Turret_Lv1_MissileCtrl : TurretCtrl
     {
         
     }
+
 }

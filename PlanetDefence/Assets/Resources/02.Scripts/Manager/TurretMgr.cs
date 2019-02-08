@@ -60,7 +60,7 @@ public class TurretMgr : MonoBehaviour
     private void SetUpTurrets()
     {
         AddTurret("Turret_Lv1_Missile");
-        AddTurret("LaserTurret");
+        AddTurret("Turret_Lv1_Laser");
         AddTurretSupports();
     }
 
@@ -123,7 +123,7 @@ public class TurretMgr : MonoBehaviour
         float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
 
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = Instantiate(turret, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0,0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Area = IdxToArea(m_focusedTurretSupportIdx);
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.TurretSupportIdx = m_focusedTurretSupportIdx;
 
         return true;
     }
@@ -149,8 +149,8 @@ public class TurretMgr : MonoBehaviour
             return false;
         }
 
+        BulletMgr.Inst.ClearBullets(m_focusedTurretSupportIdx);
         Destroy(m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.gameObject);
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = null;
 
         return true;
     }
@@ -229,22 +229,5 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
-    private PlanetArea IdxToArea(int idx)
-    {
-        int num = idx / 5; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
 
-        switch (num)
-        {
-            case 0:
-                return PlanetArea.Up;
-            case 1:
-                return PlanetArea.Left;
-            case 2:
-                return PlanetArea.Down;
-            case 3:
-                return PlanetArea.Right;
-        }
-
-        return PlanetArea.outside;
-    }
 }

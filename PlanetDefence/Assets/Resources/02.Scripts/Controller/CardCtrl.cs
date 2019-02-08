@@ -82,14 +82,14 @@ public class CardCtrl : MonoBehaviour
 
     void OnEnable()
     {
-        if (GlobalGameObjectMgr.nDays % 10 != 0)
-        {
-            ChoiceRandomCard(CardType.Normal);
-        }
-        else if(GlobalGameObjectMgr.nDays % 10 == 0)
-        {
-            ChoiceRandomCard(CardType.Boss);
-        }
+        //if (GlobalGameObjectMgr.nDays % 10 != 0)
+        //{
+        //    ChoiceRandomCard(CardType.Normal);
+        //}
+        //else if(GlobalGameObjectMgr.nDays % 10 == 0)
+        //{
+        //    ChoiceRandomCard(CardType.Boss);
+        //}
         
     }
 

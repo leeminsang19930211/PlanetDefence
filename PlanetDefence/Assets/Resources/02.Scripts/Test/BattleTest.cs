@@ -66,7 +66,7 @@ public class BattleTest : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            TurretMgr.Inst.CreateTurretOnTurretSupport("LaserTurret");
+            TurretMgr.Inst.CreateTurretOnTurretSupport("Turret_Lv1_Laser");
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {

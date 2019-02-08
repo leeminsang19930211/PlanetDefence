@@ -15,18 +15,19 @@ public class BattleInitCtrl : MonoBehaviour
             BattleGameObjectMgr.Inst.Instantiate();
             TurretMgr.Inst.Instantiate();
             SpaceShipMgr.Inst.Instantiate();
+            BulletMgr.Inst.Instantiate();
 
-            WavesMob[] infos = new WavesMob[1];
+            WavesMob[] infos = new WavesMob[2];
 
             infos[0].eMobType = MobType.Normal;
-            infos[0].nMobNum = 5;
+            infos[0].nMobNum = 10;
             infos[0].fDelayTime = 2f;
             infos[0].fFirstDelayTime = 0f;
 
-            //infos[1].eMobType = MobType.Kamikaze;
-            //infos[1].nMobNum = 4;
-            //infos[1].fDelayTime = 2f;
-            //infos[1].fFirstDelayTime = 3f;
+            infos[1].eMobType = MobType.Kamikaze;
+            infos[1].nMobNum = 3;
+            infos[1].fDelayTime = 2f;
+            infos[1].fFirstDelayTime = 3f;
 
             //infos[2].eMobType = MobType.Pirate;
             //infos[2].nMobNum = 2;

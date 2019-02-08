@@ -46,7 +46,7 @@ public class SpaceShipCtrl : MonoBehaviour
         {
             Vector3 toSpaceShip = m_transform.position - BattleGameObjectMgr.Inst.PlanetPos;
 
-            return MyMath.LeftAngle180(BattleGameObjectMgr.Inst.PlanetUp, toSpaceShip);           
+            return MyMath.LeftAngle360(BattleGameObjectMgr.Inst.PlanetUp, toSpaceShip);           
         }
     }
 
@@ -56,9 +56,6 @@ public class SpaceShipCtrl : MonoBehaviour
         if (collision.gameObject.tag == "PLANET")
         {
             BeforeDestruction();
-
-            SpaceShipMgr.Inst.RemoveSpaceShip(this);
-
             Destroy(gameObject);
         }
     }
