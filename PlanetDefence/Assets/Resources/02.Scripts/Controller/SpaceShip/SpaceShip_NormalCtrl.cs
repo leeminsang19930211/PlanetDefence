@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShipAACtrl : SpaceShipCtrl
-{ 
+public class SpaceShip_NormalCtrl : SpaceShipCtrl
+{
     void Start()
     {
         base.Init();

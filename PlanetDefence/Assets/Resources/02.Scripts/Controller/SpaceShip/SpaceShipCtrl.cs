@@ -14,12 +14,15 @@ public class SpaceShipCtrl : MonoBehaviour
         END
     }
 
+    public int m_maxHP = 0;
     public float m_fallingSpeed = 0;
     public float m_revolvingSpeed = 0;          // 가장 외각의 원을 기준으로 초당 회전 각도값. 
     public float[] m_fallingDists = new float[3];
     public float m_stayDuration = 0;            // 공전하기 이전에 잠깐 대기하는 시간 
     public Vector3 m_fallingDir = Vector3.zero;
+    public UnitHPBarCtrl m_unitHPBarCtrl = null;
 
+    private int m_curHP = 0;
     private int m_fallingRound = 0;             // 몇번째 낙하인지를 나타내는 값. 0~3 범위를 가진다. 
     private float m_stayingTimeAcc = 0;
     private float m_revolvingSpeedScalar = 0;   // 행성 원점으로부터 현재 거리에따라 스피드에 곱해져야 하는 값
@@ -60,6 +63,16 @@ public class SpaceShipCtrl : MonoBehaviour
         }
     }
 
+    public void Hit(int damage)
+    {
+        m_curHP -= damage;
+
+        if (m_curHP < 0)
+            m_curHP = 0;
+
+        m_unitHPBarCtrl.UpdateHP(m_curHP, m_maxHP);
+    }
+
     // 자식 우주선에서 호출해줄것
     protected void Init()
     {
@@ -72,9 +85,10 @@ public class SpaceShipCtrl : MonoBehaviour
 
         m_startPos = m_transform.position;
 
+        m_curHP = m_maxHP;
+
         ChangeState(STATE.FALLING);
     }
-
 
     /* not events */
     // 파괴되기 이전의 호출되는 함수이다. 필요하면 상속받은 클래스에서 정의 해주자.

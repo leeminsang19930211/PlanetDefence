@@ -15,6 +15,8 @@ public class Bullet_Lv1_MissileCtrl : BulletCtrl
 
     protected override void AlmostOnTarget()
     {
+        HitTarget();
+
         gameObject.SetActive(false);
     }
 }
