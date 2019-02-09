@@ -14,14 +14,19 @@ public class SpaceShipCtrl : MonoBehaviour
         END
     }
 
+    public int m_maxBulletInstCnt = 0;
+    public int m_maxBulletCnt = -1;
     public int m_dropJunk = 0;
     public int m_dropEleCircuit = 0;
     public int m_dropCoin = 0;
     public int m_maxHP = 0;
+    public float m_fanAngleForTargeting = 45f;
+    public float m_fireDelay = 0;
     public float m_fallingSpeed = 0;
     public float m_revolvingSpeed = 0;          // 가장 외각의 원을 기준으로 초당 회전 각도값. 
     public float[] m_fallingDists = new float[3];
     public float m_stayDuration = 0;            // 공전하기 이전에 잠깐 대기하는 시간 
+    public Bullet m_bulletType = Bullet.End;
     public Vector3 m_fallingDir = Vector3.zero;
     public UnitHPBarCtrl m_unitHPBarCtrl = null;
 
@@ -37,6 +42,9 @@ public class SpaceShipCtrl : MonoBehaviour
 
     private delegate void StateProc();
     private readonly StateProc[] m_stateProcs = new StateProc[(int)STATE.END];
+
+    public int BulletPoolIdx { get; set; } = -1;
+    public bool Clone { get; set; } = false;
 
     public Vector3 Pos
     {
@@ -80,6 +88,7 @@ public class SpaceShipCtrl : MonoBehaviour
         m_unitHPBarCtrl.UpdateHP(m_curHP, m_maxHP);
     }
 
+
     // 자식 우주선에서 호출해줄것
     protected void Init()
     {
@@ -93,6 +102,8 @@ public class SpaceShipCtrl : MonoBehaviour
         m_startPos = m_transform.position;
 
         m_curHP = m_maxHP;
+
+        AllocateBullets();
 
         ChangeState(STATE.FALLING);
     }
@@ -116,6 +127,40 @@ public class SpaceShipCtrl : MonoBehaviour
         Player.Inst.AddJunk(m_dropJunk);
         Player.Inst.AddEleCircuit(m_dropEleCircuit);
         Player.Inst.AddCoin(m_dropCoin);
+    }
+
+    protected virtual void CreateBullet()
+    {
+        //TurretCtrl target = null;
+
+        //target = TurretMgr.Inst.FindFirstTargetInFan(m_transform.position, m_fanAngleForTargeting);
+
+        //BulletMgr.Inst.FireBullet(BulletPool.SpaceShip, BulletPoolIdx, m_transform.position, m_transform.localEulerAngles, target);
+    }
+
+    private void AllocateBullets()
+    {
+        if (BulletPoolIdx < 0)
+            return;
+
+        BulletMgr.Inst.AllocateBullets(m_bulletType, BulletPool.SpaceShip, BulletPoolIdx, m_maxBulletInstCnt);
+    }
+
+    private void ClearBullets()
+    {
+        if (BulletPoolIdx < 0)
+            return;
+
+        BulletMgr.Inst.ClearBullets(BulletPool.SpaceShip, BulletPoolIdx);
+    }
+
+    private void OnDestroy()
+    {
+        if(Clone)
+        {
+            ClearBullets();
+        }
+      
     }
 
     private void StateProc_Falling()
@@ -254,4 +299,33 @@ public class SpaceShipCtrl : MonoBehaviour
 
         return 1f; // 테스트용
     }
+
+    private IEnumerator FireWithDelay()
+    {
+        int curBullet = 0;
+
+        if (m_maxBulletCnt > 0)
+        {
+            while (curBullet < m_maxBulletCnt)
+            {
+                yield return new WaitForSeconds(m_fireDelay);
+
+                CreateBullet();
+
+                curBullet++;
+            }
+        }
+        else
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(m_fireDelay);
+
+                CreateBullet();
+            }
+        }
+    }
+
+   
+
 }

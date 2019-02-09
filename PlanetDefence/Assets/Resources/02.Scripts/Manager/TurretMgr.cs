@@ -83,6 +83,56 @@ public class TurretMgr : MonoBehaviour
         return true;
     }
 
+    public TurretCtrl FindFirstTargetInFan(Vector3 from, float fanAngle)
+    {
+        Vector3 toFrom = from - BattleGameObjectMgr.Inst.PlanetPos;
+
+        float leftAngle = MyMath.LeftAngle360(BattleGameObjectMgr.Inst.PlanetUp, toFrom);
+        float halfAngle = fanAngle * 0.5f;
+
+        int planetArea = -1;
+
+        if( 0<= leftAngle && ( halfAngle > leftAngle  || 360f-halfAngle < leftAngle) )
+        {
+            planetArea = 0;
+        }
+        else if( 90f- halfAngle <= leftAngle && 90f +halfAngle > leftAngle )
+        {
+            planetArea = 1;
+        }
+        else if( 180f - halfAngle <= leftAngle && 180f +halfAngle > leftAngle)
+        {
+            planetArea = 2;
+        }
+        else if(270f - halfAngle <= leftAngle && 270f +halfAngle > leftAngle)
+        {
+            planetArea = 3;
+        }
+
+        return FindFirstTurret(planetArea);
+    }
+
+    public TurretCtrl FindFirstTurret(int planetArea)
+    {
+        if (planetArea < 0 || planetArea >= 4)
+            return null;
+
+        int start = planetArea * 5;// 5 단위로 구역이 나뉨
+
+        TurretCtrl turret = null;
+
+        for (int i= start; i< start +5; ++i )
+        {
+            if (m_turretSupportCtrs[i].TurretCtrl != null)
+            {
+                turret = m_turretSupportCtrs[i].TurretCtrl;
+                break;
+            }
+        }
+
+        return turret; 
+    }
+
     // Turrets 프리팹에 있는 터렛 이름을 입력하면 현재 포커시된 터렛 지지대 위에 그 터렛을 만들어준다.
     public bool CreateTurretOnTurretSupport(string turretName)
     {
@@ -120,10 +170,7 @@ public class TurretMgr : MonoBehaviour
             return false;
         }
 
-        float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
-
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = Instantiate(turret, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0,0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.TurretSupportIdx = m_focusedTurretSupportIdx;
+        CreateTurret(turret, parentTrsf);
 
         return true;
     }
@@ -164,10 +211,7 @@ public class TurretMgr : MonoBehaviour
             return false;
         }
 
-        float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
-
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = Instantiate(turret, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0, 0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.TurretSupportIdx = m_focusedTurretSupportIdx;
+        CreateTurret(turret, parentTrsf);
 
         return true;
     }
@@ -193,8 +237,7 @@ public class TurretMgr : MonoBehaviour
             return false;
         }
 
-        BulletMgr.Inst.ClearBullets(m_focusedTurretSupportIdx);
-        Destroy(m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.gameObject);
+        RemoveTurret();
 
         return true;
     }
@@ -236,6 +279,20 @@ public class TurretMgr : MonoBehaviour
         m_focusedTurretSupportIdx = idx;
 
         return true;
+    }
+
+    private void CreateTurret(GameObject source, Transform parentTrsf)
+    {
+        float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
+
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = Instantiate(source, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0, 0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.TurretSupportIdx = m_focusedTurretSupportIdx;
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Clone = true;
+    }
+
+    private void RemoveTurret()
+    {       
+        Destroy(m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.gameObject);
     }
 
     private bool AddTurret(string name)

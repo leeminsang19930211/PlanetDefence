@@ -37,7 +37,13 @@ public class BattleInitCtrl : MonoBehaviour
 
             // 이 함수에 웨이브 정보를 넘기면 웨이브가 생성이 시작된다.
             SpaceShipMgr.Inst.StartCreatingWaves(infos);
+
+            BulletMgr.Inst.ClearBulletPool(BulletPool.SpaceShip);
+            BulletMgr.Inst.AllocateBulletPool(BulletPool.SpaceShip, SpaceShipMgr.Inst.MaxSpaceShipCnt);
+
+            BulletMgr.Inst.ClearBulletPool(BulletPool.Turret);
+            BulletMgr.Inst.AllocateBulletPool(BulletPool.Turret, 20);
         }
-   
+
     }
 }

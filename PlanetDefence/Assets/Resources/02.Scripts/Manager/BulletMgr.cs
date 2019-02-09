@@ -22,10 +22,9 @@ public class BulletMgr : MonoBehaviour
         }
     }
 
-    private int[] m_curBulletIndies = new int[20];
-    private List<BulletCtrl>[] m_copyBullets = new List<BulletCtrl>[20]; // 포탑 지지대의 수가 20개이다.
+    private List<int>[] m_bulletPoolIndex = new List<int>[(int)BulletPool.End];
+    private List<List<BulletCtrl>>[] m_bulletPool = new List<List<BulletCtrl>>[(int)BulletPool.End];
     private Dictionary<string, GameObject> m_sourceBullets = new Dictionary<string, GameObject>();
-
 
     public void Instantiate()
     {
@@ -57,42 +56,51 @@ public class BulletMgr : MonoBehaviour
         }
     }
 
-    public bool FireBullet(int idx, Vector3 startPos, Vector3 startAngle, SpaceShipCtrl target)
+    public bool AllocateBulletPool(BulletPool pool, int cnt )
     {
-        if (target == null)
-            return false;
-
-        if (idx < 0 || idx >= m_copyBullets.Length)
+        if(m_bulletPool[(int)pool].Count > 0 || m_bulletPoolIndex[(int)pool].Count > 0)
         {
-            Debug.Log("the bullet idx is out of the range");
+            Debug.Log("The bulletPool is alloceted already");
             return false;
         }
 
-        if(m_copyBullets[idx].Count == 0)
+        for(int i=0; i<cnt; ++i)
         {
-            Debug.Log("the bullets is not allocated");
-            return false;
+            m_bulletPool[(int)pool].Add(new List<BulletCtrl>());
+            m_bulletPoolIndex[(int)pool].Add(0);
         }
+        return true;
+    }
 
-        m_copyBullets[idx][m_curBulletIndies[idx]].gameObject.SetActive(true);
-        m_copyBullets[idx][m_curBulletIndies[idx]].Fire(startPos, startAngle, target);
-        m_curBulletIndies[idx] += 1;
+    public bool ClearBulletPool(BulletPool pool)
+    {
+        if (m_bulletPool[(int)pool] == null)
+            return false;
 
-        if (m_curBulletIndies[idx] >= m_copyBullets[idx].Count)
-            m_curBulletIndies[idx] = 0;
+        for(int i=0; i<m_bulletPool[(int)pool].Count; ++i)
+        {
+            ClearBullets(pool, i);
+        }
 
         return true;
     }
 
-    public bool AllocateBullets(Bullet bullet, int idx, int bulletCnt, bool active= false)
+    // 총알들을 생성한다. 게임 오브젝트가 생성될때마다 호출해줄것
+    public bool AllocateBullets(Bullet bullet, BulletPool pool, int idx, int bulletCnt, bool active = false)
     {
-        if (idx < 0 || idx >= m_copyBullets.Length)
+        if(m_bulletPool[(int)pool].Count == 0)
+        {
+            Debug.Log("The bulletPool is not allocted");
+            return false;
+        }
+
+        if (idx < 0 || idx >= m_bulletPool[(int)pool].Count)
         {
             Debug.Log("the bullet idx is out of the range");
             return false;
         }
 
-        if (m_copyBullets[idx].Count > 0)
+        if (m_bulletPool[(int)pool][idx].Count > 0)
         {
             Debug.Log("the bullets at the idx is created already");
             return false;
@@ -100,18 +108,17 @@ public class BulletMgr : MonoBehaviour
 
         GameObject source = FindSourceBullet(bullet);
 
-        if(source == null)
+        if (source == null)
         {
             Debug.Log("Finding the source of bullet failed");
             return false;
         }
 
-        m_copyBullets[idx].Capacity = bulletCnt;
+        m_bulletPool[(int)pool][idx].Capacity = bulletCnt;
 
         Transform parentTrsf = GameObject.FindGameObjectWithTag("BATTLESTATIC")?.GetComponent<Transform>();
 
-
-        for (int i=0; i<bulletCnt; ++i)
+        for (int i = 0; i < bulletCnt; ++i)
         {
             GameObject obj = null;
 
@@ -119,48 +126,65 @@ public class BulletMgr : MonoBehaviour
 
             obj.SetActive(active);
 
-            m_copyBullets[idx].Add(obj.GetComponent<BulletCtrl>());
+            m_bulletPool[(int)pool][idx].Add(obj.GetComponent<BulletCtrl>());
         }
 
         return true;
     }
 
-    public bool ClearBullets(int idx)
+    // 총알들을 삭제한다. 게임오브젝트가 삭제 될때마다 호출해줄것
+    public bool ClearBullets(BulletPool pool, int idx)
     {
-        if (idx < 0 || idx >= m_copyBullets.Length)
+        if (idx < 0 || idx >= m_bulletPool[(int)pool].Count)
         {
             Debug.Log("the bullet idx is out of the range");
             return false;
         }
 
-        foreach (BulletCtrl ctrl in m_copyBullets[idx])
+        foreach (BulletCtrl ctrl in m_bulletPool[(int)pool][idx])
         {
             Destroy(ctrl.gameObject);
         }
 
-        m_copyBullets[idx].Clear();
-        m_copyBullets[idx].Capacity = 0;
+        m_bulletPool[(int)pool][idx].Clear();
+        m_bulletPool[(int)pool][idx].Capacity = 0;
 
         return true;
     }
 
-    private GameObject FindSourceBullet(Bullet bullet)
+    public bool FireBullet(BulletPool pool, int idx, Vector3 startPos, Vector3 startAngle, SpaceShipCtrl target)
     {
-        string bulletStr = "";
+        if (target == null)
+            return false;
 
-        switch (bullet)
+        if (idx < 0 || idx >= m_bulletPool[(int)pool].Count)
         {
-            case Bullet.Lv1_Missile:
-                bulletStr = "Bullet_Lv1_Missile";
-                break;
-            case Bullet.Lv1_Laser:
-                bulletStr = "Bullet_Lv1_Laser";
-                break;
+            Debug.Log("the bullet idx is out of the range");
+            return false;
         }
 
+        if (m_bulletPool[(int)pool][idx].Count == 0)
+        {
+            Debug.Log("the bullets is not allocated");
+            return false;
+        }
+
+        m_bulletPool[(int)pool][idx][m_bulletPoolIndex[(int)pool][idx]].gameObject.SetActive(true);
+        m_bulletPool[(int)pool][idx][m_bulletPoolIndex[(int)pool][idx]].Fire(startPos, startAngle, target);
+        m_bulletPoolIndex[(int)pool][idx] += 1;
+
+        if (m_bulletPoolIndex[(int)pool][idx] >= m_bulletPool[(int)pool][idx].Count)
+            m_bulletPoolIndex[(int)pool][idx] = 0;
+
+        return true;
+    }
+
+  
+    private GameObject FindSourceBullet(Bullet bullet)
+    {
         GameObject source = null;
 
-        m_sourceBullets.TryGetValue(bulletStr, out source);
+        m_sourceBullets.TryGetValue(EnumToStr(bullet), out source);
 
         return source;
     }
@@ -170,13 +194,15 @@ public class BulletMgr : MonoBehaviour
         AddBullet("Bullet_Lv1_Missile");
         AddBullet("Bullet_Lv1_Laser");
 
-       for (int i=0; i< m_copyBullets.Length; ++i)
+ 
+        for(int i=0; i <(int)BulletPool.End; ++i)
         {
-            m_copyBullets[i] = new List<BulletCtrl>();
+            m_bulletPool[i] = new List<List<BulletCtrl>>();
+            m_bulletPoolIndex[i] = new List<int>();
         }
     }
 
-    private bool AddBullet(string name)
+private bool AddBullet(string name)
     {
         GameObject bullet = null;
 
@@ -190,5 +216,25 @@ public class BulletMgr : MonoBehaviour
         m_sourceBullets.Add(name, bullet);
 
         return true;
+    }
+
+    private string EnumToStr(Bullet bullet)
+    {
+        string str = "";
+
+        switch (bullet)
+        {
+            case Bullet.Lv1_Missile:
+                str = "Bullet_Lv1_Missile";
+                break;
+            case Bullet.Lv1_Laser:
+                str = "Bullet_Lv1_Laser";
+                break;
+            default:
+                Debug.LogError("The bullet str from the bullet enum is not mapped");
+                break;
+        }
+
+        return str;
     }
 }

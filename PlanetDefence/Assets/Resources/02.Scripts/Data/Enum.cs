@@ -40,6 +40,13 @@ public enum Bullet
     End,
 }
 
+public enum BulletPool
+{
+    Turret,
+    SpaceShip,
+    End,
+}
+
 public enum PlanetArea
 {
     Up,

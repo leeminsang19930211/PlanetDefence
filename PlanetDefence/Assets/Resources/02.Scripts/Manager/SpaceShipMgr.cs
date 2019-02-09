@@ -6,14 +6,14 @@ public class SpaceShipMgr : MonoBehaviour
 {
     public struct WrappedWaveInfo
     {
-        public  GameObject spaceShip;
+        public GameObject spaceShip;
         public int spaceShipNum;
         public float delay;
-        public float firstDelay; 
+        public float firstDelay;
 
         public WrappedWaveInfo(GameObject _spaceShip, int _spaceShipNum, float _delay, float _firstDelay)
         {
-             spaceShip = _spaceShip;
+            spaceShip = _spaceShip;
             spaceShipNum = _spaceShipNum;
             delay = _delay;
             firstDelay = _firstDelay;
@@ -40,7 +40,16 @@ public class SpaceShipMgr : MonoBehaviour
     }
 
     private int m_maxSpaceShipCnt = 0;
+    private int m_createdSpaceShipCnt = 0;
     private Dictionary<string, GameObject> m_sourceSpaceShips = new Dictionary<string, GameObject>();
+
+    public int MaxSpaceShipCnt
+    {
+        get
+        {
+            return m_maxSpaceShipCnt;
+        }
+    }
 
     public void Instantiate()
     {
@@ -81,6 +90,7 @@ public class SpaceShipMgr : MonoBehaviour
     public void StartCreatingWaves(WavesMob[] waveInfos)
     {
         m_maxSpaceShipCnt = 0;
+        m_createdSpaceShipCnt = 0;
 
         foreach (WavesMob waveInfo in waveInfos)
         {
@@ -170,15 +180,23 @@ public class SpaceShipMgr : MonoBehaviour
         {
             while (curSapceShipNum < wrappedWaveInfo.spaceShipNum)
             {
-                // TEMP : 위치 임시로 해놓음
-                SpaceShipCtrl ctrl = null;
-                ctrl = Instantiate(wrappedWaveInfo.spaceShip, new Vector3(0, 1000f, 0), Quaternion.Euler(0, 0, 0), parentTrsf)?.GetComponent<SpaceShipCtrl>();
-                             
-                curSapceShipNum += 1;
+                CreateSpaceShip(wrappedWaveInfo.spaceShip, parentTrsf);
 
+                curSapceShipNum += 1;
+                
                 yield return new WaitForSeconds(wrappedWaveInfo.delay);
             }
         }  
+    }
+
+    private void CreateSpaceShip(GameObject source, Transform parentTrsf)
+    {
+        SpaceShipCtrl ctrl = null;
+        ctrl = Instantiate(source, new Vector3(0, 1000f, 0), Quaternion.Euler(0, 0, 0), parentTrsf)?.GetComponent<SpaceShipCtrl>();
+        ctrl.BulletPoolIdx = m_createdSpaceShipCnt;
+        ctrl.Clone = true;
+
+        m_createdSpaceShipCnt += 1;
     }
 
     private bool AddSpaceShip(string name)

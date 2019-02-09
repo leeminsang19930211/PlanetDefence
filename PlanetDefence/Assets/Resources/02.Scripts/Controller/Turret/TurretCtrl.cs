@@ -23,7 +23,9 @@ public class TurretCtrl : MonoBehaviour
     protected Transform m_trsf = null;
     protected PlanetArea m_planetArea = PlanetArea.outside;
 
-    private int m_turretSupportIdx = 0;
+    private int m_turretSupportIdx = -1;
+
+    public bool Clone { get; set; } = false;
 
     public Vector3 BulletStartPos
     {
@@ -82,6 +84,7 @@ public class TurretCtrl : MonoBehaviour
         m_unitHPBarCtrl.UpdateHP(m_curHP, m_maxHP);
     }
 
+
     protected void Init()
     {
         m_trsf = GetComponent<Transform>();
@@ -93,7 +96,7 @@ public class TurretCtrl : MonoBehaviour
 
         StartCoroutine("FireWithDelay");
 
-        BulletMgr.Inst.AllocateBullets(m_bulletType, m_turretSupportIdx, m_maxBulletInstCnt);
+        AllocateBullets();
     }
 
     protected IEnumerator FireWithDelay()
@@ -141,7 +144,31 @@ public class TurretCtrl : MonoBehaviour
             target = SpaceShipMgr.Inst.FindFirstTargetInFan(m_minAngleForTargeting, m_maxAngleForTargeting, m_trsf.position, m_minDistToAttack);
         }
 
-        BulletMgr.Inst.FireBullet(TurretSupportIdx, BulletStartPos, m_trsf.localEulerAngles, target);
+        BulletMgr.Inst.FireBullet(BulletPool.Turret, TurretSupportIdx, BulletStartPos, m_trsf.localEulerAngles, target);
+    }
+
+    private void AllocateBullets()
+    {
+        if (TurretSupportIdx < 0)
+            return;
+
+        BulletMgr.Inst.AllocateBullets(m_bulletType, BulletPool.Turret, TurretSupportIdx, m_maxBulletInstCnt);
+    }
+
+    private void ClearBullets()
+    {
+        if (TurretSupportIdx < 0)
+            return;
+
+        BulletMgr.Inst.ClearBullets(BulletPool.Turret, TurretSupportIdx);
+    }
+
+    private void OnDestroy()
+    {
+        if (Clone)
+        {
+            ClearBullets();
+        }
     }
 
     private PlanetArea IdxToArea(int idx)
