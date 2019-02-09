@@ -16,6 +16,7 @@ public class BattleInitCtrl : MonoBehaviour
             TurretMgr.Inst.Instantiate();
             SpaceShipMgr.Inst.Instantiate();
             BulletMgr.Inst.Instantiate();
+            Player.Inst.Instantiate();
 
             WavesMob[] infos = new WavesMob[2];
 

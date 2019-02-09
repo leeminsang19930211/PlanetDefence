@@ -3,6 +3,7 @@
     Lv1_Missile,
     Lv1_Laser,
     Lv2_Shield,
+    End,
 }
 
 public enum Lab
@@ -11,6 +12,7 @@ public enum Lab
     IncTurretSupports,
     IncTurretHelth,
     IncTurretDamage,
+    End,
 }
 
 public enum SpaceShipPart
@@ -19,7 +21,8 @@ public enum SpaceShipPart
     _1,
     _2,
     _3,
-    _4
+    _4,
+    End,
 }
 
 public enum BuyErr
@@ -27,13 +30,14 @@ public enum BuyErr
    NoError,
    AlreadySetUp,         // 터렛이 이미 설치되있는 경우
    NotEnoughRsrc,        // 자원이 모자른 경우
+   End,
 }
 
 public enum Bullet
 {
     Lv1_Missile,
     Lv1_Laser,
-    end,
+    End,
 }
 
 public enum PlanetArea
@@ -43,4 +47,5 @@ public enum PlanetArea
     Down,
     Right,
     outside,
+    End,
 }

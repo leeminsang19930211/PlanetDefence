@@ -48,7 +48,7 @@ public class ResourceCtrl : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
     {
         m_junkText = m_junk.GetComponent<Text>();
         m_eleCircuitText = m_eleCircuit.GetComponent<Text>();

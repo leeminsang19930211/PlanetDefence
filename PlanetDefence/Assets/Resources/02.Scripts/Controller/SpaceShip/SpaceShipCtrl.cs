@@ -14,6 +14,9 @@ public class SpaceShipCtrl : MonoBehaviour
         END
     }
 
+    public int m_dropJunk = 0;
+    public int m_dropEleCircuit = 0;
+    public int m_dropCoin = 0;
     public int m_maxHP = 0;
     public float m_fallingSpeed = 0;
     public float m_revolvingSpeed = 0;          // 가장 외각의 원을 기준으로 초당 회전 각도값. 
@@ -67,9 +70,13 @@ public class SpaceShipCtrl : MonoBehaviour
     {
         m_curHP -= damage;
 
-        if (m_curHP < 0)
+        if (m_curHP <= 0)
+        {
+            UpdateRsrc();
+            BeforeDestruction();
             m_curHP = 0;
-
+        }
+           
         m_unitHPBarCtrl.UpdateHP(m_curHP, m_maxHP);
     }
 
@@ -94,13 +101,21 @@ public class SpaceShipCtrl : MonoBehaviour
     // 파괴되기 이전의 호출되는 함수이다. 필요하면 상속받은 클래스에서 정의 해주자.
     protected virtual void BeforeDestruction()
     {
-
+        BattleGameObjectMgr.Inst.AddDestroyedEnemy(1);
+        Destroy(gameObject);
     }
    
     // 업데이트에서 호출해줄 것 . 호출해주면 떨어지고 공전하면서 움직이게 된다
     protected void MoveBody()
     {
         m_stateProcs[(int)m_state]();
+    }
+
+    protected void UpdateRsrc()
+    {
+        Player.Inst.AddJunk(m_dropJunk);
+        Player.Inst.AddEleCircuit(m_dropEleCircuit);
+        Player.Inst.AddCoin(m_dropCoin);
     }
 
     private void StateProc_Falling()

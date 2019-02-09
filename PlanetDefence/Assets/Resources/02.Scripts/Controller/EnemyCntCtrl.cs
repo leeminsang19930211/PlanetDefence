@@ -22,16 +22,15 @@ public class EnemyCntCtrl : MonoBehaviour
             }
 
             m_maxEnemyCnt = value;
+            m_destroyedEnemyCnt = 0;
         }
     }
 
-    public int DestroyedEnemyCnt
+    public void AddDestroyedEnemy(int add)      
     {
-        set
-        {
-            m_destroyedEnemyCnt = value;
-        }
+        m_destroyedEnemyCnt += add;
     }
+
 
     void Start()
     {

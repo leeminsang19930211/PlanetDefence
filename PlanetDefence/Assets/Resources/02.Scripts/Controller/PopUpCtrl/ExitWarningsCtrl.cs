@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExitRemoveWarningCtrl : MonoBehaviour
+public class ExitWarningsCtrl : MonoBehaviour
 {
     public void OnClick()
     {
-        BattleGameObjectMgr.Inst.ExitRemoveWarning();
+        BattleGameObjectMgr.Inst.ExitWarnings();
     }
 }

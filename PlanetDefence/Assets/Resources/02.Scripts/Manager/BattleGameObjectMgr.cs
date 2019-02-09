@@ -48,11 +48,15 @@ public class BattleGameObjectMgr : MonoBehaviour
     private GameObject[] m_LabInfoScrolls;
     private GameObject[] m_RepairButtons;
     private GameObject[] m_RepairInfoScrolls;
-    private GameObject[] m_BuildButtons;
-    private GameObject[] m_BuildInfoScrolls;
+    private GameObject[] m_BuildButtons;    
 
     // 추가
+	private GameObject[] m_BuildButtons_Black;
+    private GameObject[] m_BuildInfoScrolls;
+    private GameObject m_BuildWarningNoBP;
+    private GameObject m_BuildWarningAlready;
     private GameObject m_RemoveInfoScroll;
+ 	private GameObject m_RemoveWarningYet;
     private GameObject m_RemoveWarning;
     private GameObject[] m_TurretSupports;
 
@@ -111,18 +115,25 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RepairButtons = GameObject.FindGameObjectsWithTag("REPAIRBUTTON");
         m_RepairInfoScrolls = GameObject.FindGameObjectsWithTag("REPAIRINFO");
         m_BuildButtons = GameObject.FindGameObjectsWithTag("BUILDBUTTON");
-        m_BuildInfoScrolls = GameObject.FindGameObjectsWithTag("BUILDINFO");
+
 
         // 추가
+ 		m_BuildButtons_Black = GameObject.FindGameObjectsWithTag("BUILDBUTTON_BLACK");
+        m_BuildInfoScrolls = GameObject.FindGameObjectsWithTag("BUILDINFO");
+        m_BuildWarningNoBP = GameObject.Find("BuildWarningNoBP");
+        m_BuildWarningAlready = GameObject.Find("BuildWarningAlready");
         m_RemoveInfoScroll = GameObject.FindGameObjectWithTag("REMOVEINFO");
+        m_RemoveWarningYet = GameObject.Find("RemoveWarningYet");
         m_RemoveWarning = GameObject.Find("RemoveWarningPanel");
+
+
         m_TurretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
 
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);
     }
 
-    public void FlashMiniPlanet(MiniPlanetCtrl.AREA_DIR area)
+    public void FlashMiniPlanet(PlanetArea area)
     {
         m_miniPlanetCtrl.FlashArea(area);
     }
@@ -142,12 +153,16 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_miniPlanetCtrl.RotateToTarget(targetDir);
     }
 
-    public void UpdateEnemyCnt(int maxEnemyCnt, int destroyedEnemyCnt)
+    public void UpdateEnemyCnt(int maxEnemyCnt)
     {
         m_enemyCntCtrl.MaxEnemyCnt = maxEnemyCnt;
-        m_enemyCntCtrl.DestroyedEnemyCnt = destroyedEnemyCnt;
     }
 
+    public void AddDestroyedEnemy(int add)
+    {
+        m_enemyCntCtrl.AddDestroyedEnemy(add);
+    }
+    
     public void UpdatePlanetHP(int maxHP, int curHP)
     {
         m_planetHpCtrl.MaxHP = maxHP;
@@ -333,7 +348,15 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             m_BuildInfoScroll.SetActive(false);
         }
+        // 추가
+        for(int i=0;i<4;i++)
+        {
+            m_BuildButtons_Black[i].SetActive(false);
+        }
+        m_BuildWarningNoBP.SetActive(false);
+        m_BuildWarningAlready.SetActive(false);
         m_RemoveInfoScroll.SetActive(false);
+        m_RemoveWarningYet.SetActive(false);
         m_RemoveWarning.SetActive(false);
 
     }
@@ -346,6 +369,13 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     }
 
+    public void PopUpBuildInfos2(GameObject ThisBuildButtonB)
+    {
+        int BuildButtonBIdx = System.Array.IndexOf(m_BuildButtons_Black, ThisBuildButtonB);
+
+        m_BuildInfoScrolls[BuildButtonBIdx].SetActive(true);
+
+    }
     public void BuildInfosExit()
     {
         for (int i = 0; i < m_BuildInfoScrolls.Length; i++)
@@ -390,6 +420,24 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
+ public void PopUBuildWarningNoBP()
+    {
+        m_BuildWarningNoBP.SetActive(true);
+    }
+
+    public void ExitWarnings()
+    {
+        m_BuildWarningNoBP.SetActive(false);
+        m_BuildWarningAlready.SetActive(false);
+        m_RemoveWarningYet.SetActive(false);
+        m_RemoveWarning.SetActive(false);
+
+    }
+
+    public void PopUBuildWarningAlready()
+    {
+        m_BuildWarningAlready.SetActive(true);
+    }
     public void PopUpRemoveInfo()
     {
         m_RemoveInfoScroll.SetActive(true);
@@ -407,13 +455,13 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveInfoScroll.SetActive(true);
     }
 
+    public void PopUpRemoveWarningYet()
+    {
+        m_RemoveWarningYet.SetActive(true);
+    }
+
     public void PopUpRemoveWarning()
     {
         m_RemoveWarning.SetActive(true);
-    }
-
-    public void ExitRemoveWarning()
-    {
-        m_RemoveWarning.SetActive(false);
     }
 }

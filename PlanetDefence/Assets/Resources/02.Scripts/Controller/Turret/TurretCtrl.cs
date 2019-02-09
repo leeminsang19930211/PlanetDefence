@@ -14,7 +14,7 @@ public class TurretCtrl : MonoBehaviour
     public float m_fireDelay = 0;
     public float m_bodyDistFromTurretSupport = 0;
     public float m_bulletDistFromtTurret = 0;
-    public Bullet m_bulletType = Bullet.end;
+    public Bullet m_bulletType = Bullet.End;
     public UnitHPBarCtrl m_unitHPBarCtrl = null;
     public GameObject m_body = null;
 

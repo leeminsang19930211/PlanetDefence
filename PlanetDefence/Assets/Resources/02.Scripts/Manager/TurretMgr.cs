@@ -127,6 +127,50 @@ public class TurretMgr : MonoBehaviour
 
         return true;
     }
+    public bool CreateTurretOnTurretSupport(Turret turretName)
+    {
+        if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
+        {
+            Debug.Log("the focus idx is out of the range");
+            return false;
+        }
+
+        if (CheckTurretOnTurretSupport() == true)
+        {
+            Debug.Log("the turret support has a turret");
+            return false;
+        }
+
+        if (m_turretSupportCtrs[m_focusedTurretSupportIdx].Focus == false)
+        {
+            Debug.Log("the turret support is not focused");
+            return false;
+        }
+
+        GameObject turret = null;
+        string turretStr = EnumToStr(turretName);
+
+        if (false == m_sourceTurrets.TryGetValue(turretStr, out turret))
+        {
+            Debug.Log("Finding turret in the Dictionary failed");
+            return false;
+        }
+
+        Transform parentTrsf = GameObject.FindGameObjectWithTag("BATTLESTATIC")?.GetComponent<Transform>();
+
+        if (parentTrsf == null)
+        {
+            Debug.Log("The BattleStatic inst is not found");
+            return false;
+        }
+
+        float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
+
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = Instantiate(turret, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0, 0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.TurretSupportIdx = m_focusedTurretSupportIdx;
+
+        return true;
+    }
 
     // 현재 포커싱된 터렛 지지대 위에 터렛을 삭제한다
     public bool RemoveTurretOnTurretSupport()
@@ -229,5 +273,23 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
+    private string EnumToStr(Turret turret)
+    {
+        string str = "";
 
+        switch (turret)
+        {
+            case Turret.Lv1_Missile:
+                str = "Turret_Lv1_Missile";
+                break;
+            case Turret.Lv1_Laser:
+                str = "Turret_Lv1_Laser";
+                break;
+            default:
+                Debug.LogError("The turret str from the turret enum is not mapped");
+                break;
+        }
+
+        return str;
+    }
 }

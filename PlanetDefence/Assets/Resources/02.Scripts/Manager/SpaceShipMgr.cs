@@ -39,6 +39,7 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
+    private int m_maxSpaceShipCnt = 0;
     private Dictionary<string, GameObject> m_sourceSpaceShips = new Dictionary<string, GameObject>();
 
     public void Instantiate()
@@ -79,8 +80,12 @@ public class SpaceShipMgr : MonoBehaviour
 
     public void StartCreatingWaves(WavesMob[] waveInfos)
     {
-        foreach(WavesMob waveInfo in waveInfos)
+        m_maxSpaceShipCnt = 0;
+
+        foreach (WavesMob waveInfo in waveInfos)
         {
+            m_maxSpaceShipCnt += waveInfo.nMobNum;
+
             GameObject spaceShip = FindSpaceShipByEnum(waveInfo.eMobType);
 
             if(spaceShip == null)
@@ -92,6 +97,8 @@ public class SpaceShipMgr : MonoBehaviour
 
             StartCoroutine("CreateWave", new WrappedWaveInfo(spaceShip, waveInfo.nMobNum, waveInfo.fDelayTime, waveInfo.fFirstDelayTime));
         }
+
+        BattleGameObjectMgr.Inst.UpdateEnemyCnt(m_maxSpaceShipCnt);
     }
 
     public SpaceShipCtrl FindFirstTargetInFan(float minAngle, float maxAngle, Vector3 from, float minDist)
@@ -135,21 +142,9 @@ public class SpaceShipMgr : MonoBehaviour
 
     private GameObject FindSpaceShipByEnum(MobType type )
     {
-        string typeStr = "";
-
-        switch (type)
-        {
-            case MobType.Normal:
-                typeStr = "SpaceShip_Normal";
-                break;
-            case MobType.Kamikaze:
-                typeStr = "SpaceShip_Dummy";
-                break;
-        }
-
         GameObject spaceShip = null;
 
-        m_sourceSpaceShips.TryGetValue(typeStr, out spaceShip);
+        m_sourceSpaceShips.TryGetValue(EnumToStr(type), out spaceShip);
   
         return spaceShip;
     }
@@ -200,5 +195,25 @@ public class SpaceShipMgr : MonoBehaviour
         m_sourceSpaceShips.Add(name, spaceShip);
 
         return true;
+    }
+
+    private string EnumToStr(MobType spaceShip)
+    {
+        string str = "";
+
+        switch (spaceShip)
+        {
+            case MobType.Normal:
+                str = "SpaceShip_Normal";
+                break;
+            case MobType.Kamikaze:
+                str = "SpaceShip_Dummy";
+                break;
+            default:
+                Debug.LogError("The space ship str from the space ship enum is not mapped");
+                break;
+        }
+
+        return str;
     }
 }

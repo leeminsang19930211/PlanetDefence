@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class MiniPlanetCtrl : MonoBehaviour
 {
-    public enum AREA_DIR
-    {
-        UP,
-        LEFT,
-        DOWN,
-        RIGHT
-    }
-
     public int m_maxFalshCnt = 0;
     public float m_flashDuration = 0;
     
@@ -33,23 +25,23 @@ public class MiniPlanetCtrl : MonoBehaviour
         
     }
 
-    public void FlashArea(AREA_DIR areaDir )
+    public void FlashArea(PlanetArea areaDir )
     {
         switch (areaDir)
         {
-            case AREA_DIR.UP:
+            case PlanetArea.Up:
                 StopCoroutine("Coroutine_FlashArea");
                 StartCoroutine("Coroutine_FlashArea", m_miniPlanet_up);
                 break;
-            case AREA_DIR.LEFT:
+            case PlanetArea.Left:
                 StopCoroutine("Coroutine_FlashArea");
                 StartCoroutine("Coroutine_FlashArea", m_miniPlanet_left);
                 break;
-            case AREA_DIR.DOWN:
+            case PlanetArea.Down:
                 StopCoroutine("Coroutine_FlashArea");
                 StartCoroutine("Coroutine_FlashArea", m_miniPlanet_down);
                 break;
-            case AREA_DIR.RIGHT:
+            case PlanetArea.Right:
                 StopCoroutine("Coroutine_FlashArea");
                 StartCoroutine("Coroutine_FlashArea", m_miniPlanet_right);
                 break;
