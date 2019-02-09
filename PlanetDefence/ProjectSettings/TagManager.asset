@@ -25,6 +25,8 @@ TagManager:
   - BATTLESTATIC
   - SPACESHIP_NORMAL
   - SPACESHIP_DUMMY
+  - BUILDBUTTON_BLACK
+  - TURRET_NORMAL
   layers:
   - Default
   - TransparentFX
@@ -71,10 +73,16 @@ TagManager:
   - name: Turret_Step1
     uniqueID: 4153457833
     locked: 0
-  - name: Bullet0
+  - name: SpaceShip_Bullet0
+    uniqueID: 1780442137
+    locked: 0
+  - name: SpaceShip_Bullet1
+    uniqueID: 3352041389
+    locked: 0
+  - name: Turret_Bullet0
     uniqueID: 2045242963
     locked: 0
-  - name: Bullet1
+  - name: Turret_Bullet1
     uniqueID: 3175762473
     locked: 0
   - name: TurretHpBar_Back

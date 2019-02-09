@@ -88,7 +88,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
-    public void Awake()
+    public void Init()
     {
         m_mainCameraCtrl = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<MainCameraCtrl>();
         m_enemyCntCtrl = GameObject.FindGameObjectWithTag("ENEMY_CNT")?.GetComponent<EnemyCntCtrl>();
@@ -155,12 +155,15 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public void UpdateEnemyCnt(int maxEnemyCnt)
     {
-        m_enemyCntCtrl.MaxEnemyCnt = maxEnemyCnt;
+        if(m_enemyCntCtrl)
+            m_enemyCntCtrl.MaxEnemyCnt = maxEnemyCnt;
+
     }
 
     public void AddDestroyedEnemy(int add)
     {
-        m_enemyCntCtrl.AddDestroyedEnemy(add);
+        if (m_enemyCntCtrl)
+            m_enemyCntCtrl.AddDestroyedEnemy(add);
     }
     
     public void UpdatePlanetHP(int maxHP, int curHP)

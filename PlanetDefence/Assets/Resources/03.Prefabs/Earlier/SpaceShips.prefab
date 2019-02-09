@@ -120,7 +120,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cc2ffa720d3ca4bb6d72b04bd17a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 100
+  m_maxHP: 1000
+  m_maxBullets: 0
+  m_maxFires: -1
+  m_fanAngle: 45
+  m_fireDelay: 0
+  m_fireDistAlignUp: 0
+  m_bulletType: 0
+  m_bulletPool: 1
+  m_unitHPBarCtrl: {fileID: 8090626085724825001}
+  m_dropJunk: 20
+  m_dropEleCircuit: 25
+  m_dropCoin: 30
   m_fallingSpeed: 200
   m_revolvingSpeed: 10
   m_fallingDists:
@@ -129,7 +140,6 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
-  m_unitHPBarCtrl: {fileID: 8090626085724825001}
 --- !u!1 &2222494291023890232
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +260,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3efb9e71c00e02439c67cc6e45129bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 100
+  m_maxHP: 300
+  m_maxBullets: 10
+  m_maxFires: -1
+  m_fanAngle: 45
+  m_fireDelay: 1
+  m_fireDistAlignUp: 100
+  m_bulletType: 2
+  m_bulletPool: 1
+  m_unitHPBarCtrl: {fileID: 3290378697062621502}
+  m_dropJunk: 10
+  m_dropEleCircuit: 15
+  m_dropCoin: 5
   m_fallingSpeed: 200
   m_revolvingSpeed: 10
   m_fallingDists:
@@ -259,7 +280,6 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
-  m_unitHPBarCtrl: {fileID: 3290378697062621502}
 --- !u!1 &2222494291067591024
 GameObject:
   m_ObjectHideFlags: 0

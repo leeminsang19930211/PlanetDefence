@@ -30,18 +30,22 @@ public class MiniPlanetCtrl : MonoBehaviour
         switch (areaDir)
         {
             case PlanetArea.Up:
+                m_miniPlanet_up.SetActive(false);
                 StopCoroutine("Coroutine_FlashArea");
                 StartCoroutine("Coroutine_FlashArea", m_miniPlanet_up);
                 break;
             case PlanetArea.Left:
+                m_miniPlanet_left.SetActive(false);
                 StopCoroutine("Coroutine_FlashArea");
                 StartCoroutine("Coroutine_FlashArea", m_miniPlanet_left);
                 break;
             case PlanetArea.Down:
+                m_miniPlanet_down.SetActive(false);
                 StopCoroutine("Coroutine_FlashArea");
                 StartCoroutine("Coroutine_FlashArea", m_miniPlanet_down);
                 break;
             case PlanetArea.Right:
+                m_miniPlanet_right.SetActive(false);
                 StopCoroutine("Coroutine_FlashArea");
                 StartCoroutine("Coroutine_FlashArea", m_miniPlanet_right);
                 break;
@@ -73,5 +77,7 @@ public class MiniPlanetCtrl : MonoBehaviour
 
             curFlashCnt++;
         }
+
+        m_miniPlanet_up.SetActive(false);
     }
 }

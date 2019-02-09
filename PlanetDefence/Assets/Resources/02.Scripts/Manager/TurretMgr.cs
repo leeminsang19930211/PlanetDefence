@@ -5,6 +5,9 @@ using UnityEngine;
 public class TurretMgr : MonoBehaviour
 {
     private static TurretMgr m_inst = null;
+    private int m_focusedTurretSupportIdx = -1; // 클릭하여 현재 포커싱 된 터렛 지지대의 인덱스이다
+    private List<TurretSupportCtrl> m_turretSupportCtrs = new List<TurretSupportCtrl>();
+    private Dictionary<string, GameObject> m_sourceTurrets = new Dictionary<string, GameObject>();
 
     public static TurretMgr Inst
     {
@@ -22,23 +25,7 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
-    private int m_focusedTurretSupportIdx = -1; // 클릭하여 현재 포커싱 된 터렛 지지대의 인덱스이다
-
-    private List<TurretSupportCtrl> m_turretSupportCtrs = new List<TurretSupportCtrl>();
-    private Dictionary<string, GameObject> m_sourceTurrets = new Dictionary<string, GameObject>();
-
-    public void Instantiate()
-    {
-        if (m_inst == null)
-        {
-            GameObject container = new GameObject();
-            container.name = "BattleGameObjectMgr";
-            m_inst = container.AddComponent<TurretMgr>() as TurretMgr;
-            DontDestroyOnLoad(container);
-        }
-    }
-
-    public void Awake()
+    public void Init()
     {
         GameObject turrets = GlobalGameObjectMgr.Inst.FindGameObject("Turrets");
 
@@ -55,32 +42,6 @@ public class TurretMgr : MonoBehaviour
             SetUpTurrets();
             turrets.SetActive(false);
         }
-    }
-
-    private void SetUpTurrets()
-    {
-        AddTurret("Turret_Lv1_Missile");
-        AddTurret("Turret_Lv1_Laser");
-        AddTurretSupports();
-    }
-
-    public bool HitTurret(int turretIdx, int damage)
-    {
-        if(turretIdx < 0 || turretIdx >= m_turretSupportCtrs.Count)
-        {
-            Debug.Log("the focus idx is out of the range");
-            return false;
-        }
-
-        if(m_turretSupportCtrs[turretIdx].TurretCtrl == null )
-        {
-            Debug.Log("the turretCtrl is null");
-            return false;
-        }
-
-        m_turretSupportCtrs[turretIdx].TurretCtrl.Hit(damage);
-
-        return true;
     }
 
     public TurretCtrl FindFirstTargetInFan(Vector3 from, float fanAngle)
@@ -112,28 +73,23 @@ public class TurretMgr : MonoBehaviour
         return FindFirstTurret(planetArea);
     }
 
-    public TurretCtrl FindFirstTurret(int planetArea)
+    public bool CheckTurretOnTurretSupport()
     {
-        if (planetArea < 0 || planetArea >= 4)
-            return null;
-
-        int start = planetArea * 5;// 5 단위로 구역이 나뉨
-
-        TurretCtrl turret = null;
-
-        for (int i= start; i< start +5; ++i )
+        if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
         {
-            if (m_turretSupportCtrs[i].TurretCtrl != null)
-            {
-                turret = m_turretSupportCtrs[i].TurretCtrl;
-                break;
-            }
+            Debug.Log("the focus idx is out of the range");
+            return false;
         }
 
-        return turret; 
+        if (m_turretSupportCtrs[m_focusedTurretSupportIdx].Focus == false)
+        {
+            Debug.Log("the turret support is not focused");
+            return false;
+        }
+
+        return m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl != null;
     }
 
-    // Turrets 프리팹에 있는 터렛 이름을 입력하면 현재 포커시된 터렛 지지대 위에 그 터렛을 만들어준다.
     public bool CreateTurretOnTurretSupport(string turretName)
     {
         if(m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
@@ -174,6 +130,7 @@ public class TurretMgr : MonoBehaviour
 
         return true;
     }
+
     public bool CreateTurretOnTurretSupport(Turret turretName)
     {
         if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
@@ -216,7 +173,6 @@ public class TurretMgr : MonoBehaviour
         return true;
     }
 
-    // 현재 포커싱된 터렛 지지대 위에 터렛을 삭제한다
     public bool RemoveTurretOnTurretSupport()
     {
         if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
@@ -242,25 +198,6 @@ public class TurretMgr : MonoBehaviour
         return true;
     }
 
-    // 현재 포커싱된 터렛 지지대 위에 터렛이 있으면 true를 반환한다
-    public bool CheckTurretOnTurretSupport()
-    {
-        if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
-        {
-            Debug.Log("the focus idx is out of the range");
-            return false;
-        }
-
-        if (m_turretSupportCtrs[m_focusedTurretSupportIdx].Focus == false)
-        {
-            Debug.Log("the turret support is not focused");
-            return false;
-        }
-
-        return m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl != null;
-    }
-
-    // 터렛 지지대가 눌릴때 호출해야 하는 함수이다. 호출해서 자신이 포커싱 된것을 알려줘야한다.
     public bool FocusTurretSupportByIdx(int idx)
     {
         if (idx < 0 || idx >= m_turretSupportCtrs.Count)
@@ -281,33 +218,39 @@ public class TurretMgr : MonoBehaviour
         return true;
     }
 
+    private TurretCtrl FindFirstTurret(int planetArea)
+    {
+        if (planetArea < 0 || planetArea >= 4)
+            return null;
+
+        int start = planetArea * 5;// 5 단위로 구역이 나뉨
+
+        TurretCtrl turret = null;
+
+        for (int i = start; i < start + 5; ++i)
+        {
+            if (m_turretSupportCtrs[i].TurretCtrl != null)
+            {
+                turret = m_turretSupportCtrs[i].TurretCtrl;
+                break;
+            }
+        }
+
+        return turret;
+    }
+
     private void CreateTurret(GameObject source, Transform parentTrsf)
     {
         float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
 
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = Instantiate(source, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0, 0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.TurretSupportIdx = m_focusedTurretSupportIdx;
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.BulletPoolIdx = m_focusedTurretSupportIdx;
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Clone = true;
     }
 
     private void RemoveTurret()
     {       
         Destroy(m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.gameObject);
-    }
-
-    private bool AddTurret(string name)
-    {
-        GameObject turret = null;
-
-        turret = GameObject.Find(name);
-        if (turret == null)
-        {
-            Debug.LogError("Finding "+ name + " failed");
-            return false;
-        }
-           
-        m_sourceTurrets.Add(name, turret);
-        return true;
     }
 
     private void AddTurretSupports()
@@ -330,6 +273,28 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
+    private bool AddTurret(string name)
+    {
+        GameObject turret = null;
+
+        turret = GameObject.Find(name);
+        if (turret == null)
+        {
+            Debug.LogError("Finding " + name + " failed");
+            return false;
+        }
+
+        m_sourceTurrets.Add(name, turret);
+        return true;
+    }
+
+    private void SetUpTurrets()
+    {
+        AddTurret("Turret_Lv1_Missile");
+        AddTurret("Turret_Lv1_Laser");
+        AddTurretSupports();
+    }
+
     private string EnumToStr(Turret turret)
     {
         string str = "";
@@ -349,4 +314,6 @@ public class TurretMgr : MonoBehaviour
 
         return str;
     }
+
+ 
 }

@@ -37,6 +37,7 @@ public enum Bullet
 {
     Lv1_Missile,
     Lv1_Laser,
+    TestBullet,
     End,
 }
 
@@ -53,6 +54,5 @@ public enum PlanetArea
     Left,
     Down,
     Right,
-    outside,
     End,
 }

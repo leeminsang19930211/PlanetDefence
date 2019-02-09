@@ -20,8 +20,18 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
-
     private static SpaceShipMgr m_inst = null;
+    private int m_maxSpaceShipCnt = 0;
+    private int m_createdSpaceShipCnt = 0;
+    private Dictionary<string, GameObject> m_sourceSpaceShips = new Dictionary<string, GameObject>();
+
+    public int MaxSpaceShipCnt
+    {
+        get
+        {
+            return m_maxSpaceShipCnt;
+        }
+    }
 
     public static SpaceShipMgr Inst
     {
@@ -39,30 +49,7 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
-    private int m_maxSpaceShipCnt = 0;
-    private int m_createdSpaceShipCnt = 0;
-    private Dictionary<string, GameObject> m_sourceSpaceShips = new Dictionary<string, GameObject>();
-
-    public int MaxSpaceShipCnt
-    {
-        get
-        {
-            return m_maxSpaceShipCnt;
-        }
-    }
-
-    public void Instantiate()
-    {
-        if (m_inst == null)
-        {
-            GameObject container = new GameObject();
-            container.name = "BattleGameObjectMgr";
-            m_inst = container.AddComponent<SpaceShipMgr>() as SpaceShipMgr;
-            DontDestroyOnLoad(container);
-        }
-    }
-
-    public void Awake()
+    public void Init()
     {
         GameObject spaceShips = GlobalGameObjectMgr.Inst.FindGameObject("SpaceShips");
 
@@ -79,12 +66,6 @@ public class SpaceShipMgr : MonoBehaviour
             SetUpSpaceShips();
             spaceShips.SetActive(false);
         }
-    }
-
-    private void SetUpSpaceShips()
-    {
-        AddSpaceShip("SpaceShip_Normal");
-        AddSpaceShip("SpaceShip_Dummy");
     }
 
     public void StartCreatingWaves(WavesMob[] waveInfos)
@@ -111,40 +92,50 @@ public class SpaceShipMgr : MonoBehaviour
         BattleGameObjectMgr.Inst.UpdateEnemyCnt(m_maxSpaceShipCnt);
     }
 
-    public SpaceShipCtrl FindFirstTargetInFan(float minAngle, float maxAngle, Vector3 from, float minDist)
+    public SpaceShipCtrl FindFirstTargetInFan(float refAngle, float fanAngle, Vector3 from, float minDist)
     {
         SpaceShipCtrl target = null;
 
         GameObject[] dummyList = GameObject.FindGameObjectsWithTag("SPACESHIP_DUMMY");
 
-        target = FindFirstTargetInFan(dummyList, minAngle, maxAngle, from,  minDist);
+        target = FindFirstTargetInList(dummyList, refAngle, fanAngle, from,  minDist);
 
         if (target != null)
             return target; // 더미가 있으면 무조건 더미먼저
 
         GameObject[] normalList = GameObject.FindGameObjectsWithTag("SPACESHIP_NORMAL");
 
-        target = FindFirstTargetInFan(normalList, minAngle, maxAngle, from, minDist);
+        target = FindFirstTargetInList(normalList, refAngle, fanAngle, from, minDist);
 
         return target;
     }
 
-    private SpaceShipCtrl FindFirstTargetInFan(GameObject[] spaceShipList, float minAngle, float maxAngle, Vector3 from, float minDist)
+    private SpaceShipCtrl FindFirstTargetInList(GameObject[] spaceShipList, float refAngle, float fanAngle, Vector3 from, float minDist)
     {
         if (spaceShipList == null)
             return null;
+
+        float halfAngle = fanAngle * 0.5f;
 
         foreach (GameObject spcShip in spaceShipList)
         {
             SpaceShipCtrl ctrl = spcShip.GetComponent<SpaceShipCtrl>();
 
-            if ((ctrl.Pos - from).magnitude < minDist)
+            if ((ctrl.Position - from).magnitude < minDist)
             {
                 continue;
             }
-              
-            if (minAngle <= ctrl.AngleFromPlanetUp && maxAngle >= ctrl.AngleFromPlanetUp)
-                return ctrl;
+
+            if(refAngle == 0)
+            {
+                if (0 <= ctrl.AngleFromPlanetUp && (halfAngle > ctrl.AngleFromPlanetUp || 360f- halfAngle  < ctrl.AngleFromPlanetUp))
+                    return ctrl;      
+            }
+            else
+            {
+                if (refAngle - halfAngle <= ctrl.AngleFromPlanetUp && refAngle + halfAngle > ctrl.AngleFromPlanetUp)
+                    return ctrl;
+            }
         }
 
         return null;
@@ -215,6 +206,12 @@ public class SpaceShipMgr : MonoBehaviour
         return true;
     }
 
+    private void SetUpSpaceShips()
+    {
+        AddSpaceShip("SpaceShip_Normal");
+        AddSpaceShip("SpaceShip_Dummy");
+    }
+
     private string EnumToStr(MobType spaceShip)
     {
         string str = "";
@@ -234,4 +231,6 @@ public class SpaceShipMgr : MonoBehaviour
 
         return str;
     }
+
+
 }

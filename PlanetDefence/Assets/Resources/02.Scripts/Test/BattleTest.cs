@@ -30,7 +30,7 @@ public class BattleTest : MonoBehaviour
 
             BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxPlanetHP, m_curPlanetHP);        
 
-            TurretMgr.Inst.HitTurret(0, 10);
+        
             
         }
 

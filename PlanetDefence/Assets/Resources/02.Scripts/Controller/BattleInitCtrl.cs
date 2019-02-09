@@ -11,23 +11,22 @@ public class BattleInitCtrl : MonoBehaviour
             // TEMP : 나중에 배틀이 정말 끝난는지 판단하여 작성해야함. 
             GlobalGameObjectMgr.Inst.Battle = true;
 
-            // Awake 함수 호출을 위해 여기서 인스탄트한다
-            BattleGameObjectMgr.Inst.Instantiate();
-            TurretMgr.Inst.Instantiate();
-            SpaceShipMgr.Inst.Instantiate();
-            BulletMgr.Inst.Instantiate();
+            BattleGameObjectMgr.Inst.Init();
+            TurretMgr.Inst.Init();
+            SpaceShipMgr.Inst.Init();
+            BulletMgr.Inst.Init();
             Player.Inst.Instantiate();
 
             WavesMob[] infos = new WavesMob[2];
 
             infos[0].eMobType = MobType.Normal;
-            infos[0].nMobNum = 10;
+            infos[0].nMobNum = 30;
             infos[0].fDelayTime = 2f;
             infos[0].fFirstDelayTime = 0f;
 
             infos[1].eMobType = MobType.Kamikaze;
-            infos[1].nMobNum = 3;
-            infos[1].fDelayTime = 2f;
+            infos[1].nMobNum = 10;
+            infos[1].fDelayTime = 6f;
             infos[1].fFirstDelayTime = 3f;
 
             //infos[2].eMobType = MobType.Pirate;

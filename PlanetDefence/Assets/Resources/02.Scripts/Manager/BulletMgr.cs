@@ -5,6 +5,9 @@ using UnityEngine;
 public class BulletMgr : MonoBehaviour
 {
     private static BulletMgr m_inst = null;
+    private List<int>[] m_bulletPoolIndex = new List<int>[(int)BulletPool.End];
+    private List<List<BulletCtrl>>[] m_bulletPool = new List<List<BulletCtrl>>[(int)BulletPool.End];
+    private Dictionary<string, GameObject> m_sourceBullets = new Dictionary<string, GameObject>();
 
     public static BulletMgr Inst
     {
@@ -22,22 +25,7 @@ public class BulletMgr : MonoBehaviour
         }
     }
 
-    private List<int>[] m_bulletPoolIndex = new List<int>[(int)BulletPool.End];
-    private List<List<BulletCtrl>>[] m_bulletPool = new List<List<BulletCtrl>>[(int)BulletPool.End];
-    private Dictionary<string, GameObject> m_sourceBullets = new Dictionary<string, GameObject>();
-
-    public void Instantiate()
-    {
-        if (m_inst == null)
-        {
-            GameObject container = new GameObject();
-            container.name = "BulletMgr";
-            m_inst = container.AddComponent<BulletMgr>() as BulletMgr;
-            DontDestroyOnLoad(container);
-        }
-    }
-
-    public void Awake()
+    public void Init()
     {
         GameObject bullets = GlobalGameObjectMgr.Inst.FindGameObject("Bullets");
 
@@ -85,7 +73,6 @@ public class BulletMgr : MonoBehaviour
         return true;
     }
 
-    // 총알들을 생성한다. 게임 오브젝트가 생성될때마다 호출해줄것
     public bool AllocateBullets(Bullet bullet, BulletPool pool, int idx, int bulletCnt, bool active = false)
     {
         if(m_bulletPool[(int)pool].Count == 0)
@@ -132,7 +119,6 @@ public class BulletMgr : MonoBehaviour
         return true;
     }
 
-    // 총알들을 삭제한다. 게임오브젝트가 삭제 될때마다 호출해줄것
     public bool ClearBullets(BulletPool pool, int idx)
     {
         if (idx < 0 || idx >= m_bulletPool[(int)pool].Count)
@@ -152,7 +138,7 @@ public class BulletMgr : MonoBehaviour
         return true;
     }
 
-    public bool FireBullet(BulletPool pool, int idx, Vector3 startPos, Vector3 startAngle, SpaceShipCtrl target)
+    public bool FireBullet(BulletPool pool, int idx, Vector3 startPos, Vector3 startAngle, Gunner target)
     {
         if (target == null)
             return false;
@@ -179,7 +165,6 @@ public class BulletMgr : MonoBehaviour
         return true;
     }
 
-  
     private GameObject FindSourceBullet(Bullet bullet)
     {
         GameObject source = null;
@@ -189,20 +174,7 @@ public class BulletMgr : MonoBehaviour
         return source;
     }
 
-    private void SetUpBullets()
-    {
-        AddBullet("Bullet_Lv1_Missile");
-        AddBullet("Bullet_Lv1_Laser");
-
- 
-        for(int i=0; i <(int)BulletPool.End; ++i)
-        {
-            m_bulletPool[i] = new List<List<BulletCtrl>>();
-            m_bulletPoolIndex[i] = new List<int>();
-        }
-    }
-
-private bool AddBullet(string name)
+    private bool AddBullet(string name)
     {
         GameObject bullet = null;
 
@@ -218,6 +190,19 @@ private bool AddBullet(string name)
         return true;
     }
 
+    private void SetUpBullets()
+    {
+        AddBullet("Bullet_Lv1_Missile");
+        AddBullet("Bullet_Lv1_Laser");
+        AddBullet("TestBullet");
+
+        for (int i=0; i <(int)BulletPool.End; ++i)
+        {
+            m_bulletPool[i] = new List<List<BulletCtrl>>();
+            m_bulletPoolIndex[i] = new List<int>();
+        }
+    }
+
     private string EnumToStr(Bullet bullet)
     {
         string str = "";
@@ -230,6 +215,9 @@ private bool AddBullet(string name)
             case Bullet.Lv1_Laser:
                 str = "Bullet_Lv1_Laser";
                 break;
+            case Bullet.TestBullet:
+                str = "TestBullet";
+                break;
             default:
                 Debug.LogError("The bullet str from the bullet enum is not mapped");
                 break;
@@ -237,4 +225,6 @@ private bool AddBullet(string name)
 
         return str;
     }
+
+ 
 }

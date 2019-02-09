@@ -7,9 +7,9 @@ public class BulletCtrl : MonoBehaviour
     public float m_speed = 0;
 
     private Transform m_trsf = null;
-    private SpaceShipCtrl m_target= null;
+    private Gunner m_target= null;
 
-    public void Fire(Vector3 startPos, Vector3 startAngle, SpaceShipCtrl target)
+    public void Fire(Vector3 startPos, Vector3 startAngle, Gunner target)
     {
         m_trsf.position = startPos;
         m_trsf.localEulerAngles = startAngle;
@@ -49,7 +49,7 @@ public class BulletCtrl : MonoBehaviour
             return;
         }
           
-        Vector3 moveDir = m_target.Pos - m_trsf.position;
+        Vector3 moveDir = m_target.Position - m_trsf.position;
 
         float moveDist = m_speed * Time.deltaTime;
 
@@ -67,7 +67,7 @@ public class BulletCtrl : MonoBehaviour
         if (m_target == null)
             return;
 
-        Vector3 moveDir = m_target.Pos - m_trsf.position;
+        Vector3 moveDir = m_target.Position - m_trsf.position;
 
         float angle = MyMath.LeftAngle180(m_trsf.up, moveDir);
 

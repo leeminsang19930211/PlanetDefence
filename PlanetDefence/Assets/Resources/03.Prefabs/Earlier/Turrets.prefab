@@ -1,119 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1120943726
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1120943727}
-  - component: {fileID: 2408495467682920943}
-  m_Layer: 0
-  m_Name: Turret_Lv1_Laser
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1120943727
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1120943726}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2383027454419205768}
-  - {fileID: 3575922697537337829}
-  m_Father: {fileID: 7342356059077564409}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2408495467682920943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1120943726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f12023ab98639ad4dad5ee3d495a6475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_maxBulletInstCnt: 10
-  m_maxBulletCnt: -1
-  m_maxHP: 100
-  m_curHP: 100
-  m_angleForTargetting: 45
-  m_minDistToAttack: 500
-  m_fireDelay: 1
-  m_bodyDistFromTurretSupport: 170
-  m_bulletDistFromtTurret: 240
-  m_bulletType: 1
-  m_unitHPBarCtrl: {fileID: 0}
-  m_body: {fileID: 1288370658454147696}
---- !u!1 &1175790779954245945
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6968288826387335938}
-  - component: {fileID: 8068745204091561621}
-  m_Layer: 0
-  m_Name: Turret_Lv1_Missile
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6968288826387335938
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1175790779954245945}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7342356059920019020}
-  - {fileID: 3489792505670340505}
-  m_Father: {fileID: 7342356059077564409}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8068745204091561621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1175790779954245945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cefe9f011802274488dd138b06a2ab17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_maxBulletInstCnt: 10
-  m_maxBulletCnt: -1
-  m_maxHP: 100
-  m_curHP: 100
-  m_angleForTargetting: 45
-  m_minDistToAttack: 300
-  m_fireDelay: 0.2
-  m_bodyDistFromTurretSupport: 170
-  m_bulletDistFromtTurret: 300
-  m_bulletType: 0
-  m_unitHPBarCtrl: {fileID: 8723878849878509831}
-  m_body: {fileID: 7342356059920019021}
 --- !u!1 &1288370658454147696
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,9 +11,10 @@ GameObject:
   - component: {fileID: 2383027454419205768}
   - component: {fileID: 1613364447105971012}
   - component: {fileID: 1903531935792055630}
+  - component: {fileID: 7341852725154864305}
   m_Layer: 0
-  m_Name: Turret_Lv1_Laser_Body
-  m_TagString: Untagged
+  m_Name: Turret_Lv1_Laser
+  m_TagString: TURRET_NORMAL
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,9 +29,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 9, y: 9, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1120943727}
-  m_RootOrder: 0
+  m_Children:
+  - {fileID: 3575922697537337829}
+  m_Father: {fileID: 7342356059077564409}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1613364447105971012
 SpriteRenderer:
@@ -213,6 +101,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7341852725154864305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288370658454147696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12023ab98639ad4dad5ee3d495a6475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxHP: 100
+  m_maxBullets: 10
+  m_maxFires: -1
+  m_fanAngle: 45
+  m_fireDelay: 1
+  m_fireDistAlignUp: 70
+  m_bulletType: 1
+  m_bulletPool: 0
+  m_unitHPBarCtrl: {fileID: 8709804327909752699}
+  m_minDistToAttack: 300
+  m_distFromTurretSupport: 170
 --- !u!1 &7342356059077564410
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,8 +151,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6968288826387335938}
-  - {fileID: 1120943727}
+  - {fileID: 7342356059920019020}
+  - {fileID: 2383027454419205768}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -256,9 +167,10 @@ GameObject:
   - component: {fileID: 7342356059920019020}
   - component: {fileID: 7342356059920018994}
   - component: {fileID: 7342356059920018995}
+  - component: {fileID: 3336642793453080133}
   m_Layer: 0
-  m_Name: NormalTurret_Body
-  m_TagString: NORMAL_TURRET
+  m_Name: Turret_Lv1_Missile
+  m_TagString: TURRET_NORMAL
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -273,8 +185,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 9, y: 9, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6968288826387335938}
+  m_Children:
+  - {fileID: 3489792505670340505}
+  m_Father: {fileID: 7342356059077564409}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7342356059920018994
@@ -344,12 +257,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3336642793453080133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342356059920019021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefe9f011802274488dd138b06a2ab17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxHP: 100
+  m_maxBullets: 10
+  m_maxFires: -1
+  m_fanAngle: 45
+  m_fireDelay: 0.2
+  m_fireDistAlignUp: 150
+  m_bulletType: 0
+  m_bulletPool: 0
+  m_unitHPBarCtrl: {fileID: 8723878849878509831}
+  m_minDistToAttack: 300
+  m_distFromTurretSupport: 170
 --- !u!1001 &4240300656699393934
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 6968288826387335938}
+    m_TransformParent: {fileID: 7342356059920019020}
     m_Modifications:
     - target: {fileID: 771990411897030676, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -374,17 +310,17 @@ PrefabInstance:
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -394,7 +330,7 @@ PrefabInstance:
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -411,16 +347,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.11111112
+      objectReference: {fileID: 0}
+    - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.11111112
+      objectReference: {fileID: 0}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_distFromPos
-      value: -25
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_targetTrsf
       value: 
-      objectReference: {fileID: 6968288826387335938}
+      objectReference: {fileID: 7342356059920019020}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_frontImgTrsf
@@ -457,7 +403,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1120943727}
+    m_TransformParent: {fileID: 2383027454419205768}
     m_Modifications:
     - target: {fileID: 771990411897030676, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -502,7 +448,7 @@ PrefabInstance:
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -519,16 +465,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.11111112
+      objectReference: {fileID: 0}
+    - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.11111112
+      objectReference: {fileID: 0}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_distFromPos
-      value: -25
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_targetTrsf
       value: 
-      objectReference: {fileID: 1120943727}
+      objectReference: {fileID: 2383027454419205768}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_frontImgTrsf
@@ -542,6 +498,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4257752740884214258}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8709804327909752699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 4257752740884214258}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3853f928aff0e034f8ac4fecad226ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3575922696268768418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 771990410477311312, guid: 245eafaad3292f444833b917795673d6,
