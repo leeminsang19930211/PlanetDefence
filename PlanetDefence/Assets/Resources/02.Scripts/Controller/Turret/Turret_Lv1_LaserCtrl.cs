@@ -15,5 +15,4 @@ public class Turret_Lv1_LaserCtrl : TurretCtrl
     {
         
     }
-
 }

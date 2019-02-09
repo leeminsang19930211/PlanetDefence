@@ -5,18 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GlobalGameObjectMgr : MonoBehaviour
 {
-    //private static int m_nDays = PlayerPrefs.GetInt("Days", 1);
-
-    //public static int nDays
-    //{
-    //    get
-    //    {
-    //        return m_nDays;
-    //    }
-    //}
-
-    public static CardInfo SelectedCard = null;
-    public static bool bSelected = false;
+    public CardInfo SelectedCard = null;
+    public bool bSelected = false;
 
     private static GlobalGameObjectMgr m_inst = null;
 

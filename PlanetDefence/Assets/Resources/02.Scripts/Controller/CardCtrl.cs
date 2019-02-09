@@ -66,7 +66,7 @@ public class CardCtrl : MonoBehaviour
 
     public void DeleteCards()
     {
-        Debug.Log("Delete");
+        //Debug.Log("Delete");
         for (int i = 0; i < nCardNum; i++)
         {
             Destroy(CardsClone[i]);
@@ -82,14 +82,14 @@ public class CardCtrl : MonoBehaviour
 
     void OnEnable()
     {
-        //if (GlobalGameObjectMgr.nDays % 10 != 0)
-        //{
-        //    ChoiceRandomCard(CardType.Normal);
-        //}
-        //else if(GlobalGameObjectMgr.nDays % 10 == 0)
-        //{
-        //    ChoiceRandomCard(CardType.Boss);
-        //}
+        if (GlobalGameObjectMgr.Inst.CurDay % 10 != 0)
+        {
+            ChoiceRandomCard(CardType.Normal);
+        }
+        else if(GlobalGameObjectMgr.Inst.CurDay % 10 == 0)
+        {
+            ChoiceRandomCard(CardType.Boss);
+        }
         
     }
 

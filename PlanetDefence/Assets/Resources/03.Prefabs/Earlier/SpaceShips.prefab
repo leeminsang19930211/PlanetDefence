@@ -376,6 +376,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
+      propertyPath: m_targetTrsf
+      value: 
+      objectReference: {fileID: 2222494290855825929}
+    - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
+        type: 3}
       propertyPath: m_frontImgTrsf
       value: 
       objectReference: {fileID: 4123300355926670960}
@@ -487,6 +492,11 @@ PrefabInstance:
       propertyPath: m_distFromPos
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
+        type: 3}
+      propertyPath: m_targetTrsf
+      value: 
+      objectReference: {fileID: 2222494291023890231}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_frontImgTrsf
