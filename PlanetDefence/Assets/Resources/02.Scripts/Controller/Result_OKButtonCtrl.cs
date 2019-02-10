@@ -8,15 +8,17 @@ public class Result_OKButtonCtrl : MonoBehaviour
 
     public void OnClick()
     {
-        GlobalGameObjectMgr.Inst.Battle = false;
-
         if(Clear == true)
         {
+            BattleCtrl.Release_Clear();
             SceneLoader.LoadScene("Choice");
         }
         else
         {
+            BattleCtrl.Release_Fail();
             SceneLoader.LoadScene("Lobby");
-        }       
+        }
+
+        BattleGameObjectMgr.Inst.PopDownResult();
     }
 }

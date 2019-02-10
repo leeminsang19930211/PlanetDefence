@@ -6,7 +6,6 @@ public class ToLobby_OkButtonCtrl : MonoBehaviour
 {
     public void OnClick()
     {
-        BattleGameObjectMgr.Inst.PopDownToLobby();
         SceneLoader.LoadScene("Lobby");
     }
 }

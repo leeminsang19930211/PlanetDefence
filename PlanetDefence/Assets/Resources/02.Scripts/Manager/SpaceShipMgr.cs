@@ -68,9 +68,48 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
-    public void ClearSpaceShips()
+    public void Release_Clear()
     {
+        m_maxSpaceShipCnt = 0;
+        m_createdSpaceShipCnt = 0;
 
+        GameObject[] ships = GameObject.FindGameObjectsWithTag("SPACESHIP_DUMMY");
+
+        foreach(GameObject obj in ships)
+        {
+            obj?.GetComponent<SpaceShipCtrl>()?.Die();
+        }
+
+        ships = GameObject.FindGameObjectsWithTag("SPACESHIP_NORMAL");
+
+        foreach (GameObject obj in ships)
+        {
+            obj?.GetComponent<SpaceShipCtrl>()?.Die();
+        }
+
+        StopCoroutine("CreateWave");
+    }
+
+    public void Release_Fail()
+    {
+        m_maxSpaceShipCnt = 0;
+        m_createdSpaceShipCnt = 0;
+
+        GameObject[] ships = GameObject.FindGameObjectsWithTag("SPACESHIP_DUMMY");
+
+        foreach (GameObject obj in ships)
+        {
+            obj?.GetComponent<SpaceShipCtrl>()?.Die();
+        }
+
+        ships = GameObject.FindGameObjectsWithTag("SPACESHIP_NORMAL");
+
+        foreach (GameObject obj in ships)
+        {
+            obj?.GetComponent<SpaceShipCtrl>()?.Die();
+        }
+
+        StopCoroutine("CreateWave");
     }
 
     public void StartCreatingWaves(WavesMob[] waveInfos)

@@ -44,6 +44,22 @@ public class BulletMgr : MonoBehaviour
         }
     }
 
+    public void Release_Clear()
+    {
+        for (int i = 0; i < (int)BulletPool.End; ++i)
+        {
+            ClearBulletPool((BulletPool)i);
+        }
+    }
+
+    public void Release_Fail()
+    {
+        for(int i=0; i<(int)BulletPool.End; ++i)
+        {
+            ClearBulletPool((BulletPool)i);
+        } 
+    }
+
     public bool AllocateBulletPool(BulletPool pool, int cnt )
     {
         if(m_bulletPool[(int)pool].Count > 0 || m_bulletPoolIndex[(int)pool].Count > 0)
@@ -68,7 +84,12 @@ public class BulletMgr : MonoBehaviour
         for(int i=0; i<m_bulletPool[(int)pool].Count; ++i)
         {
             ClearBullets(pool, i);
+           
         }
+
+        m_bulletPoolIndex[(int)pool].Clear();
+        m_bulletPool[(int)pool].Clear();
+        m_bulletPool[(int)pool].Capacity = 0;
 
         return true;
     }

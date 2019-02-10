@@ -35,6 +35,20 @@ public class Player : MonoBehaviour
         UpdateRsrc();
     }
 
+    public void Release_Clear()
+    {
+
+    }
+
+    public void Release_Fail()
+    {
+        m_junk = 0;
+        m_eleCircuit = 0;
+        m_coin = 0;
+
+        UpdateRsrc();
+    }
+
     public void AddJunk(int junk)
     {
         m_junk += junk;

@@ -8,6 +8,6 @@ public class ToLobbyButtonCtrl : MonoBehaviour
     {
         BattleGameObjectMgr.Inst.PopUpToLobby();
 
-        
+        BattleGameObjectMgr.Inst.PopDownToLobby();
     }
 }

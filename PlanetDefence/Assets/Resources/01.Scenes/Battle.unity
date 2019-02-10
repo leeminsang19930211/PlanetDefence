@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 908254126}
   - component: {fileID: 908254125}
   m_Layer: 0
-  m_Name: BattleInit
+  m_Name: BattleCtrl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

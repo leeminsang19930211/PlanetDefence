@@ -100,7 +100,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RepairInfoScrolls = GameObject.FindGameObjectsWithTag("REPAIRINFO");
         m_BuildButtons = GameObject.FindGameObjectsWithTag("BUILDBUTTON");
 
-
         // 추가
  		m_BuildButtons_Black = GameObject.FindGameObjectsWithTag("BUILDBUTTON_BLACK");
         m_BuildInfoScrolls = GameObject.FindGameObjectsWithTag("BUILDINFO");
@@ -110,11 +109,20 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveWarningYet = GameObject.Find("RemoveWarningYet");
         m_RemoveWarning = GameObject.Find("RemoveWarningPanel");
 
-
         m_TurretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
 
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);
+    }
+
+    public void Release_Clear()
+    {
+        m_miniPlanetCtrl.AllToFalse();
+    }
+
+    public void Release_Fail()
+    {
+        m_miniPlanetCtrl.AllToFalse();
     }
 
     public void FlashMiniPlanet(PlanetArea area)
@@ -151,6 +159,9 @@ public class BattleGameObjectMgr : MonoBehaviour
     
     public void UpdatePlanetHP(int maxHP, int curHP)
     {
+        if (m_planetHpCtrl == null)
+            return;
+
         m_planetHpCtrl.MaxHP = maxHP;
         m_planetHpCtrl.CurHP = curHP; 
     }
@@ -215,19 +226,25 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public void PopDownToLobby()
     {
+        if (m_toLobbyPopUpPanel == null)
+            return;
+
         m_toLobbyPopUpPanel.SetActive(false);
     }
 
     public void PopUpResult(bool clear)
     {
         m_resultPopUpPanel.SetActive(true);
+
+        Result_OKButtonCtrl ctrl = m_resultPopUpPanel.GetComponentInChildren<Result_OKButtonCtrl>();
+
+        ctrl.Clear = clear;
     }
 
     public void PopDownResult()
     {
         m_resultPopUpPanel.SetActive(false);
     }
-
 
     public void PopUpLabInfos(GameObject ThisLabButton)
     {

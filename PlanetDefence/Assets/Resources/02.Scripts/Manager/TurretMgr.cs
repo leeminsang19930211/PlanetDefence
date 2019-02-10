@@ -44,6 +44,26 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
+    public void Release_Clear()
+    {
+        m_focusedTurretSupportIdx = -1;  
+    }
+
+    public void Release_Fail()
+    {
+        m_focusedTurretSupportIdx = -1;
+
+        foreach (TurretSupportCtrl turret in m_turretSupportCtrs)
+        {
+            if (turret.TurretCtrl)
+            {
+                turret.TurretCtrl.Die();
+            }
+        }
+
+
+    }
+
     public Gunner FindShieldTurret(int refIdx)
     {
         int startIdx = (refIdx / 5)* 5;

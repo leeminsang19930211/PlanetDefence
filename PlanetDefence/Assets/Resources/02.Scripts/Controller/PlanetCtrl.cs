@@ -45,6 +45,17 @@ public class PlanetCtrl : MonoBehaviour
         }
     }
 
+
+    public void Release_Clear()
+    {
+        Start();
+    }
+
+    public void Release_Fail()
+    {
+        Start();
+    }
+
     public void Hit(int damage)
     {
         m_curHP -= damage;

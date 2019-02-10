@@ -49,19 +49,19 @@ public class CardCtrl : MonoBehaviour
 
     private void RandomInstanceCardCreate(int nMaxNum)
     {
-        if(nMaxNum == 0)
-        {
-            Debug.Log("Cards Loading Error");
-        }
+        //if(nMaxNum == 0)
+        //{
+        //    Debug.Log("Cards Loading Error");
+        //}
 
-        for (int i = 0; i< nCardNum; i++)
-        {
-            int nRandomInt = Random.Range(0, nMaxNum);
-            GameObject CardPrefab = MonoBehaviour.Instantiate((GameObject)Cards[nRandomInt]);
-            CardPrefab.name = "Card";
-            CardPrefab.transform.SetParent(Contents);
-            CardsClone[i] = CardPrefab;
-        }
+        //for (int i = 0; i< nCardNum; i++)
+        //{
+        //    int nRandomInt = Random.Range(0, nMaxNum);
+        //    GameObject CardPrefab = MonoBehaviour.Instantiate((GameObject)Cards[nRandomInt]);
+        //    CardPrefab.name = "Card";
+        //    CardPrefab.transform.SetParent(Contents);
+        //    CardsClone[i] = CardPrefab;
+        //}
     }
 
     public void DeleteCards()

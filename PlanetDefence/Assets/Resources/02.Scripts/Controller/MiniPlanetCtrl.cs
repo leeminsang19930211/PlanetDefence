@@ -25,6 +25,14 @@ public class MiniPlanetCtrl : MonoBehaviour
         
     }
 
+    public void AllToFalse()
+    {
+        m_miniPlanet_up.SetActive(false);
+        m_miniPlanet_left.SetActive(false);
+        m_miniPlanet_down.SetActive(false);
+        m_miniPlanet_right.SetActive(false);
+    }
+
     public void FlashArea(PlanetArea areaDir )
     {
         switch (areaDir)
@@ -77,7 +85,5 @@ public class MiniPlanetCtrl : MonoBehaviour
 
             curFlashCnt++;
         }
-
-        m_miniPlanet_up.SetActive(false);
     }
 }

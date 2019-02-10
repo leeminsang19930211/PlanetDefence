@@ -32,5 +32,14 @@ public class BattleTest : MonoBehaviour
             Player.Inst.SellTurret(20, 20);
         }
 
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            BattleGameObjectMgr.Inst.PopUpResult(false);
+        }
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            BattleGameObjectMgr.Inst.PopUpResult(true);
+        }
+
     }
 }
