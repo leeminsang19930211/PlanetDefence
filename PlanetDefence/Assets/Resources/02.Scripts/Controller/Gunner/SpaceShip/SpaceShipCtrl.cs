@@ -61,12 +61,12 @@ public class SpaceShipCtrl : Gunner
 
     protected override void _OnZeroHP()
     {
+        UpdateRsrc();
         Die();
     }
 
     protected override void _OnDying()
-    {
-        UpdateRsrc();
+    {        
         BattleGameObjectMgr.Inst.AddDestroyedEnemy(1);
     }
 

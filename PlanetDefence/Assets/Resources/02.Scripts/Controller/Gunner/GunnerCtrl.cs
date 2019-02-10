@@ -19,6 +19,7 @@ public class Gunner : MonoBehaviour
 
     public bool Clone { get; set; } = false; // 원본인지 복사된 객체인지를 구분하는 값
     public int BulletPoolIdx { get; set; } = -1;// BulletPool에 할당할때 사용할 idx
+
     public Vector3 Position
     {
         get
@@ -54,6 +55,23 @@ public class Gunner : MonoBehaviour
         m_unitHPBarCtrl.UpdateHP(m_curHP, m_maxHP);
     }
 
+
+    // Destory 함수 대신 이함수 호출해야함.
+    public void Die()
+    {
+        if (Clone)
+        {
+            _OnDying();
+
+            if (m_maxBullets > 0)
+            {
+                ClearBullets();
+            }
+
+            Destroy(this.gameObject);
+        }
+    }
+
     // 초기화 함수. 상속받은 클래스에서 꼭 호출해줄것
     protected void Init()
     {
@@ -68,21 +86,6 @@ public class Gunner : MonoBehaviour
 
     }
 
-    // Destory 함수 대신 이함수 호출해야함.
-    protected void Die()
-    {
-        if (Clone)
-        {
-            _OnDying();
-
-            if (m_maxBullets > 0)
-            {
-                ClearBullets();
-            }
-
-            Destroy(this.gameObject);
-        }
-    }
 
     // 데미지를 받아 죽기 이전에 호출되는 함수
     protected virtual void _OnZeroHP()

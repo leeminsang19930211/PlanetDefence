@@ -30,6 +30,7 @@ public class BattleGameObjectMgr : MonoBehaviour
     private MiniPlanetCtrl m_miniPlanetCtrl = null;
   
     private GameObject m_toLobbyPopUpPanel = null;
+    private GameObject m_resultPopUpPanel = null;
 
     private GameObject m_laboratoryPopUp = null;
 
@@ -80,6 +81,8 @@ public class BattleGameObjectMgr : MonoBehaviour
     
         m_toLobbyPopUpPanel = GameObject.Find("ToLobbyPopUpPanel");
         PopDownToLobby();
+        m_resultPopUpPanel = GameObject.Find("ResultPopUpPanel");
+        PopDownResult();
 
         m_laboratoryPopUp = GameObject.FindGameObjectWithTag("LABORATORY_POPUP");
         m_buildPopUp = GameObject.FindGameObjectWithTag("BUILD_POPUP");
@@ -138,7 +141,6 @@ public class BattleGameObjectMgr : MonoBehaviour
     {
         if(m_enemyCntCtrl)
             m_enemyCntCtrl.MaxEnemyCnt = maxEnemyCnt;
-
     }
 
     public void AddDestroyedEnemy(int add)
@@ -215,7 +217,18 @@ public class BattleGameObjectMgr : MonoBehaviour
     {
         m_toLobbyPopUpPanel.SetActive(false);
     }
-   
+
+    public void PopUpResult(bool clear)
+    {
+        m_resultPopUpPanel.SetActive(true);
+    }
+
+    public void PopDownResult()
+    {
+        m_resultPopUpPanel.SetActive(false);
+    }
+
+
     public void PopUpLabInfos(GameObject ThisLabButton)
     {
         int LabButtonIdx = System.Array.IndexOf(m_LabButtons, ThisLabButton);

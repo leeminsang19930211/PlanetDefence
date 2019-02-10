@@ -20,8 +20,7 @@ public class BattleTest : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F1))
         {
-  
-                 
+            Player.Inst.BuyTurret(Turret.Lv2_Shield, 0, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))

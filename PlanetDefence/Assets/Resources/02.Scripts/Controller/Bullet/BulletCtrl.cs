@@ -56,7 +56,7 @@ public class BulletCtrl : MonoBehaviour
         if(moveDist > moveDir.magnitude)
         {
             moveDist = moveDir.magnitude;
-            AlmostOnTarget();
+            _OnTarget();
         }
 
         m_trsf.position += moveDir.normalized * moveDist;     
@@ -74,13 +74,36 @@ public class BulletCtrl : MonoBehaviour
         m_trsf.Rotate(0, 0, angle);
     }
 
-    protected virtual void AlmostOnTarget()
+    protected virtual void _OnTarget()
     {
 
+    }
+
+    protected virtual void _OnShield()
+    {
+        if (m_target is TurretCtrl)
+        {
+            Gunner shield = TurretMgr.Inst.FindShieldTurret(m_target.BulletPoolIdx); // TurretCtrl 의 BulletPoolIdx 는 터렛 지지대의 인덱스이다.
+
+            if(shield )
+            {
+                shield.Hit(m_damage);
+                gameObject.SetActive(false);
+            }
+        }
     }
 
     protected void Init()
     {
         m_trsf = GetComponent<Transform>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "SHIELD")
+        {
+            _OnShield();
+
+        }
     }
 }

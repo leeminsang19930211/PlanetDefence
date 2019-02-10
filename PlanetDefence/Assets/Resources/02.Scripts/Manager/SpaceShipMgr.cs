@@ -68,6 +68,11 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
+    public void ClearSpaceShips()
+    {
+
+    }
+
     public void StartCreatingWaves(WavesMob[] waveInfos)
     {
         m_maxSpaceShipCnt = 0;

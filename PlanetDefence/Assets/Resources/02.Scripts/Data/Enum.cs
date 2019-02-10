@@ -1,7 +1,7 @@
 ﻿public enum Turret
 {
     Lv1_Missile,
-    Lv1_Laser,
+    Lv1_Laser, 
     Lv2_Shield,
     End,
 }

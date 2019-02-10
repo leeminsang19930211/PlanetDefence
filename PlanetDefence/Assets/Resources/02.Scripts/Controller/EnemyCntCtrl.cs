@@ -29,6 +29,12 @@ public class EnemyCntCtrl : MonoBehaviour
     public void AddDestroyedEnemy(int add)      
     {
         m_destroyedEnemyCnt += add;
+
+        if(m_destroyedEnemyCnt == m_maxEnemyCnt)
+        {
+            BattleGameObjectMgr.Inst.PopUpResult(true);
+            m_destroyedEnemyCnt = 0;
+        }
     }
 
 

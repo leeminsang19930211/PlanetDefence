@@ -25,12 +25,14 @@ public class UnitHPBarCtrl : MonoBehaviour
 
     public void UpdateHP(int curHP, int maxHP)
     {
+        if (m_trsf == null || m_frontImgTrsf == null)
+            return;
+
         if (maxHP == 0)
             return;
 
         if (curHP > maxHP)
             return;
-
        
         Vector3 _localScale = m_frontImgTrsf.localScale;
         _localScale.x = (curHP / (float)maxHP) * m_maxScaleX;

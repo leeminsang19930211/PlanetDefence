@@ -13,7 +13,7 @@ public class Bullet_Lv1_MissileCtrl : BulletCtrl
         MoveToTarget();
     }
 
-    protected override void AlmostOnTarget()
+    protected override void _OnTarget()
     {
         HitTarget();
 

@@ -52,6 +52,7 @@ public class PlanetCtrl : MonoBehaviour
         if (m_curHP < 0)
         {
             m_curHP = 0;
+            BattleGameObjectMgr.Inst.PopUpResult(false);
         }
 
         BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxHP, m_curHP);

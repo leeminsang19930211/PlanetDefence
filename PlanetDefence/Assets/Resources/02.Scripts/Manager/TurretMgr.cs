@@ -44,6 +44,24 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
+    public Gunner FindShieldTurret(int refIdx)
+    {
+        int startIdx = (refIdx / 5)* 5;
+
+        for(int i =startIdx; i<startIdx +5; ++i)
+        {
+            if (m_turretSupportCtrs[i].TurretCtrl == null)
+                continue;
+
+            if(m_turretSupportCtrs[i].TurretCtrl.tag == "TURRET_SHIELD")
+            {
+                return m_turretSupportCtrs[i].TurretCtrl;
+            }
+        }
+
+        return null;
+    }
+
     public Gunner FindFirstTargetInFan(Vector3 from, float fanAngle)
     {     
         Vector3 toFrom = from - PlanetCtrl.Inst.Position; 
@@ -257,8 +275,8 @@ public class TurretMgr : MonoBehaviour
     }
 
     private void RemoveTurret()
-    {       
-        Destroy(m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.gameObject);
+    {
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Die();
     }
 
     private void AddTurretSupports()
@@ -300,6 +318,7 @@ public class TurretMgr : MonoBehaviour
     {
         AddTurret("Turret_Lv1_Missile");
         AddTurret("Turret_Lv1_Laser");
+        AddTurret("Turret_Lv2_Shield");
         AddTurretSupports();
     }
 
@@ -314,6 +333,9 @@ public class TurretMgr : MonoBehaviour
                 break;
             case Turret.Lv1_Laser:
                 str = "Turret_Lv1_Laser";
+                break;
+            case Turret.Lv2_Shield:
+                str = "Turret_Lv2_Shield";
                 break;
             default:
                 Debug.LogError("The turret str from the turret enum is not mapped");
