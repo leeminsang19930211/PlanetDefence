@@ -38,9 +38,9 @@ public class SpaceShipCtrl : Gunner
     {
         get
         {
-            Vector3 toSpaceShip = m_trsf.position - BattleGameObjectMgr.Inst.PlanetPos;
+            Vector3 toSpaceShip = m_trsf.position - PlanetCtrl.Inst.Position;
 
-            return MyMath.LeftAngle360(BattleGameObjectMgr.Inst.PlanetUp, toSpaceShip);           
+            return MyMath.LeftAngle360(PlanetCtrl.Inst.Up, toSpaceShip);           
         }
     }
 
@@ -75,7 +75,7 @@ public class SpaceShipCtrl : Gunner
         if (m_state == STATE.FALLING || m_state == STATE.LANDING)
             return;
 
-        TurretCtrl target = TurretMgr.Inst.FindFirstTargetInFan(transform.position, m_fanAngle);
+        Gunner target = TurretMgr.Inst.FindFirstTargetInFan(transform.position, m_fanAngle);
 
         Vector3 angle = m_trsf.localEulerAngles;
 
@@ -179,11 +179,11 @@ public class SpaceShipCtrl : Gunner
 
         if(m_revolvingAngleAcc+ curAngle < 360f)
         {
-            transform.RotateAround(BattleGameObjectMgr.Inst.PlanetPos, Vector3.forward, curAngle);           
+            transform.RotateAround(PlanetCtrl.Inst.Position, Vector3.forward, curAngle);           
         }
         else
         {
-            transform.RotateAround(BattleGameObjectMgr.Inst.PlanetPos, Vector3.forward,  360f- m_revolvingAngleAcc);
+            transform.RotateAround(PlanetCtrl.Inst.Position, Vector3.forward,  360f- m_revolvingAngleAcc);
 
             if(m_fallingRound >=2)
             {
@@ -216,7 +216,7 @@ public class SpaceShipCtrl : Gunner
     private Vector3 CalculateFallingTargetPos(int fallingRound)
     {
         if (fallingRound >= 3)
-            return BattleGameObjectMgr.Inst.PlanetPos; // 마지막 추락일때는 행성에 충돌해야한다.
+            return PlanetCtrl.Inst.Position; // 마지막 추락일때는 행성에 충돌해야한다.
 
         return m_trsf.position + m_fallingDir.normalized * m_fallingDists[fallingRound];
     }
@@ -224,9 +224,9 @@ public class SpaceShipCtrl : Gunner
     private float CalculateRevolvingSpeedScalar()
     {
         // 가장 외각의 원의 반지름을 나타낸다. 이때를 기준으로 반지름이 작아질수록 회전각이 더 커지게된다.
-        float stdDist = (BattleGameObjectMgr.Inst.PlanetPos - (m_startPos + m_fallingDir.normalized * m_fallingDists[0])).magnitude;
+        float stdDist = (PlanetCtrl.Inst.Position - (m_startPos + m_fallingDir.normalized * m_fallingDists[0])).magnitude;
 
-        float curDist = (BattleGameObjectMgr.Inst.PlanetPos - m_trsf.position).magnitude;
+        float curDist = (PlanetCtrl.Inst.Position - m_trsf.position).magnitude;
 
         if (curDist == 0)
             return 0;

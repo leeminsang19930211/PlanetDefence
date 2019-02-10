@@ -92,9 +92,9 @@ public class SpaceShipMgr : MonoBehaviour
         BattleGameObjectMgr.Inst.UpdateEnemyCnt(m_maxSpaceShipCnt);
     }
 
-    public SpaceShipCtrl FindFirstTargetInFan(float refAngle, float fanAngle, Vector3 from, float minDist)
+    public Gunner FindFirstTargetInFan(float refAngle, float fanAngle, Vector3 from, float minDist)
     {
-        SpaceShipCtrl target = null;
+        Gunner target = null;
 
         GameObject[] dummyList = GameObject.FindGameObjectsWithTag("SPACESHIP_DUMMY");
 
@@ -110,7 +110,7 @@ public class SpaceShipMgr : MonoBehaviour
         return target;
     }
 
-    private SpaceShipCtrl FindFirstTargetInList(GameObject[] spaceShipList, float refAngle, float fanAngle, Vector3 from, float minDist)
+    private Gunner FindFirstTargetInList(GameObject[] spaceShipList, float refAngle, float fanAngle, Vector3 from, float minDist)
     {
         if (spaceShipList == null)
             return null;

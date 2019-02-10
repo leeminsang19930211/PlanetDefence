@@ -44,11 +44,11 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
-    public TurretCtrl FindFirstTargetInFan(Vector3 from, float fanAngle)
-    {
-        Vector3 toFrom = from - BattleGameObjectMgr.Inst.PlanetPos;
+    public Gunner FindFirstTargetInFan(Vector3 from, float fanAngle)
+    {     
+        Vector3 toFrom = from - PlanetCtrl.Inst.Position; 
 
-        float leftAngle = MyMath.LeftAngle360(BattleGameObjectMgr.Inst.PlanetUp, toFrom);
+        float leftAngle = MyMath.LeftAngle360(PlanetCtrl.Inst.Up, toFrom);
         float halfAngle = fanAngle * 0.5f;
 
         int planetArea = -1;
@@ -70,7 +70,15 @@ public class TurretMgr : MonoBehaviour
             planetArea = 3;
         }
 
-        return FindFirstTurret(planetArea);
+        if (planetArea == -1)
+            return null;
+
+        Gunner target = FindFirstTurret(planetArea);
+
+        if (target == null) // 구역에는 있는데 터렛이 없을 경우
+            return PlanetCtrl.Inst.GetPlanetHit(planetArea);
+
+        return target;
     }
 
     public bool CheckTurretOnTurretSupport()
@@ -218,7 +226,7 @@ public class TurretMgr : MonoBehaviour
         return true;
     }
 
-    private TurretCtrl FindFirstTurret(int planetArea)
+    private Gunner FindFirstTurret(int planetArea)
     {
         if (planetArea < 0 || planetArea >= 4)
             return null;

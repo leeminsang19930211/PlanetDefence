@@ -28,8 +28,7 @@ public class BattleGameObjectMgr : MonoBehaviour
     private PlanetHPCtrl m_planetHpCtrl = null;
     private ResourceCtrl m_resourceCtrl = null;
     private MiniPlanetCtrl m_miniPlanetCtrl = null;
-    private Transform m_planetTransform = null;
-
+  
     private GameObject m_toLobbyPopUpPanel = null;
 
     private GameObject m_laboratoryPopUp = null;
@@ -60,23 +59,6 @@ public class BattleGameObjectMgr : MonoBehaviour
     private GameObject m_RemoveWarning;
     private GameObject[] m_TurretSupports;
 
-
-    public Vector3 PlanetPos
-    {
-        get
-        {
-            return m_planetTransform.position;
-        }
-    }
-
-    public Vector3 PlanetUp
-    {
-        get
-        {
-            return m_planetTransform.up;
-        }
-    }
-
     public void Instantiate()
     {
         if (m_inst == null)
@@ -95,8 +77,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_planetHpCtrl = GameObject.FindGameObjectWithTag("PLANET_HP")?.GetComponent<PlanetHPCtrl>();
         m_resourceCtrl = GameObject.FindGameObjectWithTag("RESOURCE")?.GetComponent<ResourceCtrl>();
         m_miniPlanetCtrl = GameObject.FindGameObjectWithTag("MINIPLANET")?.GetComponent<MiniPlanetCtrl>();
-        m_planetTransform = GameObject.FindGameObjectWithTag("PLANET")?.GetComponent<Transform>();
-
+    
         m_toLobbyPopUpPanel = GameObject.Find("ToLobbyPopUpPanel");
         PopDownToLobby();
 
@@ -423,7 +404,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
- public void PopUBuildWarningNoBP()
+ public void PopUpBuildWarningNoBP()
     {
         m_BuildWarningNoBP.SetActive(true);
     }
@@ -437,7 +418,7 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     }
 
-    public void PopUBuildWarningAlready()
+    public void PopUpBuildWarningAlready()
     {
         m_BuildWarningAlready.SetActive(true);
     }

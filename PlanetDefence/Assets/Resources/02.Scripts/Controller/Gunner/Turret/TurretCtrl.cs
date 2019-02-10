@@ -33,7 +33,7 @@ public class TurretCtrl : Gunner
 
     protected override void CreateBullet()
     {
-        SpaceShipCtrl target = null;
+        Gunner target = null;
 
         target = SpaceShipMgr.Inst.FindFirstTargetInFan(m_planetAngle, m_fanAngle, m_trsf.position, m_minDistToAttack);
 

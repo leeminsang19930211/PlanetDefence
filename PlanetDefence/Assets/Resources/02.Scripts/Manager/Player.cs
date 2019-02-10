@@ -29,16 +29,10 @@ public class Player : MonoBehaviour
             return m_inst;
         }
     }
-    
-    public void Instantiate()
+
+    public void Init()
     {
-        if (m_inst == null)
-        {
-            GameObject container = new GameObject();
-            container.name = "Player";
-            m_inst = container.AddComponent<Player>() as Player;
-            DontDestroyOnLoad(container);
-        }
+        UpdateRsrc();
     }
 
     public void AddJunk(int junk)
@@ -57,11 +51,6 @@ public class Player : MonoBehaviour
     {
         m_coin += coin;
         BattleGameObjectMgr.Inst.UpdateCoinCnt(m_coin);
-    }
-
-    public void Start()
-    {
-        UpdateRsrc();
     }
 
     /* 해금여부를 반환 하는 함수. 해금되있으면 true 반환*/
@@ -127,4 +116,5 @@ public class Player : MonoBehaviour
         BattleGameObjectMgr.Inst.UpdateEleCircuitCnt(m_eleCircuit);
         BattleGameObjectMgr.Inst.UpdateCoinCnt(m_coin);
     }
+
 }

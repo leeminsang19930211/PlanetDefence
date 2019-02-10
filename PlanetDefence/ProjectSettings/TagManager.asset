@@ -27,6 +27,8 @@ TagManager:
   - SPACESHIP_DUMMY
   - BUILDBUTTON_BLACK
   - TURRET_NORMAL
+  - PLANET_HIT
+  - Card
   layers:
   - Default
   - TransparentFX
@@ -64,8 +66,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BackGround
+  - name: BackGround0
     uniqueID: 2704018043
+    locked: 0
+  - name: BackGround1
+    uniqueID: 2680794011
+    locked: 0
+  - name: SpaceShip0
+    uniqueID: 1219103143
+    locked: 0
+  - name: SpaceShip1
+    uniqueID: 1825579245
     locked: 0
   - name: Turret_Step0
     uniqueID: 3271386761

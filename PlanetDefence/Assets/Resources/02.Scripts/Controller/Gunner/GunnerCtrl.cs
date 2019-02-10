@@ -30,7 +30,18 @@ public class Gunner : MonoBehaviour
         }
     }
 
-    public void Hit(int damage)
+    public Vector3 Up
+    {
+        get
+        {
+            if (m_trsf == null)
+                m_trsf = GetComponent<Transform>();
+
+            return m_trsf.up;
+        }
+    }
+
+    public virtual void Hit(int damage)
     {
         m_curHP -= damage;
 
