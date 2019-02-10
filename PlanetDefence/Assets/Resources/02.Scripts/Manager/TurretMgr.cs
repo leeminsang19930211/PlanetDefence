@@ -365,5 +365,14 @@ public class TurretMgr : MonoBehaviour
         return str;
     }
 
- 
+    // 추가2
+    public int[] TurretJunkCost =
+    {
+        10,20,30,40,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50
+    };
+
+    public int[] TurretCircuitCost =
+    {
+        1,2,3,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
+    };
 }

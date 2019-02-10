@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToLobbyButtonCtrl : MonoBehaviour
+public class BuyTurretCtrl : MonoBehaviour
 {
     public void OnClick()
     {
-        BattleGameObjectMgr.Inst.PopUpToLobby();   
+        Player.Inst.BuyTurret(gameObject);
     }
 }

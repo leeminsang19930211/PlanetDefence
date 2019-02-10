@@ -53,8 +53,15 @@ public class BattleGameObjectMgr : MonoBehaviour
     // 추가
 	private GameObject[] m_BuildButtons_Black;
     private GameObject[] m_BuildInfoScrolls;
-    private GameObject m_BuildWarningNoBP;
-    private GameObject m_BuildWarningAlready;
+
+    // 추가2
+    private GameObject[] m_BuildImages_Black;
+    public GameObject[] m_BuildStartButtons;
+    public GameObject m_BuildWarningNoBP;
+    public GameObject m_BuildWarningAlready;
+    public GameObject m_BuildWarningNoRsrc;
+
+
     private GameObject m_RemoveInfoScroll;
  	private GameObject m_RemoveWarningYet;
     private GameObject m_RemoveWarning;
@@ -99,12 +106,15 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RepairButtons = GameObject.FindGameObjectsWithTag("REPAIRBUTTON");
         m_RepairInfoScrolls = GameObject.FindGameObjectsWithTag("REPAIRINFO");
         m_BuildButtons = GameObject.FindGameObjectsWithTag("BUILDBUTTON");
-
-        // 추가
  		m_BuildButtons_Black = GameObject.FindGameObjectsWithTag("BUILDBUTTON_BLACK");
         m_BuildInfoScrolls = GameObject.FindGameObjectsWithTag("BUILDINFO");
+        m_BuildImages_Black = GameObject.FindGameObjectsWithTag("BUILDIMAGE_BLACK");
+        m_BuildStartButtons = GameObject.FindGameObjectsWithTag("BUILDSTARTBUTTON");
+
         m_BuildWarningNoBP = GameObject.Find("BuildWarningNoBP");
         m_BuildWarningAlready = GameObject.Find("BuildWarningAlready");
+        m_BuildWarningNoRsrc = GameObject.Find("BuildWarningNoRsrc");
+
         m_RemoveInfoScroll = GameObject.FindGameObjectWithTag("REMOVEINFO");
         m_RemoveWarningYet = GameObject.Find("RemoveWarningYet");
         m_RemoveWarning = GameObject.Find("RemoveWarningPanel");
@@ -221,6 +231,9 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public void PopUpToLobby()
     {
+        if (m_toLobbyPopUpPanel == null)
+            return;
+
         m_toLobbyPopUpPanel.SetActive(true);
     }
 
@@ -362,16 +375,27 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             m_BuildInfoScroll.SetActive(false);
         }
-        // 추가
-        for(int i=0;i<4;i++)
-        {
-            m_BuildButtons_Black[i].SetActive(false);
-        }
+        // 삭제
+        
         m_BuildWarningNoBP.SetActive(false);
         m_BuildWarningAlready.SetActive(false);
+
+        // 추가2
+        m_BuildWarningNoRsrc.SetActive(false);
+
         m_RemoveInfoScroll.SetActive(false);
         m_RemoveWarningYet.SetActive(false);
         m_RemoveWarning.SetActive(false);
+
+
+        // 추가2
+        for (int i = 0; i < (int)Turret.End; ++i)
+        {
+            if (true == Player.Inst.CheckUnLock((Turret)i))
+            {
+                m_BuildButtons_Black[i].SetActive(false);
+            }
+        }
 
     }
 
@@ -380,6 +404,13 @@ public class BattleGameObjectMgr : MonoBehaviour
         int BuildButtonIdx = System.Array.IndexOf(m_BuildButtons, ThisBuildButton);
 
         m_BuildInfoScrolls[BuildButtonIdx].SetActive(true);
+        
+        // 추가2
+        if (true == Player.Inst.CheckUnLock((Turret)BuildButtonIdx))
+        {
+            m_BuildImages_Black[BuildButtonIdx].SetActive(false);
+        }
+        
 
     }
 
@@ -388,6 +419,12 @@ public class BattleGameObjectMgr : MonoBehaviour
         int BuildButtonBIdx = System.Array.IndexOf(m_BuildButtons_Black, ThisBuildButtonB);
 
         m_BuildInfoScrolls[BuildButtonBIdx].SetActive(true);
+
+        // 추가2
+        if (true == Player.Inst.CheckUnLock((Turret)BuildButtonBIdx))
+        {
+            m_BuildImages_Black[BuildButtonBIdx].SetActive(false);
+        }
 
     }
     public void BuildInfosExit()
@@ -427,6 +464,8 @@ public class BattleGameObjectMgr : MonoBehaviour
 
                 m_BuildInfoScrolls[BuildInfoIdx].SetActive(false);
                 m_BuildInfoScrolls[BuildInfoIdx - 1].SetActive(true);
+                // 추가 2
+                m_BuildImages_Black[BuildInfoIdx - 1].SetActive(false);
 
                 return;
             }
@@ -443,6 +482,7 @@ public class BattleGameObjectMgr : MonoBehaviour
     {
         m_BuildWarningNoBP.SetActive(false);
         m_BuildWarningAlready.SetActive(false);
+        m_BuildWarningNoRsrc.SetActive(false);
         m_RemoveWarningYet.SetActive(false);
         m_RemoveWarning.SetActive(false);
 
@@ -451,6 +491,12 @@ public class BattleGameObjectMgr : MonoBehaviour
     public void PopUpBuildWarningAlready()
     {
         m_BuildWarningAlready.SetActive(true);
+    }
+
+    // 추가2
+    public void PopUpBuildWarningNoRsrc()
+    {
+        m_BuildWarningNoRsrc.SetActive(true);
     }
     public void PopUpRemoveInfo()
     {

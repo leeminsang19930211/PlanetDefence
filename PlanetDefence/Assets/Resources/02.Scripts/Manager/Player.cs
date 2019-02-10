@@ -6,9 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private static Player m_inst = null;
-    private int m_junk = 0;
-    private int m_eleCircuit = 0;
-    private int m_coin = 0;
+    private int m_junk = 99;
+    private int m_eleCircuit = 99;
+    private int m_coin = 99;
 
     private TurretInfo[] m_turretInfos = new TurretInfo[(int)Turret.End];
     private LabInfo[] m_labInfos = new LabInfo[(int)Lab.End];
@@ -104,6 +104,39 @@ public class Player : MonoBehaviour
         UpdateRsrc();
 
         TurretMgr.Inst.CreateTurretOnTurretSupport(turret);
+
+        return BuyErr.NoError;
+    }
+    
+    // 정연 함수
+        public BuyErr BuyTurret(GameObject ThisBuildStartButton)
+    {
+        int BuildStartButtonIdx = System.Array.IndexOf(BattleGameObjectMgr.Inst.m_BuildStartButtons, ThisBuildStartButton);
+
+        if (false == Player.Inst.CheckUnLock((Turret)BuildStartButtonIdx))
+        {
+            BattleGameObjectMgr.Inst.m_BuildWarningNoBP.SetActive(true);
+            return BuyErr.NoBP;
+        }
+        if (true == TurretMgr.Inst.CheckTurretOnTurretSupport())
+        {
+            BattleGameObjectMgr.Inst.m_BuildWarningAlready.SetActive(true);
+            return BuyErr.AlreadySetUp;
+        }
+        if (TurretMgr.Inst.TurretJunkCost[BuildStartButtonIdx] > m_junk || TurretMgr.Inst.TurretCircuitCost[BuildStartButtonIdx] > m_eleCircuit)
+        {
+            BattleGameObjectMgr.Inst.m_BuildWarningNoRsrc.SetActive(true);
+            return BuyErr.NotEnoughRsrc;
+        }
+
+        m_junk -= TurretMgr.Inst.TurretJunkCost[BuildStartButtonIdx];
+        m_eleCircuit -= TurretMgr.Inst.TurretCircuitCost[BuildStartButtonIdx];
+
+        UpdateRsrc();
+
+        TurretMgr.Inst.CreateTurretOnTurretSupport((Turret)BuildStartButtonIdx);
+        BattleGameObjectMgr.Inst.BuildInfosExit();
+        BattleGameObjectMgr.Inst.PopUpExit();
 
         return BuyErr.NoError;
     }
