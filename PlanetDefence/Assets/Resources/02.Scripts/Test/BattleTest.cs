@@ -29,7 +29,7 @@ public class BattleTest : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            Player.Inst.SellTurret(20, 20);
+            Player.Inst.SellTurret();
         }
 
         if (Input.GetKeyDown(KeyCode.F4))

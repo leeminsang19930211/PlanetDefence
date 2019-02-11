@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BrokenSpaceShipCtrl : MonoBehaviour
 {
-    public void OnMouseDown()
+
+    public void OnClick()
     {
         BattleGameObjectMgr.Inst.PopUpLab();
     }

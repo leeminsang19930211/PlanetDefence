@@ -31,6 +31,8 @@ TagManager:
   - Card
   - SHIELD
   - TURRET_SHIELD
+  - BUILDIMAGE_BLACK
+  - BUILDSTARTBUTTON
   layers:
   - Default
   - TransparentFX
@@ -82,6 +84,9 @@ TagManager:
     locked: 0
   - name: Turret0
     uniqueID: 3271386761
+    locked: 0
+  - name: Shield
+    uniqueID: 1686821933
     locked: 0
   - name: SpaceShip_Bullet0
     uniqueID: 1780442137

@@ -107,9 +107,25 @@ public class Player : MonoBehaviour
 
         return BuyErr.NoError;
     }
-    
-    // 정연 함수
-        public BuyErr BuyTurret(GameObject ThisBuildStartButton)
+
+    // 터렛을 판매하고 삭제한다. 삭제할 터렛이 없을경우 false 리턴한다.
+    public bool SellTurret(int junk, int eleCircuit)
+    {
+        if (false == TurretMgr.Inst.CheckTurretOnTurretSupport())
+            return false;
+
+        m_junk += junk;
+        m_eleCircuit += eleCircuit;
+
+        UpdateRsrc();
+
+        TurretMgr.Inst.RemoveTurretOnTurretSupport();
+
+        return true;
+    }
+
+    // ★ 이거 사용
+    public BuyErr BuyTurret(GameObject ThisBuildStartButton)
     {
         int BuildStartButtonIdx = System.Array.IndexOf(BattleGameObjectMgr.Inst.m_BuildStartButtons, ThisBuildStartButton);
 
@@ -141,14 +157,31 @@ public class Player : MonoBehaviour
         return BuyErr.NoError;
     }
 
-    // 터렛을 판매하고 삭제한다. 삭제할 터렛이 없을경우 false 리턴한다.
-    public bool SellTurret(int junk, int eleCircuit)
+    // ★ 이거 사용
+    public bool SellTurret()
     {
-        if (false == TurretMgr.Inst.CheckTurretOnTurretSupport())
+        TurretCtrl turret = TurretMgr.Inst.FocusedTurret;
+
+        if (turret == null)
             return false;
 
-        m_junk += junk;
-        m_eleCircuit += eleCircuit;
+        if(turret.m_turretType == Turret.End)
+        {
+            Debug.LogError("The turretType in turretCtrl is turret.End");
+            return false;
+        }
+
+        if (turret.m_maxHP == 0)
+        {
+            Debug.LogError("The turret maxHP in turretCtrl is zero");
+            return false;
+        }
+
+        int turretIdx = (int)turret.m_turretType;
+        float ratio = turret.CurHP / (float)turret.m_maxHP;
+
+        m_junk += (int)(TurretMgr.Inst.TurretJunkCost[turretIdx] * ratio);
+        m_eleCircuit += (int)(TurretMgr.Inst.TurretCircuitCost[turretIdx] * ratio);
 
         UpdateRsrc();
 

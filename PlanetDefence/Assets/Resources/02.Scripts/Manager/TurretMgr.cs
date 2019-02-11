@@ -25,6 +25,17 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
+    public TurretCtrl FocusedTurret
+    {
+        get
+        {
+            if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
+                return null;
+
+            return m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl;
+        }
+    }
+
     public void Init()
     {
         GameObject turrets = GlobalGameObjectMgr.Inst.FindGameObject("Turrets");
@@ -60,8 +71,25 @@ public class TurretMgr : MonoBehaviour
                 turret.TurretCtrl.Die();
             }
         }
+    }
 
+    public void CheckShieldToShow()
+    {
+        BattleGameObjectMgr.Inst.HideAllShields();
 
+        for (int i=0; i< 4; ++i )
+        {
+            int startIdx = i * 5;
+            PlanetArea area = IdxToArea(startIdx);
+        
+            for (int j = startIdx; j < startIdx + 5; ++j)
+            {
+                if (m_turretSupportCtrs[j].TurretCtrl == null)
+                    continue;
+
+                BattleGameObjectMgr.Inst.ShowShield(area, m_turretSupportCtrs[j].TurretCtrl.m_turretType);
+            }
+        }   
     }
 
     public Gunner FindShieldTurret(int refIdx)
@@ -287,15 +315,20 @@ public class TurretMgr : MonoBehaviour
 
     private void CreateTurret(GameObject source, Transform parentTrsf)
     {
+      
         float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
 
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = Instantiate(source, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0, 0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.BulletPoolIdx = m_focusedTurretSupportIdx;
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Clone = true;
+
+        CheckShieldToShow();
     }
 
     private void RemoveTurret()
     {
+        CheckShieldToShow();
+
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Die();
     }
 
@@ -340,6 +373,29 @@ public class TurretMgr : MonoBehaviour
         AddTurret("Turret_Lv1_Laser");
         AddTurret("Turret_Lv2_Shield");
         AddTurretSupports();
+    }
+
+    private PlanetArea IdxToArea(int num)
+    {
+        int areaNum = num / 5;
+
+        switch (areaNum)
+        {
+            case 0:
+                return PlanetArea.Up;
+            case 1:
+                return PlanetArea.Left;
+            case 2:
+                return PlanetArea.Down;
+            case 3:
+                return PlanetArea.Right;
+            default:
+                Debug.LogError("The num to change to PlanetArea is invalid");
+                break;
+
+        }
+
+        return PlanetArea.End;
     }
 
     private string EnumToStr(Turret turret)

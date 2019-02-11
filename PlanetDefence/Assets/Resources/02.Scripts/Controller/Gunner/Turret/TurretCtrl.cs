@@ -7,6 +7,7 @@ public class TurretCtrl : Gunner
 {
     public float m_minDistToAttack = 0;             // 공격하기 위한 적 우주선과의 최소 거리
     public float m_distFromTurretSupport = 0;       // 터렛 서포트로부터 위치 할 거리
+    public Turret m_turretType = Turret.End;
 
     private float m_planetAngle = 0;                  
 
@@ -29,6 +30,7 @@ public class TurretCtrl : Gunner
         PlanetArea area = (PlanetArea)(BulletPoolIdx / 5);
 
         BattleGameObjectMgr.Inst.FlashMiniPlanet(area);
+        TurretMgr.Inst.CheckShieldToShow();
     }
 
     protected override void CreateBullet()

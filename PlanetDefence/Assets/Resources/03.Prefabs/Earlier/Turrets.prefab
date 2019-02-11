@@ -124,6 +124,7 @@ MonoBehaviour:
   m_unitHPBarCtrl: {fileID: 8709804327909752699}
   m_minDistToAttack: 300
   m_distFromTurretSupport: 170
+  m_turretType: 1
 --- !u!1 &5365092780304173415
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +249,7 @@ MonoBehaviour:
   m_unitHPBarCtrl: {fileID: 4884685328041642393}
   m_minDistToAttack: 0
   m_distFromTurretSupport: 170
+  m_turretType: 2
 --- !u!1 &7342356059077564410
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +476,7 @@ MonoBehaviour:
   m_unitHPBarCtrl: {fileID: 8723878849878509831}
   m_minDistToAttack: 300
   m_distFromTurretSupport: 170
+  m_turretType: 0
 --- !u!1001 &278726416
 PrefabInstance:
   m_ObjectHideFlags: 0

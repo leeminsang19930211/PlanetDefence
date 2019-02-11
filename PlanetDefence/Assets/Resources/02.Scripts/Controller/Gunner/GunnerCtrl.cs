@@ -20,6 +20,11 @@ public class Gunner : MonoBehaviour
     public bool Clone { get; set; } = false; // 원본인지 복사된 객체인지를 구분하는 값
     public int BulletPoolIdx { get; set; } = -1;// BulletPool에 할당할때 사용할 idx
 
+    public int CurHP
+    {
+        get { return m_curHP; }
+    }
+
     public Vector3 Position
     {
         get

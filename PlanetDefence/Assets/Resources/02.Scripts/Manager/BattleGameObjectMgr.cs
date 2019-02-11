@@ -28,7 +28,8 @@ public class BattleGameObjectMgr : MonoBehaviour
     private PlanetHPCtrl m_planetHpCtrl = null;
     private ResourceCtrl m_resourceCtrl = null;
     private MiniPlanetCtrl m_miniPlanetCtrl = null;
-  
+    private ShieldCtrl m_shieldCtrl = null;
+
     private GameObject m_toLobbyPopUpPanel = null;
     private GameObject m_resultPopUpPanel = null;
 
@@ -85,6 +86,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_planetHpCtrl = GameObject.FindGameObjectWithTag("PLANET_HP")?.GetComponent<PlanetHPCtrl>();
         m_resourceCtrl = GameObject.FindGameObjectWithTag("RESOURCE")?.GetComponent<ResourceCtrl>();
         m_miniPlanetCtrl = GameObject.FindGameObjectWithTag("MINIPLANET")?.GetComponent<MiniPlanetCtrl>();
+        m_shieldCtrl = GameObject.Find("Shield")?.GetComponent<ShieldCtrl>();
     
         m_toLobbyPopUpPanel = GameObject.Find("ToLobbyPopUpPanel");
         PopDownToLobby();
@@ -133,6 +135,16 @@ public class BattleGameObjectMgr : MonoBehaviour
     public void Release_Fail()
     {
         m_miniPlanetCtrl.AllToFalse();
+    }
+
+    public void ShowShield(PlanetArea area, Turret turret)
+    {
+        m_shieldCtrl.SetShieldImgActive(area, turret, true);
+    }
+
+    public void HideAllShields()
+    {
+        m_shieldCtrl.HideAllShield();
     }
 
     public void FlashMiniPlanet(PlanetArea area)
