@@ -30,7 +30,7 @@ public class TurretCtrl : Gunner
         PlanetArea area = (PlanetArea)(BulletPoolIdx / 5);
 
         BattleGameObjectMgr.Inst.FlashMiniPlanet(area);
-        TurretMgr.Inst.CheckShieldToShow();
+        TurretMgr.Inst.CheckShieldToShow(BulletPoolIdx, BulletPoolIdx);
     }
 
     protected override void CreateBullet()

@@ -73,23 +73,29 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
-    public void CheckShieldToShow()
+    public void CheckShieldToShow(int turretIdx, int exception = -1)
     {
+        if (turretIdx < 0 || turretIdx >= m_turretSupportCtrs.Count)
+        {
+            Debug.Log("the focus idx is out of the range");
+            return;
+        }
+
         BattleGameObjectMgr.Inst.HideAllShields();
 
-        for (int i=0; i< 4; ++i )
-        {
-            int startIdx = i * 5;
-            PlanetArea area = IdxToArea(startIdx);
-        
-            for (int j = startIdx; j < startIdx + 5; ++j)
-            {
-                if (m_turretSupportCtrs[j].TurretCtrl == null)
-                    continue;
+        int startIdx = (turretIdx/5) * 5;
+        PlanetArea area = IdxToArea(startIdx);
 
-                BattleGameObjectMgr.Inst.ShowShield(area, m_turretSupportCtrs[j].TurretCtrl.m_turretType);
-            }
-        }   
+        for (int i = startIdx; i < startIdx + 5; ++i)
+        {
+            if (m_turretSupportCtrs[i].TurretCtrl == null)
+                continue;
+
+            if (i == exception)
+                continue;
+
+            BattleGameObjectMgr.Inst.ShowShield(area, m_turretSupportCtrs[i].TurretCtrl.m_turretType);
+        }
     }
 
     public Gunner FindShieldTurret(int refIdx)
@@ -322,14 +328,14 @@ public class TurretMgr : MonoBehaviour
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.BulletPoolIdx = m_focusedTurretSupportIdx;
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Clone = true;
 
-        CheckShieldToShow();
+        CheckShieldToShow(m_focusedTurretSupportIdx);
     }
 
     private void RemoveTurret()
     {
-        CheckShieldToShow();
-
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Die();
+
+        CheckShieldToShow(m_focusedTurretSupportIdx);
     }
 
     private void AddTurretSupports()

@@ -20,12 +20,14 @@ public class FastButtonCtrl : MonoBehaviour
 
     public void OnClick_FastButton_On()
     {
+        Time.timeScale = 2f;
         m_fastButton_One.SetActive(false);
         m_fastButton_Double.SetActive(true);
     }
 
     public void OnClick_FastButton_Double()
     {
+        Time.timeScale = 1f;
         m_fastButton_One.SetActive(true);
         m_fastButton_Double.SetActive(false);
     }
