@@ -6,9 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private static Player m_inst = null;
-    private int m_junk = 99;
-    private int m_eleCircuit = 99;
-    private int m_coin = 99;
+    private int m_junk = 400;
+    private int m_eleCircuit = 400;
+    private int m_coin = 400;
 
     private TurretInfo[] m_turretInfos = new TurretInfo[(int)Turret.End];
     private LabInfo[] m_labInfos = new LabInfo[(int)Lab.End];

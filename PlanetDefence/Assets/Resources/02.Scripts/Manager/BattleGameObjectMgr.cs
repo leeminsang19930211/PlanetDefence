@@ -140,9 +140,9 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_shieldCtrl.SetShieldImgActive(area, turret, true);
     }
 
-    public void HideAllShields()
+    public void HideShield(PlanetArea area)
     {
-        m_shieldCtrl.HideAllShield();
+        m_shieldCtrl.HideAllShield(area);
     }
 
     public void FlashMiniPlanet(PlanetArea area)

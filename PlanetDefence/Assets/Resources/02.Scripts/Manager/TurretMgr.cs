@@ -81,19 +81,20 @@ public class TurretMgr : MonoBehaviour
             return;
         }
 
-        BattleGameObjectMgr.Inst.HideAllShields();
-
+        
         int startIdx = (turretIdx/5) * 5;
         PlanetArea area = IdxToArea(startIdx);
+
+        BattleGameObjectMgr.Inst.HideShield(area);
 
         for (int i = startIdx; i < startIdx + 5; ++i)
         {
             if (m_turretSupportCtrs[i].TurretCtrl == null)
                 continue;
 
+
             if (i == exception)
                 continue;
-
             BattleGameObjectMgr.Inst.ShowShield(area, m_turretSupportCtrs[i].TurretCtrl.m_turretType);
         }
     }

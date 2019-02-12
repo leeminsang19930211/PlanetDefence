@@ -62,7 +62,7 @@ public class BulletMgr : MonoBehaviour
 
     public bool AllocateBulletPool(BulletPool pool, int cnt )
     {
-        if(m_bulletPool[(int)pool].Count > 0 || m_bulletPoolIndex[(int)pool].Count > 0)
+        if(m_bulletPool[(int)pool].Count > 0 || m_bulletPool[(int)pool].Count > 0)
         {
             Debug.Log("The bulletPool is alloceted already");
             return false;
@@ -137,6 +137,8 @@ public class BulletMgr : MonoBehaviour
             m_bulletPool[(int)pool][idx].Add(obj.GetComponent<BulletCtrl>());
         }
 
+        m_bulletPoolIndex[(int)pool][idx] = 0;
+
         return true;
     }
 
@@ -155,11 +157,12 @@ public class BulletMgr : MonoBehaviour
 
         m_bulletPool[(int)pool][idx].Clear();
         m_bulletPool[(int)pool][idx].Capacity = 0;
+        m_bulletPoolIndex[(int)pool][idx] = 0;
 
         return true;
     }
 
-    public bool FireBullet(BulletPool pool, int idx, Vector3 startPos, Vector3 startAngle, Gunner target)
+    public bool FireBullet(BulletPool pool, int idx, Vector3 startPos, Vector3 startAngle, Gunner shooter, Gunner target)
     {
         if (target == null)
             return false;
@@ -177,7 +180,7 @@ public class BulletMgr : MonoBehaviour
         }
 
         m_bulletPool[(int)pool][idx][m_bulletPoolIndex[(int)pool][idx]].gameObject.SetActive(true);
-        m_bulletPool[(int)pool][idx][m_bulletPoolIndex[(int)pool][idx]].Fire(startPos, startAngle, target);
+        m_bulletPool[(int)pool][idx][m_bulletPoolIndex[(int)pool][idx]].Fire(startPos, startAngle, shooter, target);
         m_bulletPoolIndex[(int)pool][idx] += 1;
 
         if (m_bulletPoolIndex[(int)pool][idx] >= m_bulletPool[(int)pool][idx].Count)

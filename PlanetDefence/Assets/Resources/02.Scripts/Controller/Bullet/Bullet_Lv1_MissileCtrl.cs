@@ -12,11 +12,4 @@ public class Bullet_Lv1_MissileCtrl : BulletCtrl
     {
         MoveToTarget();
     }
-
-    protected override void _OnTarget()
-    {
-        HitTarget();
-
-        gameObject.SetActive(false);
-    }
 }

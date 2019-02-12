@@ -23,7 +23,6 @@ public class Bullet_Lv1_LaserCtrl : BulletCtrl
         RotateToTarget();
     }
 
-
     private IEnumerator Stay()
     {
         yield return new WaitForSeconds(m_stayDuration);
@@ -35,7 +34,7 @@ public class Bullet_Lv1_LaserCtrl : BulletCtrl
     {
         while(true)
         {
-            HitRayCastedTarget();
+            RayCastTargets();
 
             yield return new WaitForSeconds(m_hitDuration);
         }        

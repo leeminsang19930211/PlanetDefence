@@ -74,7 +74,20 @@ public enum Bullet
     End,
 }
 
+public enum Effect
+{
+    Explosion_Bullet0,
+    End,
+}
+
 public enum BulletPool
+{
+    Turret,
+    SpaceShip,
+    End,
+}
+
+public enum EffectPool
 {
     Turret,
     SpaceShip,

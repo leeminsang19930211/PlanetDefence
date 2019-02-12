@@ -81,7 +81,7 @@ public class SpaceShipCtrl : Gunner
 
         angle.z += 180f;
 
-        BulletMgr.Inst.FireBullet(m_bulletPool, BulletPoolIdx, m_trsf.position + m_trsf.up * -1f* m_fireDistAlignUp, angle, target);
+        BulletMgr.Inst.FireBullet(m_bulletPool, BulletPoolIdx, m_trsf.position + m_trsf.up * -1f* m_fireDistAlignUp, angle,this, target);
     }
 
     // 업데이트에서 호출해줄 것 . 호출해주면 떨어지고 공전하면서 움직이게 된다

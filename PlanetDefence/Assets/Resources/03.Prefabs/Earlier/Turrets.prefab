@@ -115,12 +115,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 100
   m_maxBullets: 10
+  m_maxEffects: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 1
   m_fireDistAlignUp: 70
   m_bulletType: 1
   m_bulletPool: 0
+  m_effectType: 0
+  m_effectPool: 0
   m_unitHPBarCtrl: {fileID: 8709804327909752699}
   m_minDistToAttack: 300
   m_distFromTurretSupport: 170
@@ -240,12 +243,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 500
   m_maxBullets: 0
+  m_maxEffects: 0
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 0
   m_fireDistAlignUp: 0
   m_bulletType: 3
   m_bulletPool: 2
+  m_effectType: 1
+  m_effectPool: 2
   m_unitHPBarCtrl: {fileID: 4884685328041642393}
   m_minDistToAttack: 0
   m_distFromTurretSupport: 170
@@ -467,12 +473,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 100
   m_maxBullets: 10
+  m_maxEffects: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 0.2
   m_fireDistAlignUp: 150
   m_bulletType: 0
   m_bulletPool: 0
+  m_effectType: 0
+  m_effectPool: 0
   m_unitHPBarCtrl: {fileID: 8723878849878509831}
   m_minDistToAttack: 300
   m_distFromTurretSupport: 170

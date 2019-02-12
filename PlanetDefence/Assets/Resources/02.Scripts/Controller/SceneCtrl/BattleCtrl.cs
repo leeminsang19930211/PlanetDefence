@@ -12,6 +12,7 @@ public class BattleCtrl: MonoBehaviour
         {
             BattleGameObjectMgr.Inst.Init();
             BulletMgr.Inst.Init();
+            EffectMgr.Inst.Init();
             TurretMgr.Inst.Init();
             SpaceShipMgr.Inst.Init();
             Player.Inst.Init();
@@ -47,7 +48,13 @@ public class BattleCtrl: MonoBehaviour
 
             BulletMgr.Inst.ClearBulletPool(BulletPool.SpaceShip);
             BulletMgr.Inst.AllocateBulletPool(BulletPool.SpaceShip, spaceShipsNum);
-            
+
+            EffectMgr.Inst.ClearEffectPool(EffectPool.Turret);
+            EffectMgr.Inst.AllocateEffectPool(EffectPool.Turret, 20);
+
+            EffectMgr.Inst.ClearEffectPool(EffectPool.SpaceShip);
+            EffectMgr.Inst.AllocateEffectPool(EffectPool.SpaceShip, spaceShipsNum);
+
             SpaceShipMgr.Inst.StartCreatingWaves(infos);
         }
 
@@ -58,6 +65,7 @@ public class BattleCtrl: MonoBehaviour
         Player.Inst.Release_Clear();
         SpaceShipMgr.Inst.Release_Clear();
         TurretMgr.Inst.Release_Clear();
+        EffectMgr.Inst.Release_Clear();
         BulletMgr.Inst.Release_Clear();
         BattleGameObjectMgr.Inst.Release_Clear();
         PlanetCtrl.Inst.Release_Clear();
@@ -70,6 +78,7 @@ public class BattleCtrl: MonoBehaviour
         Player.Inst.Release_Fail();
         SpaceShipMgr.Inst.Release_Fail();
         TurretMgr.Inst.Release_Fail();
+        EffectMgr.Inst.Release_Fail();
         BulletMgr.Inst.Release_Fail();
         BattleGameObjectMgr.Inst.Release_Fail();
         PlanetCtrl.Inst.Release_Fail();

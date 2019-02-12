@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 700662154087287818}
   - component: {fileID: 4356518684219879248}
   m_Layer: 0
-  m_Name: Test
+  m_Name: AlienComing
   m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,13 +55,9 @@ MonoBehaviour:
   eCardType: 1
   Waves:
   - eMobType: 0
-    nMobNum: 15
+    nMobNum: 20
     fDelayTime: 1
     fFirstDelayTime: 5
-  - eMobType: 0
-    nMobNum: 5
-    fDelayTime: 1
-    fFirstDelayTime: 30
 --- !u!222 &1871069740519433408
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -90,7 +86,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: cb2b426292b79be4db1930cdca582403, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0999c5086e7c1974eab36ab04c47045c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

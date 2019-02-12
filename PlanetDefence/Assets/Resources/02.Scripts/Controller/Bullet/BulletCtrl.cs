@@ -7,38 +7,17 @@ public class BulletCtrl : MonoBehaviour
     public float m_speed = 0;
 
     private Transform m_trsf = null;
+
+    private Gunner m_shooter = null;
     private Gunner m_target= null;
 
-    public void Fire(Vector3 startPos, Vector3 startAngle, Gunner target)
+ 
+    public void Fire(Vector3 startPos, Vector3 startAngle, Gunner shooter, Gunner target)
     {
         m_trsf.position = startPos;
         m_trsf.localEulerAngles = startAngle;
         m_target = target;
-    }
-
-    protected void HitTarget()
-    {
-        m_target.Hit(m_damage);        
-    }
-
-    protected void HitRayCastedTarget()
-    {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(new Vector2(m_trsf.position.x, m_trsf.position.y), new Vector3(m_trsf.up.x, m_trsf.up.y));
-
-        if (hits != null)
-        {
-            foreach (RaycastHit2D hit in hits)
-            {
-                if (hit.collider.gameObject.tag == "SPACESHIP_NORMAL")
-                {
-                    hit.collider.gameObject.GetComponent<SpaceShipCtrl>().Hit(m_damage);
-                }
-                else if (hit.collider.gameObject.tag == "SPACESHIP_DUMMY")
-                {
-                    hit.collider.gameObject.GetComponent<SpaceShipCtrl>().Hit(m_damage);
-                }
-            }
-        }
+        m_shooter = shooter;
     }
 
     protected void MoveToTarget()
@@ -56,7 +35,7 @@ public class BulletCtrl : MonoBehaviour
         if(moveDist > moveDir.magnitude)
         {
             moveDist = moveDir.magnitude;
-            _OnTarget();
+            _OnTarget(m_target, m_trsf.position);
         }
 
         m_trsf.position += moveDir.normalized * moveDist;     
@@ -74,23 +53,53 @@ public class BulletCtrl : MonoBehaviour
         m_trsf.Rotate(0, 0, angle);
     }
 
-    protected virtual void _OnTarget()
+    protected void RayCastTargets()
     {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(new Vector2(m_trsf.position.x, m_trsf.position.y), new Vector3(m_trsf.up.x, m_trsf.up.y));
 
-    }
-
-    protected virtual void _OnShield()
-    {
-        if (m_target is TurretCtrl)
+        if (hits != null)
         {
-            Gunner shield = TurretMgr.Inst.FindShieldTurret(m_target.BulletPoolIdx); // TurretCtrl 의 BulletPoolIdx 는 터렛 지지대의 인덱스이다.
-
-            if(shield )
+            foreach (RaycastHit2D hit in hits)
             {
-                shield.Hit(m_damage);
-                gameObject.SetActive(false);
+                if (hit.collider.gameObject.tag == "SPACESHIP_NORMAL")
+                {
+                    Gunner target = hit.collider.gameObject.GetComponent<SpaceShipCtrl>();
+
+                    _OnTargetByRayCast(target, target.Position);
+                }
+                else if (hit.collider.gameObject.tag == "SPACESHIP_DUMMY")
+                {
+                    Gunner target = hit.collider.gameObject.GetComponent<SpaceShipCtrl>();
+
+                    _OnTargetByRayCast(target, target.Position);
+                }
             }
         }
+    }
+
+    protected void PlayEffect(Vector3 pos )
+    {
+        EffectMgr.Inst.PlayEffect(m_shooter.m_effectPool, m_shooter.BulletPoolIdx, pos);
+    }
+
+    protected virtual void _OnTargetByRayCast(Gunner target, Vector3 hitPos)
+    {
+        PlayEffect(hitPos);
+        target.Hit(m_damage);
+    }
+
+    protected virtual void _OnTarget(Gunner target, Vector3 hitPos)
+    {
+        PlayEffect(hitPos);
+        target.Hit(m_damage);
+        gameObject.SetActive(false);
+    }
+
+    protected virtual void _OnShield(Gunner target, Vector3 hitPos)
+    {
+        PlayEffect(hitPos);
+        target.Hit(m_damage);
+        gameObject.SetActive(false);
     }
 
     protected void Init()
@@ -102,7 +111,16 @@ public class BulletCtrl : MonoBehaviour
     {
         if (collision.gameObject.tag == "SHIELD")
         {
-            _OnShield();
+            if (m_target is TurretCtrl)
+            {
+                Gunner shield = TurretMgr.Inst.FindShieldTurret(m_target.BulletPoolIdx); // TurretCtrl 의 BulletPoolIdx 는 터렛 지지대의 인덱스이다.
+
+                if (shield)
+                {
+                    m_target = shield;
+                    _OnShield(m_target, m_trsf.position);
+                }
+            }
 
         }
     }

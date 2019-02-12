@@ -30,11 +30,22 @@ public class ShieldCtrl: MonoBehaviour
         }
     }
 
-    public void HideAllShield()
+    public void HideAllShield(PlanetArea area)
     {
-        foreach(GameObject shield in m_shieldImgs)
+        switch (area)
         {
-            shield.SetActive(false);
+            case PlanetArea.Up:
+                m_shieldImgs[0].SetActive(false);
+                break;
+            case PlanetArea.Left:
+                m_shieldImgs[1].SetActive(false);
+                break;
+            case PlanetArea.Down:
+                m_shieldImgs[2].SetActive(false);
+                break;
+            case PlanetArea.Right:
+                m_shieldImgs[3].SetActive(false);
+                break;
         }
     }
 

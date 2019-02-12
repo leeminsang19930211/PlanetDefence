@@ -6,12 +6,15 @@ public class Gunner : MonoBehaviour
 {
     public int m_maxHP = 0;
     public int m_maxBullets = 0;            // BulletPool 에 할당할 총알의 수
+    public int m_maxEffects = 0;            // EffectPool 에 할당할 이펙트의 수
     public int m_maxFires = -1;             // 총알을 총 발사할 수, 음수이면 무한 발사
     public float m_fanAngle = 45f;          // 타겟을 탐색할때 사용할 각도값
     public float m_fireDelay = 0;           // 총알 발사 딜레이
     public float m_fireDistAlignUp = 0;     // up 방향으로 총알을 쏠 위치까지의 거리
     public Bullet m_bulletType = Bullet.End;
     public BulletPool m_bulletPool = BulletPool.End;
+    public Effect m_effectType = Effect.End;
+    public EffectPool m_effectPool = EffectPool.End;
     public UnitHPBarCtrl m_unitHPBarCtrl = null;
 
     protected int m_curHP = 0;
@@ -73,6 +76,11 @@ public class Gunner : MonoBehaviour
                 ClearBullets();
             }
 
+            if (m_maxEffects > 0)
+            {
+                ClearEffects();
+            }
+
             Destroy(this.gameObject);
         }
     }
@@ -89,6 +97,10 @@ public class Gunner : MonoBehaviour
             AllocateBullets();
         }
 
+        if(m_maxEffects >0 )
+        {
+            AllocateEffects();
+        }
     }
 
 
@@ -118,12 +130,28 @@ public class Gunner : MonoBehaviour
         BulletMgr.Inst.AllocateBullets(m_bulletType, m_bulletPool, BulletPoolIdx, m_maxBullets);
     }
 
+    private void AllocateEffects()
+    {
+        if (BulletPoolIdx < 0)
+            return;
+
+        EffectMgr.Inst.AllocateEffects(m_effectType, m_effectPool, BulletPoolIdx, m_maxEffects);
+    }
+
     private void ClearBullets()
     {
         if (BulletPoolIdx < 0)
             return;
 
         BulletMgr.Inst.ClearBullets(m_bulletPool, BulletPoolIdx);
+    }
+
+    private void ClearEffects()
+    {
+        if (BulletPoolIdx < 0)
+            return;
+
+        EffectMgr.Inst.ClearEffects(m_effectPool, BulletPoolIdx);
     }
 
     private IEnumerator FireWithDelay()

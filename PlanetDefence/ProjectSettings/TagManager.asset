@@ -100,6 +100,9 @@ TagManager:
   - name: Turret_Bullet1
     uniqueID: 3175762473
     locked: 0
+  - name: Effect_Esplosion0
+    uniqueID: 3740830739
+    locked: 0
   - name: TurretHpBar_Back
     uniqueID: 71970953
     locked: 0
