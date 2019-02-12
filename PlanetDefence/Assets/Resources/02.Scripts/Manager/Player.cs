@@ -157,14 +157,18 @@ public class Player : MonoBehaviour
         return BuyErr.NoError;
     }
 
-    // ★ 이거 사용
+    // ★ 이거 사용  <-- 변경
     public bool SellTurret()
     {
         TurretCtrl turret = TurretMgr.Inst.FocusedTurret;
 
         if (turret == null)
+        {
+            BattleGameObjectMgr.Inst.m_RemoveWarningYet.SetActive(true);
             return false;
+        }
 
+            
         if(turret.m_turretType == Turret.End)
         {
             Debug.LogError("The turretType in turretCtrl is turret.End");
@@ -186,6 +190,8 @@ public class Player : MonoBehaviour
         UpdateRsrc();
 
         TurretMgr.Inst.RemoveTurretOnTurretSupport();
+        BattleGameObjectMgr.Inst.ExitWarnings();
+        BattleGameObjectMgr.Inst.PopUpExit();
 
         return true;
     }

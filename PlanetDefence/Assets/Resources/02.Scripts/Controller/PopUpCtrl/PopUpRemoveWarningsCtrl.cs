@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopUpRemoveWarningCtrl : MonoBehaviour
+public class PopUpRemoveWarningsCtrl : MonoBehaviour
 {
     public void OnClick()
     {
-        BattleGameObjectMgr.Inst.PopUpRemoveWarning();
+        BattleGameObjectMgr.Inst.PopUpRemoveWarnings();
     }
 }

@@ -56,6 +56,16 @@ public enum BuyErr
    End,
 }
 
+// 추가
+public enum LabErr
+{
+    NoError,
+    Max,                 // 최대 누적
+    NoBP,
+    NotEnoughRsrc,
+    End,
+}
+
 public enum Bullet
 {
     Lv1_Missile,

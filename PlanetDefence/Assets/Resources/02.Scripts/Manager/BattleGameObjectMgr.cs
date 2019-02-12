@@ -49,13 +49,9 @@ public class BattleGameObjectMgr : MonoBehaviour
     private GameObject[] m_LabInfoScrolls;
     private GameObject[] m_RepairButtons;
     private GameObject[] m_RepairInfoScrolls;
-    private GameObject[] m_BuildButtons;    
-
-    // 추가
+    private GameObject[] m_BuildButtons;
 	private GameObject[] m_BuildButtons_Black;
     private GameObject[] m_BuildInfoScrolls;
-
-    // 추가2
     private GameObject[] m_BuildImages_Black;
     public GameObject[] m_BuildStartButtons;
     public GameObject m_BuildWarningNoBP;
@@ -64,7 +60,9 @@ public class BattleGameObjectMgr : MonoBehaviour
 
 
     private GameObject m_RemoveInfoScroll;
- 	private GameObject m_RemoveWarningYet;
+
+    // 변경
+ 	public GameObject m_RemoveWarningYet;
     private GameObject m_RemoveWarning;
     private GameObject[] m_TurretSupports;
 
@@ -374,7 +372,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
-    // 추가
 
     public void PopUpBuild()
     {
@@ -387,20 +384,14 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             m_BuildInfoScroll.SetActive(false);
         }
-        // 삭제
-        
+
         m_BuildWarningNoBP.SetActive(false);
         m_BuildWarningAlready.SetActive(false);
-
-        // 추가2
         m_BuildWarningNoRsrc.SetActive(false);
-
         m_RemoveInfoScroll.SetActive(false);
         m_RemoveWarningYet.SetActive(false);
         m_RemoveWarning.SetActive(false);
 
-
-        // 추가2
         for (int i = 0; i < (int)Turret.End; ++i)
         {
             if (true == Player.Inst.CheckUnLock((Turret)i))
@@ -416,8 +407,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         int BuildButtonIdx = System.Array.IndexOf(m_BuildButtons, ThisBuildButton);
 
         m_BuildInfoScrolls[BuildButtonIdx].SetActive(true);
-        
-        // 추가2
+
         if (true == Player.Inst.CheckUnLock((Turret)BuildButtonIdx))
         {
             m_BuildImages_Black[BuildButtonIdx].SetActive(false);
@@ -432,7 +422,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_BuildInfoScrolls[BuildButtonBIdx].SetActive(true);
 
-        // 추가2
         if (true == Player.Inst.CheckUnLock((Turret)BuildButtonBIdx))
         {
             m_BuildImages_Black[BuildButtonBIdx].SetActive(false);
@@ -458,6 +447,8 @@ public class BattleGameObjectMgr : MonoBehaviour
 
                 m_BuildInfoScrolls[BuildInfoIdx].SetActive(false);
                 m_BuildInfoScrolls[BuildInfoIdx + 1].SetActive(true);
+                // 추가
+                m_BuildImages_Black[BuildInfoIdx + 1].SetActive(false);
 
                 return;
             }
@@ -476,7 +467,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
                 m_BuildInfoScrolls[BuildInfoIdx].SetActive(false);
                 m_BuildInfoScrolls[BuildInfoIdx - 1].SetActive(true);
-                // 추가 2
                 m_BuildImages_Black[BuildInfoIdx - 1].SetActive(false);
 
                 return;
@@ -505,7 +495,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_BuildWarningAlready.SetActive(true);
     }
 
-    // 추가2
     public void PopUpBuildWarningNoRsrc()
     {
         m_BuildWarningNoRsrc.SetActive(true);
@@ -527,13 +516,20 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveInfoScroll.SetActive(true);
     }
 
-    public void PopUpRemoveWarningYet()
+    // 삭제 및 추가
+
+    public void PopUpRemoveWarnings()
     {
-        m_RemoveWarningYet.SetActive(true);
+        if (false == TurretMgr.Inst.CheckTurretOnTurretSupport())
+        {
+            m_RemoveWarningYet.SetActive(true);
+        }
+
+        else
+        {
+            m_RemoveWarning.SetActive(true);
+        }
+        
     }
 
-    public void PopUpRemoveWarning()
-    {
-        m_RemoveWarning.SetActive(true);
-    }
 }
