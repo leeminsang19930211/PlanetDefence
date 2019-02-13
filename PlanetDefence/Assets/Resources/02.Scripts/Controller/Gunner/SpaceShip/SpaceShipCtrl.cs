@@ -18,12 +18,13 @@ public class SpaceShipCtrl : Gunner
     public int m_dropEleCircuit = 0;
     public int m_dropCoin = 0;
     public float m_fallingSpeed = 0;
-    public float m_revolvingSpeed = 0;          // 가장 외각의 원을 기준으로 초당 회전 각도값. 
+    public float m_revolvingSpeed = 0;          // 가장 외각의 원을 기준으로 초당 회전 각도값.
     public float[] m_fallingDists = new float[3];
     public float m_stayDuration = 0;            // 공전하기 이전에 잠깐 대기하는 시간 
     public Vector3 m_fallingDir = Vector3.zero;
 
     private int m_fallingRound = 0;             // 몇번째 낙하인지를 나타내는 값. 0~3 범위를 가진다. 
+    private float m_revolvingSpeed_origin = 0;
     private float m_stayingTimeAcc = 0;
     private float m_revolvingSpeedScalar = 0;   // 행성 원점으로부터 현재 거리에따라 스피드에 곱해져야 하는 값
     private float m_revolvingAngleAcc = 0;
@@ -44,6 +45,12 @@ public class SpaceShipCtrl : Gunner
         }
     }
 
+    public override void SlowMove(Gunner.SlowMoveInfo slowInfo)
+    {
+        StopCoroutine("SlowMove_Coroutin");
+        StartCoroutine("SlowMove_Coroutin", slowInfo);
+    }
+
     // 자식 우주선에서 호출해줄것
     protected new void Init()
     {
@@ -55,6 +62,8 @@ public class SpaceShipCtrl : Gunner
         m_stateProcs[(int)STATE.LANDING] = StateProc_Landing;
 
         m_startPos = m_trsf.position;
+
+        m_revolvingSpeed_origin = m_revolvingSpeed;
 
         ChangeState(STATE.FALLING);
     }
@@ -232,6 +241,15 @@ public class SpaceShipCtrl : Gunner
             return 0;
 
         return 1f; // 테스트용
+    }
+
+    private IEnumerator SlowMove_Coroutin(SlowMoveInfo slowInfo)
+    {
+        m_revolvingSpeed = m_revolvingSpeed_origin * slowInfo.slowScale;
+
+        yield return new WaitForSeconds(slowInfo.duration);
+
+        m_revolvingSpeed = m_revolvingSpeed_origin;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

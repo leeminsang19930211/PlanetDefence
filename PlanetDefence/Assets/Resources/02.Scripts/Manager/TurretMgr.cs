@@ -92,10 +92,10 @@ public class TurretMgr : MonoBehaviour
             if (m_turretSupportCtrs[i].TurretCtrl == null)
                 continue;
 
-
             if (i == exception)
                 continue;
-            BattleGameObjectMgr.Inst.ShowShield(area, m_turretSupportCtrs[i].TurretCtrl.m_turretType);
+
+            BattleGameObjectMgr.Inst.ShowShield(area, m_turretSupportCtrs[i].TurretCtrl.TurretType);
         }
     }
 
@@ -329,7 +329,7 @@ public class TurretMgr : MonoBehaviour
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.BulletPoolIdx = m_focusedTurretSupportIdx;
         m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Clone = true;
 
-        CheckShieldToShow(m_focusedTurretSupportIdx);
+      
     }
 
     private void RemoveTurret()
@@ -378,7 +378,14 @@ public class TurretMgr : MonoBehaviour
     {
         AddTurret("Turret_Lv1_Missile");
         AddTurret("Turret_Lv1_Laser");
+        AddTurret("Turret_Lv1_Gatling");
+        AddTurret("Turret_Lv2_Posion");
         AddTurret("Turret_Lv2_Shield");
+        AddTurret("Turret_Lv2_Slow");
+        AddTurret("Turret_Lv2_Pause");
+
+
+
         AddTurretSupports();
     }
 
@@ -417,8 +424,20 @@ public class TurretMgr : MonoBehaviour
             case Turret.Lv1_Laser:
                 str = "Turret_Lv1_Laser";
                 break;
+            case Turret.Lv1_Gatiling:
+                str = "Turret_Lv1_Gatling";
+                break;
             case Turret.Lv2_Shield:
                 str = "Turret_Lv2_Shield";
+                break;
+            case Turret.Lv2_Poison:
+                str = "Turret_Lv2_Posion";
+                break;
+            case Turret.Lv2_Slow:
+                str = "Turret_Lv2_Slow";
+                break;
+            case Turret.Lv2_Pause:
+                str = "Turret_Lv2_Pause";
                 break;
             default:
                 Debug.LogError("The turret str from the turret enum is not mapped");

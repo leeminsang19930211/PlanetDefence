@@ -5,8 +5,15 @@ using UnityEngine;
 public class Turret_Lv2_ShieldCtrl : TurretCtrl
 {
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        m_bulletType = Bullet.End;
+        m_bulletPool = BulletPool.End;
+        m_effectType = Effect.End;
+        m_effectPool = EffectPool.End;
+
+        m_turretType = Turret.Lv2_Shield;
+
         base.Init();
     }
 

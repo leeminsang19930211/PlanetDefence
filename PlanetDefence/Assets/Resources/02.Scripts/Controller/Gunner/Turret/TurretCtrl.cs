@@ -7,9 +7,11 @@ public class TurretCtrl : Gunner
 {
     public float m_minDistToAttack = 0;             // 공격하기 위한 적 우주선과의 최소 거리
     public float m_distFromTurretSupport = 0;       // 터렛 서포트로부터 위치 할 거리
-    public Turret m_turretType = Turret.End;
 
     private float m_planetAngle = 0;                  
+    protected Turret m_turretType = Turret.End;
+
+    public Turret TurretType {  get { return m_turretType; } }
 
     protected new void Init()
     {
@@ -18,6 +20,8 @@ public class TurretCtrl : Gunner
         m_trsf.position += m_trsf.up * m_distFromTurretSupport;
 
         m_planetAngle = (BulletPoolIdx / 5)*90f;    // BulletPoolIdx 는 터렛 지지대 인덱스와 같음
+
+        TurretMgr.Inst.CheckShieldToShow(BulletPoolIdx);
     }
 
     protected override void _OnZeroHP()

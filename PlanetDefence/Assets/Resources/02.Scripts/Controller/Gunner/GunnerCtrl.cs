@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class Gunner : MonoBehaviour
 {
+    [System.Serializable]
+    public struct DotInfo
+    {
+        public int damage;
+        public int count;
+        public float delay;
+    }
+
+    [System.Serializable]
+    public struct SlowMoveInfo
+    {
+        public float slowScale;
+        public float duration;
+    }
+
     public int m_maxHP = 0;
     public int m_maxBullets = 0;            // BulletPool 에 할당할 총알의 수
     public int m_maxEffects = 0;            // EffectPool 에 할당할 이펙트의 수
@@ -11,17 +26,19 @@ public class Gunner : MonoBehaviour
     public float m_fanAngle = 45f;          // 타겟을 탐색할때 사용할 각도값
     public float m_fireDelay = 0;           // 총알 발사 딜레이
     public float m_fireDistAlignUp = 0;     // up 방향으로 총알을 쏠 위치까지의 거리
-    public Bullet m_bulletType = Bullet.End;
-    public BulletPool m_bulletPool = BulletPool.End;
-    public Effect m_effectType = Effect.End;
-    public EffectPool m_effectPool = EffectPool.End;
     public UnitHPBarCtrl m_unitHPBarCtrl = null;
 
     protected int m_curHP = 0;
+    protected Bullet m_bulletType = Bullet.End;
+    protected BulletPool m_bulletPool = BulletPool.End;
+    protected Effect m_effectType = Effect.End;
+    protected EffectPool m_effectPool = EffectPool.End;
     protected Transform m_trsf = null;
 
     public bool Clone { get; set; } = false; // 원본인지 복사된 객체인지를 구분하는 값
     public int BulletPoolIdx { get; set; } = -1;// BulletPool에 할당할때 사용할 idx
+    public EffectPool EffectPool { get { return m_effectPool; } }
+   
 
     public int CurHP
     {
@@ -63,6 +80,21 @@ public class Gunner : MonoBehaviour
         m_unitHPBarCtrl.UpdateHP(m_curHP, m_maxHP);
     }
 
+    public virtual void Hit_Dot(DotInfo dotInfo)
+    {
+        StartCoroutine("Hit_Dot_Coroutine", dotInfo);
+    }
+
+    public virtual void SlowMove(SlowMoveInfo slowInfo)
+    {
+
+    }
+
+    public void StopFire(float duration)
+    {
+        StopCoroutine("StopFire_Coroutine");
+        StartCoroutine("StopFire_Coroutine", duration);
+    }
 
     // Destory 함수 대신 이함수 호출해야함.
     public void Die()
@@ -93,7 +125,6 @@ public class Gunner : MonoBehaviour
 
         if(m_maxBullets > 0)
         {
-            StartCoroutine("FireWithDelay");
             AllocateBullets();
         }
 
@@ -154,6 +185,32 @@ public class Gunner : MonoBehaviour
         EffectMgr.Inst.ClearEffects(m_effectPool, BulletPoolIdx);
     }
 
+    private IEnumerator Hit_Dot_Coroutine(DotInfo dotInfo)
+    {
+        int curCount = 0;
+
+        while (curCount < dotInfo.count)
+        {
+            yield return new WaitForSeconds(dotInfo.delay);
+
+            Hit(dotInfo.damage);
+
+            curCount++;
+        }
+    }
+
+    private IEnumerator StopFire_Coroutine(float duration)
+    {
+        if(m_maxBullets  > 0)
+        {            
+            StopCoroutine("FireWithDelay");
+
+            yield return new WaitForSeconds(duration);
+
+            StartCoroutine("FireWithDelay");
+        }
+    }
+
     private IEnumerator FireWithDelay()
     {
         int curFires = 0;
@@ -177,6 +234,14 @@ public class Gunner : MonoBehaviour
 
                 CreateBullet();
             }
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (m_maxBullets > 0)
+        {
+            StartCoroutine("FireWithDelay");
         }
     }
 }

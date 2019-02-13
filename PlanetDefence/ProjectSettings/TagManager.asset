@@ -82,6 +82,9 @@ TagManager:
   - name: SpaceShip1
     uniqueID: 1825579245
     locked: 0
+  - name: TurretSupport0
+    uniqueID: 3633886639
+    locked: 0
   - name: Turret0
     uniqueID: 3271386761
     locked: 0

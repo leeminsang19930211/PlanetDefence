@@ -1,8 +1,12 @@
 ﻿public enum Turret
 {
     Lv1_Missile,
-    Lv1_Laser, 
+    Lv1_Laser,
+    Lv1_Gatiling,
+    Lv2_Poison, 
     Lv2_Shield,
+    Lv2_Slow,
+    Lv2_Pause,
     // 추가2
     dummy03,
     dummy04,
@@ -21,10 +25,6 @@
     dummy17,
     dummy18,
     dummy19,
-    dummy20,
-    dummy21,
-    dummy22,
-    dummy23,
     End,
 }
 
@@ -70,6 +70,10 @@ public enum Bullet
 {
     Lv1_Missile,
     Lv1_Laser,
+    Lv1_Gatling,
+    Lv2_Posion,
+    Lv2_Slow,
+    Lv2_Pause,
     TestBullet,
     End,
 }

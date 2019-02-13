@@ -154,6 +154,24 @@ public class SpaceShipMgr : MonoBehaviour
         return target;
     }
 
+    public Gunner FindMinHPTargetInFan(float refAngle, float fanAngle, Vector3 from, float minDist)
+    { 
+        GameObject[] dummyList = GameObject.FindGameObjectsWithTag("SPACESHIP_DUMMY");
+
+        Gunner dummyTarget = FindMinHPTargetInList(dummyList, refAngle, fanAngle, from, minDist);
+
+        GameObject[] normalList = GameObject.FindGameObjectsWithTag("SPACESHIP_NORMAL");
+
+        Gunner noramlTarget = FindMinHPTargetInList(normalList, refAngle, fanAngle, from, minDist);
+
+        if (dummyTarget == null)
+            return noramlTarget;
+        else if (noramlTarget == null)
+            return dummyTarget;
+
+        return noramlTarget.CurHP <= dummyTarget.CurHP ? noramlTarget : dummyTarget;
+    }
+
     private Gunner FindFirstTargetInList(GameObject[] spaceShipList, float refAngle, float fanAngle, Vector3 from, float minDist)
     {
         if (spaceShipList == null)
@@ -183,6 +201,55 @@ public class SpaceShipMgr : MonoBehaviour
         }
 
         return null;
+    }
+
+    private Gunner FindMinHPTargetInList(GameObject[] spaceShipList, float refAngle, float fanAngle, Vector3 from, float minDist)
+    {
+        if (spaceShipList == null)
+            return null;
+
+        float halfAngle = fanAngle * 0.5f;
+
+        float minHP = float.MaxValue;
+        Gunner targetCtrl = null;
+
+
+        foreach (GameObject spcShip in spaceShipList)
+        {
+            SpaceShipCtrl ctrl = spcShip.GetComponent<SpaceShipCtrl>();
+
+            if ((ctrl.Position - from).magnitude < minDist)
+            {
+                continue;
+            }
+            
+            if (refAngle == 0)
+            {
+                if (0 <= ctrl.AngleFromPlanetUp && (halfAngle > ctrl.AngleFromPlanetUp || 360f - halfAngle < ctrl.AngleFromPlanetUp))
+                {
+                    if(ctrl.CurHP < minHP)
+                    {
+                        targetCtrl = ctrl;
+                        minHP = ctrl.CurHP;
+                    }
+                }
+                   
+            }
+            else
+            {
+                if (refAngle - halfAngle <= ctrl.AngleFromPlanetUp && refAngle + halfAngle > ctrl.AngleFromPlanetUp)
+                {
+                    if (ctrl.CurHP < minHP)
+                    {
+                        targetCtrl = ctrl;
+                        minHP = ctrl.CurHP;
+                    }
+                }
+                    
+            }
+        }
+
+        return targetCtrl;
     }
 
     private GameObject FindSpaceShipByEnum(MobType type )

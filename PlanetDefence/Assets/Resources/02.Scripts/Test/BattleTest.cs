@@ -20,23 +20,14 @@ public class BattleTest : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Player.Inst.BuyTurret(Turret.Lv2_Shield, 0, 0);
+            Player.Inst.BuyTurret(Turret.Lv2_Poison, 0, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            Player.Inst.BuyTurret(Turret.Lv1_Laser, 0, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            Player.Inst.SellTurret();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F4))
+        if (Input.GetKeyDown(KeyCode.F10))
         {
             BattleGameObjectMgr.Inst.PopUpResult(false);
         }
-        if (Input.GetKeyDown(KeyCode.F5))
+        if (Input.GetKeyDown(KeyCode.F11))
         {
             BattleGameObjectMgr.Inst.PopUpResult(true);
         }

@@ -6,12 +6,11 @@ public class BulletCtrl : MonoBehaviour
     public int m_damage = 0;
     public float m_speed = 0;
 
-    private Transform m_trsf = null;
+    protected Transform m_trsf = null;
 
     private Gunner m_shooter = null;
     private Gunner m_target= null;
 
- 
     public void Fire(Vector3 startPos, Vector3 startAngle, Gunner shooter, Gunner target)
     {
         m_trsf.position = startPos;
@@ -79,7 +78,7 @@ public class BulletCtrl : MonoBehaviour
 
     protected void PlayEffect(Vector3 pos )
     {
-        EffectMgr.Inst.PlayEffect(m_shooter.m_effectPool, m_shooter.BulletPoolIdx, pos);
+        EffectMgr.Inst.PlayEffect(m_shooter.EffectPool, m_shooter.BulletPoolIdx, pos);
     }
 
     protected virtual void _OnTargetByRayCast(Gunner target, Vector3 hitPos)

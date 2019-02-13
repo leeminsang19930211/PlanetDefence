@@ -8,6 +8,7 @@ public class Bullet_Lv1_LaserCtrl : BulletCtrl
 
     void OnEnable()
     {
+        RotateToTarget();
         base.Init();
         StartCoroutine("Stay");
         StartCoroutine("Hit");

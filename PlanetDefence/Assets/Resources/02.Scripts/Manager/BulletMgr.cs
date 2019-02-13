@@ -218,6 +218,12 @@ public class BulletMgr : MonoBehaviour
     {
         AddBullet("Bullet_Lv1_Missile");
         AddBullet("Bullet_Lv1_Laser");
+        AddBullet("Bullet_Lv1_Gatling");
+        AddBullet("Bullet_Lv2_Posion");
+        AddBullet("Bullet_Lv2_Slow");
+        AddBullet("Bullet_Lv2_Pause");
+
+
         AddBullet("TestBullet");
 
         for (int i=0; i <(int)BulletPool.End; ++i)
@@ -238,6 +244,18 @@ public class BulletMgr : MonoBehaviour
                 break;
             case Bullet.Lv1_Laser:
                 str = "Bullet_Lv1_Laser";
+                break;
+            case Bullet.Lv1_Gatling:
+                str = "Bullet_Lv1_Gatling";
+                break;
+            case Bullet.Lv2_Posion:
+                str = "Bullet_Lv2_Posion";
+                break;
+            case Bullet.Lv2_Slow:
+                str = "Bullet_Lv2_Slow";
+                break;
+            case Bullet.Lv2_Pause:
+                str = "Bullet_Lv2_Pause";
                 break;
             case Bullet.TestBullet:
                 str = "TestBullet";

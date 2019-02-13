@@ -6,6 +6,11 @@ public class SpaceShip_NormalCtrl : SpaceShipCtrl
 {
     void Start()
     {
+        m_bulletType = Bullet.TestBullet;
+        m_bulletPool = BulletPool.SpaceShip;
+        m_effectType = Effect.Explosion_Bullet0;
+        m_effectPool = EffectPool.SpaceShip;
+
         base.Init();
     }
 

@@ -6,9 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private static Player m_inst = null;
-    private int m_junk = 400;
-    private int m_eleCircuit = 400;
-    private int m_coin = 400;
+    private int m_junk = 999    ;
+    private int m_eleCircuit = 999;
+    private int m_coin = 999;
 
     private TurretInfo[] m_turretInfos = new TurretInfo[(int)Turret.End];
     private LabInfo[] m_labInfos = new LabInfo[(int)Lab.End];
@@ -167,9 +167,8 @@ public class Player : MonoBehaviour
             BattleGameObjectMgr.Inst.m_RemoveWarningYet.SetActive(true);
             return false;
         }
-
             
-        if(turret.m_turretType == Turret.End)
+        if(turret.TurretType == Turret.End)
         {
             Debug.LogError("The turretType in turretCtrl is turret.End");
             return false;
@@ -181,7 +180,7 @@ public class Player : MonoBehaviour
             return false;
         }
 
-        int turretIdx = (int)turret.m_turretType;
+        int turretIdx = (int)turret.TurretType;
         float ratio = turret.CurHP / (float)turret.m_maxHP;
 
         m_junk += (int)(TurretMgr.Inst.TurretJunkCost[turretIdx] * ratio);
