@@ -377,7 +377,7 @@ public class TurretMgr : MonoBehaviour
         AddTurret("Turret_Lv1_Missile");
         AddTurret("Turret_Lv1_Laser");
         AddTurret("Turret_Lv1_Gatling");
-        AddTurret("Turret_Lv2_Posion");
+        AddTurret("Turret_Lv2_Poison");
         AddTurret("Turret_Lv2_Shield");
         AddTurret("Turret_Lv2_Slow");
         AddTurret("Turret_Lv2_Pause");
@@ -430,7 +430,7 @@ public class TurretMgr : MonoBehaviour
                 str = "Turret_Lv2_Shield";
                 break;
             case Turret.Lv2_Poison:
-                str = "Turret_Lv2_Posion";
+                str = "Turret_Lv2_Poison";
                 break;
             case Turret.Lv2_Slow:
                 str = "Turret_Lv2_Slow";
