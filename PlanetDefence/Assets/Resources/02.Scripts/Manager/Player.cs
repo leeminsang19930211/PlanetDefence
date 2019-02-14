@@ -32,6 +32,11 @@ public class Player : MonoBehaviour
 
     public void Init()
     {
+       for(int i= 0; i<(int)Lab.End; ++i)
+       {
+            m_labInfos[i].stacks = 0;
+       }
+
         UpdateRsrc();
     }
 
@@ -243,9 +248,7 @@ public class Player : MonoBehaviour
             BattleGameObjectMgr.Inst.LabInfosExit();
             BattleGameObjectMgr.Inst.PopUpExit();
             return LabErr.NoError;
-
         }
-
     }
 
     // ------------ Repair -------------
