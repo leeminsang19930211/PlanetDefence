@@ -12,4 +12,7 @@ public struct LabInfo
 public struct SpaceShipPartInfo
 {
     public bool _lock;
+
+    // 추가
+    public bool _repaired;
 }

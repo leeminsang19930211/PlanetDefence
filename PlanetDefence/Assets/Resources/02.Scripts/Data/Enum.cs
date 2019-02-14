@@ -7,6 +7,9 @@
     Lv2_Shield,
     Lv2_Slow,
     Lv2_Pause,
+    Lv3_Sniper,
+    Lv3_Heal,
+    Lv3_Berserker,
     // 추가2
     dummy03,
     dummy04,
@@ -22,9 +25,6 @@
     dummy14,
     dummy15,
     dummy16,
-    dummy17,
-    dummy18,
-    dummy19,
     End,
 }
 
@@ -74,6 +74,8 @@ public enum Bullet
     Lv2_Posion,
     Lv2_Slow,
     Lv2_Pause,
+    Lv3_Sniper,
+    Lv3_Berserker,
     TestBullet,
     End,
 }

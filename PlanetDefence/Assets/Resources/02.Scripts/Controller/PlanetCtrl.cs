@@ -56,6 +56,16 @@ public class PlanetCtrl : MonoBehaviour
         Start();
     }
 
+    public void RecoverHP(float ratio)
+    {
+        m_curHP += (int)(m_maxHP * ratio);
+
+        if (m_curHP > m_maxHP)
+            m_curHP = m_maxHP;
+
+        BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxHP, m_curHP);
+    }
+
     public void Hit(int damage)
     {
         m_curHP -= damage;

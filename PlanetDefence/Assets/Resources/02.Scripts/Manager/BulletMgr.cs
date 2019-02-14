@@ -222,7 +222,8 @@ public class BulletMgr : MonoBehaviour
         AddBullet("Bullet_Lv2_Posion");
         AddBullet("Bullet_Lv2_Slow");
         AddBullet("Bullet_Lv2_Pause");
-
+        AddBullet("Bullet_Lv3_Sniper");
+        AddBullet("Bullet_Lv3_Berserker");
 
         AddBullet("TestBullet");
 
@@ -256,6 +257,12 @@ public class BulletMgr : MonoBehaviour
                 break;
             case Bullet.Lv2_Pause:
                 str = "Bullet_Lv2_Pause";
+                break;
+            case Bullet.Lv3_Sniper:
+                str = "Bullet_Lv3_Sniper";
+                break;
+            case Bullet.Lv3_Berserker:
+                str = "Bullet_Lv3_Berserker";
                 break;
             case Bullet.TestBullet:
                 str = "TestBullet";

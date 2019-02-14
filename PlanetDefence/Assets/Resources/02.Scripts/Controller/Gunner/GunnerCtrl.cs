@@ -29,6 +29,7 @@ public class Gunner : MonoBehaviour
     public UnitHPBarCtrl m_unitHPBarCtrl = null;
 
     protected int m_curHP = 0;
+    protected float m_fireDelay_ori = 0;
     protected Bullet m_bulletType = Bullet.End;
     protected BulletPool m_bulletPool = BulletPool.End;
     protected Effect m_effectType = Effect.End;
@@ -80,6 +81,13 @@ public class Gunner : MonoBehaviour
         m_unitHPBarCtrl.UpdateHP(m_curHP, m_maxHP);
     }
 
+    public void HitToDie()
+    {
+        m_curHP = 0;
+        _OnZeroHP();
+        m_unitHPBarCtrl.UpdateHP(m_curHP, m_maxHP);
+    }
+
     public virtual void Hit_Dot(DotInfo dotInfo)
     {
         StartCoroutine("Hit_Dot_Coroutine", dotInfo);
@@ -122,8 +130,9 @@ public class Gunner : MonoBehaviour
     {
         m_trsf = GetComponent<Transform>();
         m_curHP = m_maxHP;
+        m_fireDelay_ori = m_fireDelay;
 
-        if(m_maxBullets > 0)
+        if (m_maxBullets > 0)
         {
             AllocateBullets();
         }

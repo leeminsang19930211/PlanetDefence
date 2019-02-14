@@ -334,9 +334,7 @@ public class TurretMgr : MonoBehaviour
 
     private void RemoveTurret()
     {
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Die();
-
-        CheckShieldToShow(m_focusedTurretSupportIdx);
+        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Die();        
     }
 
     private void AddTurretSupports()
@@ -383,8 +381,9 @@ public class TurretMgr : MonoBehaviour
         AddTurret("Turret_Lv2_Shield");
         AddTurret("Turret_Lv2_Slow");
         AddTurret("Turret_Lv2_Pause");
-
-
+        AddTurret("Turret_Lv3_Sniper");
+        AddTurret("Turret_Lv3_Heal");
+        AddTurret("Turret_Lv3_Berserker");
 
         AddTurretSupports();
     }
@@ -439,6 +438,17 @@ public class TurretMgr : MonoBehaviour
             case Turret.Lv2_Pause:
                 str = "Turret_Lv2_Pause";
                 break;
+            case Turret.Lv3_Sniper:
+                str = "Turret_Lv3_Sniper";
+                break;
+            case Turret.Lv3_Heal:
+                str = "Turret_Lv3_Heal";
+                break;
+            case Turret.Lv3_Berserker:
+                str = "Turret_Lv3_Berserker";
+                break;
+
+
             default:
                 Debug.LogError("The turret str from the turret enum is not mapped");
                 break;
