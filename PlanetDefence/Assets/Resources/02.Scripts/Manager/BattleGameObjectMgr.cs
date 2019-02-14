@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;   // 추가
 
 public class BattleGameObjectMgr : MonoBehaviour
 {
@@ -46,9 +47,22 @@ public class BattleGameObjectMgr : MonoBehaviour
     private GameObject m_ButtonBuildFake = null;
 
     private GameObject[] m_LabButtons;
+    private GameObject[] m_LabButtons_Black;
     private GameObject[] m_LabInfoScrolls;
+    private GameObject[] m_LabImages_Black;
+    public GameObject[] m_LabStartButtons;
+    public GameObject m_LabWarningNoBP;
+    public GameObject m_LabWarningMax;
+    public GameObject m_LabWarningNoRsrc;
     private GameObject[] m_RepairButtons;
+    private GameObject[] m_RepairButtons_Black;
     private GameObject[] m_RepairInfoScrolls;
+    private GameObject[] m_RepairImages_Black;
+    public GameObject[] m_RepairStartButtons;
+    public GameObject m_RepairWarningAlready;
+    private GameObject m_LaunchWarningNotRepaired;
+    private GameObject m_LaunchWarning;
+
     private GameObject[] m_BuildButtons;
 	private GameObject[] m_BuildButtons_Black;
     private GameObject[] m_BuildInfoScrolls;
@@ -60,8 +74,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
 
     private GameObject m_RemoveInfoScroll;
-
-    // 변경
  	public GameObject m_RemoveWarningYet;
     private GameObject m_RemoveWarning;
     private GameObject[] m_TurretSupports;
@@ -102,9 +114,22 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_ButtonRepairFake = GameObject.Find("Button_Repair_fake");
         m_ButtonBuildFake = GameObject.Find("Button_Build_fake");
         m_LabButtons = GameObject.FindGameObjectsWithTag("LABBUTTON");
+        m_LabButtons_Black = GameObject.FindGameObjectsWithTag("LABBUTTON_BLACK");
         m_LabInfoScrolls = GameObject.FindGameObjectsWithTag("LABINFO");
+        m_LabImages_Black = GameObject.FindGameObjectsWithTag("LABIMAGE_BLACK");
+        m_LabStartButtons = GameObject.FindGameObjectsWithTag("LABSTARTBUTTON");
+        m_LabWarningNoBP = GameObject.Find("LabWarningNoBP");
+        m_LabWarningMax = GameObject.Find("LabWarningMax");
+        m_LabWarningNoRsrc = GameObject.Find("LabWarningNoRsrc");
         m_RepairButtons = GameObject.FindGameObjectsWithTag("REPAIRBUTTON");
+        m_RepairButtons_Black = GameObject.FindGameObjectsWithTag("REPAIRBUTTON_BLACK");
         m_RepairInfoScrolls = GameObject.FindGameObjectsWithTag("REPAIRINFO");
+        m_RepairImages_Black = GameObject.FindGameObjectsWithTag("REPAIRIMAGE_BLACK");
+        m_RepairStartButtons = GameObject.FindGameObjectsWithTag("REPAIRSTARTBUTTON");
+        m_RepairWarningAlready = GameObject.Find("RepairWarningAlready");
+        m_LaunchWarningNotRepaired = GameObject.Find("LaunchWarningNotRepaired");
+        m_LaunchWarning = GameObject.Find("LaunchWarningPanel");
+
         m_BuildButtons = GameObject.FindGameObjectsWithTag("BUILDBUTTON");
  		m_BuildButtons_Black = GameObject.FindGameObjectsWithTag("BUILDBUTTON_BLACK");
         m_BuildInfoScrolls = GameObject.FindGameObjectsWithTag("BUILDINFO");
@@ -219,6 +244,33 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             m_RepairInfoScroll.SetActive(false);
         }
+
+        //추가
+        m_LabWarningNoBP.SetActive(false);
+        m_LabWarningMax.SetActive(false);
+        m_LabWarningNoRsrc.SetActive(false);
+        m_RepairWarningAlready.SetActive(false);
+        m_LaunchWarningNotRepaired.SetActive(false);
+        m_LaunchWarning.SetActive(false);
+
+        for(int i=0;i<12;i++)
+        {
+            m_LabButtons_Black[i].SetActive(false);
+        }
+        for(int i=12;i<16;i++)
+        {
+            if(true==Player.Inst.CheckUnLock((Turret)i-4))
+            {
+                m_LabButtons_Black[i].SetActive(false);
+            }
+        }
+        for(int i=16;i<m_LabButtons.Length;i++)
+        {
+            if(true==Player.Inst.CheckUnLock((Turret)i+4))
+            {
+                m_LabButtons_Black[i].SetActive(false);
+            }
+        }
     }
 
     public void PopUpRepair()
@@ -227,6 +279,15 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_repairScroll.SetActive(true);
         m_ButtonLabFake.SetActive(false);
         m_ButtonRepairFake.SetActive(true);
+
+        // 추가
+        for (int i = 0; i < (int)SpaceShipPart.End; ++i)
+        {
+            if (true == Player.Inst.CheckUnLock((SpaceShipPart)i))
+            {
+                m_RepairButtons_Black[i].SetActive(false);
+            }
+        }
     }
 
     public void PopUpExit()
@@ -275,6 +336,58 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_LabInfoScrolls[LabButtonIdx].SetActive(true);
 
+        // 추가
+
+        if(LabButtonIdx>=0 && LabButtonIdx<12)
+        {
+            m_LabImages_Black[LabButtonIdx].SetActive(false);
+        }
+        else if(LabButtonIdx>=12 && LabButtonIdx<16)
+        {
+            if(true==Player.Inst.CheckUnLock((Turret)LabButtonIdx - 4))
+            {
+                m_LabImages_Black[LabButtonIdx].SetActive(false);
+            }
+               
+        }
+        else if(LabButtonIdx<m_LabButtons.Length)
+        {
+            if (true == Player.Inst.CheckUnLock((Turret)LabButtonIdx + 4))
+            {
+                m_LabImages_Black[LabButtonIdx].SetActive(false);
+            }
+        }
+
+    }
+
+    // 추가
+
+    public void PopUpLabInfos2(GameObject ThisLabButtonB)
+    {
+        int LabButtonBIdx = System.Array.IndexOf(m_LabButtons_Black, ThisLabButtonB);
+
+        m_LabInfoScrolls[LabButtonBIdx].SetActive(true);
+
+        if (LabButtonBIdx >= 0 && LabButtonBIdx < 12)
+        {
+            m_LabImages_Black[LabButtonBIdx].SetActive(false);
+        }
+        else if (LabButtonBIdx >= 12 && LabButtonBIdx < 16)
+        {
+            if (true == Player.Inst.CheckUnLock((Turret)LabButtonBIdx - 4))
+            {
+                m_LabImages_Black[LabButtonBIdx].SetActive(false);
+            }
+
+        }
+        else if (LabButtonBIdx < m_LabButtons_Black.Length)
+        {
+            if (true == Player.Inst.CheckUnLock((Turret)LabButtonBIdx + 4))
+            {
+                m_LabImages_Black[LabButtonBIdx].SetActive(false);
+            }
+        }
+
     }
 
     public void LabInfosExit()
@@ -291,10 +404,27 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             if (m_LabInfoScrolls[i].activeSelf == true)
             {
-                int LabInfoIdx = i;
+                m_LabInfoScrolls[i].SetActive(false);
+                m_LabInfoScrolls[i + 1].SetActive(true);
 
-                m_LabInfoScrolls[LabInfoIdx].SetActive(false);
-                m_LabInfoScrolls[LabInfoIdx + 1].SetActive(true);
+                if(i>=0 && i<11)
+                {
+                    m_LabImages_Black[i + 1].SetActive(false);
+                }
+                else if(i>=11 && i<15)
+                {
+                    if (true == Player.Inst.CheckUnLock((Turret)i - 3))
+                    {
+                        m_LabImages_Black[i + 1].SetActive(false);
+                    }
+                }
+                else if(i>=15 && i<19)
+                {
+                    if (true == Player.Inst.CheckUnLock((Turret)i + 5))
+                    {
+                        m_LabImages_Black[i + 1].SetActive(false);
+                    }
+                }
 
                 return;
             }
@@ -309,10 +439,27 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             if (m_LabInfoScrolls[i].activeSelf == true)
             {
-                int LabInfoIdx = i;
+                m_LabInfoScrolls[i].SetActive(false);
+                m_LabInfoScrolls[i - 1].SetActive(true);
 
-                m_LabInfoScrolls[LabInfoIdx].SetActive(false);
-                m_LabInfoScrolls[LabInfoIdx - 1].SetActive(true);
+                if (i > 0 && i < 13)
+                {
+                    m_LabImages_Black[i - 1].SetActive(false);
+                }
+                else if (i >= 13 && i < 17)
+                {
+                    if (true == Player.Inst.CheckUnLock((Turret)i - 5))
+                    {
+                        m_LabImages_Black[i - 1].SetActive(false);
+                    }
+                }
+                else if (i >= 17 && i < m_LabInfoScrolls.Length)
+                {
+                    if (true == Player.Inst.CheckUnLock((Turret)i + 3))
+                    {
+                        m_LabImages_Black[i - 1].SetActive(false);
+                    }
+                }
 
                 return;
             }
@@ -326,6 +473,28 @@ public class BattleGameObjectMgr : MonoBehaviour
         int RepairButtonIdx = System.Array.IndexOf(m_RepairButtons, ThisRepairButton);
 
         m_RepairInfoScrolls[RepairButtonIdx].SetActive(true);
+
+        //추가
+
+        if (true == Player.Inst.CheckUnLock((SpaceShipPart)RepairButtonIdx))
+        {
+            m_RepairImages_Black[RepairButtonIdx].SetActive(false);
+        }
+
+    }
+
+    // 추가
+
+    public void PopUpRepairInfos2(GameObject ThisRepairButtonB)
+    {
+        int RepairButtonBIdx = System.Array.IndexOf(m_RepairButtons_Black, ThisRepairButtonB);
+
+        m_RepairInfoScrolls[RepairButtonBIdx].SetActive(true);
+
+        if (true == Player.Inst.CheckUnLock((SpaceShipPart)RepairButtonBIdx))
+        {
+            m_RepairImages_Black[RepairButtonBIdx].SetActive(false);
+        }
 
     }
 
@@ -343,10 +512,13 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             if (m_RepairInfoScrolls[i].activeSelf == true)
             {
-                int RepairInfoIdx = i;
+                m_RepairInfoScrolls[i].SetActive(false);
+                m_RepairInfoScrolls[i + 1].SetActive(true);
 
-                m_RepairInfoScrolls[RepairInfoIdx].SetActive(false);
-                m_RepairInfoScrolls[RepairInfoIdx + 1].SetActive(true);
+                if (true == Player.Inst.CheckUnLock((SpaceShipPart)i))
+                {
+                    m_RepairImages_Black[i + 1].SetActive(false);
+                }
 
                 return;
             }
@@ -361,10 +533,13 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             if (m_RepairInfoScrolls[i].activeSelf == true)
             {
-                int RepairInfoIdx = i;
+                m_RepairInfoScrolls[i].SetActive(false);
+                m_RepairInfoScrolls[i - 1].SetActive(true);
 
-                m_RepairInfoScrolls[RepairInfoIdx].SetActive(false);
-                m_RepairInfoScrolls[RepairInfoIdx - 1].SetActive(true);
+                if (true == Player.Inst.CheckUnLock((SpaceShipPart)i))
+                {
+                    m_RepairImages_Black[i - 1].SetActive(false);
+                }
 
                 return;
             }
@@ -443,12 +618,13 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             if (m_BuildInfoScrolls[i].activeSelf == true)
             {
-                int BuildInfoIdx = i;
+                m_BuildInfoScrolls[i].SetActive(false);
+                m_BuildInfoScrolls[i + 1].SetActive(true);
 
-                m_BuildInfoScrolls[BuildInfoIdx].SetActive(false);
-                m_BuildInfoScrolls[BuildInfoIdx + 1].SetActive(true);
-                // 추가
-                m_BuildImages_Black[BuildInfoIdx + 1].SetActive(false);
+                if (true == Player.Inst.CheckUnLock((Turret)i))
+                {
+                    m_BuildImages_Black[i + 1].SetActive(false);
+                }
 
                 return;
             }
@@ -463,11 +639,13 @@ public class BattleGameObjectMgr : MonoBehaviour
         {
             if (m_BuildInfoScrolls[i].activeSelf == true)
             {
-                int BuildInfoIdx = i;
+                m_BuildInfoScrolls[i].SetActive(false);
+                m_BuildInfoScrolls[i - 1].SetActive(true);
 
-                m_BuildInfoScrolls[BuildInfoIdx].SetActive(false);
-                m_BuildInfoScrolls[BuildInfoIdx - 1].SetActive(true);
-                m_BuildImages_Black[BuildInfoIdx - 1].SetActive(false);
+                if (true == Player.Inst.CheckUnLock((Turret)i))
+                {
+                    m_BuildImages_Black[i - 1].SetActive(false);
+                }
 
                 return;
             }
@@ -487,6 +665,15 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_BuildWarningNoRsrc.SetActive(false);
         m_RemoveWarningYet.SetActive(false);
         m_RemoveWarning.SetActive(false);
+
+        // 추가
+
+        m_LabWarningNoBP.SetActive(false);
+        m_LabWarningMax.SetActive(false);
+        m_LabWarningNoRsrc.SetActive(false);
+        m_RepairWarningAlready.SetActive(false);
+        m_LaunchWarningNotRepaired.SetActive(false);
+        m_LaunchWarning.SetActive(false);
 
     }
 
@@ -530,6 +717,17 @@ public class BattleGameObjectMgr : MonoBehaviour
             m_RemoveWarning.SetActive(true);
         }
         
+    }
+
+    public void PopUpLaunchWarnings()
+    {
+        // if not repaired => m_LaunchWarningNotRepairedSetActive(true);
+        m_LaunchWarning.SetActive(true);
+    }
+
+    public void Launch()
+    {
+        SceneManager.LoadScene("Ending_Escape");
     }
 
 }

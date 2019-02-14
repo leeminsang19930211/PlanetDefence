@@ -134,19 +134,19 @@ public class Player : MonoBehaviour
             BattleGameObjectMgr.Inst.m_BuildWarningNoBP.SetActive(true);
             return BuyErr.NoBP;
         }
-        if (true == TurretMgr.Inst.CheckTurretOnTurretSupport())
-        {
+        if (true == TurretMgr.Inst.CheckTurretOnTurretSupport())                                                       // TurretJunkCost -> TurretJunkCosts
+        {                                                                                                              // TurretCircuitCost -> TurretCircuitCosts
             BattleGameObjectMgr.Inst.m_BuildWarningAlready.SetActive(true);
             return BuyErr.AlreadySetUp;
         }
-        if (TurretMgr.Inst.TurretJunkCost[BuildStartButtonIdx] > m_junk || TurretMgr.Inst.TurretCircuitCost[BuildStartButtonIdx] > m_eleCircuit)
+        if (TurretMgr.Inst.TurretJunkCosts[BuildStartButtonIdx] > m_junk || TurretMgr.Inst.TurretCircuitCosts[BuildStartButtonIdx] > m_eleCircuit)
         {
             BattleGameObjectMgr.Inst.m_BuildWarningNoRsrc.SetActive(true);
             return BuyErr.NotEnoughRsrc;
         }
 
-        m_junk -= TurretMgr.Inst.TurretJunkCost[BuildStartButtonIdx];
-        m_eleCircuit -= TurretMgr.Inst.TurretCircuitCost[BuildStartButtonIdx];
+        m_junk -= TurretMgr.Inst.TurretJunkCosts[BuildStartButtonIdx];
+        m_eleCircuit -= TurretMgr.Inst.TurretCircuitCosts[BuildStartButtonIdx];
 
         UpdateRsrc();
 
@@ -183,8 +183,8 @@ public class Player : MonoBehaviour
         int turretIdx = (int)turret.TurretType;
         float ratio = turret.CurHP / (float)turret.m_maxHP;
 
-        m_junk += (int)(TurretMgr.Inst.TurretJunkCost[turretIdx] * ratio);
-        m_eleCircuit += (int)(TurretMgr.Inst.TurretCircuitCost[turretIdx] * ratio);
+        m_junk += (int)(TurretMgr.Inst.TurretJunkCosts[turretIdx] * ratio);                               // TurretJunkCost -> TurretJunkCosts
+        m_eleCircuit += (int)(TurretMgr.Inst.TurretCircuitCosts[turretIdx] * ratio);                      // TurretCircuitCost -> TurretCircuitCosts
 
         UpdateRsrc();
 
@@ -200,6 +200,85 @@ public class Player : MonoBehaviour
         BattleGameObjectMgr.Inst.UpdateJunkCnt(m_junk);
         BattleGameObjectMgr.Inst.UpdateEleCircuitCnt(m_eleCircuit);
         BattleGameObjectMgr.Inst.UpdateCoinCnt(m_coin);
+    }
+
+    // -------- Lab ----------
+
+    
+
+    public LabErr BuyLab(GameObject ThisLabStartButton)
+    {
+        int LabStartButtonIdx = System.Array.IndexOf(BattleGameObjectMgr.Inst.m_LabStartButtons, ThisLabStartButton);
+
+        if (LabStartButtonIdx>=12 && LabStartButtonIdx < 16)
+        {
+            if (false == Player.Inst.CheckUnLock((Turret)LabStartButtonIdx - 4))
+            {
+                BattleGameObjectMgr.Inst.m_LabWarningNoBP.SetActive(true);
+                return LabErr.NoBP;
+            }
+        }
+
+        else if(LabStartButtonIdx>=16 && LabStartButtonIdx < BattleGameObjectMgr.Inst.m_LabStartButtons.Length)
+        {
+            if (false == Player.Inst.CheckUnLock((Turret)LabStartButtonIdx + 4))
+            {
+                BattleGameObjectMgr.Inst.m_LabWarningNoBP.SetActive(true);
+                return LabErr.NoBP;
+            }
+        }
+
+        if (TurretMgr.Inst.LabCoinCosts[LabStartButtonIdx]>m_coin)
+        {
+            BattleGameObjectMgr.Inst.m_LabWarningNoRsrc.SetActive(true);
+            return LabErr.NotEnoughRsrc;
+
+        }
+
+        else
+        {
+            m_coin -= TurretMgr.Inst.LabCoinCosts[LabStartButtonIdx];
+            UpdateRsrc();
+            TurretMgr.Inst.LabTempFunc(LabStartButtonIdx);
+            BattleGameObjectMgr.Inst.LabInfosExit();
+            BattleGameObjectMgr.Inst.PopUpExit();
+            return LabErr.NoError;
+
+        }
+
+    }
+
+    // ------------ Repair -------------
+
+    public RepairErr BuyRepair(GameObject ThisRepairStartButton)
+    {
+        int RepairStartButtonIdx = System.Array.IndexOf(BattleGameObjectMgr.Inst.m_RepairStartButtons, ThisRepairStartButton);
+
+        if (false == Player.Inst.CheckUnLock((SpaceShipPart)RepairStartButtonIdx))
+        {
+            BattleGameObjectMgr.Inst.m_LabWarningNoBP.SetActive(true);
+            return RepairErr.NoBP;
+        }
+
+        // Already Repaired 추가 要
+
+        if (TurretMgr.Inst.RepairCoinCosts[RepairStartButtonIdx] > m_coin)
+        {
+            BattleGameObjectMgr.Inst.m_LabWarningNoRsrc.SetActive(true);
+            return RepairErr.NotEnoughRsrc;
+
+        }
+
+        else
+        {
+            m_coin -= TurretMgr.Inst.RepairCoinCosts[RepairStartButtonIdx];
+            UpdateRsrc();
+            TurretMgr.Inst.RepairTempFunc(RepairStartButtonIdx);
+            BattleGameObjectMgr.Inst.RepairInfosExit();
+            BattleGameObjectMgr.Inst.PopUpExit();
+            return RepairErr.NoError;
+
+        }
     }
 
 }

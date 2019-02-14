@@ -457,14 +457,61 @@ public class TurretMgr : MonoBehaviour
         return str;
     }
 
-    // 추가2
-    public int[] TurretJunkCost =
+
+
+
+
+    public int[] TurretJunkCosts =
     {
         10,20,30,40,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50
     };
 
-    public int[] TurretCircuitCost =
+    public int[] TurretCircuitCosts =
     {
         1,2,3,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
     };
+
+
+    // -------------- Lab ---------------
+
+
+
+    
+    public int[] LabCoinCosts =
+    {
+        10,20,30,40,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50
+    };
+
+    public int[] LabMaxStacks =
+    {
+        2,5,5,5,5,5,1,1,5,5,5,5,5,5,2,2,5,5,5,5
+    };
+
+    
+
+    public bool LabTempFunc(int Idx)
+    {
+        if (Idx>=0 && Idx< (int)Lab.End)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    // -------- Repair --------------
+
+    public int[] RepairCoinCosts =
+    {
+        10,20,30,40,50
+    };
+
+    public bool RepairTempFunc(int Idx)
+    {
+        if (Idx >= 0 && Idx < (int)SpaceShipPart.End)
+        {
+            return true;
+        }
+        return false;
+    }
 }

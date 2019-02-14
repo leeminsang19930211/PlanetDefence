@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/01.Scenes/Battle.unity
     guid: 56aa77afb38fdaa44aedb0a042dd60b1
+  - enabled: 1
+    path: Assets/Resources/01.Scenes/Ending_Escape.unity
+    guid: 4d7b77f9b0ab3ff47851feda52b3bd23
   m_configObjects: {}

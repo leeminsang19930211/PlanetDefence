@@ -10,7 +10,6 @@
     Lv3_Sniper,
     Lv3_Heal,
     Lv3_Berserker,
-    // 추가2
     dummy03,
     dummy04,
     dummy05,
@@ -34,6 +33,19 @@ public enum Lab
     IncTurretSupports,
     IncTurretHelth,
     IncTurretDamage,
+    dummy07,
+    dummy08,
+    dummy09,
+    dummy10,
+    dummy11,
+    dummy12,
+    dummy13,
+    dummy14,
+    dummy15,
+    dummy16,
+    dummy17,
+    dummy18,
+    dummy19,
     End,
 }
 
@@ -56,12 +68,20 @@ public enum BuyErr
    End,
 }
 
-// 추가
 public enum LabErr
 {
     NoError,
-    Max,                 // 최대 누적
     NoBP,
+    Max,                 
+    NotEnoughRsrc,
+    End,
+}
+
+public enum RepairErr
+{
+    NoError,
+    NoBP,
+    AlreadyRepaired,
     NotEnoughRsrc,
     End,
 }
