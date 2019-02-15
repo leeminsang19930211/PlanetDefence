@@ -18,7 +18,7 @@ public class LobbyTest : MonoBehaviour
             SceneLoader.LoadScene("Choice");
         }
 
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             SceneLoader.LoadScene("Choice");
         }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.IO;
+
 public class BattleTest : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -22,6 +24,29 @@ public class BattleTest : MonoBehaviour
         {
             Player.Inst.BuyTurret(Turret.Lv2_Poison, 0, 0);
         }
+
+        if(Input.GetKeyDown(KeyCode.F3))
+        {
+            FileStream fs = File.Open(Application.persistentDataPath + "TestData.bin", FileMode.Create);
+
+            BinaryWriter wr = new BinaryWriter(fs);
+
+            wr.Write(GlobalGameObjectMgr.Inst.CurDay +1);
+
+            fs.Close();
+        }
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            FileStream fs = File.Open(Application.persistentDataPath + "TestData.bin", FileMode.Create);
+
+            BinaryWriter wr = new BinaryWriter(fs);
+
+            wr.Write(GlobalGameObjectMgr.Inst.CurDay + 1);
+
+            fs.Close();
+        }
+
 
         if (Input.GetKeyDown(KeyCode.F10))
         {

@@ -18,7 +18,7 @@ public class ChoiceTest : MonoBehaviour
             SceneLoader.LoadScene("Battle");
         }
 
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             SceneLoader.LoadScene("Battle");
         }

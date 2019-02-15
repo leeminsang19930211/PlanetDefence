@@ -59,7 +59,7 @@ public class LoadingBarCtrl: MonoBehaviour
 
 #else
 
-        if(Input.touchCount > 0)
+       if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             if (progress >= 1f)
             {
@@ -67,6 +67,7 @@ public class LoadingBarCtrl: MonoBehaviour
             }
         }
 #endif
+
 
     }
 
