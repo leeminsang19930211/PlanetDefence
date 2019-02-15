@@ -78,6 +78,10 @@ public class BattleGameObjectMgr : MonoBehaviour
     private GameObject m_RemoveWarning;
     private GameObject[] m_TurretSupports;
 
+    // 추가
+    public GameObject[] m_BrokenSpaceships;
+    public GameObject[] m_Rockets;
+
     public void Instantiate()
     {
         if (m_inst == null)
@@ -145,6 +149,18 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveWarning = GameObject.Find("RemoveWarningPanel");
 
         m_TurretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
+
+        // 추가
+        m_BrokenSpaceships = GameObject.FindGameObjectsWithTag("BROKENSPACESHIP");
+        m_Rockets = GameObject.FindGameObjectsWithTag("ROCKET");
+        m_BrokenSpaceships[3].SetActive(false);
+        m_BrokenSpaceships[2].SetActive(false);
+        m_BrokenSpaceships[1].SetActive(false);
+        for(int i=0;i<m_Rockets.Length;i++)
+        {
+            m_Rockets[i].SetActive(false);
+        }
+
 
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);
@@ -721,7 +737,17 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public void PopUpLaunchWarnings()
     {
-        // if not repaired => m_LaunchWarningNotRepairedSetActive(true);
+
+        for (int i = 0; i < (int)SpaceShipPart.End; i++)
+        {
+            if (Player.Inst.m_spcPartInfos[i]._repaired == false)
+            {
+                m_LaunchWarningNotRepaired.SetActive(true);
+                return;
+            }
+
+        }
+
         m_LaunchWarning.SetActive(true);
     }
 
@@ -730,4 +756,50 @@ public class BattleGameObjectMgr : MonoBehaviour
         SceneManager.LoadScene("Ending_Escape");
     }
 
+    // 추가
+
+    public void BrokenSpaceshipImageChange()
+    {
+        if (Player.Inst.m_spcPartInfos[0]._repaired==true)
+        {
+            if (Player.Inst.m_spcPartInfos[1]._repaired == false)
+            {
+                m_BrokenSpaceships[0].SetActive(false);
+                m_BrokenSpaceships[1].SetActive(true);
+            }
+
+        }
+
+        if (Player.Inst.m_spcPartInfos[1]._repaired == true)
+        {
+            if(Player.Inst.m_spcPartInfos[0]._repaired == false)
+            {
+                m_BrokenSpaceships[0].SetActive(false);
+                m_BrokenSpaceships[2].SetActive(true);
+            }
+
+            if (Player.Inst.m_spcPartInfos[0]._repaired == true)
+            {
+                m_BrokenSpaceships[1].SetActive(false);
+                m_BrokenSpaceships[2].SetActive(false);
+                m_BrokenSpaceships[3].SetActive(true);
+            }
+        }
+
+        if (Player.Inst.m_spcPartInfos[2]._repaired == true)
+        {
+            m_Rockets[0].SetActive(true);
+        }
+
+        if (Player.Inst.m_spcPartInfos[3]._repaired == true)
+        {
+            m_Rockets[1].SetActive(true);
+        }
+
+        if (Player.Inst.m_spcPartInfos[4]._repaired == true)
+        {
+            m_Rockets[2].SetActive(true);
+        }
+
+    }
 }
