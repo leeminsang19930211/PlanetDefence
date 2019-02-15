@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SpaceShipCtrl : Gunner 
+public class SpaceShipCtrl : Gunner
 {
     public enum STATE
     {
@@ -42,15 +42,19 @@ public class SpaceShipCtrl : Gunner
         {
             Vector3 toSpaceShip = m_trsf.position - PlanetCtrl.Inst.Position;
 
-            return MyMath.LeftAngle360(PlanetCtrl.Inst.Up, toSpaceShip);           
+            return MyMath.LeftAngle360(PlanetCtrl.Inst.Up, toSpaceShip);
         }
     }
+
+    public STATE FirstState { get; set; } = STATE.END;
 
     public override void SlowMove(Gunner.SlowMoveInfo slowInfo)
     {
         StopCoroutine("SlowMove_Coroutin");
         StartCoroutine("SlowMove_Coroutin", slowInfo);
     }
+
+  
 
     // 자식 우주선에서 호출해줄것
     protected new void Init()
@@ -66,12 +70,13 @@ public class SpaceShipCtrl : Gunner
 
         m_revolvingSpeed_origin = m_revolvingSpeed;
 
-        ChangeState(STATE.FALLING);
+        ChangeState(FirstState);
     }
 
     protected override void _OnZeroHP()
     {
         UpdateRsrc();
+
         Die();
     }
 
@@ -82,7 +87,7 @@ public class SpaceShipCtrl : Gunner
     }
 
     protected override void _OnDying()
-    {        
+    {
         BattleGameObjectMgr.Inst.AddDestroyedEnemy(1);
     }
 

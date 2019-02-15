@@ -26,6 +26,11 @@ public class EnemyCntCtrl : MonoBehaviour
         }
     }
 
+    public void AddMaxEnemy(int add)
+    {
+        m_maxEnemyCnt += add;
+    }
+
     public void AddDestroyedEnemy(int add)      
     {
         m_destroyedEnemyCnt += add;

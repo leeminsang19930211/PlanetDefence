@@ -112,15 +112,36 @@ public class SpaceShipMgr : MonoBehaviour
         StopCoroutine("CreateWave");
     }
 
+    public void AddSpaceShipCount(int add)
+    {
+        m_maxSpaceShipCnt += add;
+
+        BattleGameObjectMgr.Inst.AddEnemyCnt(add);
+    }
+
+    public bool CreateSpaceShip(MobType mob, Vector3 pos, Quaternion angle, SpaceShipCtrl.STATE state)
+    {
+        GameObject spaceShip = FindSpaceShipByEnum(mob);
+
+        if (spaceShip == null)
+            return false;
+
+        Transform parentTrsf = GameObject.FindGameObjectWithTag("BATTLESTATIC")?.GetComponent<Transform>();
+
+        CreateSpaceShip(spaceShip, pos, angle, parentTrsf, state);
+
+        return true;
+    }
+
     public void StartCreatingWaves(WavesMob[] waveInfos)
     {
         m_maxSpaceShipCnt = 0;
         m_createdSpaceShipCnt = 0;
 
         foreach (WavesMob waveInfo in waveInfos)
-        {
+        {     
             m_maxSpaceShipCnt += waveInfo.nMobNum;
-
+       
             GameObject spaceShip = FindSpaceShipByEnum(waveInfo.eMobType);
 
             if(spaceShip == null)
@@ -309,10 +330,16 @@ public class SpaceShipMgr : MonoBehaviour
 
     private void CreateSpaceShip(GameObject source, Transform parentTrsf)
     {
+        CreateSpaceShip(source, new Vector3(0, 1000f, 0), Quaternion.Euler(0, 0, 0), parentTrsf);
+    }
+
+    private void CreateSpaceShip(GameObject source, Vector3 pos, Quaternion angle, Transform parentTrsf, SpaceShipCtrl.STATE state = SpaceShipCtrl.STATE.FALLING)
+    {
         SpaceShipCtrl ctrl = null;
-        ctrl = Instantiate(source, new Vector3(0, 1000f, 0), Quaternion.Euler(0, 0, 0), parentTrsf)?.GetComponent<SpaceShipCtrl>();
+        ctrl = Instantiate(source, pos, angle, parentTrsf)?.GetComponent<SpaceShipCtrl>();
         ctrl.BulletPoolIdx = m_createdSpaceShipCnt;
         ctrl.Clone = true;
+        ctrl.FirstState = state;
 
         m_createdSpaceShipCnt += 1;
     }
@@ -342,6 +369,8 @@ public class SpaceShipMgr : MonoBehaviour
         AddSpaceShip("SpaceShip_Little");
         AddSpaceShip("SpaceShip_Zombie");
         AddSpaceShip("SpaceShip_Ghost");
+        AddSpaceShip("SpaceShip_Battle");
+
     }
 
     private string EnumToStr(MobType spaceShip)
@@ -371,7 +400,9 @@ public class SpaceShipMgr : MonoBehaviour
             case MobType.GhostShip:
                 str = "SpaceShip_Ghost";
                 break;
-
+            case MobType.BattleShip:
+                str = "SpaceShip_Battle";
+                break;
             default:
                 Debug.LogError("The space ship str from the space ship enum is not mapped");
                 break;

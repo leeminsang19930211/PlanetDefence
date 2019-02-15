@@ -101,6 +101,7 @@ public enum Bullet
     Spc_Little,
     Spc_Zombie, 
     Spc_Ghost,
+    Spc_Battle,
     End,
 }
 

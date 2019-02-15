@@ -229,6 +229,7 @@ public class BulletMgr : MonoBehaviour
         AddBullet("Bullet_Spc_Little");
         AddBullet("Bullet_Spc_Zombie");
         AddBullet("Bullet_Spc_Ghost");
+        AddBullet("Bullet_Spc_Battle");
 
         for (int i=0; i <(int)BulletPool.End; ++i)
         {
@@ -281,6 +282,9 @@ public class BulletMgr : MonoBehaviour
                 break;
             case Bullet.Spc_Ghost:
                 str = "Bullet_Spc_Ghost";
+                break;
+            case Bullet.Spc_Battle:
+                str = "Bullet_Spc_Battle";
                 break;
             default:
                 Debug.LogError("The bullet str from the bullet enum is not mapped");

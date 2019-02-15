@@ -203,7 +203,17 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public void RotateMiniPlanetSpotToTarget(Vector3 targetDir)
     {
-        m_miniPlanetCtrl.RotateToTarget(targetDir);
+        if(m_miniPlanetCtrl)
+        {
+            m_miniPlanetCtrl.RotateToTarget(targetDir);
+        }
+         
+    }
+
+    public void AddEnemyCnt(int add)
+    {
+        if (m_enemyCntCtrl)
+            m_enemyCntCtrl.AddMaxEnemy(add);
     }
 
     public void UpdateEnemyCnt(int maxEnemyCnt)

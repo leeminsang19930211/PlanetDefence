@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bullet_Spc_GhostCtrlk : BulletCtrl
+public class Bullet_Spc_GhostCtrl : BulletCtrl
 {
 
     private void OnEnable()
