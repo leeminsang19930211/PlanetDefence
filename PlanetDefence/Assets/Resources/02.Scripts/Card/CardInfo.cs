@@ -22,6 +22,8 @@ public enum MobType
     DummyShip,
     BionicShip,
     StealthShip,
+    ZombieShip,
+    GhostShip,
     Little,
     Meteor
 }

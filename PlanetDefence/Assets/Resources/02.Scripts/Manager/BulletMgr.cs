@@ -224,8 +224,11 @@ public class BulletMgr : MonoBehaviour
         AddBullet("Bullet_Lv2_Pause");
         AddBullet("Bullet_Lv3_Sniper");
         AddBullet("Bullet_Lv3_Berserker");
-
-        AddBullet("TestBullet");
+        AddBullet("Bullet_Spc_Normal");
+        AddBullet("Bullet_Spc_Pirate");
+        AddBullet("Bullet_Spc_Little");
+        AddBullet("Bullet_Spc_Zombie");
+        AddBullet("Bullet_Spc_Ghost");
 
         for (int i=0; i <(int)BulletPool.End; ++i)
         {
@@ -264,8 +267,20 @@ public class BulletMgr : MonoBehaviour
             case Bullet.Lv3_Berserker:
                 str = "Bullet_Lv3_Berserker";
                 break;
-            case Bullet.TestBullet:
-                str = "TestBullet";
+            case Bullet.Spc_Normal:
+                str = "Bullet_Spc_Normal";
+                break;
+            case Bullet.Spc_Pirate:
+                str = "Bullet_Spc_Pirate";
+                break;
+            case Bullet.Spc_Little:
+                str = "Bullet_Spc_Little";
+                break;
+            case Bullet.Spc_Zombie:
+                str = "Bullet_Spc_Zombie";
+                break;
+            case Bullet.Spc_Ghost:
+                str = "Bullet_Spc_Ghost";
                 break;
             default:
                 Debug.LogError("The bullet str from the bullet enum is not mapped");

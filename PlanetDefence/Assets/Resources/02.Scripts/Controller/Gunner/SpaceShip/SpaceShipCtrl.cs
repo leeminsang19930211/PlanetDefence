@@ -14,6 +14,7 @@ public class SpaceShipCtrl : Gunner
         END
     }
 
+    public int m_planetHitDamage = 0;
     public int m_dropJunk = 0;
     public int m_dropEleCircuit = 0;
     public int m_dropCoin = 0;
@@ -71,6 +72,12 @@ public class SpaceShipCtrl : Gunner
     protected override void _OnZeroHP()
     {
         UpdateRsrc();
+        Die();
+    }
+
+    protected virtual void _OnPlanet()
+    {
+        PlanetCtrl.Inst.Hit(m_planetHitDamage);
         Die();
     }
 
@@ -256,7 +263,7 @@ public class SpaceShipCtrl : Gunner
     {
         if (collision.gameObject.tag == "PLANET")
         {
-            Destroy(gameObject);
+            _OnPlanet();           
         }
     }
 }

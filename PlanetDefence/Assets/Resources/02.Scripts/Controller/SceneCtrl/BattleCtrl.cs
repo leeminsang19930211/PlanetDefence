@@ -24,17 +24,43 @@ public class BattleCtrl: MonoBehaviour
         {           
             GlobalGameObjectMgr.Inst.Battle = true;
 
-            WavesMob[] infos = new WavesMob[2];
+            WavesMob[] infos = new WavesMob[1];
 
-            infos[0].eMobType = MobType.Normal;
-            infos[0].nMobNum = 30;
-            infos[0].fDelayTime = 2f;
-            infos[0].fFirstDelayTime = 0f;
+            //infos[0].eMobType = MobType.Normal;
+            //infos[0].nMobNum = 10;
+            //infos[0].fDelayTime = 2f;
+            //infos[0].fFirstDelayTime = 0f;
 
-            infos[1].eMobType = MobType.Kamikaze;
-            infos[1].nMobNum = 10;
-            infos[1].fDelayTime = 6f;
-            infos[1].fFirstDelayTime = 3f;
+            //infos[1].eMobType = MobType.Kamikaze;
+            //infos[1].nMobNum = 10;
+            //infos[1].fDelayTime = 3f;
+            //infos[1].fFirstDelayTime = 3f;
+
+            //infos[2].eMobType = MobType.DummyShip;
+            //infos[2].nMobNum = 10;
+            //infos[2].fDelayTime = 6f;
+            //infos[2].fFirstDelayTime = 6f;
+
+            //infos[3].eMobType = MobType.Pirate;
+            //infos[3].nMobNum = 10;
+            //infos[3].fDelayTime = 4f;
+            //infos[3].fFirstDelayTime = 9f;
+
+            //infos[4].eMobType = MobType.Little;
+            //infos[4].nMobNum = 10;
+            //infos[4].fDelayTime = 2f;
+            //infos[4].fFirstDelayTime = 2f;
+
+            //infos[5].eMobType = MobType.ZombieShip;
+            //infos[5].nMobNum = 10;
+            //infos[5].fDelayTime = 5f;
+            //infos[5].fFirstDelayTime = 2f;
+
+            infos[0].eMobType = MobType.GhostShip;
+            infos[0].nMobNum = 10;
+            infos[0].fDelayTime = 3f;
+            infos[0].fFirstDelayTime = 5f;
+
 
             int spaceShipsNum = 0;
 

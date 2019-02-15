@@ -68,9 +68,21 @@ public class Gunner : MonoBehaviour
         }
     }
 
+    public void RecoverHP(float ratePerMaxHP)
+    {
+        m_curHP += (int)(m_maxHP * ratePerMaxHP);
+
+        if (m_curHP > m_maxHP)
+            m_curHP = m_maxHP;
+
+        m_unitHPBarCtrl.UpdateHP(m_curHP, m_maxHP);
+    }
+
     public virtual void Hit(int damage)
     {
         m_curHP -= damage;
+
+        _OnHit();
 
         if (m_curHP < 0)
         {
@@ -141,6 +153,11 @@ public class Gunner : MonoBehaviour
         {
             AllocateEffects();
         }
+    }
+
+    protected virtual void _OnHit()
+    {
+
     }
 
 

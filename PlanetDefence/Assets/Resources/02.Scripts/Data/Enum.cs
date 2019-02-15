@@ -96,7 +96,11 @@ public enum Bullet
     Lv2_Pause,
     Lv3_Sniper,
     Lv3_Berserker,
-    TestBullet,
+    Spc_Normal,
+    Spc_Pirate,
+    Spc_Little,
+    Spc_Zombie, 
+    Spc_Ghost,
     End,
 }
 

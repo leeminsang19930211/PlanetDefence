@@ -188,6 +188,14 @@ public class SpaceShipMgr : MonoBehaviour
                 continue;
             }
 
+            SpaceShip_GhostCtrl ghost = ctrl as SpaceShip_GhostCtrl;
+
+            if (ghost != null)
+            {
+                if (ghost.Visible == false)
+                    continue;
+            }
+
             if(refAngle == 0)
             {
                 if (0 <= ctrl.AngleFromPlanetUp && (halfAngle > ctrl.AngleFromPlanetUp || 360f- halfAngle  < ctrl.AngleFromPlanetUp))
@@ -222,7 +230,15 @@ public class SpaceShipMgr : MonoBehaviour
             {
                 continue;
             }
-            
+
+            SpaceShip_GhostCtrl ghost = ctrl as SpaceShip_GhostCtrl;
+
+            if (ghost != null)
+            {
+                if (ghost.Visible == false)
+                    continue;
+            }
+
             if (refAngle == 0)
             {
                 if (0 <= ctrl.AngleFromPlanetUp && (halfAngle > ctrl.AngleFromPlanetUp || 360f - halfAngle < ctrl.AngleFromPlanetUp))
@@ -321,6 +337,11 @@ public class SpaceShipMgr : MonoBehaviour
     {
         AddSpaceShip("SpaceShip_Normal");
         AddSpaceShip("SpaceShip_Dummy");
+        AddSpaceShip("SpaceShip_Kamikaze");
+        AddSpaceShip("SpaceShip_Pirate");
+        AddSpaceShip("SpaceShip_Little");
+        AddSpaceShip("SpaceShip_Zombie");
+        AddSpaceShip("SpaceShip_Ghost");
     }
 
     private string EnumToStr(MobType spaceShip)
@@ -332,9 +353,25 @@ public class SpaceShipMgr : MonoBehaviour
             case MobType.Normal:
                 str = "SpaceShip_Normal";
                 break;
-            case MobType.Kamikaze:
+            case MobType.DummyShip:
                 str = "SpaceShip_Dummy";
                 break;
+            case MobType.Kamikaze:
+                str = "SpaceShip_Kamikaze";
+                break;
+            case MobType.Pirate:
+                str = "SpaceShip_Pirate";
+                break;
+            case MobType.Little:
+                str = "SpaceShip_Little";
+                break;
+            case MobType.ZombieShip:
+                str = "SpaceShip_Zombie";
+                break;
+            case MobType.GhostShip:
+                str = "SpaceShip_Ghost";
+                break;
+
             default:
                 Debug.LogError("The space ship str from the space ship enum is not mapped");
                 break;
