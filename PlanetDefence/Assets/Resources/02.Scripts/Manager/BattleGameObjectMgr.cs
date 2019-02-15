@@ -701,6 +701,12 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_LaunchWarningNotRepaired.SetActive(false);
         m_LaunchWarning.SetActive(false);
 
+        // 추가
+
+        BuildInfosExit();
+        LabInfosExit();
+        RepairInfosExit();
+
     }
 
     public void PopUpBuildWarningAlready()

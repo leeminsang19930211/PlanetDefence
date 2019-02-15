@@ -11,9 +11,9 @@ public class Player : MonoBehaviour
     private int m_coin = 999;
 
     private TurretInfo[] m_turretInfos = new TurretInfo[(int)Turret.End];
-    private LabInfo[] m_labInfos = new LabInfo[(int)Lab.End];
 
     // 수정
+    public LabInfo[] m_labInfos = new LabInfo[(int)Lab.End];
     public SpaceShipPartInfo[] m_spcPartInfos = new SpaceShipPartInfo[(int)SpaceShipPart.End];
 
     public static Player Inst
@@ -261,6 +261,10 @@ public class Player : MonoBehaviour
             m_coin -= TurretMgr.Inst.LabCoinCosts[LabStartButtonIdx];
             UpdateRsrc();
             m_labInfos[LabStartButtonIdx].stacks += 1;
+
+            // 추가
+            BattleGameObjectMgr.Inst.LabInfosExit();
+
             TurretMgr.Inst.LabTempFunc(LabStartButtonIdx);
             return LabErr.NoError;
         }
@@ -296,7 +300,10 @@ public class Player : MonoBehaviour
             m_coin -= TurretMgr.Inst.RepairCoinCosts[RepairStartButtonIdx];
             UpdateRsrc();
             m_spcPartInfos[RepairStartButtonIdx]._repaired = true;
-            TurretMgr.Inst.RepairTempFunc(RepairStartButtonIdx);
+
+            // 추가
+            BattleGameObjectMgr.Inst.RepairInfosExit();
+
             return RepairErr.NoError;
 
         }

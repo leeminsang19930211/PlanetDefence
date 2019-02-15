@@ -33,6 +33,11 @@ public enum Lab
     IncTurretSupports,
     IncTurretHelth,
     IncTurretDamage,
+    // 추가
+    dummy03,
+    dummy04,
+    dummy05,
+    dummy06,
     dummy07,
     dummy08,
     dummy09,
