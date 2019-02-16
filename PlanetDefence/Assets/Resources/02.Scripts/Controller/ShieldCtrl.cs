@@ -4,54 +4,86 @@ using UnityEngine;
 
 public class ShieldCtrl: MonoBehaviour
 {
-    public GameObject[] m_shieldImgs = null;
+    public GameObject[] m_lv2ShieldImgs = null;
+    public GameObject[] m_lv3ShieldImgs = null;
 
-    public void SetShieldImgActive(PlanetArea area, Turret turret, bool active)
+    public void ShowShield(PlanetArea area, Turret turret)
     {
-        switch (turret)
+        switch (area)
         {
-            case Turret.Lv2_Shield:
-                switch (area)
+            case PlanetArea.Up:
+                if(turret == Turret.Lv2_Shield)
                 {
-                    case PlanetArea.Up:
-                        m_shieldImgs[0].SetActive(active);
-                        break;
-                    case PlanetArea.Left:
-                        m_shieldImgs[1].SetActive(active);
-                        break;
-                    case PlanetArea.Down:
-                        m_shieldImgs[2].SetActive(active);
-                        break;
-                    case PlanetArea.Right:
-                        m_shieldImgs[3].SetActive(active);
-                        break;
+                    m_lv2ShieldImgs[0].SetActive(true);
+                }
+                else if(turret == Turret.Lv3_Shield)
+                {
+                    m_lv3ShieldImgs[0].SetActive(true);
+                }      
+                break;
+            case PlanetArea.Left:
+                if (turret == Turret.Lv2_Shield)
+                {
+                    m_lv2ShieldImgs[1].SetActive(true);
+                }
+                else if (turret == Turret.Lv3_Shield)
+                {
+                    m_lv3ShieldImgs[1].SetActive(true);
+                }
+                break;
+            case PlanetArea.Down:
+                if (turret == Turret.Lv2_Shield)
+                {
+                    m_lv2ShieldImgs[2].SetActive(true);
+                }
+                else if (turret == Turret.Lv3_Shield)
+                {
+                    m_lv3ShieldImgs[2].SetActive(true);
+                }
+                break;
+            case PlanetArea.Right:
+                if (turret == Turret.Lv2_Shield)
+                {
+                    m_lv2ShieldImgs[3].SetActive(true);
+                }
+                else if (turret == Turret.Lv3_Shield)
+                {
+                    m_lv3ShieldImgs[3].SetActive(true);
                 }
                 break;
         }
     }
 
-    public void HideAllShield(PlanetArea area)
+    public void HideAllShields(PlanetArea area)
     {
         switch (area)
         {
             case PlanetArea.Up:
-                m_shieldImgs[0].SetActive(false);
+                m_lv2ShieldImgs[0].SetActive(false);
+                m_lv3ShieldImgs[0].SetActive(false);
                 break;
             case PlanetArea.Left:
-                m_shieldImgs[1].SetActive(false);
+                m_lv2ShieldImgs[1].SetActive(false);
+                m_lv3ShieldImgs[1].SetActive(false);
                 break;
             case PlanetArea.Down:
-                m_shieldImgs[2].SetActive(false);
+                m_lv2ShieldImgs[2].SetActive(false);
+                m_lv3ShieldImgs[2].SetActive(false);
                 break;
             case PlanetArea.Right:
-                m_shieldImgs[3].SetActive(false);
+                m_lv2ShieldImgs[3].SetActive(false);
+                m_lv3ShieldImgs[3].SetActive(false);
                 break;
         }
     }
 
-    private void Start()
+    private void Awake()
     {
-        foreach(GameObject shield in m_shieldImgs)
+        foreach(GameObject shield in m_lv2ShieldImgs)
+        {
+            shield.SetActive(false);
+        }
+        foreach (GameObject shield in m_lv3ShieldImgs)
         {
             shield.SetActive(false);
         }

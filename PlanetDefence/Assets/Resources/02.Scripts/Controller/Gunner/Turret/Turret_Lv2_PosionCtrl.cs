@@ -7,7 +7,7 @@ public class Turret_Lv2_PosionCtrl : TurretCtrl
     // Start is called before the first frame update
     private void Start()
     {
-        m_bulletType = Bullet.Lv2_Posion;
+        m_bulletType = Bullet.Lv2_Poison;
         m_bulletPool = BulletPool.Turret;
         m_effectType = Effect.Explosion_Bullet0;
         m_effectPool = EffectPool.Turret;

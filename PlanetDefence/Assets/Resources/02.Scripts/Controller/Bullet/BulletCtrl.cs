@@ -11,8 +11,13 @@ public class BulletCtrl : MonoBehaviour
     private Gunner m_shooter = null;
     private Gunner m_target= null;
 
+    public bool Clone { get; set; } = false;
+
     public void Fire(Vector3 startPos, Vector3 startAngle, Gunner shooter, Gunner target)
     {
+        if (m_trsf == null)
+            m_trsf = GetComponent<Transform>();
+
         m_trsf.position = startPos;
         m_trsf.localEulerAngles = startAngle;
         m_target = target;
@@ -78,6 +83,11 @@ public class BulletCtrl : MonoBehaviour
 
     protected void PlayEffect(Vector3 pos )
     {
+        if(m_shooter == null)
+        {
+            return;
+        }
+
         EffectMgr.Inst.PlayEffect(m_shooter.EffectPool, m_shooter.BulletPoolIdx, pos);
     }
 

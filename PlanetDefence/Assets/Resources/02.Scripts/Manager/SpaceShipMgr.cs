@@ -135,6 +135,9 @@ public class SpaceShipMgr : MonoBehaviour
 
     public void StartCreatingWaves(WavesMob[] waveInfos)
     {
+        if (waveInfos == null)
+            return;
+
         m_maxSpaceShipCnt = 0;
         m_createdSpaceShipCnt = 0;
 

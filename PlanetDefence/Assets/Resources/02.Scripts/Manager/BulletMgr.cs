@@ -134,7 +134,10 @@ public class BulletMgr : MonoBehaviour
 
             obj.SetActive(active);
 
-            m_bulletPool[(int)pool][idx].Add(obj.GetComponent<BulletCtrl>());
+            BulletCtrl ctrl = obj.GetComponent<BulletCtrl>();
+            ctrl.Clone = true;
+
+            m_bulletPool[(int)pool][idx].Add(ctrl);
         }
 
         m_bulletPoolIndex[(int)pool][idx] = 0;
@@ -219,7 +222,7 @@ public class BulletMgr : MonoBehaviour
         AddBullet("Bullet_Lv1_Missile");
         AddBullet("Bullet_Lv1_Laser");
         AddBullet("Bullet_Lv1_Gatling");
-        AddBullet("Bullet_Lv2_Posion");
+        AddBullet("Bullet_Lv2_Poison");  
         AddBullet("Bullet_Lv2_Slow");
         AddBullet("Bullet_Lv2_Pause");
         AddBullet("Bullet_Lv3_Sniper");
@@ -230,6 +233,13 @@ public class BulletMgr : MonoBehaviour
         AddBullet("Bullet_Spc_Zombie");
         AddBullet("Bullet_Spc_Ghost");
         AddBullet("Bullet_Spc_Battle");
+        AddBullet("Bullet_Lv2_Missile");
+        AddBullet("Bullet_Lv3_Missile");
+        AddBullet("Bullet_Lv3_Poison");
+        AddBullet("Bullet_Lv2_Laser");
+        AddBullet("Bullet_Lv3_Laser");
+        AddBullet("Bullet_Lv3_Slow");
+
 
         for (int i=0; i <(int)BulletPool.End; ++i)
         {
@@ -253,8 +263,14 @@ public class BulletMgr : MonoBehaviour
             case Bullet.Lv1_Gatling:
                 str = "Bullet_Lv1_Gatling";
                 break;
-            case Bullet.Lv2_Posion:
-                str = "Bullet_Lv2_Posion";
+            case Bullet.Lv2_Missile:
+                str = "Bullet_Lv2_Missile";
+                break;
+            case Bullet.Lv2_Laser:
+                str = "Bullet_Lv2_Laser";
+                break;
+            case Bullet.Lv2_Poison:
+                str = "Bullet_Lv2_Poison";
                 break;
             case Bullet.Lv2_Slow:
                 str = "Bullet_Lv2_Slow";
@@ -262,11 +278,23 @@ public class BulletMgr : MonoBehaviour
             case Bullet.Lv2_Pause:
                 str = "Bullet_Lv2_Pause";
                 break;
+            case Bullet.Lv3_Missile:
+                str = "Bullet_Lv3_Missile";
+                break;
+            case Bullet.Lv3_Laser:
+                str = "Bullet_Lv3_Laser";
+                break;
             case Bullet.Lv3_Sniper:
                 str = "Bullet_Lv3_Sniper";
                 break;
             case Bullet.Lv3_Berserker:
                 str = "Bullet_Lv3_Berserker";
+                break;
+            case Bullet.Lv3_Poison:
+                str = "Bullet_Lv3_Poison";
+                break;
+            case Bullet.Lv3_Slow:
+                str = "Bullet_Lv3_Slow";
                 break;
             case Bullet.Spc_Normal:
                 str = "Bullet_Spc_Normal";
@@ -286,6 +314,8 @@ public class BulletMgr : MonoBehaviour
             case Bullet.Spc_Battle:
                 str = "Bullet_Spc_Battle";
                 break;
+
+                
             default:
                 Debug.LogError("The bullet str from the bullet enum is not mapped");
                 break;

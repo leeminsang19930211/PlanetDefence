@@ -80,12 +80,11 @@ public class TurretMgr : MonoBehaviour
             Debug.Log("the focus idx is out of the range");
             return;
         }
-
-        
+       
         int startIdx = (turretIdx/5) * 5;
         PlanetArea area = IdxToArea(startIdx);
 
-        BattleGameObjectMgr.Inst.HideShield(area);
+        BattleGameObjectMgr.Inst.HideShields(area);
 
         for (int i = startIdx; i < startIdx + 5; ++i)
         {
@@ -377,13 +376,21 @@ public class TurretMgr : MonoBehaviour
         AddTurret("Turret_Lv1_Missile");
         AddTurret("Turret_Lv1_Laser");
         AddTurret("Turret_Lv1_Gatling");
+        AddTurret("Turret_Lv2_Missile");
+        AddTurret("Turret_Lv2_Laser");
         AddTurret("Turret_Lv2_Poison");
         AddTurret("Turret_Lv2_Shield");
         AddTurret("Turret_Lv2_Slow");
         AddTurret("Turret_Lv2_Pause");
         AddTurret("Turret_Lv3_Sniper");
+        AddTurret("Turret_Lv3_Missile");
+        AddTurret("Turret_Lv3_Laser");
         AddTurret("Turret_Lv3_Heal");
         AddTurret("Turret_Lv3_Berserker");
+        AddTurret("Turret_Lv3_Poison");
+        AddTurret("Turret_Lv3_Shield");
+        AddTurret("Turret_Lv3_Slow");
+
 
         AddTurretSupports();
     }
@@ -426,6 +433,12 @@ public class TurretMgr : MonoBehaviour
             case Turret.Lv1_Gatiling:
                 str = "Turret_Lv1_Gatling";
                 break;
+            case Turret.Lv2_Missile:
+                str = "Turret_Lv2_Missile";
+                break;
+            case Turret.Lv2_Laser:
+                str = "Turret_Lv2_Laser";
+                break;
             case Turret.Lv2_Shield:
                 str = "Turret_Lv2_Shield";
                 break;
@@ -438,6 +451,12 @@ public class TurretMgr : MonoBehaviour
             case Turret.Lv2_Pause:
                 str = "Turret_Lv2_Pause";
                 break;
+            case Turret.Lv3_Missile:
+                str = "Turret_Lv3_Missile";
+                break;
+            case Turret.Lv3_Laser:
+                str = "Turret_Lv3_Laser";
+                break;
             case Turret.Lv3_Sniper:
                 str = "Turret_Lv3_Sniper";
                 break;
@@ -447,8 +466,15 @@ public class TurretMgr : MonoBehaviour
             case Turret.Lv3_Berserker:
                 str = "Turret_Lv3_Berserker";
                 break;
-
-
+            case Turret.Lv3_Poison:
+                str = "Turret_Lv3_Poison";
+                break;
+            case Turret.Lv3_Shield:
+                str = "Turret_Lv3_Shield";
+                break;
+            case Turret.Lv3_Slow:
+                str = "Turret_Lv3_Slow";
+                break;
             default:
                 Debug.LogError("The turret str from the turret enum is not mapped");
                 break;
@@ -456,10 +482,6 @@ public class TurretMgr : MonoBehaviour
 
         return str;
     }
-
-
-
-
 
     public int[] TurretJunkCosts =
     {
