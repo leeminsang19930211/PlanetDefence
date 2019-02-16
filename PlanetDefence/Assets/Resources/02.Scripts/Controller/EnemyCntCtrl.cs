@@ -37,8 +37,11 @@ public class EnemyCntCtrl : MonoBehaviour
 
         if(m_destroyedEnemyCnt == m_maxEnemyCnt)
         {
-            BattleGameObjectMgr.Inst.PopUpResult(true);
-            m_destroyedEnemyCnt = 0;
+            if(PlanetCtrl.Inst.CurHP > 0)
+            {
+                BattleGameObjectMgr.Inst.PopUpResult(true);
+                m_destroyedEnemyCnt = 0;
+            }          
         }
     }
 

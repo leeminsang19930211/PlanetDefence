@@ -45,6 +45,11 @@ public class PlanetCtrl : MonoBehaviour
         }
     }
 
+    public int CurHP
+    {
+        get { return m_curHP; }
+    }
+
 
     public void Release_Clear()
     {

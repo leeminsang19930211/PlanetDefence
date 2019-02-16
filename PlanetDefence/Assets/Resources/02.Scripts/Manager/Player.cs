@@ -193,13 +193,18 @@ public class Player : MonoBehaviour
             return false;
         }
 
-        int turretIdx = (int)turret.TurretType;
-        float ratio = turret.CurHP / (float)turret.m_maxHP;
+        // 수정
 
-        m_junk += (int)(TurretMgr.Inst.TurretJunkCosts[turretIdx] * ratio);
-        m_eleCircuit += (int)(TurretMgr.Inst.TurretCircuitCosts[turretIdx] * ratio);
+        if(Player.Inst.m_labInfos[7]._lock==true)
+        {
+            int turretIdx = (int)turret.TurretType;
+            float ratio = turret.CurHP / (float)turret.m_maxHP;
 
-        UpdateRsrc();
+            m_junk += (int)(TurretMgr.Inst.TurretJunkCosts[turretIdx] * ratio);
+            m_eleCircuit += (int)(TurretMgr.Inst.TurretCircuitCosts[turretIdx] * ratio);
+
+            UpdateRsrc();
+        }
 
         TurretMgr.Inst.RemoveTurretOnTurretSupport();
         BattleGameObjectMgr.Inst.ExitWarnings();

@@ -78,9 +78,11 @@ public class BattleGameObjectMgr : MonoBehaviour
     private GameObject m_RemoveWarning;
     private GameObject[] m_TurretSupports;
 
-    // 추가
     public GameObject[] m_BrokenSpaceships;
     public GameObject[] m_Rockets;
+
+    // 추가
+    private GameObject m_RepairedSpaceShip;
 
     public void Instantiate()
     {
@@ -150,9 +152,14 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_TurretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
 
-        // 추가
         m_BrokenSpaceships = GameObject.FindGameObjectsWithTag("BROKENSPACESHIP");
         m_Rockets = GameObject.FindGameObjectsWithTag("ROCKET");
+
+        // 추가
+        m_RepairedSpaceShip = GameObject.Find("RepairedSpaceShip");
+        m_RepairedSpaceShip.SetActive(false);
+
+
         m_BrokenSpaceships[3].SetActive(false);
         m_BrokenSpaceships[2].SetActive(false);
         m_BrokenSpaceships[1].SetActive(false);
@@ -271,7 +278,6 @@ public class BattleGameObjectMgr : MonoBehaviour
             m_RepairInfoScroll.SetActive(false);
         }
 
-        //추가
         m_LabWarningNoBP.SetActive(false);
         m_LabWarningMax.SetActive(false);
         m_LabWarningNoRsrc.SetActive(false);
@@ -306,7 +312,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_ButtonLabFake.SetActive(false);
         m_ButtonRepairFake.SetActive(true);
 
-        // 추가
         for (int i = 0; i < (int)SpaceShipPart.End; ++i)
         {
             if (true == Player.Inst.CheckUnLock((SpaceShipPart)i))
@@ -362,7 +367,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_LabInfoScrolls[LabButtonIdx].SetActive(true);
 
-        // 추가
 
         if(LabButtonIdx>=0 && LabButtonIdx<12)
         {
@@ -386,7 +390,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     }
 
-    // 추가
 
     public void PopUpLabInfos2(GameObject ThisLabButtonB)
     {
@@ -500,7 +503,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_RepairInfoScrolls[RepairButtonIdx].SetActive(true);
 
-        //추가
 
         if (true == Player.Inst.CheckUnLock((SpaceShipPart)RepairButtonIdx))
         {
@@ -509,7 +511,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     }
 
-    // 추가
 
     public void PopUpRepairInfos2(GameObject ThisRepairButtonB)
     {
@@ -692,7 +693,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveWarningYet.SetActive(false);
         m_RemoveWarning.SetActive(false);
 
-        // 추가
 
         m_LabWarningNoBP.SetActive(false);
         m_LabWarningMax.SetActive(false);
@@ -701,7 +701,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_LaunchWarningNotRepaired.SetActive(false);
         m_LaunchWarning.SetActive(false);
 
-        // 추가
 
         BuildInfosExit();
         LabInfosExit();
@@ -735,7 +734,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveInfoScroll.SetActive(true);
     }
 
-    // 삭제 및 추가
 
     public void PopUpRemoveWarnings()
     {
@@ -769,10 +767,27 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public void Launch()
     {
-        SceneManager.LoadScene("Ending_Escape");
+        PopUpExit();
+
+        for (int i = 0; i < m_BrokenSpaceships.Length; i++)
+        {
+            Destroy(m_BrokenSpaceships[i]);
+        }
+
+        for (int i = 0; i < m_Rockets.Length; i++)
+        {
+            Destroy(m_Rockets[i]);
+        }
+
+        m_RepairedSpaceShip.SetActive(true);
     }
 
     // 추가
+    public void ToEndingEscapeScene()
+    {
+        SceneManager.LoadScene("Ending_Escape");
+    }
+
 
     public void BrokenSpaceshipImageChange()
     {
