@@ -73,6 +73,54 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
+    public TurretData[] GetSourceTurretDatas()
+    {
+        // TEMP
+        //if(m_sourceTurrets.Count < (int)Turret.End)
+        //{
+        //    Debug.LogError("The sourc turrets is less than Turret.End");
+        //    return null;
+        //}
+
+        TurretData[] datas = new TurretData[(int)Turret.End];
+
+        for (int i=0; i<(int)Turret.End; ++i)
+        {
+            datas[i] = GetSourceTurretData((Turret)i);
+        }
+
+        return datas;
+    }
+
+    public TurretData GetSourceTurretData(Turret turret)
+    {
+        string key = EnumToStr(turret);
+
+        GameObject source = null;
+
+        if (false == m_sourceTurrets.TryGetValue(key, out source))
+        {
+            // TEMP
+            //Debug.LogError("Finding source by " + key + " failed");
+            return null;
+        }
+
+        TurretCtrl ctrl = source.GetComponent<TurretCtrl>();
+
+        return ctrl.TurretData;
+    }
+
+    public void UpdateTurretDatas()
+    {
+        foreach(TurretSupportCtrl support in m_turretSupportCtrs)
+        {
+            if (support.TurretCtrl == null)
+                continue;
+
+            support.TurretCtrl.UpdateTurretData();
+        }
+    }
+
     public void CheckShieldToShow(int turretIdx, int exception = -1)
     {
         if (turretIdx < 0 || turretIdx >= m_turretSupportCtrs.Count)
@@ -115,6 +163,28 @@ public class TurretMgr : MonoBehaviour
 
         return null;
     }
+
+    public Gunner FindShieldTurret()
+    {
+        if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx>= m_turretSupportCtrs.Count)
+            return null;
+
+        int startIdx = (m_focusedTurretSupportIdx / 5) * 5;
+
+        for (int i = startIdx; i < startIdx + 5; ++i)
+        {
+            if (m_turretSupportCtrs[i].TurretCtrl == null)
+                continue;
+
+            if (m_turretSupportCtrs[i].TurretCtrl.tag == "TURRET_SHIELD")
+            {
+                return m_turretSupportCtrs[i].TurretCtrl;
+            }
+        }
+
+        return null;
+    }
+
 
     public Gunner FindFirstTargetInFan(Vector3 from, float fanAngle)
     {     
@@ -498,7 +568,6 @@ public class TurretMgr : MonoBehaviour
             case Turret.Lv3_Fast:
                 str = "Turret_Lv3_Fast";
                 break;
-
             default:
                 Debug.LogError("The turret str from the turret enum is not mapped");
                 break;

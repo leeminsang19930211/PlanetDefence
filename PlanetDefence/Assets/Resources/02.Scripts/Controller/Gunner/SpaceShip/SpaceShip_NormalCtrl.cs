@@ -11,6 +11,8 @@ public class SpaceShip_NormalCtrl : SpaceShipCtrl
         m_effectType = Effect.Explosion_Bullet0;
         m_effectPool = EffectPool.SpaceShip;
 
+        SpaceShipType = MobType.Normal;
+
         base.Init();
     }
 

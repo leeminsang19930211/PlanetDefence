@@ -36,6 +36,8 @@ public  class SpaceShipCtrl : Gunner
     private delegate void StateProc();
     private readonly StateProc[] m_stateProcs = new StateProc[(int)STATE.END];
 
+    public MobType SpaceShipType { get; set; } = MobType.End;
+
     public SpaceShipData SpaceShipData
     {
         get
@@ -78,7 +80,10 @@ public  class SpaceShipCtrl : Gunner
         StartCoroutine("SlowMove_Coroutin", slowInfo);
     }
 
-  
+    public void UpdateSpaceShipData()
+    {
+        SpaceShipData = Player.Inst.GetSpaceShipData(SpaceShipType);
+    }
 
     // 자식 우주선에서 호출해줄것
     protected new void Init()
@@ -95,6 +100,11 @@ public  class SpaceShipCtrl : Gunner
         m_revolvingSpeed_origin = m_revolvingSpeed;
 
         ChangeState(FirstState);
+
+        if(Clone)
+        {
+            UpdateSpaceShipData();
+        }     
     }
 
     protected override void _OnZeroHP()
@@ -126,7 +136,7 @@ public  class SpaceShipCtrl : Gunner
 
         angle.z += 180f;
 
-        BulletMgr.Inst.FireBullet(m_bulletPool, BulletPoolIdx, m_trsf.position + m_trsf.up * -1f* m_fireDistAlignUp, angle,this, target);
+        BulletMgr.Inst.FireBullet(m_bulletPool, BulletPoolIdx, m_trsf.position + m_trsf.up * -1f * m_fireDistAlignUp, angle, this, target);
     }
 
     // 업데이트에서 호출해줄 것 . 호출해주면 떨어지고 공전하면서 움직이게 된다

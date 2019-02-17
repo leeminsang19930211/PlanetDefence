@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bullet_Lv2_FastCtrl : BulletCtrl
+public class Bullet_Lv3_HealCtrl : BulletCtrl
 {
     private void OnEnable()
     {
-        BulletType = Bullet.Lv2_Fast;
+        BulletType = Bullet.Lv3_Heal;
+
         base.Init();
     }
 

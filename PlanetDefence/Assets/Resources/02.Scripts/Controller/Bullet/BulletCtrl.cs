@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class BulletCtrl : MonoBehaviour
+public class BulletCtrl : MonoBehaviour
 {
     public int m_damage = 0;
     public float m_speed = 0;
@@ -13,7 +13,29 @@ public abstract class BulletCtrl : MonoBehaviour
  
     public bool Clone { get; set; } = false;
 
-    public abstract IBulletData BulletData { get; set; }
+    public Bullet BulletType { get; set; } = Bullet.End;
+
+    public virtual BulletData BulletData
+    {
+        get
+        {
+            BulletData bulletData = new BulletData();
+
+            bulletData.damage = m_damage;
+
+            return bulletData;
+        }
+
+        set
+        {
+            m_damage = value.damage;
+        }
+    }
+
+    public void UpdateBulletData()
+    {
+        BulletData = Player.Inst.GetBulletData(BulletType);
+    }
 
     public void Fire(Vector3 startPos, Vector3 startAngle, Gunner shooter, Gunner target)
     {
@@ -116,6 +138,11 @@ public abstract class BulletCtrl : MonoBehaviour
     protected void Init()
     {
         m_trsf = GetComponent<Transform>();
+
+        if(Clone)
+        {
+            UpdateBulletData();
+        }    
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

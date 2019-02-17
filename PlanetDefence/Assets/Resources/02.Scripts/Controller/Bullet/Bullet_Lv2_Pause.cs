@@ -6,13 +6,13 @@ public class Bullet_Lv2_Pause : BulletCtrl
     public float m_probability = 0f;
     public float m_duration = 0f;
 
-    public override IBulletData BulletData
+    public override BulletData BulletData
     {
         get
         {
             BulletData_Pause bulletData = new BulletData_Pause();
 
-            bulletData.Damage = m_damage;
+            bulletData.damage = m_damage;
             bulletData.duration = m_duration;
 
             return bulletData;
@@ -22,10 +22,11 @@ public class Bullet_Lv2_Pause : BulletCtrl
         {
             BulletData_Pause bulletData = (BulletData_Pause)value;
 
-            m_damage = bulletData.Damage;
+            m_damage = bulletData.damage;
             m_duration = bulletData.duration;
         }
     }
+
 
     protected override void _OnTarget(Gunner target, Vector3 hitPos)
     {
@@ -47,6 +48,8 @@ public class Bullet_Lv2_Pause : BulletCtrl
 
     private void OnEnable()
     {
+        BulletType = Bullet.Lv2_Pause;
+
         base.Init();
     }
 

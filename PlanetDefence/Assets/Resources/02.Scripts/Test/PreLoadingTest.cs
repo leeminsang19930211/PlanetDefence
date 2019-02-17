@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PreLoadingTest : MonoBehaviour
 {
-
-
     void Start()
     {
 

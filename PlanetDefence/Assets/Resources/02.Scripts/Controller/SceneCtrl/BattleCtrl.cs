@@ -8,7 +8,9 @@ public class BattleCtrl: MonoBehaviour
 
     private void Awake()
     {
-        if(m_init == false) // 초기화 순서때문에 start, awake 함수 이용안하고 직접 호출함
+        SceneLoader.OnStartScene();
+
+        if (m_init == false) // 초기화 순서때문에 start, awake 함수 이용안하고 직접 호출함
         {
             BattleGameObjectMgr.Inst.Init();
             BulletMgr.Inst.Init();
@@ -20,51 +22,53 @@ public class BattleCtrl: MonoBehaviour
             m_init = true;
         }
 
-        if(GlobalGameObjectMgr.Inst.Battle == false)
-        {           
+        if (GlobalGameObjectMgr.Inst.Battle == false)
+        {
+            BattleGameObjectMgr.Inst.OffTurretSupports(2);
+
             GlobalGameObjectMgr.Inst.Battle = true;
 
-            WavesMob[] infos = new WavesMob[8];
+            WavesMob[] infos = new WavesMob[1];
 
             infos[0].eMobType = MobType.Normal;
             infos[0].nMobNum = 10;
-            infos[0].fDelayTime = 2f;
+            infos[0].fDelayTime = 4f;
             infos[0].fFirstDelayTime = 0f;
 
-            infos[1].eMobType = MobType.Kamikaze;
-            infos[1].nMobNum = 10;
-            infos[1].fDelayTime = 3f;
-            infos[1].fFirstDelayTime = 3f;
+            //infos[1].eMobType = MobType.Kamikaze;
+            //infos[1].nMobNum = 10;
+            //infos[1].fDelayTime = 3f;
+            //infos[1].fFirstDelayTime = 3f;
 
-            infos[2].eMobType = MobType.DummyShip;
-            infos[2].nMobNum = 10;
-            infos[2].fDelayTime = 6f;
-            infos[2].fFirstDelayTime = 6f;
+            //infos[2].eMobType = MobType.DummyShip;
+            //infos[2].nMobNum = 10;
+            //infos[2].fDelayTime = 6f;
+            //infos[2].fFirstDelayTime = 6f;
 
-            infos[3].eMobType = MobType.Pirate;
-            infos[3].nMobNum = 10;
-            infos[3].fDelayTime = 4f;
-            infos[3].fFirstDelayTime = 9f;
+            //infos[3].eMobType = MobType.Pirate;
+            //infos[3].nMobNum = 10;
+            //infos[3].fDelayTime = 4f;
+            //infos[3].fFirstDelayTime = 9f;
 
-            infos[4].eMobType = MobType.Little;
-            infos[4].nMobNum = 10;
-            infos[4].fDelayTime = 2f;
-            infos[4].fFirstDelayTime = 2f;
+            //infos[4].eMobType = MobType.Little;
+            //infos[4].nMobNum = 10;
+            //infos[4].fDelayTime = 2f;
+            //infos[4].fFirstDelayTime = 2f;
 
-            infos[5].eMobType = MobType.ZombieShip;
-            infos[5].nMobNum = 10;
-            infos[5].fDelayTime = 5f;
-            infos[5].fFirstDelayTime = 2f;
+            //infos[5].eMobType = MobType.ZombieShip;
+            //infos[5].nMobNum = 10;
+            //infos[5].fDelayTime = 5f;
+            //infos[5].fFirstDelayTime = 2f;
 
-            infos[6].eMobType = MobType.GhostShip;
-            infos[6].nMobNum = 10;
-            infos[6].fDelayTime = 3f;
-            infos[6].fFirstDelayTime = 5f;
+            //infos[6].eMobType = MobType.GhostShip;
+            //infos[6].nMobNum = 10;
+            //infos[6].fDelayTime = 3f;
+            //infos[6].fFirstDelayTime = 5f;
 
-            infos[7].eMobType = MobType.BattleShip;
-            infos[7].nMobNum = 10;
-            infos[7].fDelayTime = 4f;
-            infos[7].fFirstDelayTime = 2f;
+            //infos[7].eMobType = MobType.BattleShip;
+            //infos[7].nMobNum = 10;
+            //infos[7].fDelayTime = 4f;
+            //infos[7].fFirstDelayTime = 2f;
 
             int spaceShipsNum = 0;
 

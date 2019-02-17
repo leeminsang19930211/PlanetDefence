@@ -26,50 +26,27 @@ public class SceneLoader : MonoBehaviour
 
         if (m_curScene == "PreLoading" && nextScene == "Lobby")
         {
-            SceneManager.LoadScene("Lobby");
-
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", false);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", true);
+            SceneManager.LoadScene("Lobby");          
         }
         else if (m_curScene == "Lobby" && nextScene == "Choice")
         {          
-            SceneManager.LoadScene("Choice");
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", false);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Choice", true);
+            SceneManager.LoadScene("Choice");            
         }
         else if (m_curScene == "Lobby" && nextScene == "Battle")
-        {
+        { 
             SceneManager.LoadScene("Battle");
-
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", false);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", true);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("BattleStatic", true);
-
         }
         else if (m_curScene == "Choice" && nextScene == "Battle")
         {            
             SceneManager.LoadScene("Battle");
-
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Choice", false);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", true);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("BattleStatic", true);
-
         }
         else if(m_curScene == "Battle" && nextScene == "Lobby")
         {
-            SceneManager.LoadScene("Lobby");
-
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", false);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", true);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("BattleStatic", false);
+            SceneManager.LoadScene("Lobby");                  
         }
         else if(m_curScene == "Battle" && nextScene == "Choice")
         {
             SceneManager.LoadScene("Choice");
-
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", false);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("Choice", true);
-            GlobalGameObjectMgr.Inst.SetGameObectActive("BattleStatic", false);
         }
         else
         {
@@ -77,5 +54,46 @@ public class SceneLoader : MonoBehaviour
         }
 
         m_curScene = nextScene;
+    }
+
+    public static void OnStartScene()
+    {
+        if(m_prevScene == "PreLoading")
+        {
+            GlobalGameObjectMgr.Inst.SetGameObectActive("PreLoading", false);
+        }
+        else if(m_prevScene == "Lobby")
+        {
+            GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", false);
+        }
+        else if (m_prevScene == "Choice")
+        {
+            GlobalGameObjectMgr.Inst.SetGameObectActive("Choice", false);
+
+        }
+        else if (m_prevScene == "Battle")
+        {
+            GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", false);
+            GlobalGameObjectMgr.Inst.SetGameObectActive("BattleStatic", false);
+        }
+
+        if (m_curScene == "PreLoading")
+        {
+            GlobalGameObjectMgr.Inst.SetGameObectActive("PreLoading", true);
+        }
+        else if (m_curScene == "Lobby")
+        {
+            GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", true);
+        }
+        else if (m_curScene == "Choice")
+        {
+            GlobalGameObjectMgr.Inst.SetGameObectActive("Choice", true);
+
+        }
+        else if (m_curScene == "Battle")
+        {
+            GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", true);
+            GlobalGameObjectMgr.Inst.SetGameObectActive("BattleStatic", true);
+        }
     }
 }

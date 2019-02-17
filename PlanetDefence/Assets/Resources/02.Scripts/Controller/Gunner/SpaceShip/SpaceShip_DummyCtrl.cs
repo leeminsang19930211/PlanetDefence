@@ -11,6 +11,8 @@ public class SpaceShip_DummyCtrl : SpaceShipCtrl
         m_effectType = Effect.End;
         m_effectPool = EffectPool.End;
 
+        SpaceShipType = MobType.DummyShip;
+
         base.Init();
     }
 

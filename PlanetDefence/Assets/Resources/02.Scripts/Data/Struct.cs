@@ -19,146 +19,72 @@ public struct SpaceShipPartInfo
 
 public struct GlobalData
 {
-    public int ori_turretSupoorts;
-    public int ori_planetHP;
+    public int turretSupoorts;
+    public int planetHP;
 }
 
-public struct SpaceShipData
+public class SpaceShipData
 {
     public int maxHP;
-    public int junkDrops;
+   public int junkDrops;
     public int coinDrops;
 }
 
-public interface IBulletData
+
+public class BulletData
 {
-    int Damage { get; set; }
+    public int damage;
 }
 
-public struct BulletData_Gatling : IBulletData
+public class BulletData_Missile : BulletData
 {
-    public int Damage { get; set; }
-}
-
-public struct BulletData_Fast : IBulletData
-{ 
-    public int Damage { get; set; }
-}
-
-public struct BulletData_Missile : IBulletData
-{
-    public int Damage { get; set; }
-
     public float splashRange;
 }
 
-public struct BulletData_Laser : IBulletData
+public class BulletData_Laser : BulletData
 {
-    public int Damage { get; set; }
-
     public float duration;
 }
 
-public struct BulletData_Poison : IBulletData
+public class BulletData_Poison : BulletData
 {
-    public int Damage { get; set; }
-
     public int dotDamage;
 }
 
-public struct BulletData_Slow: IBulletData
+public class BulletData_Slow : BulletData
 {
-    public int Damage { get; set; }
-
     public float duration;
 }
 
-public struct BulletData_Pause : IBulletData
+public class BulletData_Pause : BulletData
 {
-    public int Damage { get; set; }
-
     public float duration;
 }
 
-public struct BulletData_Sniper : IBulletData
+public class TurretData
 {
-    public int Damage { get; set; }
+    public int maxHP;
 }
 
-public struct BulletData_Berserker : IBulletData
+public class TurretData_Heal : TurretData
 {
-    public int Damage { get; set; }
+    public bool fire;
 }
 
-public struct BulletData_SpaceShip : IBulletData
+public class TurretData_Sniper :TurretData
 {
-    public int Damage { get; set; }
+    public float fireDelay;
 }
 
-public interface ITurretData
+public class TurretData_Fast : TurretData
 {
-    int MaxHP { get; set; }
+    public float fireDelay;
 }
 
-public struct TurretData_Gatling : ITurretData
+public class TurretData_Shield : TurretData
 {
-    public int MaxHP { get; set; }
-}
-
-public struct TurretData_Fast : ITurretData
-{
-    public int MaxHP { get; set; }
-}
-
-public struct TurretData_Missile : ITurretData
-{
-    public int MaxHP { get; set; }
-}
-
-public struct TurretData_Laser : ITurretData
-{
-    public int MaxHP { get; set; }
-}
-
-public struct TurretData_Shield : ITurretData
-{
-    public int MaxHP { get; set; }
-
     public float hitDamageScale;
 }
-
-public struct TurretData_Poison : ITurretData
-{
-    public int MaxHP { get; set; }
-}
-
-public struct TurretData_Slow : ITurretData
-{
-    public int MaxHP { get; set; }
-}
-
-public struct TurretData_Pause : ITurretData
-{
-    public int MaxHP { get; set; }
-}
-
-public struct TurretData_Sniper : ITurretData
-{
-    public int MaxHP { get; set; }
-}
-
-public struct TurretData_Heal : ITurretData
-{
-    public int MaxHP { get; set; }
-
-    public float healAmount;
-}
-
-public struct TurretData_Berserker : ITurretData
-{
-    public int MaxHP { get; set; }
-}
-
 
 
 

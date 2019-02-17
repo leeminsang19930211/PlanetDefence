@@ -6,24 +6,6 @@ public class Turret_Lv3_BerserkerCtrl : TurretCtrl
     public float m_fireScale_beserker = 1f;
     public float m_beserkerHPRate = 0f;
 
-    public override ITurretData TurretData
-    {
-        get
-        {
-            TurretData_Berserker turretData = new TurretData_Berserker();
-
-            turretData.MaxHP = m_maxHP;
-
-            return turretData;
-        }
-        set
-        {
-            TurretData_Fast turretData = (TurretData_Fast)value;
-
-            m_maxHP = turretData.MaxHP;
-        }
-    }
-
     private void Start()
     {
         m_bulletType = Bullet.Lv3_Berserker;

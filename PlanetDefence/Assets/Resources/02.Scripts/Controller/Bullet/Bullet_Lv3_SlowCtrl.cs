@@ -6,13 +6,13 @@ public class Bullet_Lv3_SlowCtrl : BulletCtrl
     public float m_probability = 0f;
     public Gunner.SlowMoveInfo m_slowInfo;
 
-    public override IBulletData BulletData
+    public override BulletData BulletData
     {
         get
         {
             BulletData_Slow bulletData = new BulletData_Slow();
 
-            m_damage = bulletData.Damage;
+            m_damage = bulletData.damage;
             m_slowInfo.duration = bulletData.duration;
 
             return bulletData;
@@ -22,7 +22,7 @@ public class Bullet_Lv3_SlowCtrl : BulletCtrl
         {
             BulletData_Slow bulletData = (BulletData_Slow)value;
 
-            m_damage = bulletData.Damage;
+            m_damage = bulletData.damage;
             m_slowInfo.duration = bulletData.duration;
         }
     }
@@ -47,6 +47,8 @@ public class Bullet_Lv3_SlowCtrl : BulletCtrl
 
     private void OnEnable()
     {
+        BulletType = Bullet.Lv3_Slow;
+
         base.Init();
     }
 

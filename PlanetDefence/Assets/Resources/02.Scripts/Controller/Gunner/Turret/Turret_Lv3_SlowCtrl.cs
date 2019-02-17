@@ -3,22 +3,6 @@ using System.Collections;
 
 public class Turret_Lv3_SlowCtrl : TurretCtrl
 {
-    public override ITurretData TurretData
-    {
-        get
-        {
-            TurretData_Slow turretData = new TurretData_Slow();
-
-            turretData.MaxHP = m_maxHP;
-
-            return turretData;
-        }
-        set
-        {
-            m_maxHP = value.MaxHP;
-        }
-    }
-
     // Start is called before the first frame update
     private void Start()
     {

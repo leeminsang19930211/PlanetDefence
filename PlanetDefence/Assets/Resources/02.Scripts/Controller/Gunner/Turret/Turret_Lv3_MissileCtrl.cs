@@ -3,24 +3,6 @@ using System.Collections;
 
 public class Turret_Lv3_MissileCtrl : TurretCtrl
 {
-    public override ITurretData TurretData
-    {
-        get
-        {
-            TurretData_Missile turretData = new TurretData_Missile();
-
-            turretData.MaxHP = m_maxHP;
-
-            return turretData;
-        }
-        set
-        {
-            TurretData_Missile turretData = (TurretData_Missile)value;
-
-            m_maxHP = turretData.MaxHP;
-        }
-    }
-
     // Start is called before the first frame update
     private void Start()
     {

@@ -50,6 +50,12 @@ public class PlanetCtrl : MonoBehaviour
         get { return m_curHP; }
     }
 
+    public int MaxHP
+    {
+        get { return m_maxHP; }
+        set { m_maxHP = value; }
+    }
+
 
     public void Release_Clear()
     {

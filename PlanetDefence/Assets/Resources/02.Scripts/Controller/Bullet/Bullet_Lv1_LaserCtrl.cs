@@ -6,13 +6,13 @@ public class Bullet_Lv1_LaserCtrl : BulletCtrl
     public float m_stayDuration = 0;
     public float m_hitDelay = 0;
 
-    public override IBulletData BulletData
+    public override BulletData BulletData
     {
         get
         {
             BulletData_Laser bulletData = new BulletData_Laser();
 
-            bulletData.Damage = m_damage;
+            bulletData.damage = m_damage;
             bulletData.duration = m_stayDuration;
 
             return bulletData;
@@ -22,7 +22,7 @@ public class Bullet_Lv1_LaserCtrl : BulletCtrl
         {
             BulletData_Laser bulletData = (BulletData_Laser)value;
 
-            m_damage = bulletData.Damage;
+            m_damage = bulletData.damage;
             m_stayDuration = bulletData.duration;
         }
     }
@@ -31,6 +31,8 @@ public class Bullet_Lv1_LaserCtrl : BulletCtrl
     {
         if (Clone)
         {
+            BulletType = Bullet.Lv1_Laser;
+
             RotateToTarget();
             base.Init();
             StartCoroutine("Stay");

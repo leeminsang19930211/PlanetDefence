@@ -112,6 +112,58 @@ public class SpaceShipMgr : MonoBehaviour
         StopCoroutine("CreateWave");
     }
 
+    public SpaceShipData[] GetSourceSpaceShipDatas()
+    {
+        // TEMP
+        //if (m_sourceSpaceShips.Count < (int)MobType.End)
+        //{
+        //    Debug.LogError("The sourc turrets is less than Turret.End");
+        //    return null;
+        //}
+
+        SpaceShipData[] datas = new SpaceShipData[(int)MobType.End];
+
+        for (int i = 0; i < (int)MobType.End; ++i)
+        {
+            string key = EnumToStr((MobType)i);
+
+            GameObject source = null;
+
+            if (false == m_sourceSpaceShips.TryGetValue(key, out source))
+            {
+                datas[i] = null;
+                continue;
+            }
+
+            SpaceShipCtrl ctrl = source.GetComponent<SpaceShipCtrl>();
+
+            datas[i] = ctrl.SpaceShipData;
+        }
+
+        return datas;
+    }
+
+    public void UpdateSpaceShipDatas()
+    {
+        GameObject[] dummyList = GameObject.FindGameObjectsWithTag("SPACESHIP_DUMMY");
+
+        foreach(GameObject dummy in dummyList)
+        {
+            SpaceShipCtrl ctrl = dummy.GetComponent<SpaceShipCtrl>();
+
+            ctrl.UpdateSpaceShipData();
+        }
+
+        GameObject[] normalList = GameObject.FindGameObjectsWithTag("SPACESHIP_NORMAL");
+
+        foreach (GameObject normal in normalList)
+        {
+            SpaceShipCtrl ctrl = normal.GetComponent<SpaceShipCtrl>();
+
+            ctrl.UpdateSpaceShipData();
+        }
+    }
+
     public void AddSpaceShipCount(int add)
     {
         m_maxSpaceShipCnt += add;

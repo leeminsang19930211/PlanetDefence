@@ -25,7 +25,8 @@ public enum MobType
     ZombieShip,
     GhostShip,
     Little,
-    Meteor
+    Meteor,
+    End,
 }
 //승완 작업 --------End--------- 190208 
 

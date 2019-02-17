@@ -3,13 +3,14 @@ using System.Collections;
 
 public class Turret_Lv1_FastCtrl : TurretCtrl
 {
-    public override ITurretData TurretData
+    public override TurretData TurretData
     {
         get
         {
             TurretData_Fast turretData = new TurretData_Fast();
 
-            turretData.MaxHP = m_maxHP;
+            turretData.maxHP = m_maxHP;
+            turretData.fireDelay = m_fireDelay;
 
             return turretData;
         }
@@ -17,7 +18,8 @@ public class Turret_Lv1_FastCtrl : TurretCtrl
         {
             TurretData_Fast turretData = (TurretData_Fast)value;
 
-            m_maxHP = turretData.MaxHP;
+            m_maxHP = turretData.maxHP;
+            m_fireDelay = turretData.fireDelay;
         }
     }
 

@@ -3,23 +3,6 @@ using System.Collections;
 
 public class Turret_Lv2_GatlingCtrl : TurretCtrl
 {
-    public override ITurretData TurretData
-    {
-        get
-        {
-            TurretData_Gatling turretData = new TurretData_Gatling();
-
-            turretData.MaxHP = m_maxHP;
-
-            return turretData;
-        }
-        set
-        {
-            TurretData_Gatling turretData = (TurretData_Gatling)value;
-
-            m_maxHP = turretData.MaxHP;
-        }
-    }
 
     private void Start()
     {

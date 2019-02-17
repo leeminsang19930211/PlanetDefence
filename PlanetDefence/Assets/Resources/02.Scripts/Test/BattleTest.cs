@@ -36,18 +36,6 @@ public class BattleTest : MonoBehaviour
             fs.Close();
         }
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        {
-            FileStream fs = File.Open(Application.persistentDataPath + "TestData.bin", FileMode.Create);
-
-            BinaryWriter wr = new BinaryWriter(fs);
-
-            wr.Write(GlobalGameObjectMgr.Inst.CurDay + 1);
-
-            fs.Close();
-
-        }
-
 
         if (Input.GetKeyDown(KeyCode.F10))
         {

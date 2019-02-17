@@ -5,22 +5,23 @@ public class Turret_Lv3_ShieldCtrl : TurretCtrl
 {
     private float m_hitDamageScale = 1f;
 
-    public override ITurretData TurretData
+    public override TurretData TurretData
     {
         get
         {
             TurretData_Shield turretData = new TurretData_Shield();
 
-            turretData.MaxHP = m_maxHP;
+            turretData.maxHP = m_maxHP;
             turretData.hitDamageScale = m_hitDamageScale;
 
             return turretData;
         }
+
         set
         {
             TurretData_Shield turretData = (TurretData_Shield)value;
 
-            m_maxHP = turretData.MaxHP;
+            m_maxHP = turretData.maxHP;
             m_hitDamageScale = turretData.hitDamageScale;
         }
     }

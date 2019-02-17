@@ -60,6 +60,9 @@ public class SpaceShip_GhostCtrl : SpaceShipCtrl
         m_effectType = Effect.Explosion_Bullet0;
         m_effectPool = EffectPool.SpaceShip;
 
+
+        SpaceShipType = MobType.GhostShip;
+
         base.Init();
 
         m_sprite = GetComponent<SpriteRenderer>();

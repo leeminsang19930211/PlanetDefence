@@ -38,6 +38,8 @@ public class SpaceShip_ZombieCtrl : SpaceShipCtrl
         m_effectType = Effect.Explosion_Bullet0;
         m_effectPool = EffectPool.SpaceShip;
 
+        SpaceShipType = MobType.ZombieShip;
+
         base.Init();
     }
 

@@ -7,14 +7,13 @@ public class Bullet_Lv2_PosionCtrl : BulletCtrl
     public float m_probability = 0f;
     public Gunner.DotInfo m_dotInfo;
 
-
-    public override IBulletData BulletData
+    public override BulletData BulletData
     {
         get
         {
             BulletData_Poison bulletData = new BulletData_Poison();
 
-            bulletData.Damage = m_damage;
+            bulletData.damage = m_damage;
             bulletData.dotDamage = m_dotInfo.damage;
 
             return bulletData;
@@ -24,11 +23,10 @@ public class Bullet_Lv2_PosionCtrl : BulletCtrl
         {
             BulletData_Poison bulletData = (BulletData_Poison)value;
 
-            m_damage = bulletData.Damage;
+            m_damage = bulletData.damage;
             m_dotInfo.damage = bulletData.dotDamage;
         }
     }
-
 
     protected override void _OnTarget(Gunner target, Vector3 hitPos)
     {
@@ -44,6 +42,9 @@ public class Bullet_Lv2_PosionCtrl : BulletCtrl
 
     private void OnEnable()
     {
+        BulletType = Bullet.Lv2_Poison;
+
+
         base.Init();
     }
 

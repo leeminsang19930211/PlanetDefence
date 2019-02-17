@@ -7,13 +7,13 @@ public class Bullet_Lv1_MissileCtrl : BulletCtrl
     public float m_splashRadius = 0;
 
 
-    public override IBulletData BulletData
+    public override BulletData BulletData
     {
         get
         {
             BulletData_Missile bulletData = new BulletData_Missile();
 
-            bulletData.Damage = m_damage;
+            bulletData.damage = m_damage;
             bulletData.splashRange = m_splashRadius;
 
             return bulletData;
@@ -23,10 +23,11 @@ public class Bullet_Lv1_MissileCtrl : BulletCtrl
         {
             BulletData_Missile bulletData = (BulletData_Missile)value;
 
-            m_damage = bulletData.Damage;
+            m_damage = bulletData.damage;
             m_splashRadius = bulletData.splashRange;
         }
     }
+
 
     protected override void _OnTarget(Gunner target, Vector3 hitPos)
     {
@@ -56,7 +57,8 @@ public class Bullet_Lv1_MissileCtrl : BulletCtrl
     }
 
     private void OnEnable()
-    {       
+    {
+        BulletType = Bullet.Lv1_Missile;
         base.Init();
     }
 

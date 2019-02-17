@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class TurretCtrl : Gunner
+public class TurretCtrl : Gunner
 {
     public float m_minDistToAttack = 0;             // 공격하기 위한 적 우주선과의 최소 거리
     public float m_distFromTurretSupport = 0;       // 터렛 서포트로부터 위치 할 거리
@@ -13,7 +13,27 @@ public abstract class TurretCtrl : Gunner
 
     public Turret TurretType { get { return m_turretType; } }
 
-    public abstract ITurretData TurretData { get; set; }
+    public virtual TurretData TurretData
+    {
+        get
+        {
+            TurretData turretData = new TurretData();
+
+            turretData.maxHP = m_maxHP;
+
+            return turretData;
+        }
+
+        set
+        {
+            m_maxHP = value.maxHP;
+        }
+    }
+
+    public void UpdateTurretData()
+    {
+        TurretData = Player.Inst.GetTurretData(TurretType);
+    }
 
     protected new void Init()
     {
@@ -24,6 +44,11 @@ public abstract class TurretCtrl : Gunner
         m_planetAngle = (BulletPoolIdx / 5)*90f;    // BulletPoolIdx 는 터렛 지지대 인덱스와 같음
 
         TurretMgr.Inst.CheckShieldToShow(BulletPoolIdx);
+
+        if (Clone)
+        {
+            UpdateTurretData();
+        }
     }
 
     protected override void _OnZeroHP()

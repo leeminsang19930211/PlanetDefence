@@ -45,8 +45,6 @@ public class LoadingBarCtrl: MonoBehaviour
         float progress = CalculateProgress();
         m_progressImage.fillAmount = progress;
 
-#if UNITY_EDITOR || UNITY_STANDALONE
-
         if (progress >= 1f)
         {
             if (Input.GetKeyDown(KeyCode.Return))
@@ -56,19 +54,6 @@ public class LoadingBarCtrl: MonoBehaviour
                 SceneLoader.LoadScene("Lobby");
             }
         }
-
-#else
-
-       if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        {
-            if (progress >= 1f)
-            {
-                SceneLoader.LoadScene("Lobby");
-            }
-        }
-#endif
-
-
     }
 
     private IEnumerator LoadPrefab(LoadInfo info)

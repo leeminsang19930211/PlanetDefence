@@ -60,6 +60,42 @@ public class BulletMgr : MonoBehaviour
         } 
     }
 
+    public BulletData[] GetSourceBulletDatas()
+    {
+        // TEMP
+        //if (m_sourceBullets.Count < (int)Bullet.End)
+        //{
+        //    Debug.LogError("The sourc turrets is less than Turret.End");
+        //    return null;
+        //}
+
+        BulletData[] datas = new BulletData[(int)Bullet.End];
+
+        for (int i = 0; i < (int)Bullet.End; ++i)
+        {
+            datas[i] = GetSourceBulletData((Bullet)i);
+        }
+
+        return datas;
+    }
+
+    public BulletData GetSourceBulletData(Bullet bullet)
+    {
+        string key = EnumToStr(bullet);
+
+        GameObject source = null;
+
+        if (false == m_sourceBullets.TryGetValue(key, out source))
+        {
+            //Debug.LogError("Finding source by " + key + " failed");
+            return null;
+        }
+
+        BulletCtrl ctrl = source.GetComponent<BulletCtrl>();
+
+        return ctrl.BulletData;
+    }
+
     public bool AllocateBulletPool(BulletPool pool, int cnt )
     {
         if(m_bulletPool[(int)pool].Count > 0 || m_bulletPool[(int)pool].Count > 0)
@@ -245,6 +281,7 @@ public class BulletMgr : MonoBehaviour
         AddBullet("Bullet_Lv3_Fast");
         AddBullet("Bullet_Lv2_Gatling");
         AddBullet("Bullet_Lv3_Gatling");
+        AddBullet("Bullet_Lv3_Heal");
 
         for (int i=0; i <(int)BulletPool.End; ++i)
         {
@@ -318,6 +355,9 @@ public class BulletMgr : MonoBehaviour
                 break;
             case Bullet.Lv3_Fast:
                 str = "Bullet_Lv3_Fast";
+                break;
+            case Bullet.Lv3_Heal:
+                str = "Bullet_Lv3_Heal";
                 break;
             case Bullet.Spc_Normal:
                 str = "Bullet_Spc_Normal";

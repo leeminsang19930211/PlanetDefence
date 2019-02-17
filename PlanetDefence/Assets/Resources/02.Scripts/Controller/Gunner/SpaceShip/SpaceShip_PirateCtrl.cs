@@ -10,6 +10,8 @@ public class SpaceShip_PirateCtrl : SpaceShipCtrl
         m_effectType = Effect.Explosion_Bullet0;
         m_effectPool = EffectPool.SpaceShip;
 
+        SpaceShipType = MobType.Pirate;
+
         base.Init();
     }
 

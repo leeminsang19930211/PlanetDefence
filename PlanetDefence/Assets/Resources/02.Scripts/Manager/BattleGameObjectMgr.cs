@@ -151,7 +151,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveWarning = GameObject.Find("RemoveWarningPanel");
 
         m_TurretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
-
+     
         m_BrokenSpaceships = GameObject.FindGameObjectsWithTag("BROKENSPACESHIP");
         m_Rockets = GameObject.FindGameObjectsWithTag("ROCKET");
 
@@ -390,7 +390,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     }
 
-
     public void PopUpLabInfos2(GameObject ThisLabButtonB)
     {
         int LabButtonBIdx = System.Array.IndexOf(m_LabButtons_Black, ThisLabButtonB);
@@ -496,7 +495,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
-
     public void PopUpRepairInfos(GameObject ThisRepairButton)
     {
         int RepairButtonIdx = System.Array.IndexOf(m_RepairButtons, ThisRepairButton);
@@ -510,7 +508,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
 
     }
-
 
     public void PopUpRepairInfos2(GameObject ThisRepairButtonB)
     {
@@ -573,7 +570,6 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         }
     }
-
 
     public void PopUpBuild()
     {
@@ -734,7 +730,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveInfoScroll.SetActive(true);
     }
 
-
     public void PopUpRemoveWarnings()
     {
         if (false == TurretMgr.Inst.CheckTurretOnTurretSupport())
@@ -788,7 +783,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         SceneManager.LoadScene("Ending_Escape");
     }
 
-
     public void BrokenSpaceshipImageChange()
     {
         if (Player.Inst.m_spcPartInfos[0]._repaired==true)
@@ -832,5 +826,37 @@ public class BattleGameObjectMgr : MonoBehaviour
             m_Rockets[2].SetActive(true);
         }
 
+    }
+
+    public void OffTurretSupports(int num)
+    {
+        int max = num;
+
+        if (max > 2)
+            max = 2;
+
+        for (int i = 0; i < 4; ++i)
+        {
+            for (int j = 3; j < 3 + max; ++j)
+            {
+                m_TurretSupports[i * 5 + j].SetActive(false);
+            }
+        }
+    }
+
+    public void OnTurretSupports(int num)
+    {
+        int max = num;
+
+        if (max > 2)
+            max = 2;
+
+        for (int i = 0; i < 4; ++i)
+        {
+            for (int j = 3; j < 3 + max; ++j)
+            {
+                m_TurretSupports[i * 5 + j].SetActive(true);
+            }
+        }
     }
 }

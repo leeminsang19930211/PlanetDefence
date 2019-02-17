@@ -35,7 +35,7 @@ public enum Lab
     IncPlanetHelth, // 행성 체력 증가 
     DecSpaceShipHelth, // 적 체력 감소 
     IncJunkDrops, // 잡동사니  획득량 증가 
-    IncGoldDrops, // 골드 획득량 증가 
+    IncCoinDrops, // 코인 획득량 증가 
     DecJunkConsumtion, // 잡동사니 소모량 감소
     ReturnTurretRsrc, // 포탑 철거시 자원 반환
 
@@ -71,6 +71,7 @@ public enum BuyErr
    NoBP,                 // 도면 (BluePrint) 없음
    AlreadySetUp,         // 터렛이 이미 설치되있는 경우
    NotEnoughRsrc,        // 자원이 모자른 경우
+   DoubleShield,         // 쉴드 터렛이 두개이상인 경우
    End,
 }
 
@@ -113,6 +114,7 @@ public enum Bullet
     Lv3_Sniper,
     Lv3_Berserker,
     Lv3_Slow,
+    Lv3_Heal,
     Lv3_Pause,
     Spc_Normal,
     Spc_Pirate,

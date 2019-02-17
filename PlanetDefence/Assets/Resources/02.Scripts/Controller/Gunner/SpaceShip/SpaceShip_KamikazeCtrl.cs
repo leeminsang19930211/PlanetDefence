@@ -11,6 +11,8 @@ public class SpaceShip_KamikazeCtrl: SpaceShipCtrl
         m_effectType = Effect.End;
         m_effectPool = EffectPool.End;
 
+        SpaceShipType = MobType.Kamikaze;
+
         base.Init();
     }
 

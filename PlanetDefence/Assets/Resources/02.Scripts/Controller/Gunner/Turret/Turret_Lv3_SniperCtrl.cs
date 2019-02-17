@@ -3,19 +3,23 @@ using System.Collections;
 
 public class Turret_Lv3_SniperCtrl : TurretCtrl
 {
-    public override ITurretData TurretData
+    public override TurretData TurretData
     {
         get
         {
             TurretData_Sniper turretData = new TurretData_Sniper();
 
-            turretData.MaxHP = m_maxHP;
+            turretData.maxHP = m_maxHP;
+            turretData.fireDelay = m_fireDelay ;
 
             return turretData;
         }
         set
         {
-            m_maxHP = value.MaxHP;
+            TurretData_Sniper turretData = (TurretData_Sniper)value;
+
+            m_maxHP = turretData.maxHP;
+            m_fireDelay = turretData.fireDelay;
         }
     }
 

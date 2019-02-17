@@ -4,24 +4,6 @@ using UnityEngine;
 
 public class Turret_Lv2_PosionCtrl : TurretCtrl
 {
-    public override ITurretData TurretData
-    {
-        get
-        {
-            TurretData_Poison turretData = new TurretData_Poison();
-
-            turretData.MaxHP = m_maxHP;
-
-            return turretData;
-        }
-        set
-        {
-            TurretData_Poison turretData = (TurretData_Poison)value;
-
-            m_maxHP = turretData.MaxHP;
-        }
-    }
-
     // Start is called before the first frame update
     private void Start()
     {
