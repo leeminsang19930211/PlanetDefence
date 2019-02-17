@@ -16,6 +16,12 @@ public class CardCtrl : MonoBehaviour
     [SerializeField]
     private int nCardNum = 3;
 
+    [SerializeField]
+    private int nBossDay;
+
+    [SerializeField]
+    private bool nBossEnable = true;
+
     private bool ChoiceRandomCard(CardType eEvnetType)
     {
         // 다시 들어올때 카드위치 고정
@@ -34,10 +40,6 @@ public class CardCtrl : MonoBehaviour
         else if(eEvnetType == CardType.Boss)
         {
             sCardPrefabDir = "03.Prefabs/Card/Boss";
-        }
-        else if(eEvnetType == CardType.Event)
-        {
-            sCardPrefabDir = "03.Prefabs/Card/Event";
         }
 
         Cards = Resources.LoadAll(sCardPrefabDir);
@@ -82,11 +84,19 @@ public class CardCtrl : MonoBehaviour
 
     void OnEnable()
     {
-        if (GlobalGameObjectMgr.Inst.CurDay % 10 != 0)
+        if (GlobalGameObjectMgr.Inst.CurDay == 0)
+        {
+            Debug.Log("Day Zero Error");
+        }
+        else if (GlobalGameObjectMgr.Inst.CurDay == GlobalGameObjectMgr.Inst.MaxDay)
+        {
+            Debug.Log("Day Max Error");
+        } 
+        else if (GlobalGameObjectMgr.Inst.CurDay % nBossDay != 0)
         {
             ChoiceRandomCard(CardType.Normal);
         }
-        else if(GlobalGameObjectMgr.Inst.CurDay % 10 == 0)
+        else if(nBossEnable && GlobalGameObjectMgr.Inst.CurDay % nBossDay == 0)
         {
             ChoiceRandomCard(CardType.Boss);
         }
