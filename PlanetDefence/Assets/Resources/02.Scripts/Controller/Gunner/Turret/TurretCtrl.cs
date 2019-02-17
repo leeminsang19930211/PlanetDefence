@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TurretCtrl : Gunner
+public abstract class TurretCtrl : Gunner
 {
     public float m_minDistToAttack = 0;             // 공격하기 위한 적 우주선과의 최소 거리
     public float m_distFromTurretSupport = 0;       // 터렛 서포트로부터 위치 할 거리
 
-    protected float m_planetAngle = 0;                  
+    protected float m_planetAngle = 0;
     protected Turret m_turretType = Turret.End;
 
-    public Turret TurretType {  get { return m_turretType; } }
+    public Turret TurretType { get { return m_turretType; } }
+
+    public abstract ITurretData TurretData { get; set; }
 
     protected new void Init()
     {

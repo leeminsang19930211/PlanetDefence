@@ -32,6 +32,14 @@ public class GlobalGameObjectMgr : MonoBehaviour
         }
     }
 
+    public void IncreaseDay()
+    {
+        CurDay += 1;
+
+        if (CurDay > MaxDay)
+            CurDay = MaxDay;
+    }
+
     // GameObjectMgr에 등록된 모든 오브젝트는 씬이 변해도 파괴되지 않는다.
     public bool RegisterGameObject(string key, GameObject gameobj, bool active)
     {

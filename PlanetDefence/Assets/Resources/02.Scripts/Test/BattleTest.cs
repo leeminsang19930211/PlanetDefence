@@ -45,6 +45,7 @@ public class BattleTest : MonoBehaviour
             wr.Write(GlobalGameObjectMgr.Inst.CurDay + 1);
 
             fs.Close();
+
         }
 
 

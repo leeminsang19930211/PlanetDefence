@@ -6,6 +6,27 @@ public class Bullet_Lv3_SlowCtrl : BulletCtrl
     public float m_probability = 0f;
     public Gunner.SlowMoveInfo m_slowInfo;
 
+    public override IBulletData BulletData
+    {
+        get
+        {
+            BulletData_Slow bulletData = new BulletData_Slow();
+
+            m_damage = bulletData.Damage;
+            m_slowInfo.duration = bulletData.duration;
+
+            return bulletData;
+        }
+
+        set
+        {
+            BulletData_Slow bulletData = (BulletData_Slow)value;
+
+            m_damage = bulletData.Damage;
+            m_slowInfo.duration = bulletData.duration;
+        }
+    }
+
     protected override void _OnTarget(Gunner target, Vector3 hitPos)
     {
         SpaceShipCtrl spaceShip = target as SpaceShipCtrl;

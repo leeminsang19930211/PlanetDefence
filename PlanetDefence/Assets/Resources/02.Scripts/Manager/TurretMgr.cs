@@ -390,7 +390,12 @@ public class TurretMgr : MonoBehaviour
         AddTurret("Turret_Lv3_Poison");
         AddTurret("Turret_Lv3_Shield");
         AddTurret("Turret_Lv3_Slow");
-
+        AddTurret("Turret_Lv3_Pause");
+        AddTurret("Turret_Lv1_Fast");
+        AddTurret("Turret_Lv2_Fast");
+        AddTurret("Turret_Lv3_Fast");
+        AddTurret("Turret_Lv2_Gatling");
+        AddTurret("Turret_Lv3_Gatling");
 
         AddTurretSupports();
     }
@@ -430,8 +435,11 @@ public class TurretMgr : MonoBehaviour
             case Turret.Lv1_Laser:
                 str = "Turret_Lv1_Laser";
                 break;
-            case Turret.Lv1_Gatiling:
+            case Turret.Lv1_Gatling:
                 str = "Turret_Lv1_Gatling";
+                break;
+            case Turret.Lv1_Fast:
+                str = "Turret_Lv1_Fast";
                 break;
             case Turret.Lv2_Missile:
                 str = "Turret_Lv2_Missile";
@@ -450,6 +458,12 @@ public class TurretMgr : MonoBehaviour
                 break;
             case Turret.Lv2_Pause:
                 str = "Turret_Lv2_Pause";
+                break;
+            case Turret.Lv2_Gatling:
+                str = "Turret_Lv2_Gatling";
+                break;
+            case Turret.Lv2_Fast:
+                str = "Turret_Lv2_Fast";
                 break;
             case Turret.Lv3_Missile:
                 str = "Turret_Lv3_Missile";
@@ -475,65 +489,21 @@ public class TurretMgr : MonoBehaviour
             case Turret.Lv3_Slow:
                 str = "Turret_Lv3_Slow";
                 break;
+            case Turret.Lv3_Pause:
+                str = "Turret_Lv3_Pause";
+                break;
+            case Turret.Lv3_Gatling:
+                str = "Turret_Lv3_Gatling";
+                break;
+            case Turret.Lv3_Fast:
+                str = "Turret_Lv3_Fast";
+                break;
+
             default:
                 Debug.LogError("The turret str from the turret enum is not mapped");
                 break;
         }
 
         return str;
-    }
-
-    public int[] TurretJunkCosts =
-    {
-        10,20,30,40,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50
-    };
-
-    public int[] TurretCircuitCosts =
-    {
-        1,2,3,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
-    };
-
-
-    // -------------- Lab ---------------
-
-
-
-    
-    public int[] LabCoinCosts =
-    {
-        10,20,30,40,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50
-    };
-
-    public int[] LabMaxStacks =
-    {
-        2,5,5,5,5,5,1,1,5,5,5,5,5,5,2,2,5,5,5,5
-    };
-
-    
-
-    public bool LabTempFunc(int Idx)
-    {
-        if (Idx>=0 && Idx< (int)Lab.End)
-        {
-            return true;
-        }
-        return false;
-    }
-
-
-    // -------- Repair --------------
-
-    public int[] RepairCoinCosts =
-    {
-        10,20,30,40,50
-    };
-
-    public bool RepairTempFunc(int Idx)
-    {
-        if (Idx >= 0 && Idx < (int)SpaceShipPart.End)
-        {
-            return true;
-        }
-        return false;
     }
 }

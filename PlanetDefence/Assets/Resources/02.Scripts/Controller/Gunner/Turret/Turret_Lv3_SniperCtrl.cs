@@ -1,8 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Turret_Lv3_SniperCtrl: TurretCtrl
+public class Turret_Lv3_SniperCtrl : TurretCtrl
 {
+    public override ITurretData TurretData
+    {
+        get
+        {
+            TurretData_Sniper turretData = new TurretData_Sniper();
+
+            turretData.MaxHP = m_maxHP;
+
+            return turretData;
+        }
+        set
+        {
+            m_maxHP = value.MaxHP;
+        }
+    }
+
     protected override void CreateBullet()
     {
         Gunner target = null;

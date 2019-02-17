@@ -3,6 +3,24 @@ using System.Collections;
 
 public class Turret_Lv3_PoisonCtrl : TurretCtrl
 {
+    public override ITurretData TurretData
+    {
+        get
+        {
+            TurretData_Poison turretData = new TurretData_Poison();
+
+            turretData.MaxHP = m_maxHP;
+
+            return turretData;
+        }
+        set
+        {
+            TurretData_Poison turretData = (TurretData_Poison)value;
+
+            m_maxHP = turretData.MaxHP;
+        }
+    }
+
     // Start is called before the first frame update
     private void Start()
     {

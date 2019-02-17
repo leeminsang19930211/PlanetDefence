@@ -16,13 +16,13 @@ public class LabStackCtrl : MonoBehaviour
     {
         for (int i = 0; i < (int)Lab.End; i++)
         {
-            if (Player.Inst.m_labInfos[i].stacks < TurretMgr.Inst.LabMaxStacks[i])
+            if (Player.Inst.m_labInfos[i].stacks < Player.Inst.LabMaxStacks[i])
             {
                 int LabStack = Player.Inst.m_labInfos[i].stacks;
                 m_LabStackTexts[i].GetComponent<Text>().text = LabStack.ToString();
             }
 
-            else if (Player.Inst.m_labInfos[i].stacks >= TurretMgr.Inst.LabMaxStacks[i])
+            else if (Player.Inst.m_labInfos[i].stacks >= Player.Inst.LabMaxStacks[i])
             {
                 m_LabStackTexts[i].GetComponent<Text>().text = "M";
             }

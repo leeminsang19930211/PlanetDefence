@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletCtrl : MonoBehaviour
+public abstract class BulletCtrl : MonoBehaviour
 {
     public int m_damage = 0;
     public float m_speed = 0;
@@ -10,8 +10,10 @@ public class BulletCtrl : MonoBehaviour
 
     private Gunner m_shooter = null;
     private Gunner m_target= null;
-
+ 
     public bool Clone { get; set; } = false;
+
+    public abstract IBulletData BulletData { get; set; }
 
     public void Fire(Vector3 startPos, Vector3 startAngle, Gunner shooter, Gunner target)
     {

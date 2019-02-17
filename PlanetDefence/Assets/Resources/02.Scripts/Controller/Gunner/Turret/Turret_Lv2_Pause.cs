@@ -3,6 +3,24 @@ using System.Collections;
 
 public class Turret_Lv2_Pause : TurretCtrl
 {
+    public override ITurretData TurretData
+    {
+        get
+        {
+            TurretData_Pause turretData = new TurretData_Pause();
+
+            turretData.MaxHP = m_maxHP;
+
+            return turretData;
+        }
+        set
+        {
+            TurretData_Pause turretData = (TurretData_Pause)value;
+
+            m_maxHP = turretData.MaxHP;
+        }
+    }
+
     // Start is called before the first frame update
     private void Start()
     {

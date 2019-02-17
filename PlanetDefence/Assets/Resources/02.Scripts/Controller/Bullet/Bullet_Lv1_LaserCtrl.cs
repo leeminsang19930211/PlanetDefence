@@ -6,6 +6,27 @@ public class Bullet_Lv1_LaserCtrl : BulletCtrl
     public float m_stayDuration = 0;
     public float m_hitDelay = 0;
 
+    public override IBulletData BulletData
+    {
+        get
+        {
+            BulletData_Laser bulletData = new BulletData_Laser();
+
+            bulletData.Damage = m_damage;
+            bulletData.duration = m_stayDuration;
+
+            return bulletData;
+        }
+
+        set
+        {
+            BulletData_Laser bulletData = (BulletData_Laser)value;
+
+            m_damage = bulletData.Damage;
+            m_stayDuration = bulletData.duration;
+        }
+    }
+
     void OnEnable()
     {
         if (Clone)

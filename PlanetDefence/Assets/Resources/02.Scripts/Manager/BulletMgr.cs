@@ -239,7 +239,12 @@ public class BulletMgr : MonoBehaviour
         AddBullet("Bullet_Lv2_Laser");
         AddBullet("Bullet_Lv3_Laser");
         AddBullet("Bullet_Lv3_Slow");
-
+        AddBullet("Bullet_Lv3_Pause");
+        AddBullet("Bullet_Lv1_Fast");
+        AddBullet("Bullet_Lv2_Fast");
+        AddBullet("Bullet_Lv3_Fast");
+        AddBullet("Bullet_Lv2_Gatling");
+        AddBullet("Bullet_Lv3_Gatling");
 
         for (int i=0; i <(int)BulletPool.End; ++i)
         {
@@ -263,6 +268,9 @@ public class BulletMgr : MonoBehaviour
             case Bullet.Lv1_Gatling:
                 str = "Bullet_Lv1_Gatling";
                 break;
+            case Bullet.Lv1_Fast:
+                str = "Bullet_Lv1_Fast";
+                break;
             case Bullet.Lv2_Missile:
                 str = "Bullet_Lv2_Missile";
                 break;
@@ -277,6 +285,12 @@ public class BulletMgr : MonoBehaviour
                 break;
             case Bullet.Lv2_Pause:
                 str = "Bullet_Lv2_Pause";
+                break;
+            case Bullet.Lv2_Gatling:
+                str = "Bullet_Lv2_Gatling";
+                break;
+            case Bullet.Lv2_Fast:
+                str = "Bullet_Lv2_Fast";
                 break;
             case Bullet.Lv3_Missile:
                 str = "Bullet_Lv3_Missile";
@@ -295,6 +309,15 @@ public class BulletMgr : MonoBehaviour
                 break;
             case Bullet.Lv3_Slow:
                 str = "Bullet_Lv3_Slow";
+                break;
+            case Bullet.Lv3_Pause:
+                str = "Bullet_Lv3_Pause";
+                break;
+            case Bullet.Lv3_Gatling:
+                str = "Bullet_Lv3_Gatling";
+                break;
+            case Bullet.Lv3_Fast:
+                str = "Bullet_Lv3_Fast";
                 break;
             case Bullet.Spc_Normal:
                 str = "Bullet_Spc_Normal";

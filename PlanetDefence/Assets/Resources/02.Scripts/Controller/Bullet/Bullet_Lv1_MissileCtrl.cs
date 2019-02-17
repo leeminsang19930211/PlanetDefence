@@ -6,6 +6,28 @@ public class Bullet_Lv1_MissileCtrl : BulletCtrl
     public int m_splashDamage = 0;
     public float m_splashRadius = 0;
 
+
+    public override IBulletData BulletData
+    {
+        get
+        {
+            BulletData_Missile bulletData = new BulletData_Missile();
+
+            bulletData.Damage = m_damage;
+            bulletData.splashRange = m_splashRadius;
+
+            return bulletData;
+        }
+
+        set
+        {
+            BulletData_Missile bulletData = (BulletData_Missile)value;
+
+            m_damage = bulletData.Damage;
+            m_splashRadius = bulletData.splashRange;
+        }
+    }
+
     protected override void _OnTarget(Gunner target, Vector3 hitPos)
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(m_trsf.position, m_splashRadius, Vector2.zero);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SpaceShipCtrl : Gunner
+public  class SpaceShipCtrl : Gunner
 {
     public enum STATE
     {
@@ -36,6 +36,30 @@ public class SpaceShipCtrl : Gunner
     private delegate void StateProc();
     private readonly StateProc[] m_stateProcs = new StateProc[(int)STATE.END];
 
+    public SpaceShipData SpaceShipData
+    {
+        get
+        {
+            SpaceShipData spaceShipData = new SpaceShipData();
+
+            spaceShipData.maxHP = m_maxHP;
+            spaceShipData.junkDrops = m_dropJunk;
+            spaceShipData.coinDrops = m_dropCoin;
+
+            return spaceShipData;
+        }
+
+        set
+        {
+            SpaceShipData spaceShipData = (SpaceShipData)value;
+
+            m_maxHP = spaceShipData.maxHP;
+            m_dropJunk = spaceShipData.junkDrops;
+            m_dropJunk = spaceShipData.coinDrops;
+        }
+    }
+            
+       
     public float AngleFromPlanetUp
     {
         get

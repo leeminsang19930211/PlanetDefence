@@ -3,6 +3,24 @@ using System.Collections;
 
 public class Turret_Lv2_LaserCtrl : TurretCtrl
 {
+    public override ITurretData TurretData
+    {
+        get
+        {
+            TurretData_Laser turretData = new TurretData_Laser();
+
+            turretData.MaxHP = m_maxHP;
+
+            return turretData;
+        }
+        set
+        {
+            TurretData_Laser turretData = (TurretData_Laser)value;
+
+            m_maxHP = turretData.MaxHP;
+        }
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
