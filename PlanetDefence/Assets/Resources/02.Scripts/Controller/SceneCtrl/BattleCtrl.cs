@@ -4,24 +4,61 @@ using UnityEngine;
 
 public class BattleCtrl: MonoBehaviour
 {
-    static bool m_init = false;
-
     private void Awake()
     {
         SceneLoader.OnStartScene();
 
-        if (m_init == false) // 초기화 순서때문에 start, awake 함수 이용안하고 직접 호출함
-        {
-            BattleGameObjectMgr.Inst.Init();
-            BulletMgr.Inst.Init();
-            EffectMgr.Inst.Init();
-            TurretMgr.Inst.Init();
-            SpaceShipMgr.Inst.Init();
-            Player.Inst.Init();
+        InitManagers();
 
-            m_init = true;
-        }
+        InitBattleScene();
+    }
 
+    public static void Release_Clear()
+    {
+        Player.Inst.Release_Clear();
+        SpaceShipMgr.Inst.Release_Clear();
+        TurretMgr.Inst.Release_Clear();
+        EffectMgr.Inst.Release_Clear();
+        BulletMgr.Inst.Release_Clear();
+        BattleGameObjectMgr.Inst.Release_Clear();
+        PlanetCtrl.Inst.Release_Clear();
+
+        GlobalGameObjectMgr.Inst.Battle = false;
+        GlobalGameObjectMgr.Inst.IncreaseDay();
+
+        FileMgr.Inst.SaveGlobaData();
+        FileMgr.Inst.SavePlayerData();
+    }
+
+    public static void Release_Fail()
+    {
+        Player.Inst.Release_Fail();
+        SpaceShipMgr.Inst.Release_Fail();
+        TurretMgr.Inst.Release_Fail();
+        EffectMgr.Inst.Release_Fail();
+        BulletMgr.Inst.Release_Fail();
+        BattleGameObjectMgr.Inst.Release_Fail();
+        PlanetCtrl.Inst.Release_Fail();
+
+        GlobalGameObjectMgr.Inst.Battle = false;
+        GlobalGameObjectMgr.Inst.CurDay = 0;
+
+        FileMgr.Inst.SavePlayerData();
+        FileMgr.Inst.SaveGlobaData();
+    } 
+
+    private void InitManagers()
+    {
+        BattleGameObjectMgr.Inst.Init();
+        BulletMgr.Inst.Init();
+        EffectMgr.Inst.Init();
+        TurretMgr.Inst.Init();
+        SpaceShipMgr.Inst.Init();
+        Player.Inst.Init();
+    }
+
+    private void InitBattleScene()
+    {
         if (GlobalGameObjectMgr.Inst.Battle == false)
         {
             GlobalGameObjectMgr.Inst.Battle = true;
@@ -70,70 +107,26 @@ public class BattleCtrl: MonoBehaviour
 
             int spaceShipsNum = 0;
 
-            foreach(WavesMob info in infos)
+            foreach (WavesMob info in infos)
             {
                 // TEMP : 생성될 자식까지 포함하여 풀을 생성해야해서 임시로 해놓음
-                if(info.eMobType == MobType.BattleShip)
+                if (info.eMobType == MobType.BattleShip)
                 {
-                    spaceShipsNum += info.nMobNum * 10; 
+                    spaceShipsNum += info.nMobNum * 10;
                 }
                 else
                 {
                     spaceShipsNum += info.nMobNum;
                 }
-               
+
             }
 
-            BulletMgr.Inst.ClearBulletPool(BulletPool.Turret);
             BulletMgr.Inst.AllocateBulletPool(BulletPool.Turret, 20);
-
-            BulletMgr.Inst.ClearBulletPool(BulletPool.SpaceShip);
             BulletMgr.Inst.AllocateBulletPool(BulletPool.SpaceShip, spaceShipsNum);
-
-            EffectMgr.Inst.ClearEffectPool(EffectPool.Turret);
             EffectMgr.Inst.AllocateEffectPool(EffectPool.Turret, 20);
-
-            EffectMgr.Inst.ClearEffectPool(EffectPool.SpaceShip);
             EffectMgr.Inst.AllocateEffectPool(EffectPool.SpaceShip, spaceShipsNum);
 
             SpaceShipMgr.Inst.StartCreatingWaves(infos);
-
-            FileMgr.Inst.SavePlayerData();
         }
-
     }
-
-    public static void Release_Clear()
-    {
-        Player.Inst.Release_Clear();
-        SpaceShipMgr.Inst.Release_Clear();
-        TurretMgr.Inst.Release_Clear();
-        EffectMgr.Inst.Release_Clear();
-        BulletMgr.Inst.Release_Clear();
-        BattleGameObjectMgr.Inst.Release_Clear();
-        PlanetCtrl.Inst.Release_Clear();
-
-        GlobalGameObjectMgr.Inst.Battle = false;
-        GlobalGameObjectMgr.Inst.IncreaseDay();
-
-       FileMgr.Inst.SaveGlobaData();
-        FileMgr.Inst.SavePlayerData();
-    }
-
-    public static void Release_Fail()
-    {
-        Player.Inst.Release_Fail();
-        SpaceShipMgr.Inst.Release_Fail();
-        TurretMgr.Inst.Release_Fail();
-        EffectMgr.Inst.Release_Fail();
-        BulletMgr.Inst.Release_Fail();
-        BattleGameObjectMgr.Inst.Release_Fail();
-        PlanetCtrl.Inst.Release_Fail();
-
-        GlobalGameObjectMgr.Inst.Battle = false;
-        GlobalGameObjectMgr.Inst.CurDay = 0;
-
-        FileMgr.Inst.SavePlayerData();
-        FileMgr.Inst.SaveGlobaData();
-    } 
 }

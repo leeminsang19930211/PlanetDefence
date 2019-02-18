@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletMgr : MonoBehaviour
 {
     private static BulletMgr m_inst = null;
+    private bool m_init = false;
     private List<int>[] m_bulletPoolIndex = new List<int>[(int)BulletPool.End];
     private List<List<BulletCtrl>>[] m_bulletPool = new List<List<BulletCtrl>>[(int)BulletPool.End];
     private Dictionary<string, GameObject> m_sourceBullets = new Dictionary<string, GameObject>();
@@ -27,6 +28,11 @@ public class BulletMgr : MonoBehaviour
 
     public void Init()
     {
+        if (m_init)
+            return;
+        else
+            m_init = true;
+
         GameObject bullets = GlobalGameObjectMgr.Inst.FindGameObject("Bullets");
 
         // 테스트 환경 용.씬에서 직접 프리팹을 추가해서 테스트 하는경우에는 GlobalGameObjectMgr.Inst 에 추가가 안되있다
@@ -46,18 +52,18 @@ public class BulletMgr : MonoBehaviour
 
     public void Release_Clear()
     {
-        for (int i = 0; i < (int)BulletPool.End; ++i)
-        {
-            ClearBulletPool((BulletPool)i);
-        }
+        //for (int i = 0; i < (int)BulletPool.End; ++i)
+        //{
+        //    ClearBulletPool((BulletPool)i);
+        //}
     }
 
     public void Release_Fail()
     {
-        for(int i=0; i<(int)BulletPool.End; ++i)
-        {
-            ClearBulletPool((BulletPool)i);
-        } 
+        //for(int i=0; i<(int)BulletPool.End; ++i)
+        //{
+        //    ClearBulletPool((BulletPool)i);
+        //} 
     }
 
     public BulletData[] GetSourceBulletDatas()
@@ -100,7 +106,7 @@ public class BulletMgr : MonoBehaviour
     {
         if(m_bulletPool[(int)pool].Count > 0 || m_bulletPool[(int)pool].Count > 0)
         {
-            Debug.Log("The bulletPool is alloceted already");
+            //Debug.Log("The bulletPool is alloceted already");
             return false;
         }
 

@@ -23,6 +23,8 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
+    private bool m_init = false;
+
     /* 여기서 부터 필요한 내용들을 작성하면 된다 */
     private MainCameraCtrl m_mainCameraCtrl = null;
     private EnemyCntCtrl m_enemyCntCtrl = null;
@@ -97,6 +99,11 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public void Init()
     {
+        if (m_init)
+            return;
+        else
+            m_init = true;
+
         m_mainCameraCtrl = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<MainCameraCtrl>();
         m_enemyCntCtrl = GameObject.FindGameObjectWithTag("ENEMY_CNT")?.GetComponent<EnemyCntCtrl>();
         m_planetHpCtrl = GameObject.FindGameObjectWithTag("PLANET_HP")?.GetComponent<PlanetHPCtrl>();

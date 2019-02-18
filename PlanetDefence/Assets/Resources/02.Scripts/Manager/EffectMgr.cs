@@ -5,6 +5,7 @@ using UnityEngine;
 public class EffectMgr : MonoBehaviour
 {
     private static EffectMgr m_inst = null;
+    private bool m_init = false;
     private List<int>[] m_effectPoolIndex = new List<int>[(int)EffectPool.End];
     private List<List<EffectCtrl>>[] m_effectPool = new List<List<EffectCtrl>>[(int)EffectPool.End];
     private Dictionary<string, GameObject> m_sourceEffects = new Dictionary<string, GameObject>();
@@ -24,9 +25,14 @@ public class EffectMgr : MonoBehaviour
             return m_inst;
         }
     }
-
+    
     public void Init()
     {
+        if (m_init)
+            return;
+        else
+            m_init = true;
+
         GameObject bullets = GlobalGameObjectMgr.Inst.FindGameObject("Effects");
 
         // 테스트 환경 용.씬에서 직접 프리팹을 추가해서 테스트 하는경우에는 GlobalGameObjectMgr.Inst 에 추가가 안되있다
@@ -46,25 +52,25 @@ public class EffectMgr : MonoBehaviour
 
     public void Release_Clear()
     {
-        for (int i = 0; i < (int)EffectPool.End; ++i)
-        {
-            ClearEffectPool((EffectPool)i);
-        }
+        //for (int i = 0; i < (int)EffectPool.End; ++i)
+        //{
+        //    ClearEffectPool((EffectPool)i);
+        //}
     }
 
     public void Release_Fail()
     {
-        for (int i = 0; i < (int)EffectPool.End; ++i)
-        {
-            ClearEffectPool((EffectPool)i);
-        }
+        //for (int i = 0; i < (int)EffectPool.End; ++i)
+        //{
+        //    ClearEffectPool((EffectPool)i);
+        //}
     }
 
     public bool AllocateEffectPool(EffectPool pool, int cnt)
     {
         if (m_effectPool[(int)pool].Count > 0 || m_effectPool[(int)pool].Count > 0)
         {
-            Debug.Log("The effectPool is alloceted already");
+            //Debug.Log("The effectPool is alloceted already");
             return false;
         }
 

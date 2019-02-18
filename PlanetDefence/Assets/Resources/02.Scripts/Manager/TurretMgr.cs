@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurretMgr : MonoBehaviour
 {
     private static TurretMgr m_inst = null;
+    private bool m_init = false;
     private int m_focusedTurretSupportIdx = -1; // 클릭하여 현재 포커싱 된 터렛 지지대의 인덱스이다
     private List<TurretSupportCtrl> m_turretSupportCtrs = new List<TurretSupportCtrl>();
     private Dictionary<string, GameObject> m_sourceTurrets = new Dictionary<string, GameObject>();
@@ -38,6 +39,11 @@ public class TurretMgr : MonoBehaviour
 
     public void Init()
     {
+        if (m_init)
+            return;
+        else
+            m_init = true;
+
         GameObject turrets = GlobalGameObjectMgr.Inst.FindGameObject("Turrets");
 
         // 테스트 환경 용.씬에서 직접 프리팹을 추가해서 테스트 하는경우에는 GlobalGameObjectMgr.Inst 에 추가가 안되있다

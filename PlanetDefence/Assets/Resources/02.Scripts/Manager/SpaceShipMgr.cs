@@ -21,6 +21,7 @@ public class SpaceShipMgr : MonoBehaviour
     }
 
     private static SpaceShipMgr m_inst = null;
+    private bool m_init = false;
     private int m_maxSpaceShipCnt = 0;
     private int m_createdSpaceShipCnt = 0;
     private Dictionary<string, GameObject> m_sourceSpaceShips = new Dictionary<string, GameObject>();
@@ -51,6 +52,11 @@ public class SpaceShipMgr : MonoBehaviour
 
     public void Init()
     {
+        if (m_init)
+            return;
+        else
+            m_init = true;
+
         GameObject spaceShips = GlobalGameObjectMgr.Inst.FindGameObject("SpaceShips");
 
         // 테스트 환경 용.씬에서 직접 프리팹을 추가해서 테스트 하는경우에는 GlobalGameObjectMgr.Inst 에 추가가 안되있다

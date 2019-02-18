@@ -9,9 +9,11 @@ using System.Runtime.Serialization;
 public class Player : MonoBehaviour
 {
     private static Player m_inst = null;
+    private bool m_init = false;
     private int m_junk = 999;
     private int m_eleCircuit = 999;
     private int m_coin = 999;
+
 
     private TurretInfo[] m_turretInfos = new TurretInfo[(int)Turret.End];
     public LabInfo[] m_labInfos = new LabInfo[(int)Lab.End];
@@ -67,6 +69,11 @@ public class Player : MonoBehaviour
  
     public void Init()
     {
+        if (m_init)
+            return;
+        else
+            m_init = true;
+
         m_sourcePlanetMaxHP = PlanetCtrl.Inst.m_maxHP;
 
         if (FileMgr.Inst.PlayerReset== true)
