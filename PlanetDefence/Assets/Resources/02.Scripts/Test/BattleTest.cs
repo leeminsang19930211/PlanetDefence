@@ -27,13 +27,7 @@ public class BattleTest : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F3))
         {
-            FileStream fs = File.Open(Application.persistentDataPath + "TestData.bin", FileMode.Create);
-
-            BinaryWriter wr = new BinaryWriter(fs);
-
-            wr.Write(GlobalGameObjectMgr.Inst.CurDay +1);
-
-            fs.Close();
+            FileMgr.Inst.SavePlayerData();
         }
 
 

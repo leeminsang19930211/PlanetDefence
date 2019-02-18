@@ -468,6 +468,8 @@ public class TurretMgr : MonoBehaviour
         AddTurret("Turret_Lv3_Gatling");
 
         AddTurretSupports();
+
+        BattleGameObjectMgr.Inst.OffTurretSupports(2);
     }
 
     private PlanetArea IdxToArea(int num)

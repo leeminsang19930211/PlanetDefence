@@ -844,7 +844,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
-    public void OnTurretSupports(int num)
+    public void UpdateTurretSupports(int num)
     {
         int max = num;
 
@@ -853,6 +853,11 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         for (int i = 0; i < 4; ++i)
         {
+            for (int j = 3; j < 3 + 2; ++j)
+            {
+                m_TurretSupports[i * 5 + j].SetActive(false);
+            }
+
             for (int j = 3; j < 3 + max; ++j)
             {
                 m_TurretSupports[i * 5 + j].SetActive(true);

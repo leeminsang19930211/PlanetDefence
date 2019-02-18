@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
 public class GlobalGameObjectMgr : MonoBehaviour
 {
     public CardInfo SelectedCard = null;
@@ -38,6 +41,44 @@ public class GlobalGameObjectMgr : MonoBehaviour
 
         if (CurDay > MaxDay)
             CurDay = MaxDay;
+    }
+
+    public bool SaveData(string path)
+    {
+        FileStream fileStream = new FileStream(path, FileMode.Create);
+
+        if (fileStream == null)
+        {
+            Debug.LogError("File open for saving global data failed");
+            return false;
+        }
+
+        BinaryFormatter binFormatter = new BinaryFormatter();
+
+        binFormatter.Serialize(fileStream, CurDay);
+ 
+        fileStream.Close();
+
+        return true;
+    }
+
+    public bool LoadData(string path)
+    {
+        FileStream fileStream = new FileStream(path, FileMode.Open);
+
+        if (fileStream == null)
+        {
+            Debug.LogError("File open for loading player data failed");
+            return false;
+        }
+
+        BinaryFormatter binFormatter = new BinaryFormatter();
+
+        CurDay = (int)binFormatter.Deserialize(fileStream);
+        
+        fileStream.Close();
+
+        return true;
     }
 
     // GameObjectMgr에 등록된 모든 오브젝트는 씬이 변해도 파괴되지 않는다.

@@ -13,5 +13,7 @@ public class PreLoadingInitCtrl : MonoBehaviour
         Application.targetFrameRate = 60;
 
 #endif
+        FileMgr.Inst.LoadGlobalData();
+        FileMgr.Inst.LoadPlayerData();
     }
 }

@@ -26,7 +26,7 @@ public class SceneLoader : MonoBehaviour
 
         if (m_curScene == "PreLoading" && nextScene == "Lobby")
         {
-            SceneManager.LoadScene("Lobby");          
+            SceneManager.LoadScene("Lobby");
         }
         else if (m_curScene == "Lobby" && nextScene == "Choice")
         {          
@@ -41,11 +41,11 @@ public class SceneLoader : MonoBehaviour
             SceneManager.LoadScene("Battle");
         }
         else if(m_curScene == "Battle" && nextScene == "Lobby")
-        {
+        {            
             SceneManager.LoadScene("Lobby");                  
         }
         else if(m_curScene == "Battle" && nextScene == "Choice")
-        {
+        {      
             SceneManager.LoadScene("Choice");
         }
         else

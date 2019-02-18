@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -61,52 +64,21 @@ public class Player : MonoBehaviour
         }
     }
 
+ 
     public void Init()
     {
-        for (int i = 0; i < (int)Turret.End; ++i)
-        {
-            m_turretInfos[i]._lock = false;
-        }
-
-        for (int i = 0; i < (int)Lab.End; ++i)
-        {
-            m_labInfos[i]._lock = false;
-            m_labInfos[i].stacks = 0;
-        }
-
-        for (int i = 0; i < (int)SpaceShipPart.End; i++)
-        {
-            m_spcPartInfos[i]._repaired = false;
-        }
-
         m_sourcePlanetMaxHP = PlanetCtrl.Inst.m_maxHP;
-        m_globalData.planetHP = PlanetCtrl.Inst.m_maxHP;
-        m_globalData.turretSupoorts = 3;
-        m_bulletDatas = BulletMgr.Inst.GetSourceBulletDatas();
-        m_spaceShipDatas = SpaceShipMgr.Inst.GetSourceSpaceShipDatas();
-        m_turretDatas = TurretMgr.Inst.GetSourceTurretDatas();
 
-        m_labProcs[(int)Lab.IncTurretSupports] = LabProc_IncTurretSupports;
-        m_labProcs[(int)Lab.IncTurretHelth] = LabProc_IncTurretHelth;
-        m_labProcs[(int)Lab.IncPlanetHelth] = LabProc_IncPlanetHelth;
-        m_labProcs[(int)Lab.DecSpaceShipHelth] = LabProc_DecSpaceShipHelth;
-        m_labProcs[(int)Lab.IncJunkDrops] = LabProc_IncJunkDrops;
-        m_labProcs[(int)Lab.IncCoinDrops] = LabProc_IncCoinDrops;
-        m_labProcs[(int)Lab.DecJunkConsumtion] = LabProc_DecJunkConsumtion;
-        m_labProcs[(int)Lab.ReturnTurretRsrc] = LabProc_ReturnTurretRsrc;
+        if (FileMgr.Inst.PlayerReset== true)
+        {
+            SetUpNewDatas();
+        }
+        else
+        {
+            UpdateAllByLabInfos();
+        }
 
-        m_labProcs[(int)Lab.IncGatlingDamage] = LabProc_IncGatlingDamage;
-        m_labProcs[(int)Lab.IncFastFireSpeed] = LabProc_IncFastFireSpeed;
-        m_labProcs[(int)Lab.IncSplashRange] = LabProc_IncSplashRange;
-        m_labProcs[(int)Lab.IncLaserDuration] = LabProc_IncLaserDuration;
-        m_labProcs[(int)Lab.DecShieldHitDamage] = LabProc_DecShieldHitDamage;
-        m_labProcs[(int)Lab.IncPoisonDotDamage] = LabProc_IncPoisonDotDamage;
-        m_labProcs[(int)Lab.IncSlowDuration] = LabProc_IncSlowDuration;
-        m_labProcs[(int)Lab.IncPauseDuration] = LabProc_IncPauseDuration;
-        m_labProcs[(int)Lab.IncSniperFireSpeed] = LabProc_IncSniperFireSpeed;
-        m_labProcs[(int)Lab.IncHealAmount] = LabProc_IncHealAmount;
-        m_labProcs[(int)Lab.incBerserkerDamage] = LabProc_incBerserkerDamage;
-        m_labProcs[(int)Lab.IncKingSlayerFireSpeed] = LabProc_IncKingSlayerFireSpeed;
+        SetUpLabProcFuncs();
 
         UpdateRsrc();
     }
@@ -118,11 +90,83 @@ public class Player : MonoBehaviour
 
     public void Release_Fail()
     {
-        m_junk = 0;
-        m_eleCircuit = 0;
-        m_coin = 0;
+        // TEMP
+        m_junk = 999;
+        m_eleCircuit = 999;
+        m_coin = 999;
+
+        for (int i = 0; i < m_labInfos.Length; ++i)
+        {
+            m_labInfos[i].stacks = 0;
+        }
+
+        m_globalData.planetHP = m_sourcePlanetMaxHP;
+        TurretJunkCosts = (int[])m_sourceTurretJunkCosts.Clone();
+
+        m_bulletDatas = BulletMgr.Inst.GetSourceBulletDatas();
+        m_spaceShipDatas = SpaceShipMgr.Inst.GetSourceSpaceShipDatas();
+        m_turretDatas = TurretMgr.Inst.GetSourceTurretDatas();
 
         UpdateRsrc();
+       UpdateAllByLabInfos();
+    }
+
+    public bool SaveData(string path)
+    {
+        FileStream fileStream = new FileStream(path, FileMode.Create);
+
+        if(fileStream == null)
+        {
+            Debug.LogError("File open for saving player data failed");
+            return false;
+        }
+
+        BinaryFormatter binFormatter = new BinaryFormatter();
+
+        binFormatter.Serialize(fileStream, m_junk);
+        binFormatter.Serialize(fileStream, m_eleCircuit);
+        binFormatter.Serialize(fileStream, m_coin);
+        binFormatter.Serialize(fileStream, m_turretInfos);
+        binFormatter.Serialize(fileStream, m_labInfos);
+        binFormatter.Serialize(fileStream, m_spcPartInfos);
+        binFormatter.Serialize(fileStream, m_globalData);
+        binFormatter.Serialize(fileStream, m_bulletDatas);
+        binFormatter.Serialize(fileStream, m_spaceShipDatas);
+        binFormatter.Serialize(fileStream, m_turretDatas);
+        binFormatter.Serialize(fileStream, TurretJunkCosts);
+
+        fileStream.Close();
+
+        return true;
+    }
+
+    public bool LoadData(string path)
+    {
+        FileStream fileStream = new FileStream(path, FileMode.Open);
+
+        if (fileStream == null)
+        {
+            Debug.LogError("File open for loading player data failed");
+            return false;
+        }
+
+        BinaryFormatter binFormatter = new BinaryFormatter();
+
+        m_junk = (int)binFormatter.Deserialize(fileStream);
+        m_eleCircuit =(int)binFormatter.Deserialize(fileStream);
+        m_coin = (int)binFormatter.Deserialize(fileStream);
+        m_turretInfos = (TurretInfo[])binFormatter.Deserialize(fileStream);
+        m_labInfos = (LabInfo[])binFormatter.Deserialize(fileStream);
+        m_spcPartInfos = (SpaceShipPartInfo[])binFormatter.Deserialize(fileStream);
+        m_globalData = (GlobalData)binFormatter.Deserialize(fileStream);
+        m_bulletDatas = (BulletData[])binFormatter.Deserialize(fileStream);
+        m_spaceShipDatas = (SpaceShipData[])binFormatter.Deserialize(fileStream);
+        m_turretDatas = (TurretData[]) binFormatter.Deserialize(fileStream);
+        TurretJunkCosts = (int[])binFormatter.Deserialize(fileStream);
+
+        fileStream.Close();
+
+        return true;
     }
 
     public BulletData GetBulletData(Bullet bullet)
@@ -394,15 +438,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void LabProc_IncTurretSupports(int idx)
+    private void LabProc_IncTurretSupports(int idx)
     {
-        if (m_labInfos[idx].stacks > 2)
-            return;
-
-        BattleGameObjectMgr.Inst.OnTurretSupports(m_labInfos[idx].stacks);
+        BattleGameObjectMgr.Inst.UpdateTurretSupports(m_labInfos[idx].stacks);
     }
 
-    public void LabProc_IncTurretHelth(int idx)
+    private void LabProc_IncTurretHelth(int idx)
     {
         TurretData[] sourceDatas = TurretMgr.Inst.GetSourceTurretDatas();
 
@@ -417,14 +458,14 @@ public class Player : MonoBehaviour
         TurretMgr.Inst.UpdateTurretDatas();
     }
 
-    public void LabProc_IncPlanetHelth(int idx)
+    private void LabProc_IncPlanetHelth(int idx)
     {
         m_globalData.planetHP = m_sourcePlanetMaxHP + (int)(m_sourcePlanetMaxHP * m_labInfos[idx].stacks * 0.1f);
 
         PlanetCtrl.Inst.MaxHP = m_globalData.planetHP;
     }
 
-    public void LabProc_DecSpaceShipHelth(int idx)
+    private void LabProc_DecSpaceShipHelth(int idx)
     {
         SpaceShipData[] sourceDatas = SpaceShipMgr.Inst.GetSourceSpaceShipDatas();
 
@@ -437,7 +478,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void LabProc_IncJunkDrops(int idx)
+    private void LabProc_IncJunkDrops(int idx)
     {
         SpaceShipData[] sourceDatas = SpaceShipMgr.Inst.GetSourceSpaceShipDatas();
 
@@ -450,7 +491,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void LabProc_IncCoinDrops(int idx)
+    private void LabProc_IncCoinDrops(int idx)
     {
         SpaceShipData[] sourceDatas = SpaceShipMgr.Inst.GetSourceSpaceShipDatas();
 
@@ -463,7 +504,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void LabProc_DecJunkConsumtion(int idx)
+    private void LabProc_DecJunkConsumtion(int idx)
     {
         for(int i=0; i<TurretJunkCosts.Length; ++i)
         {
@@ -471,12 +512,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void LabProc_ReturnTurretRsrc(int idx)
+    private void LabProc_ReturnTurretRsrc(int idx)
     {
 
     }
 
-    public void LabProc_IncGatlingDamage(int idx)
+    private void LabProc_IncGatlingDamage(int idx)
     {
         BulletData sourceData0 = (BulletData)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv1_Gatling);
         BulletData sourceData1 = (BulletData)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv2_Gatling);
@@ -487,7 +528,7 @@ public class Player : MonoBehaviour
         m_bulletDatas[(int)Bullet.Lv3_Gatling].damage = sourceData2.damage + (int)(sourceData2.damage * m_labInfos[idx].stacks * 0.1f);
     }
 
-    public void LabProc_IncFastFireSpeed(int idx)
+    private void LabProc_IncFastFireSpeed(int idx)
     {
         TurretData_Fast sourceData0 = (TurretData_Fast)TurretMgr.Inst.GetSourceTurretData(Turret.Lv1_Fast);
         TurretData_Fast sourceData1 = (TurretData_Fast)TurretMgr.Inst.GetSourceTurretData(Turret.Lv2_Fast);
@@ -500,7 +541,7 @@ public class Player : MonoBehaviour
         TurretMgr.Inst.UpdateTurretDatas();
     }
 
-    public void LabProc_IncSplashRange(int idx)
+    private void LabProc_IncSplashRange(int idx)
     {
         BulletData_Missile sourceData0 = (BulletData_Missile)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv1_Missile);
         BulletData_Missile sourceData1 = (BulletData_Missile)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv2_Missile);
@@ -511,7 +552,7 @@ public class Player : MonoBehaviour
         ((BulletData_Missile)m_bulletDatas[(int)Bullet.Lv3_Missile]).splashRange = sourceData2.splashRange + (sourceData2.splashRange * m_labInfos[idx].stacks * 0.1f);
     }
 
-    public void LabProc_IncLaserDuration(int idx)
+    private void LabProc_IncLaserDuration(int idx)
     {
         BulletData_Laser sourceData0 = (BulletData_Laser)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv1_Laser);
         BulletData_Laser sourceData1 = (BulletData_Laser)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv2_Laser);
@@ -522,7 +563,7 @@ public class Player : MonoBehaviour
         ((BulletData_Laser)m_bulletDatas[(int)Bullet.Lv3_Laser]).duration = sourceData2.duration + (sourceData2.duration * m_labInfos[idx].stacks * 0.1f);
     }
 
-    public void LabProc_DecShieldHitDamage(int idx)
+    private void LabProc_DecShieldHitDamage(int idx)
     {
         TurretData_Shield sourceData0 = (TurretData_Shield)TurretMgr.Inst.GetSourceTurretData(Turret.Lv2_Shield);
         TurretData_Shield sourceData1 = (TurretData_Shield)TurretMgr.Inst.GetSourceTurretData(Turret.Lv3_Shield);
@@ -531,9 +572,9 @@ public class Player : MonoBehaviour
         ((TurretData_Fast)m_turretDatas[(int)Turret.Lv3_Shield]).fireDelay = sourceData1.hitDamageScale - (sourceData1.hitDamageScale * m_labInfos[idx].stacks * 0.1f);
 
         TurretMgr.Inst.UpdateTurretDatas();
-    }                                                                                                                                 
+    }
 
-    public void LabProc_IncPoisonDotDamage(int idx)
+    private void LabProc_IncPoisonDotDamage(int idx)
     {
         BulletData_Poison sourceData0 = (BulletData_Poison)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv2_Poison);
         BulletData_Poison sourceData1 = (BulletData_Poison)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv3_Poison);
@@ -542,7 +583,7 @@ public class Player : MonoBehaviour
         ((BulletData_Poison)m_bulletDatas[(int)Bullet.Lv3_Poison]).dotDamage = sourceData1.dotDamage + (int)(sourceData1.dotDamage * m_labInfos[idx].stacks * 0.1f);
     }
 
-    public void LabProc_IncSlowDuration(int idx)
+    private void LabProc_IncSlowDuration(int idx)
     {
         BulletData_Slow sourceData0 = (BulletData_Slow)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv2_Slow);
         BulletData_Slow sourceData1 = (BulletData_Slow)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv3_Slow);
@@ -551,7 +592,7 @@ public class Player : MonoBehaviour
         ((BulletData_Slow)m_bulletDatas[(int)Bullet.Lv3_Slow]).duration = sourceData1.duration + sourceData1.duration * m_labInfos[idx].stacks * 1;
     }
 
-    public void LabProc_IncPauseDuration(int idx)
+    private void LabProc_IncPauseDuration(int idx)
     {
         BulletData_Pause sourceData0 = (BulletData_Pause)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv2_Pause);
         BulletData_Pause sourceData1 = (BulletData_Pause)BulletMgr.Inst.GetSourceBulletData(Bullet.Lv3_Pause);
@@ -560,7 +601,7 @@ public class Player : MonoBehaviour
         ((BulletData_Pause)m_bulletDatas[(int)Bullet.Lv3_Pause]).duration = sourceData1.duration + sourceData1.duration * m_labInfos[idx].stacks * 1;
     }
 
-    public void LabProc_IncSniperFireSpeed(int idx)
+    private void LabProc_IncSniperFireSpeed(int idx)
     {
         TurretData_Sniper sourceData0 = (TurretData_Sniper)TurretMgr.Inst.GetSourceTurretData(Turret.Lv3_Sniper);
 
@@ -569,7 +610,7 @@ public class Player : MonoBehaviour
         TurretMgr.Inst.UpdateTurretDatas();
     }
 
-    public void LabProc_IncHealAmount(int idx)
+    private void LabProc_IncHealAmount(int idx)
     {
         BulletData sourceData0 = BulletMgr.Inst.GetSourceBulletData(Bullet.Lv3_Heal);
 
@@ -585,15 +626,70 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void LabProc_incBerserkerDamage(int idx)
+    private void LabProc_incBerserkerDamage(int idx)
     {
         BulletData sourceData0 = BulletMgr.Inst.GetSourceBulletData(Bullet.Lv3_Berserker);
 
         (m_bulletDatas[(int)Bullet.Lv3_Berserker]).damage = sourceData0.damage + (int)(sourceData0.damage * m_labInfos[idx].stacks * 0.1f);
     }
 
-    public void LabProc_IncKingSlayerFireSpeed(int idx)
+    private void LabProc_IncKingSlayerFireSpeed(int idx)
     {
 
+    }
+
+    private void UpdateAllByLabInfos()
+    {
+        LabProc_IncTurretSupports((int)Lab.IncTurretSupports);
+        LabProc_IncPlanetHelth((int)Lab.IncPlanetHelth);
+    }
+
+    private void SetUpNewDatas()
+    {
+        for (int i = 0; i < (int)Turret.End; ++i)
+        {
+            m_turretInfos[i]._lock = false;
+        }
+
+        for (int i = 0; i < (int)Lab.End; ++i)
+        {
+            m_labInfos[i]._lock = false;
+            m_labInfos[i].stacks = 0;
+        }
+
+        for (int i = 0; i < (int)SpaceShipPart.End; i++)
+        {
+            m_spcPartInfos[i]._repaired = false;
+        }
+        
+        m_globalData.planetHP = PlanetCtrl.Inst.m_maxHP;
+        m_bulletDatas = BulletMgr.Inst.GetSourceBulletDatas();
+        m_spaceShipDatas = SpaceShipMgr.Inst.GetSourceSpaceShipDatas();
+        m_turretDatas = TurretMgr.Inst.GetSourceTurretDatas();
+    }
+
+    private void SetUpLabProcFuncs()
+    {
+        m_labProcs[(int)Lab.IncTurretSupports] = LabProc_IncTurretSupports;
+        m_labProcs[(int)Lab.IncTurretHelth] = LabProc_IncTurretHelth;
+        m_labProcs[(int)Lab.IncPlanetHelth] = LabProc_IncPlanetHelth;
+        m_labProcs[(int)Lab.DecSpaceShipHelth] = LabProc_DecSpaceShipHelth;
+        m_labProcs[(int)Lab.IncJunkDrops] = LabProc_IncJunkDrops;
+        m_labProcs[(int)Lab.IncCoinDrops] = LabProc_IncCoinDrops;
+        m_labProcs[(int)Lab.DecJunkConsumtion] = LabProc_DecJunkConsumtion;
+        m_labProcs[(int)Lab.ReturnTurretRsrc] = LabProc_ReturnTurretRsrc;
+
+        m_labProcs[(int)Lab.IncGatlingDamage] = LabProc_IncGatlingDamage;
+        m_labProcs[(int)Lab.IncFastFireSpeed] = LabProc_IncFastFireSpeed;
+        m_labProcs[(int)Lab.IncSplashRange] = LabProc_IncSplashRange;
+        m_labProcs[(int)Lab.IncLaserDuration] = LabProc_IncLaserDuration;
+        m_labProcs[(int)Lab.DecShieldHitDamage] = LabProc_DecShieldHitDamage;
+        m_labProcs[(int)Lab.IncPoisonDotDamage] = LabProc_IncPoisonDotDamage;
+        m_labProcs[(int)Lab.IncSlowDuration] = LabProc_IncSlowDuration;
+        m_labProcs[(int)Lab.IncPauseDuration] = LabProc_IncPauseDuration;
+        m_labProcs[(int)Lab.IncSniperFireSpeed] = LabProc_IncSniperFireSpeed;
+        m_labProcs[(int)Lab.IncHealAmount] = LabProc_IncHealAmount;
+        m_labProcs[(int)Lab.incBerserkerDamage] = LabProc_incBerserkerDamage;
+        m_labProcs[(int)Lab.IncKingSlayerFireSpeed] = LabProc_IncKingSlayerFireSpeed;
     }
 }
