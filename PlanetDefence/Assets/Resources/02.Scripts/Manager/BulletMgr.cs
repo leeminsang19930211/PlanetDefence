@@ -5,7 +5,6 @@ using UnityEngine;
 public class BulletMgr : MonoBehaviour
 {
     private static BulletMgr m_inst = null;
-    private bool m_init = false;
     private List<int>[] m_bulletPoolIndex = new List<int>[(int)BulletPool.End];
     private List<List<BulletCtrl>>[] m_bulletPool = new List<List<BulletCtrl>>[(int)BulletPool.End];
     private Dictionary<string, GameObject> m_sourceBullets = new Dictionary<string, GameObject>();
@@ -26,29 +25,8 @@ public class BulletMgr : MonoBehaviour
         }
     }
 
-    public void _Reset()
+    public void _OnStart()
     {
-        if (m_inst)
-        {
-            m_init = false;
-
-            for (int i = 0; i < (int)BulletPool.End; ++i)
-            {
-                ClearBulletPool((BulletPool)i);
-            }
-
-
-            m_sourceBullets.Clear();
-        }
-    }
-
-    public void Init()
-    {
-        if (m_init)
-            return;
-        else
-            m_init = true;
-
         GameObject bullets = GlobalGameObjectMgr.Inst.FindGameObject("Bullets");
 
         // 테스트 환경 용.씬에서 직접 프리팹을 추가해서 테스트 하는경우에는 GlobalGameObjectMgr.Inst 에 추가가 안되있다

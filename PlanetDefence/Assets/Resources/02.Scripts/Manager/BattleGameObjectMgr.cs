@@ -23,9 +23,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
- 
-    private bool m_init = false;
-
     /* 여기서 부터 필요한 내용들을 작성하면 된다 */
     private MainCameraCtrl m_mainCameraCtrl = null;
     private EnemyCntCtrl m_enemyCntCtrl = null;
@@ -98,13 +95,9 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
-    public void Init()
+    // 이곳에는 변수를 얻어오는 로직만 짤것
+    public void _OnStart()
     {
-        if (m_init)
-            return;
-        else
-            m_init = true;
-
         m_mainCameraCtrl = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<MainCameraCtrl>();
         m_enemyCntCtrl = GameObject.FindGameObjectWithTag("ENEMY_CNT")?.GetComponent<EnemyCntCtrl>();
         m_planetHpCtrl = GameObject.FindGameObjectWithTag("PLANET_HP")?.GetComponent<PlanetHPCtrl>();
@@ -160,26 +153,17 @@ public class BattleGameObjectMgr : MonoBehaviour
      
         m_BrokenSpaceships = GameObject.FindGameObjectsWithTag("BROKENSPACESHIP");
         m_Rockets = GameObject.FindGameObjectsWithTag("ROCKET");
-        m_RepairedSpaceShip = GameObject.Find("RepairedSpaceShip");
-
-        // 시작시에 껏다 키는 것들 다 이 함수 안에 작성할것
-        _InitContents();
+        m_RepairedSpaceShip = GameObject.Find("RepairedSpaceShip");       
     }
 
-    public void _Reset()
-    {
-        if (m_inst == null)
-            return;
-
-        m_init = false;
-
-        _InitContents();
-    }
-
-    private void _InitContents()
+    // 시작시에 껏다 키는 로직은 여기다 작성할것
+    public void _OnNewBattle()
     {
         PopDownToLobby();
         PopDownResult();
+
+        m_rightArrow.SetActive(true);
+        m_leftArrow.SetActive(true);
 
         m_RepairedSpaceShip.SetActive(false);
         m_BrokenSpaceships[3].SetActive(false);
@@ -697,7 +681,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
- public void PopUpBuildWarningNoBP()
+    public void PopUpBuildWarningNoBP()
     {
         m_BuildWarningNoBP.SetActive(true);
     }

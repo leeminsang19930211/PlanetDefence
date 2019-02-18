@@ -137,7 +137,7 @@ public class Gunner : MonoBehaviour
     }
 
     // 새로운 배틀이 시작되었을때 호출되는 함수
-    public void OnNewBattle()
+    public void _OnNewBattle()
     {
         if (m_maxBullets > 0)
         {

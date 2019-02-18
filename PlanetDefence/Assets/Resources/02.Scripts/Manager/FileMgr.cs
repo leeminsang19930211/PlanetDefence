@@ -37,11 +37,6 @@ public class FileMgr : MonoBehaviour
         }
     }
 
-    public void _Reset()
-    {
-
-    }
-
     public bool PlayerReset { get { return CheckReset(path_playerReset); } }
     public bool GlobalReset { get { return CheckReset(path_globalReset);  } }
 

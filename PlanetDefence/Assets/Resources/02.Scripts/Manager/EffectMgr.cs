@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Collections;
 
-public class _EffectMgr : MonoBehaviour
+public class EffectMgr : MonoBehaviour
 {
-    private static _EffectMgr m_inst = null;
-    private bool m_init = false;
+    private static EffectMgr m_inst = null;
     private int[] m_effectPoolIdx = new int[(int)Effect.End];
     private List<EffectCtrl>[] m_effectPool = new List<EffectCtrl>[(int)Effect.End];
     private Dictionary<string, GameObject> m_sourceEffects = new Dictionary<string, GameObject>();
 
-    public static _EffectMgr Inst
+    public static EffectMgr Inst
     {
         get
         {
@@ -18,7 +17,7 @@ public class _EffectMgr : MonoBehaviour
             {
                 GameObject container = new GameObject();
                 container.name = "EffectMgr";
-                m_inst = container.AddComponent<_EffectMgr>() as _EffectMgr;
+                m_inst = container.AddComponent<EffectMgr>() as EffectMgr;
                 DontDestroyOnLoad(container);
             }
 
@@ -26,28 +25,8 @@ public class _EffectMgr : MonoBehaviour
         }
     }
 
-    public void _Reset()
+    public void _OnStart()
     {
-        if (m_inst)
-        {
-            m_init = false;
-
-            for (int i = 0; i < (int)Effect.End; ++i)
-            {
-                ClearEffects((Effect)i);
-            }
-
-            m_sourceEffects.Clear();
-        }
-    }
-
-    public void Init()
-    {
-        if (m_init)
-            return;
-        else
-            m_init = true;
-
         GameObject effects = GlobalGameObjectMgr.Inst.FindGameObject("Effects");
 
         // 테스트 환경 용.씬에서 직접 프리팹을 추가해서 테스트 하는경우에는 GlobalGameObjectMgr.Inst 에 추가가 안되있다

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class BattleCtrl: MonoBehaviour
 {
+    private static bool m_onStart = false;
+
     private void Awake()
     {
         SceneLoader.OnStartScene();
 
-        InitManagers();
-
-        InitBattleScene();
+        _OnStart();
+        _OnNewBattle();
+        _OnBattle();
     }
 
     public static void Release_Clear()
@@ -18,7 +20,7 @@ public class BattleCtrl: MonoBehaviour
         Player.Inst.Release_Clear();
         SpaceShipMgr.Inst.Release_Clear();
         TurretMgr.Inst.Release_Clear();
-        _EffectMgr.Inst.Release_Clear();
+        EffectMgr.Inst.Release_Clear();
         BulletMgr.Inst.Release_Clear();
         BattleGameObjectMgr.Inst.Release_Clear();
         PlanetCtrl.Inst.Release_Clear();
@@ -35,7 +37,7 @@ public class BattleCtrl: MonoBehaviour
         Player.Inst.Release_Fail();
         SpaceShipMgr.Inst.Release_Fail();
         TurretMgr.Inst.Release_Fail();
-        _EffectMgr.Inst.Release_Fail();
+        EffectMgr.Inst.Release_Fail();
         BulletMgr.Inst.Release_Fail();
         BattleGameObjectMgr.Inst.Release_Fail();
         PlanetCtrl.Inst.Release_Fail();
@@ -47,17 +49,22 @@ public class BattleCtrl: MonoBehaviour
         FileMgr.Inst.SaveGlobaData();
     } 
 
-    private void InitManagers()
+    private void _OnStart()
     {
-        BattleGameObjectMgr.Inst.Init();
-        BulletMgr.Inst.Init();
-        _EffectMgr.Inst.Init();
-        TurretMgr.Inst.Init();
-        SpaceShipMgr.Inst.Init();
-        Player.Inst.Init();
+        if(m_onStart == false)
+        {
+            BattleGameObjectMgr.Inst._OnStart();
+            BulletMgr.Inst._OnStart();
+            EffectMgr.Inst._OnStart();
+            TurretMgr.Inst._OnStart();
+            SpaceShipMgr.Inst._OnStart();
+            Player.Inst._OnStart();
+
+            m_onStart = true;
+        } 
     }
 
-    private void InitBattleScene()
+    private void _OnNewBattle()
     {
         if (GlobalGameObjectMgr.Inst.Battle == false)
         {
@@ -122,14 +129,20 @@ public class BattleCtrl: MonoBehaviour
 
             BulletMgr.Inst.AllocateBulletPool(BulletPool.Turret, 20);
             BulletMgr.Inst.AllocateBulletPool(BulletPool.SpaceShip, spaceShipsNum);
-   
-            _EffectMgr.Inst.AllocateEffects(Effect.Explosion0, 70);
-            _EffectMgr.Inst.AllocateEffects(Effect.Explosion1, 70);
-            _EffectMgr.Inst.AllocateEffects(Effect.ShieldHit0, 70);
 
-            TurretMgr.Inst.OnNewBattle();
+            EffectMgr.Inst.AllocateEffects(Effect.Explosion0, 70);
+            EffectMgr.Inst.AllocateEffects(Effect.Explosion1, 70);
+            EffectMgr.Inst.AllocateEffects(Effect.ShieldHit0, 70);
+
+            BattleGameObjectMgr.Inst._OnNewBattle();
+            TurretMgr.Inst._OnNewBattle();
 
             SpaceShipMgr.Inst.StartCreatingWaves(infos);
         }
+    }
+
+    private void _OnBattle()
+    {
+
     }
 }

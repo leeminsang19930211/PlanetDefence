@@ -9,9 +9,7 @@ public class PreLoadingInitCtrl : MonoBehaviour
         Screen.SetResolution(Screen.width, Screen.height, true);
 
 #if UNITY_ANDROID
-
         Application.targetFrameRate = 60;
-
 #endif
         FileMgr.Inst.LoadGlobalData();
         FileMgr.Inst.LoadPlayerData();

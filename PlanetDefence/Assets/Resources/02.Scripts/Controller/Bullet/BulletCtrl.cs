@@ -109,7 +109,7 @@ public class BulletCtrl : MonoBehaviour
 
     protected void PlayEffect(Effect effect, Vector3 pos )
     {
-        _EffectMgr.Inst.PlayEffect(effect, pos);
+        EffectMgr.Inst.PlayEffect(effect, pos);
     }
 
     protected virtual void _OnTargetByRayCast(Gunner target, Vector3 hitPos)

@@ -5,7 +5,6 @@ using UnityEngine;
 public class TurretMgr : MonoBehaviour
 {
     private static TurretMgr m_inst = null;
-    private bool m_init = false;
     private int m_focusedTurretSupportIdx = -1; // 클릭하여 현재 포커싱 된 터렛 지지대의 인덱스이다
     private List<TurretSupportCtrl> m_turretSupportCtrs = new List<TurretSupportCtrl>();
     private Dictionary<string, GameObject> m_sourceTurrets = new Dictionary<string, GameObject>();
@@ -26,18 +25,6 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
-    public void _Reset()
-    {
-        if (m_inst)
-        {
-            m_init = false;
-            m_focusedTurretSupportIdx = -1;
-            Release_Fail();
-            m_turretSupportCtrs.Clear();
-            m_sourceTurrets.Clear();
-        }
-    }
-
     public TurretCtrl FocusedTurret
     {
         get
@@ -49,13 +36,8 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
-    public void Init()
+    public void _OnStart()
     {
-        if (m_init)
-            return;
-        else
-            m_init = true;
-
         GameObject turrets = GlobalGameObjectMgr.Inst.FindGameObject("Turrets");
 
         // 테스트 환경 용.씬에서 직접 프리팹을 추가해서 테스트 하는경우에는 GlobalGameObjectMgr.Inst 에 추가가 안되있다
@@ -70,6 +52,17 @@ public class TurretMgr : MonoBehaviour
             turrets.SetActive(true);
             SetUpTurrets();
             turrets.SetActive(false);
+        }
+    }
+
+    public void _OnNewBattle()
+    {
+        foreach (TurretSupportCtrl support in m_turretSupportCtrs)
+        {
+            if (support.TurretCtrl == null)
+                continue;
+
+            support.TurretCtrl._OnNewBattle();
         }
     }
 
@@ -126,17 +119,6 @@ public class TurretMgr : MonoBehaviour
         TurretCtrl ctrl = source.GetComponent<TurretCtrl>();
 
         return ctrl.TurretData;
-    }
-
-    public void OnNewBattle()
-    {
-        foreach (TurretSupportCtrl support in m_turretSupportCtrs)
-        {
-            if (support.TurretCtrl == null)
-                continue;
-
-            support.TurretCtrl.OnNewBattle();
-        }
     }
 
     public void UpdateTurretDatas()
@@ -213,7 +195,6 @@ public class TurretMgr : MonoBehaviour
 
         return null;
     }
-
 
     public Gunner FindFirstTargetInFan(Vector3 from, float fanAngle)
     {     

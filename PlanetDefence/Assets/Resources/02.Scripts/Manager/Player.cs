@@ -9,7 +9,6 @@ using System.Runtime.Serialization;
 public class Player : MonoBehaviour
 {
     private static Player m_inst = null;
-    private bool m_init = false;
     private int m_junk = 999;
     private int m_eleCircuit = 999;
     private int m_coin = 999;
@@ -64,26 +63,12 @@ public class Player : MonoBehaviour
             return m_inst;
         }
     }
-
-    public void _Reset()
-    {
-        if (m_inst)
-        {
-            m_init = false;
-            SetUpNewDatas();
-        }     
-    }
  
-    public void Init()
+    public void _OnStart()
     {
-        if (m_init)
-            return;
-        else
-            m_init = true;
-
         m_sourcePlanetMaxHP = PlanetCtrl.Inst.m_maxHP;
 
-        if (FileMgr.Inst.PlayerReset== true)
+        if (FileMgr.Inst.PlayerReset == true)
         {
             SetUpNewDatas();
         }
@@ -93,7 +78,6 @@ public class Player : MonoBehaviour
         }
 
         SetUpLabProcFuncs();
-
         UpdateRsrc();
     }
 
@@ -183,6 +167,11 @@ public class Player : MonoBehaviour
         return true;
     }
 
+    public int GetLabStacks(Lab lab)
+    {
+        return m_labInfos[(int)lab].stacks;
+    }
+
     public BulletData GetBulletData(Bullet bullet)
     {
         return m_bulletDatas[(int)bullet];
@@ -216,7 +205,6 @@ public class Player : MonoBehaviour
         BattleGameObjectMgr.Inst.UpdateCoinCnt(m_coin);
     }
 
-    /* 해금여부를 반환 하는 함수. 해금되있으면 true 반환*/
     public bool CheckUnLock(Turret turret)
     {
         return !m_turretInfos[(int)turret]._lock;
@@ -231,48 +219,7 @@ public class Player : MonoBehaviour
     {
         return !m_spcPartInfos[(int)spcPart]._lock;
     }
-
-    // 연구 누적값을 반환한다 
-    public int GetLabStacks(Lab lab)
-    {
-        return m_labInfos[(int)lab].stacks;
-    }
-
-    // 터렛을 구매하고 생성한다. 포탑이 설치되어있는지 부터 체크한다.
-    public BuyErr BuyTurret(Turret turret, int junk, int eleCircuit)
-    {
-        if (true == TurretMgr.Inst.CheckTurretOnTurretSupport())
-            return BuyErr.AlreadySetUp;
-
-        if (junk > m_junk || eleCircuit > m_eleCircuit)
-            return BuyErr.NotEnoughRsrc;
-
-        m_junk -= junk;
-        m_eleCircuit -= eleCircuit;
-
-        UpdateRsrc();
-
-        TurretMgr.Inst.CreateTurretOnTurretSupport(turret);
-
-        return BuyErr.NoError;
-    }
-
-    // 터렛을 판매하고 삭제한다. 삭제할 터렛이 없을경우 false 리턴한다.
-    public bool SellTurret(int junk, int eleCircuit)
-    {
-        if (false == TurretMgr.Inst.CheckTurretOnTurretSupport())
-            return false;
-
-        m_junk += junk;
-        m_eleCircuit += eleCircuit;
-
-        UpdateRsrc();
-
-        TurretMgr.Inst.RemoveTurretOnTurretSupport();
-
-        return true;
-    }
-
+    
     public BuyErr BuyTurret(GameObject ThisBuildStartButton)
     {
         int BuildStartButtonIdx = System.Array.IndexOf(BattleGameObjectMgr.Inst.m_BuildStartButtons, ThisBuildStartButton);
