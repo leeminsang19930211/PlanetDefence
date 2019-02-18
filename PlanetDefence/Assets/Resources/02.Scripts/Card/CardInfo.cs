@@ -20,12 +20,12 @@ public enum MobType
     Pirate,
     BattleShip,
     DummyShip,
-    BionicShip,
-    StealthShip,
+    //BionicShip,
+    //StealthShip,
     ZombieShip,
     GhostShip,
     Little,
-    Meteor,
+    //Meteor,
     End,
 }
 //승완 작업 --------End--------- 190208 
