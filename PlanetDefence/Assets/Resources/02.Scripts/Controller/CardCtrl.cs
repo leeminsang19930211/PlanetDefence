@@ -17,7 +17,7 @@ public class CardCtrl : MonoBehaviour
     private int nCardNum = 3;
 
     [SerializeField]
-    private int nBossDay;
+    private int nBossDay = 1;
 
     [SerializeField]
     private bool nBossEnable = true;
@@ -42,7 +42,7 @@ public class CardCtrl : MonoBehaviour
             sCardPrefabDir = "03.Prefabs/Card/Boss";
         }
 
-        Cards = Resources.LoadAll(sCardPrefabDir);
+        Cards = Resources.LoadAll("03.Prefabs/Card/Boss");
         int nMaxCards = Cards.Length;
         RandomInstanceCardCreate(nMaxCards);
 
@@ -99,8 +99,7 @@ public class CardCtrl : MonoBehaviour
         else if(nBossEnable && GlobalGameObjectMgr.Inst.CurDay % nBossDay == 0)
         {
             ChoiceRandomCard(CardType.Boss);
-        }
-        
+        }        
     }
 
     void OnDisable()

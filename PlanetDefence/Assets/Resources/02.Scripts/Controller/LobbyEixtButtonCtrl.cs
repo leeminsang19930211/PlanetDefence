@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyEndButtonCtrl : MonoBehaviour
+public class LobbyEixtButtonCtrl : MonoBehaviour
 {
     public void OnClick()
     {

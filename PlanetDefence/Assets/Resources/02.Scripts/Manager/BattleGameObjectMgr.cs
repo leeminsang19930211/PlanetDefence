@@ -357,7 +357,7 @@ public class BattleGameObjectMgr : MonoBehaviour
     }
 
     public void PopDownResult()
-    {
+    { 
         m_resultPopUpPanel.SetActive(false);
     }
 
