@@ -137,6 +137,20 @@ public class Gunner : MonoBehaviour
         }
     }
 
+    // 새로운 배틀이 시작되었을때 호출되는 함수
+    public void OnNewBattle()
+    {
+        if (m_maxBullets > 0)
+        {
+            AllocateBullets();
+        }
+
+        if (m_maxEffects > 0)
+        {
+            AllocateEffects();
+        }
+    }
+
     // 초기화 함수. 상속받은 클래스에서 꼭 호출해줄것
     protected void Init()
     {
@@ -149,7 +163,7 @@ public class Gunner : MonoBehaviour
             AllocateBullets();
         }
 
-        if(m_maxEffects >0 )
+        if (m_maxEffects > 0)
         {
             AllocateEffects();
         }

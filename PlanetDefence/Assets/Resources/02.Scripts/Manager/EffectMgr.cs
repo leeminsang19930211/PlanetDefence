@@ -52,18 +52,18 @@ public class EffectMgr : MonoBehaviour
 
     public void Release_Clear()
     {
-        //for (int i = 0; i < (int)EffectPool.End; ++i)
-        //{
-        //    ClearEffectPool((EffectPool)i);
-        //}
+        for (int i = 0; i < (int)EffectPool.End; ++i)
+        {
+            ClearEffectPool((EffectPool)i);
+        }
     }
 
     public void Release_Fail()
     {
-        //for (int i = 0; i < (int)EffectPool.End; ++i)
-        //{
-        //    ClearEffectPool((EffectPool)i);
-        //}
+        for (int i = 0; i < (int)EffectPool.End; ++i)
+        {
+            ClearEffectPool((EffectPool)i);
+        }
     }
 
     public bool AllocateEffectPool(EffectPool pool, int cnt)

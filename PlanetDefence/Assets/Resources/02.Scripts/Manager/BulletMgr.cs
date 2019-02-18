@@ -52,18 +52,18 @@ public class BulletMgr : MonoBehaviour
 
     public void Release_Clear()
     {
-        //for (int i = 0; i < (int)BulletPool.End; ++i)
-        //{
-        //    ClearBulletPool((BulletPool)i);
-        //}
+        for (int i = 0; i < (int)BulletPool.End; ++i)
+        {
+            ClearBulletPool((BulletPool)i);
+        }
     }
 
     public void Release_Fail()
     {
-        //for(int i=0; i<(int)BulletPool.End; ++i)
-        //{
-        //    ClearBulletPool((BulletPool)i);
-        //} 
+        for (int i = 0; i < (int)BulletPool.End; ++i)
+        {
+            ClearBulletPool((BulletPool)i);
+        }
     }
 
     public BulletData[] GetSourceBulletDatas()

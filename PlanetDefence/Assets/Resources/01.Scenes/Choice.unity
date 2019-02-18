@@ -167,6 +167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Choice
       objectReference: {fileID: 0}
+    - target: {fileID: 8916769924523148801, guid: cd627baa0d3bb90448a098d46c8e33cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8916769924523148800, guid: cd627baa0d3bb90448a098d46c8e33cc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -228,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 60159528, guid: cd627baa0d3bb90448a098d46c8e33cc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 60159529, guid: cd627baa0d3bb90448a098d46c8e33cc, type: 3}
       propertyPath: m_ChildForceExpandWidth

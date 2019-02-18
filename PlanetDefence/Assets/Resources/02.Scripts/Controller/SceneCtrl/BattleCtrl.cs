@@ -118,13 +118,14 @@ public class BattleCtrl: MonoBehaviour
                 {
                     spaceShipsNum += info.nMobNum;
                 }
-
             }
 
             BulletMgr.Inst.AllocateBulletPool(BulletPool.Turret, 20);
             BulletMgr.Inst.AllocateBulletPool(BulletPool.SpaceShip, spaceShipsNum);
             EffectMgr.Inst.AllocateEffectPool(EffectPool.Turret, 20);
             EffectMgr.Inst.AllocateEffectPool(EffectPool.SpaceShip, spaceShipsNum);
+
+            TurretMgr.Inst.OnNewBattle();
 
             SpaceShipMgr.Inst.StartCreatingWaves(infos);
         }

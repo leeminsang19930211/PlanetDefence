@@ -116,6 +116,17 @@ public class TurretMgr : MonoBehaviour
         return ctrl.TurretData;
     }
 
+    public void OnNewBattle()
+    {
+        foreach (TurretSupportCtrl support in m_turretSupportCtrs)
+        {
+            if (support.TurretCtrl == null)
+                continue;
+
+            support.TurretCtrl.OnNewBattle();
+        }
+    }
+
     public void UpdateTurretDatas()
     {
         foreach(TurretSupportCtrl support in m_turretSupportCtrs)
