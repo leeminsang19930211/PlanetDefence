@@ -128,18 +128,14 @@ public enum Bullet
 
 public enum Effect
 {
-    Explosion_Bullet0,
+    Explosion0,
+    Explosion1,
+
+    ShieldHit0,
     End,
 }
 
 public enum BulletPool
-{
-    Turret,
-    SpaceShip,
-    End,
-}
-
-public enum EffectPool
 {
     Turret,
     SpaceShip,

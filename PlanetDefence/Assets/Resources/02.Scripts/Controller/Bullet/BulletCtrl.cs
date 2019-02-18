@@ -5,6 +5,8 @@ public class BulletCtrl : MonoBehaviour
 {
     public int m_damage = 0;
     public float m_speed = 0;
+    public Effect m_effect_explosion = Effect.Explosion0;
+    public Effect m_effect_shieldHit = Effect.ShieldHit0;
 
     protected Transform m_trsf = null;
 
@@ -45,7 +47,7 @@ public class BulletCtrl : MonoBehaviour
         m_trsf.position = startPos;
         m_trsf.localEulerAngles = startAngle;
         m_target = target;
-        m_shooter = shooter;
+        //m_shooter = shooter;
     }
 
     protected void MoveToTarget()
@@ -105,32 +107,27 @@ public class BulletCtrl : MonoBehaviour
         }
     }
 
-    protected void PlayEffect(Vector3 pos )
+    protected void PlayEffect(Effect effect, Vector3 pos )
     {
-        if(m_shooter == null)
-        {
-            return;
-        }
-
-        EffectMgr.Inst.PlayEffect(m_shooter.EffectPool, m_shooter.BulletPoolIdx, pos);
+        _EffectMgr.Inst.PlayEffect(effect, pos);
     }
 
     protected virtual void _OnTargetByRayCast(Gunner target, Vector3 hitPos)
     {
-        PlayEffect(hitPos);
+        PlayEffect(m_effect_explosion, hitPos);
         target.Hit(m_damage);
     }
 
     protected virtual void _OnTarget(Gunner target, Vector3 hitPos)
     {
-        PlayEffect(hitPos);
+        PlayEffect(m_effect_explosion, hitPos);
         target.Hit(m_damage);
         gameObject.SetActive(false);
     }
 
     protected virtual void _OnShield(Gunner target, Vector3 hitPos)
     {
-        PlayEffect(hitPos);
+        PlayEffect(m_effect_shieldHit, hitPos);
         target.Hit(m_damage);
         gameObject.SetActive(false);
     }

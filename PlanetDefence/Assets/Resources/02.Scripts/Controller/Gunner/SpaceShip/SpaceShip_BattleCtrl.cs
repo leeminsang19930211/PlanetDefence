@@ -43,8 +43,6 @@ public class SpaceShip_BattleCtrl : SpaceShipCtrl
     {
         m_bulletType = Bullet.Spc_Battle;
         m_bulletPool = BulletPool.SpaceShip;
-        m_effectType = Effect.Explosion_Bullet0;
-        m_effectPool = EffectPool.SpaceShip;
 
         SpaceShipType = MobType.BattleShip;
 

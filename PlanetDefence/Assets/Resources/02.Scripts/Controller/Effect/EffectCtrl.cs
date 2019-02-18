@@ -5,10 +5,11 @@ using UnityEngine;
 public class EffectCtrl : MonoBehaviour
 {
     public int m_maxPlayCnt = 1;
-    public Animator m_animator = null;
+    public string m_animState = "";
 
     private int m_curPlayCnt = 0;
     private Transform m_trsf = null;
+    private Animator m_animator = null;
 
     public void Play(Vector3 pos)
     {
@@ -18,7 +19,7 @@ public class EffectCtrl : MonoBehaviour
 
     private IEnumerator PlayAnim()
     {
-        m_animator.Play("Explosion_Bullet0", 0, 0);
+        m_animator.Play(m_animState, 0, 0);
         m_curPlayCnt += 1;
 
         while (true)
@@ -33,7 +34,7 @@ public class EffectCtrl : MonoBehaviour
                 }
                 else
                 {
-                    m_animator.Play("Explosion_Bullet0", 0, 0);
+                    m_animator.Play(m_animState, 0, 0);
                     m_curPlayCnt += 1;                    
                 }
             }
@@ -47,5 +48,6 @@ public class EffectCtrl : MonoBehaviour
     private void Awake()
     {
         m_trsf = GetComponent<Transform>();
+        m_animator = GetComponent<Animator>();
     }
 }

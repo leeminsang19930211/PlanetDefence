@@ -23,6 +23,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
+ 
     private bool m_init = false;
 
     /* 여기서 부터 필요한 내용들을 작성하면 된다 */
@@ -112,10 +113,8 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_shieldCtrl = GameObject.Find("Shield")?.GetComponent<ShieldCtrl>();
     
         m_toLobbyPopUpPanel = GameObject.Find("ToLobbyPopUpPanel");
-        PopDownToLobby();
         m_resultPopUpPanel = GameObject.Find("ResultPopUpPanel");
-        PopDownResult();
-
+        
         m_laboratoryPopUp = GameObject.FindGameObjectWithTag("LABORATORY_POPUP");
         m_buildPopUp = GameObject.FindGameObjectWithTag("BUILD_POPUP");
         m_labScroll = GameObject.Find("LabScroll");
@@ -161,20 +160,35 @@ public class BattleGameObjectMgr : MonoBehaviour
      
         m_BrokenSpaceships = GameObject.FindGameObjectsWithTag("BROKENSPACESHIP");
         m_Rockets = GameObject.FindGameObjectsWithTag("ROCKET");
-
-        // 추가
         m_RepairedSpaceShip = GameObject.Find("RepairedSpaceShip");
+
+        // 시작시에 껏다 키는 것들 다 이 함수 안에 작성할것
+        _InitContents();
+    }
+
+    public void _Reset()
+    {
+        if (m_inst == null)
+            return;
+
+        m_init = false;
+
+        _InitContents();
+    }
+
+    private void _InitContents()
+    {
+        PopDownToLobby();
+        PopDownResult();
+
         m_RepairedSpaceShip.SetActive(false);
-
-
         m_BrokenSpaceships[3].SetActive(false);
         m_BrokenSpaceships[2].SetActive(false);
         m_BrokenSpaceships[1].SetActive(false);
-        for(int i=0;i<m_Rockets.Length;i++)
+        for (int i = 0; i < m_Rockets.Length; i++)
         {
             m_Rockets[i].SetActive(false);
         }
-
 
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);

@@ -8,8 +8,6 @@ public class SpaceShip_KamikazeCtrl: SpaceShipCtrl
     {
         m_bulletType = Bullet.End;
         m_bulletPool = BulletPool.End;
-        m_effectType = Effect.End;
-        m_effectPool = EffectPool.End;
 
         SpaceShipType = MobType.Kamikaze;
 

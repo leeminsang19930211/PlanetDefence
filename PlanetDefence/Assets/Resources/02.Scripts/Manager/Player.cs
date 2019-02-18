@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     private int m_eleCircuit = 999;
     private int m_coin = 999;
 
-
     private TurretInfo[] m_turretInfos = new TurretInfo[(int)Turret.End];
     public LabInfo[] m_labInfos = new LabInfo[(int)Lab.End];
     public SpaceShipPartInfo[] m_spcPartInfos = new SpaceShipPartInfo[(int)SpaceShipPart.End];
@@ -66,6 +65,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void _Reset()
+    {
+        if (m_inst)
+        {
+            m_init = false;
+            SetUpNewDatas();
+        }     
+    }
  
     public void Init()
     {

@@ -35,7 +35,9 @@ public class EnemyCntCtrl : MonoBehaviour
     {
         m_destroyedEnemyCnt += add;
 
-        if(m_destroyedEnemyCnt == m_maxEnemyCnt)
+        m_cntText.text = "× " + (m_maxEnemyCnt - m_destroyedEnemyCnt).ToString();
+
+        if (m_destroyedEnemyCnt == m_maxEnemyCnt)
         {
             if(PlanetCtrl.Inst.CurHP > 0)
             {
@@ -43,6 +45,8 @@ public class EnemyCntCtrl : MonoBehaviour
                 m_destroyedEnemyCnt = 0;
             }          
         }
+
+       
     }
 
 
@@ -53,6 +57,6 @@ public class EnemyCntCtrl : MonoBehaviour
 
     void Update()
     {
-        m_cntText.text = "× " + (m_maxEnemyCnt - m_destroyedEnemyCnt).ToString();
+        
     }
 }

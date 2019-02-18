@@ -50,6 +50,18 @@ public class SpaceShipMgr : MonoBehaviour
         }
     }
 
+    public void _Reset()
+    {
+        if (m_inst)
+        {
+            m_init = false;
+            m_maxSpaceShipCnt = 0;
+            m_createdSpaceShipCnt = 0;
+            Release_Fail();
+            m_sourceSpaceShips.Clear();
+        }
+    }
+
     public void Init()
     {
         if (m_init)

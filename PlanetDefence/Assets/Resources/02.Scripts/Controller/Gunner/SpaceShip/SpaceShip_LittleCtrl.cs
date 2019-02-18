@@ -7,8 +7,6 @@ public class SpaceShip_LittleCtrl : SpaceShipCtrl
     {
         m_bulletType = Bullet.Spc_Little;
         m_bulletPool = BulletPool.SpaceShip;
-        m_effectType = Effect.Explosion_Bullet0;
-        m_effectPool = EffectPool.SpaceShip;
 
         SpaceShipType = MobType.Little;
 

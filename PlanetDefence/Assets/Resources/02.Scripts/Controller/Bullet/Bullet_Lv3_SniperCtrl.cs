@@ -6,7 +6,7 @@ public class Bullet_Lv3_SniperCtrl : BulletCtrl
  
     protected override void _OnTarget(Gunner target, Vector3 hitPos)
     {
-        PlayEffect(hitPos);
+        PlayEffect(m_effect_explosion, hitPos);
         target.HitToDie();
         gameObject.SetActive(false);
     }
@@ -14,6 +14,8 @@ public class Bullet_Lv3_SniperCtrl : BulletCtrl
     private void OnEnable()
     {
         BulletType = Bullet.Lv3_Sniper;
+
+        m_effect_explosion = Effect.Explosion1;
 
 
 

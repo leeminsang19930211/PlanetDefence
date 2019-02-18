@@ -21,7 +21,6 @@ public class Gunner : MonoBehaviour
 
     public int m_maxHP = 0;
     public int m_maxBullets = 0;            // BulletPool 에 할당할 총알의 수
-    public int m_maxEffects = 0;            // EffectPool 에 할당할 이펙트의 수
     public int m_maxFires = -1;             // 총알을 총 발사할 수, 음수이면 무한 발사
     public float m_fanAngle = 45f;          // 타겟을 탐색할때 사용할 각도값
     public float m_fireDelay = 0;           // 총알 발사 딜레이
@@ -32,14 +31,12 @@ public class Gunner : MonoBehaviour
     protected float m_fireDelay_ori = 0;
     protected Bullet m_bulletType = Bullet.End;
     protected BulletPool m_bulletPool = BulletPool.End;
-    protected Effect m_effectType = Effect.End;
-    protected EffectPool m_effectPool = EffectPool.End;
     protected Transform m_trsf = null;
 
     public bool Clone { get; set; } = false; // 원본인지 복사된 객체인지를 구분하는 값
     public int BulletPoolIdx { get; set; } = -1;// BulletPool에 할당할때 사용할 idx
-    public EffectPool EffectPool { get { return m_effectPool; } }
-   
+
+    private bool m_dead = false;
 
     public int CurHP
     {
@@ -119,8 +116,14 @@ public class Gunner : MonoBehaviour
     // Destory 함수 대신 이함수 호출해야함.
     public void Die()
     {
+        if (m_dead)
+            return;
+
+        m_dead = true;
+
         if (Clone)
         {
+           
             _OnDying();
 
             if (m_maxBullets > 0)
@@ -128,10 +131,6 @@ public class Gunner : MonoBehaviour
                 ClearBullets();
             }
 
-            if (m_maxEffects > 0)
-            {
-                ClearEffects();
-            }
 
             Destroy(this.gameObject);
         }
@@ -143,11 +142,6 @@ public class Gunner : MonoBehaviour
         if (m_maxBullets > 0)
         {
             AllocateBullets();
-        }
-
-        if (m_maxEffects > 0)
-        {
-            AllocateEffects();
         }
     }
 
@@ -161,11 +155,6 @@ public class Gunner : MonoBehaviour
         if (m_maxBullets > 0)
         {
             AllocateBullets();
-        }
-
-        if (m_maxEffects > 0)
-        {
-            AllocateEffects();
         }
     }
 
@@ -201,28 +190,12 @@ public class Gunner : MonoBehaviour
         BulletMgr.Inst.AllocateBullets(m_bulletType, m_bulletPool, BulletPoolIdx, m_maxBullets);
     }
 
-    private void AllocateEffects()
-    {
-        if (BulletPoolIdx < 0)
-            return;
-
-        EffectMgr.Inst.AllocateEffects(m_effectType, m_effectPool, BulletPoolIdx, m_maxEffects);
-    }
-
     private void ClearBullets()
     {
         if (BulletPoolIdx < 0)
             return;
 
         BulletMgr.Inst.ClearBullets(m_bulletPool, BulletPoolIdx);
-    }
-
-    private void ClearEffects()
-    {
-        if (BulletPoolIdx < 0)
-            return;
-
-        EffectMgr.Inst.ClearEffects(m_effectPool, BulletPoolIdx);
     }
 
     private IEnumerator Hit_Dot_Coroutine(DotInfo dotInfo)

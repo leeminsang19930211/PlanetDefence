@@ -48,8 +48,6 @@ public class Turret_Lv2_ShieldCtrl : TurretCtrl
     {
         m_bulletType = Bullet.End;
         m_bulletPool = BulletPool.End;
-        m_effectType = Effect.End;
-        m_effectPool = EffectPool.End;
 
         m_turretType = Turret.Lv2_Shield;
 

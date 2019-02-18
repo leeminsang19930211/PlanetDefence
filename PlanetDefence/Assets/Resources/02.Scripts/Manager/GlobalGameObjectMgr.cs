@@ -35,6 +35,15 @@ public class GlobalGameObjectMgr : MonoBehaviour
         }
     }
 
+    public void _Reset()
+    {
+        if (m_inst)
+        {
+            CurDay = 1;
+            Battle = false;
+        }
+    }
+
     public void IncreaseDay()
     {
         CurDay += 1;

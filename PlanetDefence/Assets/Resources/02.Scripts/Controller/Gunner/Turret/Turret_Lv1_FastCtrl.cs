@@ -27,8 +27,6 @@ public class Turret_Lv1_FastCtrl : TurretCtrl
     {
         m_bulletType = Bullet.Lv1_Fast;
         m_bulletPool = BulletPool.Turret;
-        m_effectType = Effect.Explosion_Bullet0;
-        m_effectPool = EffectPool.Turret;
 
         m_turretType = Turret.Lv1_Fast;
 

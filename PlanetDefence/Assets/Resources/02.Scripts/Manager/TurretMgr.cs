@@ -26,6 +26,18 @@ public class TurretMgr : MonoBehaviour
         }
     }
 
+    public void _Reset()
+    {
+        if (m_inst)
+        {
+            m_init = false;
+            m_focusedTurretSupportIdx = -1;
+            Release_Fail();
+            m_turretSupportCtrs.Clear();
+            m_sourceTurrets.Clear();
+        }
+    }
+
     public TurretCtrl FocusedTurret
     {
         get

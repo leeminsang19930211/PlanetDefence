@@ -26,6 +26,22 @@ public class BulletMgr : MonoBehaviour
         }
     }
 
+    public void _Reset()
+    {
+        if (m_inst)
+        {
+            m_init = false;
+
+            for (int i = 0; i < (int)BulletPool.End; ++i)
+            {
+                ClearBulletPool((BulletPool)i);
+            }
+
+
+            m_sourceBullets.Clear();
+        }
+    }
+
     public void Init()
     {
         if (m_init)
@@ -106,7 +122,7 @@ public class BulletMgr : MonoBehaviour
     {
         if(m_bulletPool[(int)pool].Count > 0 || m_bulletPool[(int)pool].Count > 0)
         {
-            //Debug.Log("The bulletPool is alloceted already");
+            Debug.Log("The bulletPool is alloceted already");
             return false;
         }
 

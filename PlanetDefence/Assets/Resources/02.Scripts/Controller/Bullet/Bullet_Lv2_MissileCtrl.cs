@@ -40,7 +40,7 @@ public class Bullet_Lv2_MissileCtrl : BulletCtrl
 
                 ctrl.Hit(m_splashDamage);
 
-                PlayEffect(ctrl.Position);
+                PlayEffect(m_effect_explosion, ctrl.Position);
             }
             else if (hit.collider.tag == "SPACESHIP_DUMMY")
             {
@@ -48,7 +48,7 @@ public class Bullet_Lv2_MissileCtrl : BulletCtrl
 
                 ctrl.Hit(m_splashDamage);
 
-                PlayEffect(ctrl.Position);
+                PlayEffect(m_effect_explosion, ctrl.Position);
             }
         }
 
