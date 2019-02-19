@@ -187,6 +187,112 @@ public class Player : MonoBehaviour
         return m_turretDatas[(int)turret];
     }
 
+    public void PickUpTurretBlueprint(float dropProbability, TurretBlueprintDropInfo[] dropInfos)
+    {
+        if (dropInfos == null || dropInfos.Length <= 0)
+            return;
+
+        if (dropProbability == 0)
+            return;
+
+        if (dropProbability < Random.Range(0, 1)) // 드랍되지 않음
+            return;
+
+        List<TurretBlueprintDropInfo> _dropInfos = new List<TurretBlueprintDropInfo>();
+        float _probabilityAcc = 0; // 확률 계산을 위한 누적치
+
+        foreach (TurretBlueprintDropInfo dropInfo in dropInfos)
+        {
+            if (CheckUnLock(dropInfo.turret) == false)
+            {
+                _probabilityAcc += dropInfo.probability;
+
+                if(_probabilityAcc > 1f)
+                {
+                    Debug.LogError("The _probabilityAcc for picking up turret blueprint is more than 1");
+                    return;
+                }
+
+                TurretBlueprintDropInfo _dropInfo = new TurretBlueprintDropInfo();
+
+                _dropInfo.turret = dropInfo.turret;
+                _dropInfo.probability = _probabilityAcc;
+
+                _dropInfos.Add(_dropInfo);
+            }
+        }
+
+        if (_dropInfos.Count <= 0)
+            return;
+
+        int randNum = Random.Range(0, 1);
+        Turret dropTurret = Turret.End;
+
+        for (int i = 0; i < _dropInfos.Count; ++i)
+        {
+            if (randNum <= _dropInfos[i].probability)
+            {
+                dropTurret = _dropInfos[i].turret;
+                break;
+            }
+        }
+
+        UnLock(dropTurret);
+    }
+
+    public void PickUpSpaceShipBlueprint(float dropProbability, SpaceShipBlueprintDropInfo[] dropInfos)
+    {
+        if (dropInfos == null || dropInfos.Length <= 0)
+            return;
+
+        if (dropProbability == 0)
+            return;
+
+        if (dropProbability < Random.Range(0, 1)) // 드랍되지 않음
+            return;
+
+        List<SpaceShipBlueprintDropInfo> _dropInfos = new List<SpaceShipBlueprintDropInfo>();
+        float _probabilityAcc = 0; // 확률 계산을 위한 누적치
+
+        foreach (SpaceShipBlueprintDropInfo dropInfo in dropInfos)
+        {
+            if (CheckUnLock(dropInfo.spaceShip) == false)
+            {
+                _probabilityAcc += dropInfo.probability;
+
+                if (_probabilityAcc > 1f)
+                {
+                    Debug.LogError("The _probabilityAcc for picking up turret blueprint is more than 1");
+                    return;
+                }
+
+                SpaceShipBlueprintDropInfo _dropInfo = new SpaceShipBlueprintDropInfo();
+
+                _dropInfo.spaceShip = dropInfo.spaceShip;
+                _dropInfo.probability = _probabilityAcc;
+
+                _dropInfos.Add(_dropInfo);
+            }
+        }
+
+        if (_dropInfos.Count <= 0)
+            return;
+
+        int randNum = Random.Range(0, 1);
+        SpaceShipPart dropSpaceShip = SpaceShipPart.End;
+
+        for (int i = 0; i < _dropInfos.Count; ++i)
+        {
+            if (randNum <= _dropInfos[i].probability)
+            {
+                dropSpaceShip = _dropInfos[i].spaceShip;
+                break;
+            }
+        }
+
+        UnLock(dropSpaceShip);
+    }
+
     public void AddJunk(int junk)
     {
         m_junk += junk;
@@ -204,6 +310,17 @@ public class Player : MonoBehaviour
         m_coin += coin;
         BattleGameObjectMgr.Inst.UpdateCoinCnt(m_coin);
     }
+
+    public void UnLock(Turret turret)
+    {
+        m_turretInfos[(int)turret]._lock = false;
+    }
+
+    public void UnLock(SpaceShipPart part)
+    {
+        m_spcPartInfos[(int)part]._lock = false;
+    }
+
 
     public bool CheckUnLock(Turret turret)
     {
@@ -609,7 +726,14 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < (int)Turret.End; ++i)
         {
-            m_turretInfos[i]._lock = false;
+            if(i<= (int)Turret.Lv1_Missile)
+            {
+                m_turretInfos[i]._lock = false;
+            }
+            else
+            {
+                m_turretInfos[i]._lock = true;
+            }           
         }
 
         for (int i = 0; i < (int)Lab.End; ++i)
@@ -620,7 +744,8 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < (int)SpaceShipPart.End; i++)
         {
-            m_spcPartInfos[i]._repaired = false;
+            m_spcPartInfos[i]._lock = true;
+          m_spcPartInfos[i]._repaired = false;
         }
         
         m_globalData.planetHP = PlanetCtrl.Inst.m_maxHP;

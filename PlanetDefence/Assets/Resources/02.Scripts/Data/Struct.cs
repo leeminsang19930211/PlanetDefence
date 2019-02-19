@@ -102,5 +102,18 @@ public class TurretData_Shield : TurretData
     public float hitDamageScale;
 }
 
+[Serializable]
+public struct TurretBlueprintDropInfo
+{
+    public float probability;
+    public Turret turret;
+}
+
+[Serializable]
+public struct SpaceShipBlueprintDropInfo
+{
+    public float probability;
+    public SpaceShipPart spaceShip;
+}
 
 

@@ -21,8 +21,8 @@
     Lv3_Slow,
     Lv3_Pause,
     Lv3_Sniper,
-    Lv3_Heal,
     Lv3_Berserker,
+    Lv3_Heal, 
     dummy14, // 킹슬레어 자리. 아직 안만듬
     End,
 }

@@ -77,6 +77,9 @@ public class Gunner : MonoBehaviour
 
     public virtual void Hit(int damage)
     {
+        if (m_curHP <= 0)
+            return;
+
         m_curHP -= damage;
 
         _OnHit();

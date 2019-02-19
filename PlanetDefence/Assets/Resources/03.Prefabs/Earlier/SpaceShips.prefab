@@ -140,9 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3efb9e71c00e02439c67cc6e45129bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 300
+  m_maxHP: 10
   m_maxBullets: 10
-  m_maxEffects: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 1
@@ -160,6 +159,18 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
+  m_turretBlueprintDropProbability: 1
+  m_turretBlueprintDrops:
+  - probability: 0.4
+    turret: 4
+  - probability: 0.4
+    turret: 5
+  - probability: 0.1
+    turret: 12
+  - probability: 0.1
+    turret: 13
+  m_spaceShipBlueprintDropProbability: 0
+  m_spaceShipBlueprintDrops: []
 --- !u!1 &1065526185582847741
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 100
   m_maxBullets: 0
-  m_maxEffects: 0
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 0
@@ -320,6 +330,10 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
+  m_turretBlueprintDropProbability: 0
+  m_turretBlueprintDrops: []
+  m_spaceShipBlueprintDropProbability: 0
+  m_spaceShipBlueprintDrops: []
 --- !u!1 &2222494291067591024
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +488,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 300
   m_maxBullets: 10
-  m_maxEffects: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 1.5
@@ -492,6 +505,10 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
+  m_turretBlueprintDropProbability: 0
+  m_turretBlueprintDrops: []
+  m_spaceShipBlueprintDropProbability: 0
+  m_spaceShipBlueprintDrops: []
   m_childrenToCreate: 5
   m_children_MinLength: 50
   m_children_MaxLength: 200
@@ -635,9 +652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f93ace16b4c704eada69e5be3ae30f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 300
+  m_maxHP: 10
   m_maxBullets: 10
-  m_maxEffects: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 1
@@ -655,6 +671,14 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
+  m_turretBlueprintDropProbability: 0
+  m_turretBlueprintDrops: []
+  m_spaceShipBlueprintDropProbability: 1
+  m_spaceShipBlueprintDrops:
+  - probability: 0.5
+    spaceShip: 2
+  - probability: 0.5
+    spaceShip: 4
   m_duration_visible: 5
   m_duration_invisible: 2.5
   m_invisibleAlpha: 0.4
@@ -800,7 +824,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 150
   m_maxBullets: 15
-  m_maxEffects: 15
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 0.5
@@ -818,6 +841,10 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
+  m_turretBlueprintDropProbability: 0
+  m_turretBlueprintDrops: []
+  m_spaceShipBlueprintDropProbability: 0
+  m_spaceShipBlueprintDrops: []
 --- !u!61 &653635435863111742
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -986,7 +1013,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 1000
   m_maxBullets: 0
-  m_maxEffects: 0
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 0
@@ -1004,6 +1030,10 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
+  m_turretBlueprintDropProbability: 0
+  m_turretBlueprintDrops: []
+  m_spaceShipBlueprintDropProbability: 0
+  m_spaceShipBlueprintDrops: []
 --- !u!1 &7881109615966311043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,7 +1150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 150
   m_maxBullets: 10
-  m_maxEffects: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 1
@@ -1138,6 +1167,10 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
+  m_turretBlueprintDropProbability: 0
+  m_turretBlueprintDrops: []
+  m_spaceShipBlueprintDropProbability: 0
+  m_spaceShipBlueprintDrops: []
 --- !u!61 &4439385556415162940
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1280,7 +1313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 300
   m_maxBullets: 10
-  m_maxEffects: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 1
@@ -1298,6 +1330,10 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
+  m_turretBlueprintDropProbability: 0
+  m_turretBlueprintDrops: []
+  m_spaceShipBlueprintDropProbability: 0
+  m_spaceShipBlueprintDrops: []
   m_durationForRecovery: 5
   m_recoveryDelay: 2
   m_recoveryRate: 0.05

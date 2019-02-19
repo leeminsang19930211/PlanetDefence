@@ -79,6 +79,9 @@ public class PlanetCtrl : MonoBehaviour
 
     public void Hit(int damage)
     {
+        if (m_curHP <= 0)
+            return;
+
         m_curHP -= damage;
 
         if (m_curHP < 0)

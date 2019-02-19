@@ -24,6 +24,11 @@ public  class SpaceShipCtrl : Gunner
     public float m_stayDuration = 0;            // 공전하기 이전에 잠깐 대기하는 시간 
     public Vector3 m_fallingDir = Vector3.zero;
 
+    public float m_turretBlueprintDropProbability = 0;
+    public TurretBlueprintDropInfo[] m_turretBlueprintDrops = null;
+    public float m_spaceShipBlueprintDropProbability = 0;
+    public SpaceShipBlueprintDropInfo[] m_spaceShipBlueprintDrops = null;
+
     private int m_fallingRound = 0;             // 몇번째 낙하인지를 나타내는 값. 0~3 범위를 가진다. 
     private float m_revolvingSpeed_origin = 0;
     private float m_stayingTimeAcc = 0;
@@ -60,8 +65,7 @@ public  class SpaceShipCtrl : Gunner
             m_dropJunk = spaceShipData.coinDrops;
         }
     }
-            
-       
+                
     public float AngleFromPlanetUp
     {
         get
@@ -110,6 +114,9 @@ public  class SpaceShipCtrl : Gunner
     protected override void _OnZeroHP()
     {
         UpdateRsrc();
+
+        Player.Inst.PickUpTurretBlueprint(m_turretBlueprintDropProbability, m_turretBlueprintDrops);
+        Player.Inst.PickUpSpaceShipBlueprint(m_spaceShipBlueprintDropProbability, m_spaceShipBlueprintDrops);
 
         Die();
     }

@@ -70,7 +70,7 @@ public class BattleCtrl: MonoBehaviour
         {
             GlobalGameObjectMgr.Inst.Battle = true;
 
-            WavesMob[] infos = new WavesMob[1];
+            WavesMob[] infos = new WavesMob[2];
 
             infos[0].eMobType = MobType.Normal;
             infos[0].nMobNum = 2;
@@ -102,10 +102,10 @@ public class BattleCtrl: MonoBehaviour
             //infos[5].fDelayTime = 5f;
             //infos[5].fFirstDelayTime = 2f;
 
-            //infos[6].eMobType = MobType.GhostShip;
-            //infos[6].nMobNum = 10;
-            //infos[6].fDelayTime = 3f;
-            //infos[6].fFirstDelayTime = 5f;
+            infos[1].eMobType = MobType.GhostShip;
+            infos[1].nMobNum = 2;
+            infos[1].fDelayTime = 3f;
+            infos[1].fFirstDelayTime = 5f;
 
             //infos[7].eMobType = MobType.BattleShip;
             //infos[7].nMobNum = 10;
