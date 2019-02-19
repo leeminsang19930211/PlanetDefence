@@ -1,8 +1,10 @@
 fileFormatVersion: 2
-guid: e88f3ef0778ac144c86d6079bb8f2833
+guid: 3eeb905bb40e0524f896e142af45e824
 TextureImporter:
   fileIDToRecycleName:
-    21300000: M484BulletCollection1_0
+    21300000: Lv1_Missile
+    21300002: Lv2_Missile
+    21300004: Lv3_Missile
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -118,21 +120,61 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: M484BulletCollection1_0
+      name: Lv1_Missile
       rect:
         serializedVersion: 2
-        x: 165
-        y: 222
-        width: 29
-        height: 16
+        x: 142
+        y: 150
+        width: 10
+        height: 13
       alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfc2fde88724b3a48b2936fb84247364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lv2_Missile
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 150
+        width: 10
+        height: 13
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b89dcb1c39136d54b96d2cda54f3593c
+      spriteID: d03dbba96299d3b4d97fefd5f028acae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lv3_Missile
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 150
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c7bbfa46ad9dd9498854fdfc4be3316
       vertices: []
       indices: 
       edges: []
@@ -140,7 +182,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: cafb810b3ad446b409d886ed26945070
+    spriteID: 15ec7383849b01f4fb95f38a8f71a7ef
     vertices: []
     indices: 
     edges: []

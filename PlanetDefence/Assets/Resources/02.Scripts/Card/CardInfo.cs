@@ -49,7 +49,9 @@ public class CardInfo : MonoBehaviour
     {
         //승완 작업 -------Start-------- 190208 
         FindObjectOfType<CardCtrl>().DeleteCards();
-        GlobalGameObjectMgr.Inst.SelectedCard = this;
+        //GlobalGameObjectMgr.Inst.SelectedCard = this;
+
+        GlobalGameObjectMgr.Inst.waveInfos = (WavesMob[])Waves.Clone();
         GlobalGameObjectMgr.Inst.bSelected = true;
         SceneLoader.LoadScene("Battle");
         //Debug.Log(GlobalGameObjectMgr.Inst.SelectedCard.sCardName);

@@ -8,7 +8,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class GlobalGameObjectMgr : MonoBehaviour
 {
-    public CardInfo SelectedCard = null;
+    //public CardInfo SelectedCard = null;
+    public WavesMob[] waveInfos = null;
     public bool bSelected = false;
 
     private static GlobalGameObjectMgr m_inst = null;

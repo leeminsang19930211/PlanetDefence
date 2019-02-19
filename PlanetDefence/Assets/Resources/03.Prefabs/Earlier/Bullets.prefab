@@ -111,6 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 1500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &439868532715472817
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +207,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &495617041092978537
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +320,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 5
   m_speed: 2000
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &535279776531952741
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +416,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &1225624100324732601
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +512,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 1500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_splashDamage: 2
   m_splashRadius: 360
 --- !u!1 &1356592560462070673
@@ -600,6 +610,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 1
   m_speed: 2800
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_probability: 0.5
   m_duration: 3
 --- !u!1 &1366948163203188476
@@ -696,6 +708,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 2
   m_speed: 0
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_stayDuration: 0.6
   m_hitDelay: 0.1
 --- !u!1 &1377412639132702007
@@ -792,6 +806,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 1
   m_speed: 2200
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_probability: 1
   m_slowInfo:
     slowScale: 0.2
@@ -880,7 +896,7 @@ Transform:
   m_GameObject: {fileID: 1887617617860607474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9, y: 15, z: 1}
+  m_LocalScale: {x: 9, y: 9, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
   m_RootOrder: 0
@@ -922,7 +938,7 @@ SpriteRenderer:
   m_SortingLayerID: 2045242963
   m_SortingLayer: 10
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 642d9db7e7606df42a242baa50100ae7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3eeb905bb40e0524f896e142af45e824, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -947,6 +963,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 1500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_splashDamage: 2
   m_splashRadius: 360
 --- !u!1 &2353868649136841695
@@ -1043,6 +1061,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2000
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_probability: 0.5
   m_dotInfo:
     damage: 2
@@ -1142,6 +1162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 2
   m_speed: 0
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_stayDuration: 0.6
   m_hitDelay: 0.1
 --- !u!1 &3355534448468855895
@@ -1255,6 +1277,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 2
   m_speed: 1200
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &3695898662060612827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,6 +1373,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &3756140891265627174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1470,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 2
   m_speed: 1500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!58 &969561528958821409
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1554,6 +1582,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 1
   m_speed: 2200
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_probability: 1
   m_slowInfo:
     slowScale: 0.2
@@ -1652,6 +1682,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 1500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_splashDamage: 2
   m_splashRadius: 360
 --- !u!1 &5438998156746576417
@@ -1748,6 +1780,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2000
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_probability: 0.5
   m_dotInfo:
     damage: 2
@@ -1847,6 +1881,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 2
   m_speed: 0
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_stayDuration: 0.6
   m_hitDelay: 0.1
 --- !u!1 &6979641996697272261
@@ -1943,6 +1979,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 1
   m_speed: 2800
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
   m_probability: 0.5
   m_duration: 3
 --- !u!1 &7051499353823596236
@@ -2056,6 +2094,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 6
   m_speed: 2500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &7413909438918626007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2150,6 +2190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 5
   m_speed: 3000
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &7957897863279622697
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,6 +2287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2000
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!58 &2088599436
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2355,6 +2399,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &8466542761118058456
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,6 +2495,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2000
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &8655073483876621162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,6 +2591,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &8822722789686036593
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,6 +2687,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 0
   m_speed: 3200
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2
 --- !u!1 &9032149386797989147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2731,3 +2783,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 3
   m_speed: 2500
+  m_effect_explosion: 0
+  m_effect_shieldHit: 2

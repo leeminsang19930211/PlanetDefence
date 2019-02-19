@@ -732,7 +732,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                m_turretInfos[i]._lock = true;
+                m_turretInfos[i]._lock = false;
             }           
         }
 
@@ -744,7 +744,7 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < (int)SpaceShipPart.End; i++)
         {
-            m_spcPartInfos[i]._lock = true;
+            m_spcPartInfos[i]._lock = false;
           m_spcPartInfos[i]._repaired = false;
         }
         

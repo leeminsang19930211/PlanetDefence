@@ -42,7 +42,7 @@ public class CardCtrl : MonoBehaviour
             sCardPrefabDir = "03.Prefabs/Card/Boss";
         }
 
-        Cards = Resources.LoadAll("03.Prefabs/Card/Boss");
+        Cards = Resources.LoadAll(sCardPrefabDir);
         int nMaxCards = Cards.Length;
         RandomInstanceCardCreate(nMaxCards);
 
