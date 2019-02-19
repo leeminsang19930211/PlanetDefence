@@ -10,7 +10,6 @@ public class BulletCtrl : MonoBehaviour
 
     protected Transform m_trsf = null;
 
-    private Gunner m_shooter = null;
     private Gunner m_target= null;
  
     public bool Clone { get; set; } = false;

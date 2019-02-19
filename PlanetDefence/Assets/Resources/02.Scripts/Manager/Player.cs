@@ -321,7 +321,6 @@ public class Player : MonoBehaviour
         m_spcPartInfos[(int)part]._lock = false;
     }
 
-
     public bool CheckUnLock(Turret turret)
     {
         return !m_turretInfos[(int)turret]._lock;

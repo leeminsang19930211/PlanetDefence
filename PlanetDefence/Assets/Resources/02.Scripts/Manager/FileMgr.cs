@@ -130,6 +130,8 @@ public class FileMgr : MonoBehaviour
         }
         catch(FileNotFoundException e)
         {
+            e.GetType();  // 안썻다는 워닝 경고때문에 해놓음
+
             return true;
         }
 

@@ -14,15 +14,15 @@
     Lv2_Pause,
     Lv3_Gatling,
     Lv3_Fast,
-    Lv3_Laser,
     Lv3_Missile,
+    Lv3_Laser,
     Lv3_Shield,
     Lv3_Poison,
     Lv3_Slow,
     Lv3_Pause,
     Lv3_Sniper,
-    Lv3_Berserker,
     Lv3_Heal, 
+    Lv3_Berserker,
     dummy14, // 킹슬레어 자리. 아직 안만듬
     End,
 }
@@ -130,8 +130,9 @@ public enum Effect
 {
     Explosion0,
     Explosion1,
-
+    Explosion2,
     ShieldHit0,
+    Poison0,
     End,
 }
 

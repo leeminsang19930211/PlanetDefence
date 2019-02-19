@@ -180,8 +180,9 @@ public class EffectMgr : MonoBehaviour
     {
         AddEffect("Effect_Explosion0");
         AddEffect("Effect_Explosion1");
+        AddEffect("Effect_Explosion2");
         AddEffect("Effect_ShieldHit0");
-
+        AddEffect("Effect_Poison0");
 
         for (int i = 0; i < (int)Effect.End; ++i)
         {
@@ -202,8 +203,14 @@ public class EffectMgr : MonoBehaviour
             case Effect.Explosion1:
                 str = "Effect_Explosion1";
                 break;
+            case Effect.Explosion2:
+                str = "Effect_Explosion2";
+                break;
             case Effect.ShieldHit0:
                 str = "Effect_ShieldHit0";
+                break;
+            case Effect.Poison0:
+                str = "Effect_Poison0";
                 break;
             default:
                 Debug.LogError("The effect str from the effect enum is not mapped");

@@ -84,7 +84,7 @@ public class Gunner : MonoBehaviour
 
         _OnHit();
 
-        if (m_curHP < 0)
+        if (m_curHP <= 0)
         {
             m_curHP = 0;
             _OnZeroHP();

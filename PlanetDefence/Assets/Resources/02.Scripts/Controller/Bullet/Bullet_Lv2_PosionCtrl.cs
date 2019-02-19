@@ -43,7 +43,7 @@ public class Bullet_Lv2_PosionCtrl : BulletCtrl
     private void OnEnable()
     {
         BulletType = Bullet.Lv2_Poison;
-
+        m_effect_explosion = Effect.Poison0;
 
         base.Init();
     }

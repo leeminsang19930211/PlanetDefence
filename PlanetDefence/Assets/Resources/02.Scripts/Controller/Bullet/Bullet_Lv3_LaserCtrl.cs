@@ -33,6 +33,10 @@ public class Bullet_Lv3_LaserCtrl : BulletCtrl
         {
             BulletType = Bullet.Lv3_Laser;
 
+            m_effect_explosion = Effect.Explosion2;
+
+
+
             RotateToTarget();
             base.Init();
             StartCoroutine("Stay");
@@ -49,6 +53,7 @@ public class Bullet_Lv3_LaserCtrl : BulletCtrl
     {
 
     }
+
 
     private void LateUpdate()
     {

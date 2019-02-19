@@ -84,7 +84,7 @@ public class PlanetCtrl : MonoBehaviour
 
         m_curHP -= damage;
 
-        if (m_curHP < 0)
+        if (m_curHP <= 0)
         {
             m_curHP = 0;
             BattleGameObjectMgr.Inst.PopUpResult(false);

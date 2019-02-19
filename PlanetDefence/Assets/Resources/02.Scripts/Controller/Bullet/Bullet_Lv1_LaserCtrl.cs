@@ -50,6 +50,12 @@ public class Bullet_Lv1_LaserCtrl : BulletCtrl
 
     }
 
+    protected override void _OnTargetByRayCast(Gunner target, Vector3 hitPos)
+    {
+        PlayEffect(Effect.Explosion2, hitPos);
+        target.Hit(m_damage);
+    }
+
     private void LateUpdate()
     {
         RotateToTarget();
