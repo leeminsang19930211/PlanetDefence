@@ -54,7 +54,7 @@ MonoBehaviour:
   sCardName: Normal
   eCardType: 2
   Waves:
-  - eMobType: 8
+  - eMobType: 6
     nMobNum: 1
     fDelayTime: 0
     fFirstDelayTime: 5

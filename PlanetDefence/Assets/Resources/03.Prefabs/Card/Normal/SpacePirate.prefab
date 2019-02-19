@@ -58,7 +58,7 @@ MonoBehaviour:
     nMobNum: 1
     fDelayTime: 0
     fFirstDelayTime: 20
-  - eMobType: 9
+  - eMobType: 7
     nMobNum: 10
     fDelayTime: 1
     fFirstDelayTime: 5
