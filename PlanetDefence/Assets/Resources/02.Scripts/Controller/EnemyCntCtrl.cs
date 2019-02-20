@@ -23,32 +23,36 @@ public class EnemyCntCtrl : MonoBehaviour
 
             m_maxEnemyCnt = value;
             m_destroyedEnemyCnt = 0;
+
+
+            EndingMgr.Inst.LeftEnemies = m_maxEnemyCnt - m_destroyedEnemyCnt;
+        }
+    }
+
+    public int LeftEnemy
+    {
+        get
+        {
+            return m_maxEnemyCnt - m_destroyedEnemyCnt;
         }
     }
 
     public void AddMaxEnemy(int add)
     {
         m_maxEnemyCnt += add;
+
+        EndingMgr.Inst.LeftEnemies = m_maxEnemyCnt - m_destroyedEnemyCnt;
     }
 
     public void AddDestroyedEnemy(int add)      
     {
+        if(m_destroyedEnemyCnt > m_maxEnemyCnt)
+            return;
+
         m_destroyedEnemyCnt += add;
 
-        m_cntText.text = "× " + (m_maxEnemyCnt - m_destroyedEnemyCnt).ToString();
-
-        if (m_destroyedEnemyCnt == m_maxEnemyCnt)
-        {
-            if(PlanetCtrl.Inst.CurHP > 0)
-            {
-                BattleGameObjectMgr.Inst.PopUpResult(true);
-                m_destroyedEnemyCnt = 0;
-            }          
-        }
-
-       
+        EndingMgr.Inst.LeftEnemies = m_maxEnemyCnt - m_destroyedEnemyCnt;       
     }
-
 
     void Start()
     {
@@ -57,6 +61,7 @@ public class EnemyCntCtrl : MonoBehaviour
 
     void Update()
     {
-        
+        m_cntText.text = "× " + (m_maxEnemyCnt - m_destroyedEnemyCnt).ToString();
+
     }
 }

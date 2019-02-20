@@ -24,34 +24,45 @@ public class SceneLoader : MonoBehaviour
 
         m_prevScene = m_curScene;
 
-        if (m_curScene == "PreLoading" && nextScene == "Lobby")
-        {
-            SceneManager.LoadScene("Lobby");
-        }
-        else if (m_curScene == "Lobby" && nextScene == "Choice")
-        {          
-            SceneManager.LoadScene("Choice");            
-        }
-        else if (m_curScene == "Lobby" && nextScene == "Battle")
-        { 
-            SceneManager.LoadScene("Battle");
-        }
-        else if (m_curScene == "Choice" && nextScene == "Battle")
-        {            
-            SceneManager.LoadScene("Battle");
-        }
-        else if(m_curScene == "Battle" && nextScene == "Lobby")
-        {            
-            SceneManager.LoadScene("Lobby");                  
-        }
-        else if(m_curScene == "Battle" && nextScene == "Choice")
-        {      
-            SceneManager.LoadScene("Choice");
-        }
-        else
-        {
-            Debug.LogError("The scene change is invalid");
-        }
+        SceneManager.LoadScene(nextScene);
+
+
+        //if (m_curScene == "PreLoading" && nextScene == "Lobby")
+        //{
+        //    SceneManager.LoadScene("Lobby");
+        //}
+        //else if (m_curScene == "Lobby" && nextScene == "Choice")
+        //{          
+        //    SceneManager.LoadScene("Choice");            
+        //}
+        //else if (m_curScene == "Lobby" && nextScene == "Battle")
+        //{ 
+        //    SceneManager.LoadScene("Battle");
+        //}
+        //else if (m_curScene == "Choice" && nextScene == "Battle")
+        //{            
+        //    SceneManager.LoadScene("Battle");
+        //}
+        //else if(m_curScene == "Battle" && nextScene == "Lobby")
+        //{            
+        //    SceneManager.LoadScene("Lobby");                  
+        //}
+        //else if(m_curScene == "Battle" && nextScene == "Choice")
+        //{      
+        //    SceneManager.LoadScene("Choice");
+        //}
+        //else if(m_curScene == "Battle" && nextScene == "Ending_Escape")
+        //{
+        //    SceneManager.LoadScene("Ending_Escape");
+        //}
+        //else if(m_curScene == "Ending_Escape" && nextScene == "Lobby")
+        //{
+        //    SceneManager.LoadScene("Lobby");
+        //}
+        //else
+        //{
+        //    Debug.LogError("The scene change is invalid");
+        //}
 
         m_curScene = nextScene;
     }

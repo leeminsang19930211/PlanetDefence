@@ -13,6 +13,6 @@ public class BrokenSpaceshipImageChangeCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BattleGameObjectMgr.Inst.BrokenSpaceshipImageChange();
+        
     }
 }

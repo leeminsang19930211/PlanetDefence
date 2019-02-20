@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
             return m_inst;
         }
     }
+
+    public bool Ended { get; set; } = false;
  
     public void _OnStart()
     {
@@ -132,6 +134,7 @@ public class Player : MonoBehaviour
         binFormatter.Serialize(fileStream, m_spaceShipDatas);
         binFormatter.Serialize(fileStream, m_turretDatas);
         binFormatter.Serialize(fileStream, TurretJunkCosts);
+        binFormatter.Serialize(fileStream, Ended);
 
         fileStream.Close();
 
@@ -161,6 +164,7 @@ public class Player : MonoBehaviour
         m_spaceShipDatas = (SpaceShipData[])binFormatter.Deserialize(fileStream);
         m_turretDatas = (TurretData[]) binFormatter.Deserialize(fileStream);
         TurretJunkCosts = (int[])binFormatter.Deserialize(fileStream);
+        Ended = (bool)binFormatter.Deserialize(fileStream);
 
         fileStream.Close();
 
@@ -751,7 +755,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < (int)SpaceShipPart.End; i++)
         {
             m_spcPartInfos[i]._lock = false;
-          m_spcPartInfos[i]._repaired = false;
+           m_spcPartInfos[i]._repaired = false;
         }
         
         m_globalData.planetHP = PlanetCtrl.Inst.m_maxHP;

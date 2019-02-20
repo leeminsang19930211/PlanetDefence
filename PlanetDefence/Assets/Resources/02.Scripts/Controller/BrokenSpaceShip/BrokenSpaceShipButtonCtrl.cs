@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrokenSpaceShipCtrl : MonoBehaviour
+public class BrokenSpaceShipButtonCtrl : MonoBehaviour
 {
-
     public void OnClick()
     {
         BattleGameObjectMgr.Inst.PopUpLab();

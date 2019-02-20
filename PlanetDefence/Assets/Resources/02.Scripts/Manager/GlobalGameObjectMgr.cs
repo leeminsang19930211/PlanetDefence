@@ -16,7 +16,7 @@ public class GlobalGameObjectMgr : MonoBehaviour
 
     private Dictionary<string, GameObject> m_gameObjects = new Dictionary<string, GameObject>();
 
-    public int MaxDay { get; set; } = 50; // 50은 임시 값
+    public int MaxDay { get; set; } = 3; // Test용
     public int CurDay { get; set; } = 1;
     public bool Battle { get; set; } = false; // Battle 씬에서 전투가 끝났는지 아닌지 여부를 판단하기 위한 값
 
@@ -36,12 +36,29 @@ public class GlobalGameObjectMgr : MonoBehaviour
         }
     }
 
+    public int LeftDays
+    {
+        get
+        {
+            int leftDays = MaxDay - CurDay;
+
+            if (leftDays < 0)
+                return 0;
+
+            return leftDays;
+        }
+
+    }
+
+
     public void IncreaseDay()
     {
         CurDay += 1;
 
         if (CurDay > MaxDay)
             CurDay = MaxDay;
+
+      
     }
 
     public bool SaveData(string path)

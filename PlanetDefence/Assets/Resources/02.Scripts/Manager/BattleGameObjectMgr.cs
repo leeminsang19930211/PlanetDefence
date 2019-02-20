@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;   // 추가
+using UnityEngine.SceneManagement; 
 
 public class BattleGameObjectMgr : MonoBehaviour
 {
@@ -23,7 +23,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         }
     }
 
-    /* 여기서 부터 필요한 내용들을 작성하면 된다 */
     private MainCameraCtrl m_mainCameraCtrl = null;
     private EnemyCntCtrl m_enemyCntCtrl = null;
     private PlanetHPCtrl m_planetHpCtrl = null;
@@ -34,7 +33,6 @@ public class BattleGameObjectMgr : MonoBehaviour
     private SpcDropPopUpPanelCtrl m_spcDropPopUpCtrl = null;
 
     private GameObject m_toLobbyPopUpPanel = null;
-    private GameObject m_resultPopUpPanel = null;
 
     private GameObject m_laboratoryPopUp = null;
 
@@ -72,25 +70,17 @@ public class BattleGameObjectMgr : MonoBehaviour
     public GameObject[] m_BuildStartButtons;
     public GameObject m_BuildWarningNoBP;
     public GameObject m_BuildWarningAlready;
-
-    // 추가3
     public GameObject m_BuildWarningDoubleShield;
-
     public GameObject m_BuildWarningNoRsrc;
-
 
     private GameObject m_RemoveInfoScroll;
  	public GameObject m_RemoveWarningYet;
     private GameObject m_RemoveWarning;
     private GameObject[] m_TurretSupports;
-
-    public GameObject[] m_BrokenSpaceships;
-    public GameObject[] m_Rockets;
-    private GameObject m_RepairedSpaceShip;
-
-    // 추가3
     private GameObject m_GotBPPanel;
     private GameObject[] m_BPImages;
+
+    private GameObject m_brokenSpaceShip = null;
 
     public void Instantiate()
     {
@@ -112,13 +102,9 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_resourceCtrl = GameObject.FindGameObjectWithTag("RESOURCE")?.GetComponent<ResourceCtrl>();
         m_miniPlanetCtrl = GameObject.FindGameObjectWithTag("MINIPLANET")?.GetComponent<MiniPlanetCtrl>();
         m_shieldCtrl = GameObject.Find("Shield")?.GetComponent<ShieldCtrl>();
-    
         m_toLobbyPopUpPanel = GameObject.Find("ToLobbyPopUpPanel");
-        m_resultPopUpPanel = GameObject.Find("ResultPopUpPanel");
         m_turretDropPopUpCtrl = GameObject.Find("TurretDropPopUpPanel").GetComponent<TurretDropPopUpCtrl>();
         m_spcDropPopUpCtrl = GameObject.Find("SpcDropPopUpPanel").GetComponent<SpcDropPopUpPanelCtrl>();
-
-
         m_laboratoryPopUp = GameObject.FindGameObjectWithTag("LABORATORY_POPUP");
         m_buildPopUp = GameObject.FindGameObjectWithTag("BUILD_POPUP");
         m_labScroll = GameObject.Find("LabScroll");
@@ -145,62 +131,48 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RepairWarningAlready = GameObject.Find("RepairWarningAlready");
         m_LaunchWarningNotRepaired = GameObject.Find("LaunchWarningNotRepaired");
         m_LaunchWarning = GameObject.Find("LaunchWarningPanel");
-
         m_BuildButtons = GameObject.FindGameObjectsWithTag("BUILDBUTTON");
  		m_BuildButtons_Black = GameObject.FindGameObjectsWithTag("BUILDBUTTON_BLACK");
         m_BuildInfoScrolls = GameObject.FindGameObjectsWithTag("BUILDINFO");
         m_BuildImages_Black = GameObject.FindGameObjectsWithTag("BUILDIMAGE_BLACK");
         m_BuildStartButtons = GameObject.FindGameObjectsWithTag("BUILDSTARTBUTTON");
-
         m_BuildWarningNoBP = GameObject.Find("BuildWarningNoBP");
         m_BuildWarningAlready = GameObject.Find("BuildWarningAlready");
-
-        // 추가3
         m_BuildWarningDoubleShield = GameObject.Find("BuildWarningDoubleShield");
-
         m_BuildWarningNoRsrc = GameObject.Find("BuildWarningNoRsrc");
-
         m_RemoveInfoScroll = GameObject.FindGameObjectWithTag("REMOVEINFO");
         m_RemoveWarningYet = GameObject.Find("RemoveWarningYet");
         m_RemoveWarning = GameObject.Find("RemoveWarningPanel");
-
         m_TurretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
-     
-        m_BrokenSpaceships = GameObject.FindGameObjectsWithTag("BROKENSPACESHIP");
-        m_Rockets = GameObject.FindGameObjectsWithTag("ROCKET");
-        m_RepairedSpaceShip = GameObject.Find("RepairedSpaceShip");
-
-        // 추가3
         m_GotBPPanel = GameObject.Find("GotBPPanel");
         m_BPImages = GameObject.FindGameObjectsWithTag("BPIMAGE");
+
+
+        m_brokenSpaceShip = GameObject.Find("BrokenSpaceShip");
     }
 
     // 시작시에 껏다 키는 로직은 여기다 작성할것
     public void _OnNewBattle()
     {
         PopDownToLobby();
-        PopDownResult();
 
         m_rightArrow.SetActive(true);
         m_leftArrow.SetActive(true);
         m_turretDropPopUpCtrl.gameObject.SetActive(false);
         m_spcDropPopUpCtrl.gameObject.SetActive(false);
-
-
-        m_RepairedSpaceShip.SetActive(false);
-        m_BrokenSpaceships[3].SetActive(false);
-        m_BrokenSpaceships[2].SetActive(false);
-        m_BrokenSpaceships[1].SetActive(false);
-        for (int i = 0; i < m_Rockets.Length; i++)
-        {
-            m_Rockets[i].SetActive(false);
-        }
-
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);
-
-        // 추가3
         m_GotBPPanel.SetActive(false);
+
+        if (Player.Inst.Ended == true)
+        {
+            m_brokenSpaceShip.SetActive(false);
+        }
+        else
+        {
+            m_brokenSpaceShip.SetActive(true);
+            m_brokenSpaceShip.GetComponent<BrokenSpaceShipCtrl>().Init();
+        }
     }
 
     public void Release_Clear()
@@ -375,20 +347,6 @@ public class BattleGameObjectMgr : MonoBehaviour
             return;
 
         m_toLobbyPopUpPanel.SetActive(false);
-    }
-
-    public void PopUpResult(bool clear)
-    {
-        m_resultPopUpPanel.SetActive(true);
-
-        Result_OKButtonCtrl ctrl = m_resultPopUpPanel.GetComponentInChildren<Result_OKButtonCtrl>();
-
-        ctrl.Clear = clear;
-    }
-
-    public void PopDownResult()
-    { 
-        m_resultPopUpPanel.SetActive(false);
     }
 
     public void PopUpLabInfos(GameObject ThisLabButton)
@@ -809,70 +767,17 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public void Launch()
     {
-        PopUpExit();
-
-        for (int i = 0; i < m_BrokenSpaceships.Length; i++)
-        {
-            Destroy(m_BrokenSpaceships[i]);
-        }
-
-        for (int i = 0; i < m_Rockets.Length; i++)
-        {
-            Destroy(m_Rockets[i]);
-        }
-
-        m_RepairedSpaceShip.SetActive(true);
+        m_brokenSpaceShip.GetComponent<BrokenSpaceShipCtrl>().Launch();
     }
 
-    // 추가
     public void ToEndingEscapeScene()
     {
-        SceneManager.LoadScene("Ending_Escape");
+        SceneLoader.LoadScene("Ending_Escape");
     }
 
     public void BrokenSpaceshipImageChange()
     {
-        if (Player.Inst.m_spcPartInfos[0]._repaired==true)
-        {
-            if (Player.Inst.m_spcPartInfos[1]._repaired == false)
-            {
-                m_BrokenSpaceships[0].SetActive(false);
-                m_BrokenSpaceships[1].SetActive(true);
-            }
-
-        }
-
-        if (Player.Inst.m_spcPartInfos[1]._repaired == true)
-        {
-            if(Player.Inst.m_spcPartInfos[0]._repaired == false)
-            {
-                m_BrokenSpaceships[0].SetActive(false);
-                m_BrokenSpaceships[2].SetActive(true);
-            }
-
-            if (Player.Inst.m_spcPartInfos[0]._repaired == true)
-            {
-                m_BrokenSpaceships[1].SetActive(false);
-                m_BrokenSpaceships[2].SetActive(false);
-                m_BrokenSpaceships[3].SetActive(true);
-            }
-        }
-
-        if (Player.Inst.m_spcPartInfos[2]._repaired == true)
-        {
-            m_Rockets[0].SetActive(true);
-        }
-
-        if (Player.Inst.m_spcPartInfos[3]._repaired == true)
-        {
-            m_Rockets[1].SetActive(true);
-        }
-
-        if (Player.Inst.m_spcPartInfos[4]._repaired == true)
-        {
-            m_Rockets[2].SetActive(true);
-        }
-
+        m_brokenSpaceShip.GetComponent<BrokenSpaceShipCtrl>().UpdateActives();
     }
 
     public void OffTurretSupports(int num)

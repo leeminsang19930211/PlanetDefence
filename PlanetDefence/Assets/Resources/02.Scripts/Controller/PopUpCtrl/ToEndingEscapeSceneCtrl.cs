@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ToEndingEscapeSceneCtrl : MonoBehaviour
 {
-    // Start is called before the first frame update
     void ToEndingEscape()
-    {
+    {       
+        EndingMgr.Inst.ReleaseBattleScene();
         BattleGameObjectMgr.Inst.ToEndingEscapeScene();
     }
-
 }

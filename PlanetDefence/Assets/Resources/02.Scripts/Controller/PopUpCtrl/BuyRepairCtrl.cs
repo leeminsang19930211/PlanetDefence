@@ -7,5 +7,6 @@ public class BuyRepairCtrl : MonoBehaviour
     public void OnClick()
     {
         Player.Inst.BuyRepair(gameObject);
+        BattleGameObjectMgr.Inst.BrokenSpaceshipImageChange();
     }
 }

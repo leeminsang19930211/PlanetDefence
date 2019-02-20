@@ -30,15 +30,5 @@ public class BattleTest : MonoBehaviour
             FileMgr.Inst.SavePlayerData();
         }
 
-
-        if (Input.GetKeyDown(KeyCode.F10))
-        {
-            BattleGameObjectMgr.Inst.PopUpResult(false);
-        }
-        if (Input.GetKeyDown(KeyCode.F11))
-        {
-            BattleGameObjectMgr.Inst.PopUpResult(true);
-        }
-
     }
 }

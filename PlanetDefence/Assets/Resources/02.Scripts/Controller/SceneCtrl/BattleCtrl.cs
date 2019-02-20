@@ -15,40 +15,6 @@ public class BattleCtrl: MonoBehaviour
         _OnBattle();
     }
 
-    public static void Release_Clear()
-    {
-        Player.Inst.Release_Clear();
-        SpaceShipMgr.Inst.Release_Clear();
-        TurretMgr.Inst.Release_Clear();
-        EffectMgr.Inst.Release_Clear();
-        BulletMgr.Inst.Release_Clear();
-        BattleGameObjectMgr.Inst.Release_Clear();
-        PlanetCtrl.Inst.Release_Clear();
-
-        GlobalGameObjectMgr.Inst.Battle = false;
-        GlobalGameObjectMgr.Inst.IncreaseDay();
-
-        FileMgr.Inst.SaveGlobaData();
-        FileMgr.Inst.SavePlayerData();
-    }
-
-    public static void Release_Fail()
-    {
-        Player.Inst.Release_Fail();
-        SpaceShipMgr.Inst.Release_Fail();
-        TurretMgr.Inst.Release_Fail();
-        EffectMgr.Inst.Release_Fail();
-        BulletMgr.Inst.Release_Fail();
-        BattleGameObjectMgr.Inst.Release_Fail();
-        PlanetCtrl.Inst.Release_Fail();
-
-        GlobalGameObjectMgr.Inst.Battle = false;
-        GlobalGameObjectMgr.Inst.CurDay = 0;
-
-        FileMgr.Inst.SavePlayerData();
-        FileMgr.Inst.SaveGlobaData();
-    } 
-
     private void _OnStart()
     {
         if(m_onStart == false)
@@ -59,6 +25,8 @@ public class BattleCtrl: MonoBehaviour
             TurretMgr.Inst._OnStart();
             SpaceShipMgr.Inst._OnStart();
             Player.Inst._OnStart();
+            EndingMgr.Inst._OnStart();
+
 
             m_onStart = true;
         } 
@@ -70,10 +38,10 @@ public class BattleCtrl: MonoBehaviour
         {
             GlobalGameObjectMgr.Inst.Battle = true;
 
-            WavesMob[] infos = new WavesMob[2];
+            WavesMob[] infos = new WavesMob[1];
 
             infos[0].eMobType = MobType.Normal;
-            infos[0].nMobNum = 10;
+            infos[0].nMobNum = 2;
             infos[0].fDelayTime = 4f;
             infos[0].fFirstDelayTime = 0f;
 
@@ -102,10 +70,10 @@ public class BattleCtrl: MonoBehaviour
             //infos[5].fDelayTime = 5f;
             //infos[5].fFirstDelayTime = 2f;
 
-            infos[1].eMobType = MobType.GhostShip;
-            infos[1].nMobNum = 2;
-            infos[1].fDelayTime = 3f;
-            infos[1].fFirstDelayTime = 5f;
+            //infos[1].eMobType = MobType.GhostShip;
+            //infos[1].nMobNum = 2;
+            //infos[1].fDelayTime = 3f;
+            //infos[1].fFirstDelayTime = 5f;
 
             //infos[7].eMobType = MobType.BattleShip;
             //infos[7].nMobNum = 2;
@@ -136,9 +104,9 @@ public class BattleCtrl: MonoBehaviour
             EffectMgr.Inst.AllocateEffects(Effect.ShieldHit0, 70);
             EffectMgr.Inst.AllocateEffects(Effect.Poison0, 70);
 
-
             BattleGameObjectMgr.Inst._OnNewBattle();
             TurretMgr.Inst._OnNewBattle();
+
 
             SpaceShipMgr.Inst.StartCreatingWaves(infos);
         }
@@ -146,6 +114,6 @@ public class BattleCtrl: MonoBehaviour
 
     private void _OnBattle()
     {
-
+        EndingMgr.Inst._OnBattle();
     }
 }
