@@ -94,15 +94,18 @@ public class SceneLoader : MonoBehaviour
         }
         else if (m_curScene == "Lobby")
         {
+            AudioManager.Inst.PlayBGM(AudioManager.eBGM.LobbyBGM);
             GlobalGameObjectMgr.Inst.SetGameObectActive("Lobby", true);
         }
         else if (m_curScene == "Choice")
         {
+            AudioManager.Inst.PlayBGM(AudioManager.eBGM.ChoiceBGM);
             GlobalGameObjectMgr.Inst.SetGameObectActive("Choice", true);
 
         }
         else if (m_curScene == "Battle")
         {
+            AudioManager.Inst.PlayBGM(AudioManager.eBGM.BattleBGM);
             GlobalGameObjectMgr.Inst.SetGameObectActive("Battle", true);
             GlobalGameObjectMgr.Inst.SetGameObectActive("BattleStatic", true);
         }

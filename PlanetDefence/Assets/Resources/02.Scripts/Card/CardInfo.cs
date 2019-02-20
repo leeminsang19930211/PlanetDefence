@@ -48,9 +48,9 @@ public class CardInfo : MonoBehaviour
     public void Selected()
     {
         //승완 작업 -------Start-------- 190208 
+        AudioManager.Inst.playSelectSFX(AudioManager.eSelectSFX.CardSFX);
         FindObjectOfType<CardCtrl>().DeleteCards();
         //GlobalGameObjectMgr.Inst.SelectedCard = this;
-
         GlobalGameObjectMgr.Inst.waveInfos = (WavesMob[])Waves.Clone();
         GlobalGameObjectMgr.Inst.bSelected = true;
         SceneLoader.LoadScene("Battle");

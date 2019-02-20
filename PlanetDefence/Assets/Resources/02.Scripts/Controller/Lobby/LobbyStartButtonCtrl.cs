@@ -21,7 +21,8 @@ public class LobbyStartButtonCtrl : MonoBehaviour
 
     public void OnClick()
     {
-       SceneLoader.LoadScene("Choice");
+        AudioManager.Inst.playSelectSFX(AudioManager.eSelectSFX.ButtonSFX);
+        SceneLoader.LoadScene("Choice");
     }
 
 }

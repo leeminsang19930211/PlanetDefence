@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ChoiceTextCtrl : MonoBehaviour
 {
     [SerializeField]
-    private Text DaysText;
+    private Text DaysText = null;
 
     void UpdateDayText()
     {

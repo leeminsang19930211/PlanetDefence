@@ -6,6 +6,7 @@ public class LobbyEixtButtonCtrl : MonoBehaviour
 {
     public void OnClick()
     {
+        AudioManager.Inst.playSelectSFX(AudioManager.eSelectSFX.ButtonSFX);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
