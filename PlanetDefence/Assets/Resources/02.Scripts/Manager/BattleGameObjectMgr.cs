@@ -30,6 +30,8 @@ public class BattleGameObjectMgr : MonoBehaviour
     private ResourceCtrl m_resourceCtrl = null;
     private MiniPlanetCtrl m_miniPlanetCtrl = null;
     private ShieldCtrl m_shieldCtrl = null;
+    private TurretDropPopUpCtrl m_turretDropPopUpCtrl = null;
+    private SpcDropPopUpPanelCtrl m_spcDropPopUpCtrl = null;
 
     private GameObject m_toLobbyPopUpPanel = null;
     private GameObject m_resultPopUpPanel = null;
@@ -70,6 +72,10 @@ public class BattleGameObjectMgr : MonoBehaviour
     public GameObject[] m_BuildStartButtons;
     public GameObject m_BuildWarningNoBP;
     public GameObject m_BuildWarningAlready;
+
+    // 추가3
+    public GameObject m_BuildWarningDoubleShield;
+
     public GameObject m_BuildWarningNoRsrc;
 
 
@@ -80,9 +86,11 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public GameObject[] m_BrokenSpaceships;
     public GameObject[] m_Rockets;
-
-    // 추가
     private GameObject m_RepairedSpaceShip;
+
+    // 추가3
+    private GameObject m_GotBPPanel;
+    private GameObject[] m_BPImages;
 
     public void Instantiate()
     {
@@ -107,7 +115,10 @@ public class BattleGameObjectMgr : MonoBehaviour
     
         m_toLobbyPopUpPanel = GameObject.Find("ToLobbyPopUpPanel");
         m_resultPopUpPanel = GameObject.Find("ResultPopUpPanel");
-        
+        m_turretDropPopUpCtrl = GameObject.Find("TurretDropPopUpPanel").GetComponent<TurretDropPopUpCtrl>();
+        m_spcDropPopUpCtrl = GameObject.Find("SpcDropPopUpPanel").GetComponent<SpcDropPopUpPanelCtrl>();
+
+
         m_laboratoryPopUp = GameObject.FindGameObjectWithTag("LABORATORY_POPUP");
         m_buildPopUp = GameObject.FindGameObjectWithTag("BUILD_POPUP");
         m_labScroll = GameObject.Find("LabScroll");
@@ -143,6 +154,10 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_BuildWarningNoBP = GameObject.Find("BuildWarningNoBP");
         m_BuildWarningAlready = GameObject.Find("BuildWarningAlready");
+
+        // 추가3
+        m_BuildWarningDoubleShield = GameObject.Find("BuildWarningDoubleShield");
+
         m_BuildWarningNoRsrc = GameObject.Find("BuildWarningNoRsrc");
 
         m_RemoveInfoScroll = GameObject.FindGameObjectWithTag("REMOVEINFO");
@@ -153,7 +168,11 @@ public class BattleGameObjectMgr : MonoBehaviour
      
         m_BrokenSpaceships = GameObject.FindGameObjectsWithTag("BROKENSPACESHIP");
         m_Rockets = GameObject.FindGameObjectsWithTag("ROCKET");
-        m_RepairedSpaceShip = GameObject.Find("RepairedSpaceShip");       
+        m_RepairedSpaceShip = GameObject.Find("RepairedSpaceShip");
+
+        // 추가3
+        m_GotBPPanel = GameObject.Find("GotBPPanel");
+        m_BPImages = GameObject.FindGameObjectsWithTag("BPIMAGE");
     }
 
     // 시작시에 껏다 키는 로직은 여기다 작성할것
@@ -164,6 +183,9 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_rightArrow.SetActive(true);
         m_leftArrow.SetActive(true);
+        m_turretDropPopUpCtrl.gameObject.SetActive(false);
+        m_spcDropPopUpCtrl.gameObject.SetActive(false);
+
 
         m_RepairedSpaceShip.SetActive(false);
         m_BrokenSpaceships[3].SetActive(false);
@@ -176,6 +198,9 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);
+
+        // 추가3
+        m_GotBPPanel.SetActive(false);
     }
 
     public void Release_Clear()
@@ -590,6 +615,10 @@ public class BattleGameObjectMgr : MonoBehaviour
 
         m_BuildWarningNoBP.SetActive(false);
         m_BuildWarningAlready.SetActive(false);
+
+        // 추가3
+        m_BuildWarningDoubleShield.SetActive(false);
+
         m_BuildWarningNoRsrc.SetActive(false);
         m_RemoveInfoScroll.SetActive(false);
         m_RemoveWarningYet.SetActive(false);
@@ -690,6 +719,10 @@ public class BattleGameObjectMgr : MonoBehaviour
     {
         m_BuildWarningNoBP.SetActive(false);
         m_BuildWarningAlready.SetActive(false);
+
+        // 추가3
+        m_BuildWarningDoubleShield.SetActive(false);
+
         m_BuildWarningNoRsrc.SetActive(false);
         m_RemoveWarningYet.SetActive(false);
         m_RemoveWarning.SetActive(false);
@@ -702,6 +735,9 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_LaunchWarningNotRepaired.SetActive(false);
         m_LaunchWarning.SetActive(false);
 
+        // 추가3
+        m_GotBPPanel.SetActive(false);
+
 
         BuildInfosExit();
         LabInfosExit();
@@ -712,6 +748,12 @@ public class BattleGameObjectMgr : MonoBehaviour
     public void PopUpBuildWarningAlready()
     {
         m_BuildWarningAlready.SetActive(true);
+    }
+
+    // 추가3
+    public void PopUpBuildWarningDoubleShield()
+    {
+        m_BuildWarningDoubleShield.SetActive(true);
     }
 
     public void PopUpBuildWarningNoRsrc()
@@ -868,5 +910,15 @@ public class BattleGameObjectMgr : MonoBehaviour
                 m_TurretSupports[i * 5 + j].SetActive(true);
             }
         }
+    }
+
+    public void PopUpTurretDropInfo(Turret turret)
+    {
+        m_turretDropPopUpCtrl.PopUp(turret);
+    }
+
+    public void PopUpSpaceShipDropInfo(SpaceShipPart part)
+    {
+        m_spcDropPopUpCtrl.PopUp(part);
     }
 }

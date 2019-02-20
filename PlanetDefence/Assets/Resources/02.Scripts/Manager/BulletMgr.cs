@@ -282,6 +282,8 @@ public class BulletMgr : MonoBehaviour
         AddBullet("Bullet_Lv2_Gatling");
         AddBullet("Bullet_Lv3_Gatling");
         AddBullet("Bullet_Lv3_Heal");
+        AddBullet("Bullet_Lv3_KingSlayer");
+
 
         for (int i=0; i <(int)BulletPool.End; ++i)
         {
@@ -358,6 +360,9 @@ public class BulletMgr : MonoBehaviour
                 break;
             case Bullet.Lv3_Heal:
                 str = "Bullet_Lv3_Heal";
+                break;
+            case Bullet.Lv3_KingSlayer:
+                str = "Bullet_Lv3_KingSlayer";
                 break;
             case Bullet.Spc_Normal:
                 str = "Bullet_Spc_Normal";

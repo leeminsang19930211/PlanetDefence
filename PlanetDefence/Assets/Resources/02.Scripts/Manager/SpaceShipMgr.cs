@@ -212,6 +212,24 @@ public class SpaceShipMgr : MonoBehaviour
         BattleGameObjectMgr.Inst.UpdateEnemyCnt(m_maxSpaceShipCnt);
     }
 
+    public Gunner FindBossTargetInFan(float refAngle, float fanAngle, Vector3 from, float minDist)
+    {
+        Gunner target = null;
+
+        GameObject[] dummyList = GameObject.FindGameObjectsWithTag("SPACESHIP_DUMMY");
+
+        target = FindBossTargetInList(dummyList, refAngle, fanAngle, from, minDist);
+
+        if (target != null)
+            return target; // 더미가 있으면 무조건 더미먼저
+
+        GameObject[] normalList = GameObject.FindGameObjectsWithTag("SPACESHIP_NORMAL");
+
+        target = FindBossTargetInList(normalList, refAngle, fanAngle, from, minDist);
+
+        return target;
+    }
+
     public Gunner FindFirstTargetInFan(float refAngle, float fanAngle, Vector3 from, float minDist)
     {
         Gunner target = null;
@@ -246,6 +264,57 @@ public class SpaceShipMgr : MonoBehaviour
             return dummyTarget;
 
         return noramlTarget.CurHP <= dummyTarget.CurHP ? noramlTarget : dummyTarget;
+    }
+
+    private Gunner FindBossTargetInList(GameObject[] spaceShipList, float refAngle, float fanAngle, Vector3 from, float minDist)
+    {
+        if (spaceShipList == null)
+            return null;
+
+        float halfAngle = fanAngle * 0.5f;
+
+        foreach (GameObject spcShip in spaceShipList)
+        {
+            SpaceShipCtrl ctrl = spcShip.GetComponent<SpaceShipCtrl>();
+
+            if ((ctrl.Position - from).magnitude < minDist)
+            {
+                continue;
+            }
+
+            SpaceShip_GhostCtrl ghost = ctrl as SpaceShip_GhostCtrl;
+
+            if (ghost != null)
+            {
+                if (ghost.Visible == false)
+                    continue;
+            }
+
+            if (refAngle == 0)
+            {
+                if (0 <= ctrl.AngleFromPlanetUp && (halfAngle > ctrl.AngleFromPlanetUp || 360f - halfAngle < ctrl.AngleFromPlanetUp))
+                {
+                    if (ctrl.SpaceShipType == MobType.ZombieShip || ctrl.SpaceShipType == MobType.BattleShip || ctrl.SpaceShipType == MobType.GhostShip)
+                    {
+                        return ctrl;
+                    }
+                }
+                    
+            }
+            else
+            {
+                if (refAngle - halfAngle <= ctrl.AngleFromPlanetUp && refAngle + halfAngle > ctrl.AngleFromPlanetUp)
+                {
+                    if (ctrl.SpaceShipType == MobType.ZombieShip || ctrl.SpaceShipType == MobType.BattleShip || ctrl.SpaceShipType == MobType.GhostShip)
+                    {
+                        return ctrl;
+                    }
+
+                }                    
+            }
+        }
+
+        return null;
     }
 
     private Gunner FindFirstTargetInList(GameObject[] spaceShipList, float refAngle, float fanAngle, Vector3 from, float minDist)

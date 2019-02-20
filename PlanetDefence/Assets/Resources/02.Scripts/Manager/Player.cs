@@ -238,6 +238,8 @@ public class Player : MonoBehaviour
         }
 
         UnLock(dropTurret);
+
+        BattleGameObjectMgr.Inst.PopUpTurretDropInfo(dropTurret);
     }
 
     public void PickUpSpaceShipBlueprint(float dropProbability, SpaceShipBlueprintDropInfo[] dropInfos)
@@ -291,6 +293,8 @@ public class Player : MonoBehaviour
         }
 
         UnLock(dropSpaceShip);
+
+        BattleGameObjectMgr.Inst.PopUpSpaceShipDropInfo(dropSpaceShip);
     }
 
     public void AddJunk(int junk)
@@ -358,6 +362,9 @@ public class Player : MonoBehaviour
         {
             if(TurretMgr.Inst.FindShieldTurret() != null)
             {
+                // 추가3
+                BattleGameObjectMgr.Inst.m_BuildWarningDoubleShield.SetActive(true);
+
                 return BuyErr.DoubleShield;
             }
         }

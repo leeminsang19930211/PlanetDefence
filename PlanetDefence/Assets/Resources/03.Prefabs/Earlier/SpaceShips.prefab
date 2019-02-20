@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3efb9e71c00e02439c67cc6e45129bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 200
+  m_maxHP: 10
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45

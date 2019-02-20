@@ -476,6 +476,8 @@ public class TurretMgr : MonoBehaviour
         AddTurret("Turret_Lv3_Fast");
         AddTurret("Turret_Lv2_Gatling");
         AddTurret("Turret_Lv3_Gatling");
+        AddTurret("Turret_Lv3_KingSlayer");
+
 
         AddTurretSupports();
 
@@ -579,6 +581,9 @@ public class TurretMgr : MonoBehaviour
                 break;
             case Turret.Lv3_Fast:
                 str = "Turret_Lv3_Fast";
+                break;
+            case Turret.Lv3_KingSlayer:
+                str = "Turret_Lv3_KingSlayer";
                 break;
             default:
                 Debug.LogError("The turret str from the turret enum is not mapped");

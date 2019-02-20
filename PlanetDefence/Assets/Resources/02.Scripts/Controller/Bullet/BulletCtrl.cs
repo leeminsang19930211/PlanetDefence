@@ -5,8 +5,8 @@ public class BulletCtrl : MonoBehaviour
 {
     public int m_damage = 0;
     public float m_speed = 0;
-    public Effect m_effect_explosion = Effect.Explosion0;
-    public Effect m_effect_shieldHit = Effect.ShieldHit0;
+    protected Effect m_effect_explosion = Effect.Explosion0;
+    protected Effect m_effect_shieldHit = Effect.ShieldHit0;
 
     protected Transform m_trsf = null;
 

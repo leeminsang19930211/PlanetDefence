@@ -23,7 +23,7 @@
     Lv3_Sniper,
     Lv3_Heal, 
     Lv3_Berserker,
-    dummy14, // 킹슬레어 자리. 아직 안만듬
+    Lv3_KingSlayer,
     End,
 }
 
@@ -116,6 +116,7 @@ public enum Bullet
     Lv3_Slow,
     Lv3_Heal,
     Lv3_Pause,
+    Lv3_KingSlayer,
     Spc_Normal,
     Spc_Pirate,
     Spc_Little,
