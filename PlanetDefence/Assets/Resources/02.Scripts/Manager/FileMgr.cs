@@ -18,13 +18,15 @@ public class FileMgr : MonoBehaviour
     private string path_turretData = "Data/TurretData.bin";
 
 #else
-    private string path_playerReset = Application.persistentDataPath + "Reset.txt";
+    private string path_playerReset = Application.persistentDataPath + "PlayerReset.txt";
     private string path_playerData = Application.persistentDataPath + "PlayerData.bin";
     private string path_globalReset = Application.persistentDataPath + "GlobalReset.txt";
     private string path_globalData = Application.persistentDataPath + "GlobalData.bin";
-       private string path_turretReset = Application.persistentDataPath + "Data/TurretReset.txt";
-    private string path_turretData = Application.persistentDataPath + "Data/TurretData.bin";
+    private string path_turretReset = Application.persistentDataPath + "TurretReset.txt";
+    private string path_turretData = Application.persistentDataPath + "TurretData.bin";
 #endif
+
+
 
 
     public static FileMgr Inst
@@ -81,7 +83,7 @@ public class FileMgr : MonoBehaviour
     public void SaveTurretData()
     {
         RecordReset(path_turretReset, false);
-        TurretMgr.Inst.SaveData(path_turretReset);
+        TurretMgr.Inst.SaveData(path_turretData);
     }
 
     public void LoadTurretData()
@@ -91,13 +93,13 @@ public class FileMgr : MonoBehaviour
             return;
         }
 
-        TurretMgr.Inst.LoadData(path_turretReset);
+        TurretMgr.Inst.LoadData(path_turretData);
     }
 
     public void SavePlayerData()
     {
         RecordReset(path_playerReset, false);
-        Player.Inst.SaveData(path_playerReset);
+        Player.Inst.SaveData(path_playerData);
     }
 
     public void LoadPlayerData()
@@ -107,7 +109,7 @@ public class FileMgr : MonoBehaviour
             return;
         }
 
-        Player.Inst.LoadData(path_playerReset);
+        Player.Inst.LoadData(path_playerData);
     }
 
     private void RecordReset(string path, bool reset)
