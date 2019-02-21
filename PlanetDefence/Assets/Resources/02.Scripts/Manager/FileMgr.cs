@@ -14,12 +14,18 @@ public class FileMgr : MonoBehaviour
     private string path_playerData = "Data/PlayerData.bin";
     private string path_globalReset = "Data/GlobalReset.txt";
     private string path_globalData = "Data/GlobalData.bin";
+    private string path_turretReset = "Data/TurretReset.txt";
+    private string path_turretData = "Data/TurretData.bin";
+
 #else
     private string path_playerReset = Application.persistentDataPath + "Reset.txt";
     private string path_playerData = Application.persistentDataPath + "PlayerData.bin";
     private string path_globalReset = Application.persistentDataPath + "GlobalReset.txt";
     private string path_globalData = Application.persistentDataPath + "GlobalData.bin";
+       private string path_turretReset = Application.persistentDataPath + "Data/TurretReset.txt";
+    private string path_turretData = Application.persistentDataPath + "Data/TurretData.bin";
 #endif
+
 
     public static FileMgr Inst
     {
@@ -39,6 +45,7 @@ public class FileMgr : MonoBehaviour
 
     public bool PlayerReset { get { return CheckReset(path_playerReset); } }
     public bool GlobalReset { get { return CheckReset(path_globalReset);  } }
+    public bool TurretReset { get { return CheckReset(path_turretReset); } }
 
     public void ResetPlayerData()
     {
@@ -48,6 +55,11 @@ public class FileMgr : MonoBehaviour
     public void ResetGlobalData()
     {
         RecordReset(path_globalReset, true);
+    }
+
+    public void ResetTurretData()
+    {
+        RecordReset(path_turretReset, true);
     }
 
     public void SaveGlobaData()
@@ -66,20 +78,36 @@ public class FileMgr : MonoBehaviour
         GlobalGameObjectMgr.Inst.LoadData(path_globalData);
     }
 
-    public void SavePlayerData()
+    public void SaveTurretData()
     {
-        RecordReset(path_playerReset, false);
-        Player.Inst.SaveData(path_playerData);
+        RecordReset(path_turretReset, false);
+        TurretMgr.Inst.SaveData(path_turretReset);
     }
 
-    public void LoadPlayerData()
+    public void LoadTurretData()
     {
-        if (CheckReset(path_playerReset) ==true)
+        if (CheckReset(path_turretReset) ==true)
         {
             return;
         }
 
-        Player.Inst.LoadData(path_playerData);
+        TurretMgr.Inst.LoadData(path_turretReset);
+    }
+
+    public void SavePlayerData()
+    {
+        RecordReset(path_playerReset, false);
+        Player.Inst.SaveData(path_playerReset);
+    }
+
+    public void LoadPlayerData()
+    {
+        if (CheckReset(path_playerReset) == true)
+        {
+            return;
+        }
+
+        Player.Inst.LoadData(path_playerReset);
     }
 
     private void RecordReset(string path, bool reset)

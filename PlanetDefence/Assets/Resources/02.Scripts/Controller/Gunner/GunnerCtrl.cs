@@ -44,6 +44,11 @@ public class Gunner : MonoBehaviour
         get { return m_curHP; }
     }
 
+    public int StartHP
+    {
+        get; set;
+    } = -1;
+
     public Vector3 Position
     {
         get
@@ -155,6 +160,11 @@ public class Gunner : MonoBehaviour
         m_trsf = GetComponent<Transform>();
         m_curHP = m_maxHP;
         m_fireDelay_ori = m_fireDelay;
+
+        if(StartHP > 0)
+        {
+            m_curHP = StartHP;
+        }
 
         if (m_maxBullets > 0)
         {

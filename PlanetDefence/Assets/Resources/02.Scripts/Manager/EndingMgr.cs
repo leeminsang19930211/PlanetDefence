@@ -3,12 +3,20 @@ using System.Collections;
 
 public class EndingMgr : MonoBehaviour
 {
+    public enum eResult
+    {
+        Fail,
+        Clear,
+        Clear_Last,
+        End,
+    }
+
     private static EndingMgr m_inst = null;
 
     private int m_leftEnemies = int.MaxValue;
     private int m_leftPlanetHP = int.MaxValue;
     private bool m_launchingSpaceShip = false;
-    private bool m_clear = false;
+    private eResult m_result = eResult.End;
 
     private GameObject m_resultPopUpPanel = null;
     private GameObject m_ending30Days = null;
@@ -28,6 +36,11 @@ public class EndingMgr : MonoBehaviour
             return m_inst;
         }
     }
+    public eResult Result
+    {
+        get { return m_result; }
+    }
+
 
     public void _OnStart()
     {
@@ -42,6 +55,8 @@ public class EndingMgr : MonoBehaviour
     {
         m_resultPopUpPanel.SetActive(false);
         m_ending30Days.SetActive(false);
+
+        m_result = eResult.Fail;
     }
 
     public int LeftEnemies
@@ -54,17 +69,17 @@ public class EndingMgr : MonoBehaviour
             m_leftEnemies = value;
 
             if (m_leftEnemies == 0 && m_leftPlanetHP > 0)
-            {
-                m_clear = true;
-
+            {               
                 if(m_launchingSpaceShip == false)
                 {
                     if (GlobalGameObjectMgr.Inst.LeftDays > 0)
                     {
+                        m_result = eResult.Clear;
                         PopUpResultPanel();
                     }
                     else
                     {
+                        m_result = eResult.Clear_Last;
                         m_ending30Days.SetActive(true);
                     }
                 }
@@ -83,7 +98,7 @@ public class EndingMgr : MonoBehaviour
 
             if (m_leftPlanetHP == 0)
             {
-                m_clear = false;
+                m_result = eResult.Fail;
 
                 m_resultPopUpPanel.SetActive(false);
             }
@@ -95,18 +110,13 @@ public class EndingMgr : MonoBehaviour
         set
         {
             m_launchingSpaceShip = value;
-            m_clear = true;
+            m_result  = eResult.Clear;
         }
     }
 
     public void PopUpResultPanel()
     {
-        m_resultPopUpPanel.SetActive(true);
-    }
-
-    public void PopDownResultPanel()
-    {
-        if(m_clear)
+        if (m_result == eResult.Clear || m_result == eResult.Clear_Last)
         {
             AudioManager.Inst.playClearSFX(AudioManager.eClearSFX.ClearSFX);
         }
@@ -115,12 +125,19 @@ public class EndingMgr : MonoBehaviour
             AudioManager.Inst.playClearSFX(AudioManager.eClearSFX.FailedSFX);
         }
 
+        m_resultPopUpPanel.SetActive(true);
+    }
+
+    public void PopDownResultPanel()
+    {
+
+
         m_resultPopUpPanel.SetActive(false);
     }
 
     public void ReleaseBattleScene()
     {
-        if (m_clear)
+        if (m_result == eResult.Clear || m_result == eResult.Clear_Last)
         {
             Release_Clear();            
         }
@@ -145,12 +162,12 @@ public class EndingMgr : MonoBehaviour
 
         FileMgr.Inst.SaveGlobaData();
         FileMgr.Inst.SavePlayerData();
+        FileMgr.Inst.SaveTurretData();
     }
 
     private void Release_Fail()
     {
-       
-
+      
         Player.Inst.Release_Fail();
         SpaceShipMgr.Inst.Release_Fail();
         TurretMgr.Inst.Release_Fail();
@@ -164,5 +181,6 @@ public class EndingMgr : MonoBehaviour
 
         FileMgr.Inst.SavePlayerData();
         FileMgr.Inst.SaveGlobaData();
+        FileMgr.Inst.SaveTurretData();
     }
 }

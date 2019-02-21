@@ -10,6 +10,7 @@ public class LobbyResetButtonCtrl : MonoBehaviour
     {
         FileMgr.Inst.ResetPlayerData();
         FileMgr.Inst.ResetGlobalData();
+        FileMgr.Inst.ResetTurretData();
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

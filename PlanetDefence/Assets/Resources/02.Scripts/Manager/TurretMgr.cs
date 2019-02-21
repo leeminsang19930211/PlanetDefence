@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class TurretMgr : MonoBehaviour
 {
@@ -83,6 +85,80 @@ public class TurretMgr : MonoBehaviour
             }
         }
     }
+
+    public bool SaveData(string path)
+    {
+        FileStream fileStream = new FileStream(path, FileMode.Create);
+
+        if (fileStream == null)
+        {
+            Debug.LogError("File open for saving turret data failed");
+            return false;
+        }
+
+        BinaryFormatter binFormatter = new BinaryFormatter();
+
+        int turretCnt = 0;
+
+        foreach (TurretSupportCtrl support in m_turretSupportCtrs)
+        {
+            if(support.TurretCtrl != null)
+            {
+                turretCnt += 1;
+            }
+        }
+
+        binFormatter.Serialize(fileStream, turretCnt);
+
+       for(int i=0; i< m_turretSupportCtrs.Count;  ++i)
+        {
+            if (m_turretSupportCtrs[i].TurretCtrl != null)
+            {
+                binFormatter.Serialize(fileStream, i);
+                binFormatter.Serialize(fileStream, m_turretSupportCtrs[i].TurretCtrl.TurretType);
+                binFormatter.Serialize(fileStream, m_turretSupportCtrs[i].TurretCtrl.CurHP);
+            }
+        }
+
+
+        fileStream.Close();
+
+        return true;
+    }
+
+    public bool LoadData(string path)
+    {
+        FileStream fileStream = new FileStream(path, FileMode.Open);
+
+        if (fileStream == null)
+        {
+            return false;
+        }
+
+        BinaryFormatter binFormatter = new BinaryFormatter();
+
+        int turretCnt = 0;
+
+        turretCnt =  (int)binFormatter.Deserialize(fileStream);
+
+        for(int i=0; i<turretCnt; ++i)
+        {
+            int idx = (int)binFormatter.Deserialize(fileStream);
+            Turret turret = (Turret)binFormatter.Deserialize(fileStream);
+            int curHP = (int)binFormatter.Deserialize(fileStream);
+
+            CreateTurretOnTurretSupport(idx, curHP, turret);            
+        }
+
+
+        fileStream.Close();
+
+ 
+        return true;
+    }
+
+
+    
 
     public TurretData[] GetSourceTurretDatas()
     {
@@ -250,47 +326,6 @@ public class TurretMgr : MonoBehaviour
         return m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl != null;
     }
 
-    public bool CreateTurretOnTurretSupport(string turretName)
-    {
-        if(m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
-        {
-            Debug.Log("the focus idx is out of the range");
-            return false;
-        }
-
-        if(CheckTurretOnTurretSupport() == true)
-        {
-            Debug.Log("the turret support has a turret");
-            return false;
-        }
-        
-        if(m_turretSupportCtrs[m_focusedTurretSupportIdx].Focus == false)
-        {
-            Debug.Log("the turret support is not focused");
-            return false;
-        }
-
-        GameObject turret = null;
-            
-        if(false ==  m_sourceTurrets.TryGetValue(turretName, out turret))
-        {
-            Debug.Log("Finding turret in the Dictionary failed");
-            return false;
-        }
-
-        Transform parentTrsf = GameObject.FindGameObjectWithTag("BATTLESTATIC")?.GetComponent<Transform>();
-
-        if (parentTrsf == null)
-        {
-            Debug.Log("The BattleStatic inst is not found");
-            return false;
-        }
-
-        CreateTurret(turret, parentTrsf);
-
-        return true;
-    }
-
     public bool CreateTurretOnTurretSupport(Turret turretName)
     {
         if (m_focusedTurretSupportIdx < 0 || m_focusedTurretSupportIdx >= m_turretSupportCtrs.Count)
@@ -328,7 +363,41 @@ public class TurretMgr : MonoBehaviour
             return false;
         }
 
-        CreateTurret(turret, parentTrsf);
+        CreateTurret(m_focusedTurretSupportIdx, turret, parentTrsf);
+
+        return true;
+    }
+
+    public bool CreateTurretOnTurretSupport(int turretIdx, int startHP, Turret turretName)
+    {
+        if (turretIdx < 0 || turretIdx >= m_turretSupportCtrs.Count)
+        {
+            Debug.Log("the focus idx is out of the range");
+            return false;
+        }
+
+        if (m_turretSupportCtrs[turretIdx].TurretCtrl != null)
+            return false;
+
+
+        GameObject turret = null;
+        string turretStr = EnumToStr(turretName);
+
+        if (false == m_sourceTurrets.TryGetValue(turretStr, out turret))
+        {
+            Debug.Log("Finding turret in the Dictionary failed");
+            return false;
+        }
+
+        Transform parentTrsf = GameObject.FindGameObjectWithTag("BATTLESTATIC")?.GetComponent<Transform>();
+
+        if (parentTrsf == null)
+        {
+            Debug.Log("The BattleStatic inst is not found");
+            return false;
+        }
+
+        CreateTurret(turretIdx, turret, parentTrsf).StartHP = startHP;
 
         return true;
     }
@@ -399,16 +468,16 @@ public class TurretMgr : MonoBehaviour
         return turret;
     }
 
-    private void CreateTurret(GameObject source, Transform parentTrsf)
+    private Gunner CreateTurret(int turretIdx, GameObject source, Transform parentTrsf)
     {
       
-        float angle = (m_focusedTurretSupportIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
+        float angle = (turretIdx / 5) * 90f; //5 단위로 위/왼쪽/아래/오른쪽으로 나뉨
 
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl = Instantiate(source, m_turretSupportCtrs[m_focusedTurretSupportIdx].SetUpPos, Quaternion.Euler(0, 0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.BulletPoolIdx = m_focusedTurretSupportIdx;
-        m_turretSupportCtrs[m_focusedTurretSupportIdx].TurretCtrl.Clone = true;
+        m_turretSupportCtrs[turretIdx].TurretCtrl = Instantiate(source, m_turretSupportCtrs[turretIdx].SetUpPos, Quaternion.Euler(0, 0, angle), parentTrsf)?.GetComponent<TurretCtrl>();
+        m_turretSupportCtrs[turretIdx].TurretCtrl.BulletPoolIdx = turretIdx;
+        m_turretSupportCtrs[turretIdx].TurretCtrl.Clone = true;
 
-      
+        return m_turretSupportCtrs[turretIdx].TurretCtrl;
     }
 
     private void RemoveTurret()

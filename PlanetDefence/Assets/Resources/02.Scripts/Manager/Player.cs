@@ -383,8 +383,8 @@ public class Player : MonoBehaviour
             return BuyErr.NotEnoughRsrc;
         }
 
-        m_junk -= TurretJunkCosts[BuildStartButtonIdx];
-        m_eleCircuit -= TurretCircuitCosts[BuildStartButtonIdx];
+        //m_junk -= TurretJunkCosts[BuildStartButtonIdx];
+        //m_eleCircuit -= TurretCircuitCosts[BuildStartButtonIdx];
 
         UpdateRsrc();
 

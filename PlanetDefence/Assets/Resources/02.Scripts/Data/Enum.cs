@@ -1,4 +1,8 @@
-﻿public enum Turret
+﻿using System;
+
+
+[Serializable]
+public enum Turret
 {
     Lv1_Gatling,
     Lv1_Fast,

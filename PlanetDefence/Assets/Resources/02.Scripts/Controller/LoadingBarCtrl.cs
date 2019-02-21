@@ -48,22 +48,15 @@ public class LoadingBarCtrl: MonoBehaviour
         if (progress >= 1f)
         {
 
-#if UNITY_EDITOR
 
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
+
+            //if (Input.GetKeyDown(KeyCode.Return))
+            //{
                 BeforeChaningScene();
 
                 SceneLoader.LoadScene("Lobby");
-            }
-#else
-            if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-            {
-                BeforeChaningScene();
+            //}
 
-                SceneLoader.LoadScene("Lobby");
-            }
-#endif
         }
     }
 

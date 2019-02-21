@@ -23,8 +23,18 @@ public class LobbyStartButtonCtrl : MonoBehaviour
 
     public void OnClick()
     {
+        if (GlobalGameObjectMgr.Inst.Battle == true)
+        {
+            m_text.text = "CONTINUE";
+            SceneLoader.LoadScene("Battle");
+        }
+        else
+        {
+            m_text.text = "START";
+            SceneLoader.LoadScene("Choice");
+        }
+
         AudioManager.Inst.playSelectSFX(AudioManager.eSelectSFX.ButtonSFX);
-        SceneLoader.LoadScene("Choice");
     }
 
 }
