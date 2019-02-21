@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2d3d2ba7c31a04e978cf7f8bb6a1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 300
+  m_maxHP: 200
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd73e8f2ea442f4092a77014c58ab65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 300
+  m_maxHP: 200
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
@@ -1333,7 +1333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21760266128c97e4fb8790df1623d1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 200
+  m_maxHP: 150
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
@@ -1558,7 +1558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e732f107c71d1aa40a95dae36740fc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 300
+  m_maxHP: 200
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
@@ -2070,7 +2070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1157466d57e43414ba2fa163bc0f7454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 200
+  m_maxHP: 150
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
@@ -2173,7 +2173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad61a1ef710e684bbdde0dc342a16d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 100
+  m_maxHP: 150
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
@@ -2734,7 +2734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17322c9e28c65341b2b5254beb3954a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 300
+  m_maxHP: 200
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
@@ -2856,7 +2856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4dda87ed07e7c4287388ab9643009d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 300
+  m_maxHP: 200
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45

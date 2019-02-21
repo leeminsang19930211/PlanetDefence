@@ -159,16 +159,9 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);
 
+        m_brokenSpaceShip.SetActive(true);
+        m_brokenSpaceShip.GetComponent<BrokenSpaceShipCtrl>().Init();
 
-        if (Player.Inst.Ended == true)
-        {
-            m_brokenSpaceShip.SetActive(false);
-        }
-        else
-        {
-            m_brokenSpaceShip.SetActive(true);
-            m_brokenSpaceShip.GetComponent<BrokenSpaceShipCtrl>().Init();
-        }
     }
 
     public void Release_Clear()

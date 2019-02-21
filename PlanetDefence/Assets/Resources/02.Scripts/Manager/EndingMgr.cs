@@ -57,6 +57,7 @@ public class EndingMgr : MonoBehaviour
         m_ending30Days.SetActive(false);
 
         m_result = eResult.Fail;
+        m_launchingSpaceShip = false;
     }
 
     public int LeftEnemies

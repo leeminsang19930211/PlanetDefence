@@ -482,7 +482,7 @@ public class Player : MonoBehaviour
 
         else
         {
-            m_coin -= LabCoinCosts[LabStartButtonIdx];
+            //m_coin -= LabCoinCosts[LabStartButtonIdx];
             UpdateRsrc();
             m_labInfos[LabStartButtonIdx].stacks += 1;
 
@@ -520,7 +520,7 @@ public class Player : MonoBehaviour
 
         else
         {
-            m_coin -= RepairCoinCosts[RepairStartButtonIdx];
+            //m_coin -= RepairCoinCosts[RepairStartButtonIdx];
             UpdateRsrc();
             m_spcPartInfos[RepairStartButtonIdx]._repaired = true;
 

@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class LobbyResetButtonCtrl : MonoBehaviour
 {
-    public LobbyButtonsCtrl m_buttons = null;
+    public GameObject ResetPopUp = null;
+
 
     public void OnClick()
     {
-        FileMgr.Inst.ResetPlayerData();
-        FileMgr.Inst.ResetGlobalData();
-        FileMgr.Inst.ResetTurretData();
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        ResetPopUp.SetActive(true);
 
     }
 }

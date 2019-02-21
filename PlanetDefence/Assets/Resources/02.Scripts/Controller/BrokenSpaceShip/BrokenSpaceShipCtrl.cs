@@ -32,6 +32,19 @@ public class BrokenSpaceShipCtrl : MonoBehaviour
 
     public void UpdateActives()
     {
+        if(Player.Inst.Ended)
+        {
+            foreach (GameObject rocket in m_rockets)
+            {
+                rocket.SetActive(true);
+            }
+            m_brokenSpcs[3].SetActive(true);
+
+            return;
+
+
+        }
+
         foreach(GameObject rocket in m_rockets)
         {
             rocket.SetActive(false);

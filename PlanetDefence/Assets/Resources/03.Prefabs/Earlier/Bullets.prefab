@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c613111579a8649b4c58717a8b05cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 300
+  m_damage: 250
   m_speed: 2500
 --- !u!1 &495617041092978537
 GameObject:
@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35c7279d193cb64fa8a75552052599c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 150
+  m_damage: 225
   m_speed: 1500
   m_splashDamage: 75
   m_splashRadius: 360
@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c32870c31e70414c8999ae363130431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 15
+  m_damage: 30
   m_speed: 0
   m_stayDuration: 1
   m_hitDelay: 0.1
@@ -1141,7 +1141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cda406cec3bcf45afa7088fb3757f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 45
+  m_damage: 80
   m_speed: 0
   m_stayDuration: 1
   m_hitDelay: 0.1
@@ -1766,7 +1766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab8c8cd6bd445541bba98210a2f28a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 150
+  m_damage: 300
   m_speed: 1500
   m_splashDamage: 150
   m_splashRadius: 360
@@ -1961,7 +1961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d7bea336548da458249109cd85660b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 22
+  m_damage: 45
   m_speed: 0
   m_stayDuration: 1
   m_hitDelay: 0.1
@@ -2469,7 +2469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cc4c01c904f18459882128ca026590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 60
+  m_damage: 80
   m_speed: 2500
 --- !u!1 &8466542761118058456
 GameObject:

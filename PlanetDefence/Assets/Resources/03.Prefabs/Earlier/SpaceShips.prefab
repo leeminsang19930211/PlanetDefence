@@ -140,17 +140,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3efb9e71c00e02439c67cc6e45129bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 1000
+  m_maxHP: 3000
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
-  m_fireDelay: 1
+  m_fireDelay: 2
   m_fireDistAlignUp: 100
   m_unitHPBarCtrl: {fileID: 3290378697062621502}
-  m_growHP: 0
+  m_growHP: 200
   m_planetHitDamage: 50
-  m_dropJunk: 10
-  m_dropEleCircuit: 15
+  m_dropJunk: 25
+  m_dropEleCircuit: 0
   m_dropCoin: 5
   m_fallingSpeed: 200
   m_revolvingSpeed: 10
@@ -312,16 +312,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ab1981edb5492418a6f7039baa5da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 400
+  m_maxHP: 1200
   m_maxBullets: 0
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 0
   m_fireDistAlignUp: 0
   m_unitHPBarCtrl: {fileID: 1986375982164775582}
-  m_growHP: 20
+  m_growHP: 100
   m_planetHitDamage: 200
-  m_dropJunk: 30
+  m_dropJunk: 15
   m_dropEleCircuit: 0
   m_dropCoin: 10
   m_fallingSpeed: 200
@@ -488,16 +488,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfafef30f7ada92409a91e08666f4532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 3000
+  m_maxHP: 90000
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 3
   m_fireDistAlignUp: 100
   m_unitHPBarCtrl: {fileID: 4043932451152714961}
-  m_growHP: 1000
+  m_growHP: 3000
   m_planetHitDamage: 1000
-  m_dropJunk: 800
+  m_dropJunk: 400
   m_dropEleCircuit: 10
   m_dropCoin: 150
   m_fallingSpeed: 200
@@ -655,16 +655,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f93ace16b4c704eada69e5be3ae30f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 300
+  m_maxHP: 90000
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 2
   m_fireDistAlignUp: 100
   m_unitHPBarCtrl: {fileID: 8378191148211948359}
-  m_growHP: 1000
+  m_growHP: 3000
   m_planetHitDamage: 1000
-  m_dropJunk: 1000
+  m_dropJunk: 500
   m_dropEleCircuit: 6
   m_dropCoin: 150
   m_fallingSpeed: 200
@@ -826,16 +826,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1277e195fdb1dc44aaf0cc7c1006cb0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 3000
+  m_maxHP: 9000
   m_maxBullets: 15
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 1
   m_fireDistAlignUp: 100
   m_unitHPBarCtrl: {fileID: 8502288890682342835}
-  m_growHP: 100
+  m_growHP: 500
   m_planetHitDamage: 200
-  m_dropJunk: 200
+  m_dropJunk: 150
   m_dropEleCircuit: 5
   m_dropCoin: 20
   m_fallingSpeed: 200
@@ -1016,16 +1016,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cc2ffa720d3ca4bb6d72b04bd17a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 5000
+  m_maxHP: 15000
   m_maxBullets: 0
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 2
   m_fireDistAlignUp: 0
   m_unitHPBarCtrl: {fileID: 8090626085724825001}
-  m_growHP: 250
+  m_growHP: 500
   m_planetHitDamage: 0
-  m_dropJunk: 200
+  m_dropJunk: 100
   m_dropEleCircuit: 3
   m_dropCoin: 20
   m_fallingSpeed: 200
@@ -1154,16 +1154,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f784199c832d846a4c6f2728e327d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 400
+  m_maxHP: 1200
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 2
   m_fireDistAlignUp: 50
   m_unitHPBarCtrl: {fileID: 3182500861613960835}
-  m_growHP: 20
+  m_growHP: 100
   m_planetHitDamage: 50
-  m_dropJunk: 30
+  m_dropJunk: 15
   m_dropEleCircuit: 0
   m_dropCoin: 10
   m_fallingSpeed: 200
@@ -1318,16 +1318,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5c50ce0075ca349860278435b80edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 30000
+  m_maxHP: 90000
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 3
   m_fireDistAlignUp: 100
   m_unitHPBarCtrl: {fileID: 3578139359778778642}
-  m_growHP: 1000
+  m_growHP: 3000
   m_planetHitDamage: 1000
-  m_dropJunk: 800
+  m_dropJunk: 400
   m_dropEleCircuit: 6
   m_dropCoin: 200
   m_fallingSpeed: 200
