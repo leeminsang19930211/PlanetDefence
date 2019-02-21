@@ -77,9 +77,7 @@ public class BattleGameObjectMgr : MonoBehaviour
  	public GameObject m_RemoveWarningYet;
     private GameObject m_RemoveWarning;
     private GameObject[] m_TurretSupports;
-    private GameObject m_GotBPPanel;
-    private GameObject[] m_BPImages;
-
+   
     private GameObject m_brokenSpaceShip = null;
 
     public void Instantiate()
@@ -144,9 +142,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveWarningYet = GameObject.Find("RemoveWarningYet");
         m_RemoveWarning = GameObject.Find("RemoveWarningPanel");
         m_TurretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
-        m_GotBPPanel = GameObject.Find("GotBPPanel");
-        m_BPImages = GameObject.FindGameObjectsWithTag("BPIMAGE");
-
+    
 
         m_brokenSpaceShip = GameObject.Find("BrokenSpaceShip");
     }
@@ -162,7 +158,7 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_spcDropPopUpCtrl.gameObject.SetActive(false);
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);
-        m_GotBPPanel.SetActive(false);
+
 
         if (Player.Inst.Ended == true)
         {
@@ -692,9 +688,6 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RepairWarningAlready.SetActive(false);
         m_LaunchWarningNotRepaired.SetActive(false);
         m_LaunchWarning.SetActive(false);
-
-        // 추가3
-        m_GotBPPanel.SetActive(false);
 
 
         BuildInfosExit();

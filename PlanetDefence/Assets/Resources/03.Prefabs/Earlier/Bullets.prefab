@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec44f569087d441498b8e915df9faade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 2
   m_speed: 1500
 --- !u!1 &439868532715472817
 GameObject:
@@ -141,7 +141,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 18
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4833904048041517186
 SpriteRenderer:
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c613111579a8649b4c58717a8b05cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 300
   m_speed: 2500
 --- !u!1 &495617041092978537
 GameObject:
@@ -346,7 +346,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 10
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1752205994016840034
 SpriteRenderer:
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f3535fef7896544884f36bb95438a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 90
   m_speed: 2500
 --- !u!1 &1225624100324732601
 GameObject:
@@ -440,7 +440,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2993556795903870245
 SpriteRenderer:
@@ -502,9 +502,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35c7279d193cb64fa8a75552052599c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 150
   m_speed: 1500
-  m_splashDamage: 2
+  m_splashDamage: 75
   m_splashRadius: 360
 --- !u!1 &1356592560462070673
 GameObject:
@@ -598,10 +598,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced2f718f6490294f920d45a430a6a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 1
+  m_damage: 50
   m_speed: 2800
-  m_probability: 0.5
-  m_duration: 3
+  m_probability: 1
+  m_duration: 4
 --- !u!1 &1366948163203188476
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +632,7 @@ Transform:
   m_LocalScale: {x: 3, y: 45, z: 9}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1292495973626762330
 SpriteRenderer:
@@ -694,9 +694,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c32870c31e70414c8999ae363130431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 2
+  m_damage: 15
   m_speed: 0
-  m_stayDuration: 0.6
+  m_stayDuration: 1
   m_hitDelay: 0.1
 --- !u!1 &1377412639132702007
 GameObject:
@@ -790,12 +790,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b91375ddcce6c940888e328146816d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 1
+  m_damage: 50
   m_speed: 2200
   m_probability: 1
   m_slowInfo:
     slowScale: 0.2
-    duration: 5
+    duration: 4
 --- !u!1 &1887617616167426815
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,27 +823,27 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1887617617860607475}
-  - {fileID: 5441500553228496553}
   - {fileID: 8108362025819219531}
   - {fileID: 522909070009106638}
+  - {fileID: 1887617617860607475}
+  - {fileID: 5441500553228496553}
+  - {fileID: 8548497723710184821}
+  - {fileID: 799278636720367365}
   - {fileID: 1041203049397180586}
   - {fileID: 5345408352578300413}
   - {fileID: 732514443494118176}
   - {fileID: 8791591789729455577}
   - {fileID: 4823256474780059056}
-  - {fileID: 8548497723710184821}
-  - {fileID: 799278636720367365}
-  - {fileID: 2616069006328305150}
-  - {fileID: 4576335912692149821}
-  - {fileID: 599089567608146894}
-  - {fileID: 4260506349089694524}
-  - {fileID: 9143082672404834858}
-  - {fileID: 2600738686854751825}
-  - {fileID: 2467092150301784547}
   - {fileID: 6346985443469082724}
   - {fileID: 181221252556602816}
+  - {fileID: 4576335912692149821}
+  - {fileID: 599089567608146894}
+  - {fileID: 2616069006328305150}
+  - {fileID: 2600738686854751825}
+  - {fileID: 2467092150301784547}
+  - {fileID: 4260506349089694524}
   - {fileID: 5875841090844641756}
+  - {fileID: 9143082672404834858}
   - {fileID: 4458252070837889576}
   - {fileID: 1999215098}
   - {fileID: 5968092168180962290}
@@ -884,7 +884,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1887617617860607472
 SpriteRenderer:
@@ -946,9 +946,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0069e3e4b3f9d049b76cb079849faf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 150
   m_speed: 1500
-  m_splashDamage: 2
+  m_splashDamage: 50
   m_splashRadius: 360
 --- !u!1 &2353868649136841695
 GameObject:
@@ -980,7 +980,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 11
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7079036507858233777
 SpriteRenderer:
@@ -1042,13 +1042,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0257d831bcb54544cb7dc6181e7b417f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 100
   m_speed: 2000
-  m_probability: 0.5
+  m_probability: 1
   m_dotInfo:
-    damage: 2
-    count: 10
-    delay: 0.4
+    damage: 36
+    count: 25
+    delay: 0.2
 --- !u!1 &2928239111383966629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,7 +1079,7 @@ Transform:
   m_LocalScale: {x: 3, y: 45, z: 9}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1220663099164433519
 SpriteRenderer:
@@ -1141,9 +1141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cda406cec3bcf45afa7088fb3757f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 2
+  m_damage: 45
   m_speed: 0
-  m_stayDuration: 0.6
+  m_stayDuration: 1
   m_hitDelay: 0.1
 --- !u!1 &3345722243343130392
 GameObject:
@@ -1257,7 +1257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb7e60152dd54c4f95d50ce5f3251b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 4
+  m_damage: 150
   m_speed: 2500
   m_damageScaleToKing: 4
 --- !u!1 &3355534448468855895
@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89041807f9305144481a8fb6c26dee76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 2
+  m_damage: 1
   m_speed: 1200
 --- !u!1 &3695898662060612827
 GameObject:
@@ -1401,7 +1401,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 19
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &39355869467563322
 SpriteRenderer:
@@ -1463,7 +1463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d3b49b37765044ca5fcb269b152505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 180
   m_speed: 2500
 --- !u!1 &3756140891265627174
 GameObject:
@@ -1558,7 +1558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ee53f7576500044816831ba76fd459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 2
+  m_damage: 10
   m_speed: 1500
 --- !u!58 &969561528958821409
 CircleCollider2D:
@@ -1606,7 +1606,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1038733527143971655
 SpriteRenderer:
@@ -1668,12 +1668,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af97976f0fa9c246ab4e88b8df86bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 1
+  m_damage: 25
   m_speed: 2200
   m_probability: 1
   m_slowInfo:
     slowScale: 0.2
-    duration: 5
+    duration: 2
 --- !u!1 &4576237209228291517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,7 +1704,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1096323732082769726
 SpriteRenderer:
@@ -1766,9 +1766,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab8c8cd6bd445541bba98210a2f28a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 150
   m_speed: 1500
-  m_splashDamage: 2
+  m_splashDamage: 150
   m_splashRadius: 360
 --- !u!1 &5438998156746576417
 GameObject:
@@ -1800,7 +1800,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5694449560681549615
 SpriteRenderer:
@@ -1862,13 +1862,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd149eff6e53c04b932e648a3e20805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 50
   m_speed: 2000
-  m_probability: 0.5
+  m_probability: 1
   m_dotInfo:
-    damage: 2
-    count: 10
-    delay: 0.4
+    damage: 24
+    count: 25
+    delay: 0.2
 --- !u!1 &6004070570611460878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,7 +1899,7 @@ Transform:
   m_LocalScale: {x: 3, y: 45, z: 9}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1491542217496123421
 SpriteRenderer:
@@ -1961,9 +1961,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d7bea336548da458249109cd85660b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 2
+  m_damage: 22
   m_speed: 0
-  m_stayDuration: 0.6
+  m_stayDuration: 1
   m_hitDelay: 0.1
 --- !u!1 &6979641996697272261
 GameObject:
@@ -1995,7 +1995,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &170056903789156739
 SpriteRenderer:
@@ -2057,9 +2057,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5a207a2534d4f469ea65bc2b864bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 1
+  m_damage: 25
   m_speed: 2800
-  m_probability: 0.5
+  m_probability: 1
   m_duration: 3
 --- !u!1 &7051499353823596236
 GameObject:
@@ -2170,7 +2170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2156b64f5f6a8049af8f9818771c496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 6
+  m_damage: 20
   m_speed: 2500
 --- !u!1 &7413909438918626007
 GameObject:
@@ -2202,7 +2202,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 15
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7339899582044495382
 SpriteRenderer:
@@ -2264,7 +2264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d59028c0e3e9546a644c09714eff2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 5
+  m_damage: 300
   m_speed: 3000
 --- !u!1 &7957897863279622697
 GameObject:
@@ -2359,7 +2359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a31e4bf89fa7144be5c8876afc43b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 10
   m_speed: 2000
 --- !u!58 &2088599436
 CircleCollider2D:
@@ -2407,7 +2407,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6149067368277686319
 SpriteRenderer:
@@ -2469,7 +2469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cc4c01c904f18459882128ca026590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 60
   m_speed: 2500
 --- !u!1 &8466542761118058456
 GameObject:
@@ -2501,7 +2501,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4331861863439919925
 SpriteRenderer:
@@ -2563,7 +2563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7462f6e7af7e5f34c99dfe3ae249762e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 200
   m_speed: 2000
 --- !u!1 &8655073483876621162
 GameObject:
@@ -2595,7 +2595,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 9
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6306126067378374830
 SpriteRenderer:
@@ -2657,7 +2657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa739f411ee7a845a62e1e99b6ce037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 150
   m_speed: 2500
 --- !u!1 &8822722789686036593
 GameObject:
@@ -2689,7 +2689,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 14
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8222038653150653413
 SpriteRenderer:
@@ -2751,7 +2751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdcd31eeef41ae4bbbe9ecf7ae1a287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 0
+  m_damage: 9999
   m_speed: 3200
 --- !u!1 &9032149386797989147
 GameObject:
@@ -2783,7 +2783,7 @@ Transform:
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5438215932362896130
 SpriteRenderer:
@@ -2845,5 +2845,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405cb341cb5a683418bc94e372ef2b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 3
+  m_damage: 100
   m_speed: 2500

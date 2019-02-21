@@ -14,6 +14,7 @@ public  class SpaceShipCtrl : Gunner
         END
     }
 
+    public int m_growHP = 0;
     public int m_planetHitDamage = 0;
     public int m_dropJunk = 0;
     public int m_dropEleCircuit = 0;
@@ -104,6 +105,8 @@ public  class SpaceShipCtrl : Gunner
         m_revolvingSpeed_origin = m_revolvingSpeed;
 
         ChangeState(FirstState);
+
+        m_curHP += m_growHP * GlobalGameObjectMgr.Inst.CurDay;
 
         if(Clone)
         {
