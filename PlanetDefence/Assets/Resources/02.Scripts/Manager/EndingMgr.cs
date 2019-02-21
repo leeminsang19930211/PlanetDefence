@@ -131,7 +131,6 @@ public class EndingMgr : MonoBehaviour
         EffectMgr.Inst.Release_Clear();
         BulletMgr.Inst.Release_Clear();
         BattleGameObjectMgr.Inst.Release_Clear();
-        PlanetCtrl.Inst.Release_Clear();
 
         GlobalGameObjectMgr.Inst.Battle = false;
         GlobalGameObjectMgr.Inst.IncreaseDay();
@@ -148,7 +147,7 @@ public class EndingMgr : MonoBehaviour
         EffectMgr.Inst.Release_Fail();
         BulletMgr.Inst.Release_Fail();
         BattleGameObjectMgr.Inst.Release_Fail();
-        PlanetCtrl.Inst.Release_Fail();
+ 
 
         GlobalGameObjectMgr.Inst.Battle = false;
         GlobalGameObjectMgr.Inst.CurDay = 0;

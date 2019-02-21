@@ -23,6 +23,17 @@ public class PlanetCtrl : MonoBehaviour
         }
     }
 
+    public int CurHP
+    {
+        get { return m_curHP; }
+    }
+
+    public int MaxHP
+    {
+        get { return m_maxHP; }
+        set { m_maxHP = value; }
+    }
+
     public Vector3 Position
     {
         get
@@ -45,52 +56,10 @@ public class PlanetCtrl : MonoBehaviour
         }
     }
 
-    public int CurHP
+    public void _OnNewBattle()
     {
-        get { return m_curHP; }
-    }
-
-    public int MaxHP
-    {
-        get { return m_maxHP; }
-        set { m_maxHP = value; }
-    }
-
-
-    public void Release_Clear()
-    {
-        Start();
-    }
-
-    public void Release_Fail()
-    {
-        Start();
-    }
-
-    public void RecoverHP(float ratio)
-    {
-        m_curHP += (int)(m_maxHP * ratio);
-
-        if (m_curHP > m_maxHP)
-            m_curHP = m_maxHP;
-
-        BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxHP, m_curHP);
-    }
-
-    public void Hit(int damage)
-    {
-        if (m_curHP <= 0)
-            return;
-
-        m_curHP -= damage;
-
-        if (m_curHP <= 0)
-        {
-            m_curHP = 0;           
-        }
-
-        EndingMgr.Inst.LeftPlanetHP = m_curHP;
-
+        m_curHP = m_maxHP;
+        m_trsf = GetComponent<Transform>();
         BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxHP, m_curHP);
     }
 
@@ -102,10 +71,36 @@ public class PlanetCtrl : MonoBehaviour
         return m_planetHits[idx];
     }
 
-    private void Start()
+    public void RecoverHP(float ratio)
     {
-        m_curHP = m_maxHP;
-        m_trsf = GetComponent<Transform>();
+        m_curHP += (int)(m_maxHP * ratio);
+
+        if (m_curHP > m_maxHP)
+            m_curHP = m_maxHP;
+
+        UpdateHP();
+    }
+
+    public void Hit(int damage)
+    {
+        if (m_curHP <= 0)
+            return;
+
+        m_curHP -= damage;
+
+        if (m_curHP <= 0)
+        {
+            m_curHP = 0;
+        }
+
+        UpdateHP();
+    }
+
+    private void UpdateHP()
+    {
+        EndingMgr.Inst.LeftPlanetHP = m_curHP;
+
         BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxHP, m_curHP);
     }
+
 }

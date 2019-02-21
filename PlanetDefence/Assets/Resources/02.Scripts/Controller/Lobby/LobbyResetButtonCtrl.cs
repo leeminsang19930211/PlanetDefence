@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyNewButtonCtrl : MonoBehaviour
+public class LobbyResetButtonCtrl : MonoBehaviour
 {
     public LobbyButtonsCtrl m_buttons = null;
 

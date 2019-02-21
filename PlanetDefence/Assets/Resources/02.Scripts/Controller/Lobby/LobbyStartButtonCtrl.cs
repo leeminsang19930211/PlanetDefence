@@ -7,11 +7,13 @@ public class LobbyStartButtonCtrl : MonoBehaviour
 {
     public Text m_text = null;
 
+    public int m_fontSize = 0;
+
     public void OnEnable()
-    {
+    { 
         if (GlobalGameObjectMgr.Inst.Battle == true)
         {
-            m_text.text = "PLAY";
+            m_text.text = "CONTINUE";
         }
         else
         {

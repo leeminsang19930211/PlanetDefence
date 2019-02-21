@@ -1155,6 +1155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4458252070837889576}
   - component: {fileID: 7234816187846592182}
+  - component: {fileID: 1151775645245877565}
   - component: {fileID: 8171384133121393405}
   m_Layer: 0
   m_Name: Bullet_Lv3_KingSlayer
@@ -1172,7 +1173,7 @@ Transform:
   m_GameObject: {fileID: 3345722243343130392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 148, y: 160, z: 0}
-  m_LocalScale: {x: 4.5, y: 4.5, z: 1}
+  m_LocalScale: {x: 9, y: 9, z: 1}
   m_Children: []
   m_Father: {fileID: 1887617616167426812}
   m_RootOrder: 21
@@ -1214,7 +1215,7 @@ SpriteRenderer:
   m_SortingLayerID: 2045242963
   m_SortingLayer: 10
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300042, guid: 3eeb905bb40e0524f896e142af45e824, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6af9a9999d729c2419fda2a87b016f4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1225,6 +1226,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1151775645245877565
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3345722243343130392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 454991cb66f2568489ba44ecfccbeda0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8171384133121393405
 MonoBehaviour:
   m_ObjectHideFlags: 0

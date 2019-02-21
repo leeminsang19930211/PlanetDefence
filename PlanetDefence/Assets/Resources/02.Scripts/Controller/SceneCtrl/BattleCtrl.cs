@@ -41,7 +41,7 @@ public class BattleCtrl: MonoBehaviour
             WavesMob[] infos = new WavesMob[1];
 
             infos[0].eMobType = MobType.Normal;
-            infos[0].nMobNum = 2;
+            infos[0].nMobNum = 20;
             infos[0].fDelayTime = 4f;
             infos[0].fFirstDelayTime = 0f;
 
@@ -106,6 +106,7 @@ public class BattleCtrl: MonoBehaviour
 
             BattleGameObjectMgr.Inst._OnNewBattle();
             TurretMgr.Inst._OnNewBattle();
+            PlanetCtrl.Inst._OnNewBattle();
 
 
             SpaceShipMgr.Inst.StartCreatingWaves(infos);

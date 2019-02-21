@@ -16,7 +16,7 @@ public class EnemyCntCtrl : MonoBehaviour
     {
         set
         {
-            if(value < 0)
+            if (value < 0)
             {
                 return;
             }
@@ -24,8 +24,7 @@ public class EnemyCntCtrl : MonoBehaviour
             m_maxEnemyCnt = value;
             m_destroyedEnemyCnt = 0;
 
-
-            EndingMgr.Inst.LeftEnemies = m_maxEnemyCnt - m_destroyedEnemyCnt;
+            UpdateEnemyCount();
         }
     }
 
@@ -37,11 +36,24 @@ public class EnemyCntCtrl : MonoBehaviour
         }
     }
 
+    private Text Text
+    {
+        get
+        {
+            if(m_cntText == null)
+            {
+                m_cntText = m_text.GetComponent<Text>();
+            }
+
+            return m_cntText;
+        }
+    }
+
     public void AddMaxEnemy(int add)
     {
         m_maxEnemyCnt += add;
 
-        EndingMgr.Inst.LeftEnemies = m_maxEnemyCnt - m_destroyedEnemyCnt;
+        UpdateEnemyCount();
     }
 
     public void AddDestroyedEnemy(int add)      
@@ -51,17 +63,14 @@ public class EnemyCntCtrl : MonoBehaviour
 
         m_destroyedEnemyCnt += add;
 
-        EndingMgr.Inst.LeftEnemies = m_maxEnemyCnt - m_destroyedEnemyCnt;       
+        UpdateEnemyCount();     
     }
 
-    void Start()
+    private void UpdateEnemyCount()
     {
-        m_cntText = m_text.GetComponent<Text>();
+        EndingMgr.Inst.LeftEnemies = m_maxEnemyCnt - m_destroyedEnemyCnt;
+
+        Text.text = "× " + (m_maxEnemyCnt - m_destroyedEnemyCnt).ToString();
     }
 
-    void Update()
-    {
-        m_cntText.text = "× " + (m_maxEnemyCnt - m_destroyedEnemyCnt).ToString();
-
-    }
 }
