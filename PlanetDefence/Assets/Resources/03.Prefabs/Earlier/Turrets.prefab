@@ -118,7 +118,7 @@ MonoBehaviour:
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 2
-  m_fireDistAlignUp: 70
+  m_fireDistAlignUp: 90
   m_unitHPBarCtrl: {fileID: 4474120765820835151}
   m_minDistToAttack: 300
   m_distFromTurretSupport: 170
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 2
-  m_fireDistAlignUp: 70
+  m_fireDistAlignUp: 90
   m_unitHPBarCtrl: {fileID: 8709804327909752699}
   m_minDistToAttack: 300
   m_distFromTurretSupport: 170
@@ -2739,7 +2739,7 @@ MonoBehaviour:
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 2
-  m_fireDistAlignUp: 70
+  m_fireDistAlignUp: 90
   m_unitHPBarCtrl: {fileID: 5422967284515127495}
   m_minDistToAttack: 300
   m_distFromTurretSupport: 170

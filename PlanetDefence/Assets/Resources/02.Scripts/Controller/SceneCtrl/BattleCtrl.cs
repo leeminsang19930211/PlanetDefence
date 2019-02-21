@@ -41,7 +41,7 @@ public class BattleCtrl: MonoBehaviour
             WavesMob[] infos = new WavesMob[1];
 
             infos[0].eMobType = MobType.Normal;
-            infos[0].nMobNum = 3;
+            infos[0].nMobNum = 30;
             infos[0].fDelayTime = 4f;
             infos[0].fFirstDelayTime = 0f;
 

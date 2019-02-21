@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 225
-  m_speed: 1500
+  m_speed: 1700
   m_splashDamage: 75
   m_splashRadius: 360
 --- !u!1 &1356592560462070673
@@ -947,7 +947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 150
-  m_speed: 1500
+  m_speed: 1700
   m_splashDamage: 50
   m_splashRadius: 360
 --- !u!1 &2353868649136841695
@@ -1370,7 +1370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 1
-  m_speed: 1200
+  m_speed: 1500
 --- !u!1 &3695898662060612827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,7 +1767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 300
-  m_speed: 1500
+  m_speed: 1700
   m_splashDamage: 150
   m_splashRadius: 360
 --- !u!1 &5438998156746576417
@@ -2265,7 +2265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 300
-  m_speed: 3000
+  m_speed: 2500
 --- !u!1 &7957897863279622697
 GameObject:
   m_ObjectHideFlags: 0

@@ -134,7 +134,7 @@ public class Gunner : MonoBehaviour
         {           
             _OnDying();
 
-            AudioManager.Inst.playExplosionSFX(m_trsf.position, m_explosionSound);
+            
 
             if (m_maxBullets > 0)
             {

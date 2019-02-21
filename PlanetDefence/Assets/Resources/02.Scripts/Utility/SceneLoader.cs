@@ -24,7 +24,17 @@ public class SceneLoader : MonoBehaviour
 
         m_prevScene = m_curScene;
 
+        if (m_prevScene == "Battle")
+        {
+            BattleGameObjectMgr.Inst.RecoverToOriginalTimeScale();
+        }
+        else if(nextScene == "Battle")
+        {
+            BattleGameObjectMgr.Inst.RecoverToPrevTimeScale();
+        }
+
         SceneManager.LoadScene(nextScene);
+
 
 
         //if (m_curScene == "PreLoading" && nextScene == "Lobby")

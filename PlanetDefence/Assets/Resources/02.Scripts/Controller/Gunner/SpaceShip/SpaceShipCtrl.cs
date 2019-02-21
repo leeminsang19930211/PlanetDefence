@@ -122,6 +122,7 @@ public  class SpaceShipCtrl : Gunner
     {
         UpdateRsrc();
 
+        AudioManager.Inst.playExplosionSFX(m_trsf.position, m_explosionSound);
         Player.Inst.PickUpTurretBlueprint(m_turretBlueprintDropProbability, m_turretBlueprintDrops);
         Player.Inst.PickUpSpaceShipBlueprint(m_spaceShipBlueprintDropProbability, m_spaceShipBlueprintDrops);
 

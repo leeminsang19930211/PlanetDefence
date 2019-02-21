@@ -56,6 +56,7 @@ public class TurretCtrl : Gunner
 
     protected override void _OnZeroHP()
     {
+        AudioManager.Inst.playExplosionSFX(m_trsf.position, m_explosionSound);
         Die();
     }
 

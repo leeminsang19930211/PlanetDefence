@@ -36,6 +36,7 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     private GameObject m_laboratoryPopUp = null;
 
+    private GameObject m_fastButton = null;
     private GameObject m_buildPopUp = null;
     private GameObject m_labScroll = null;
     private GameObject m_repairScroll = null;
@@ -142,9 +143,9 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RemoveWarningYet = GameObject.Find("RemoveWarningYet");
         m_RemoveWarning = GameObject.Find("RemoveWarningPanel");
         m_TurretSupports = GameObject.FindGameObjectsWithTag("TURRET_SUPPORT");
-    
+        m_fastButton = GameObject.Find("FastButton");
 
-        m_brokenSpaceShip = GameObject.Find("BrokenSpaceShip");
+            m_brokenSpaceShip = GameObject.Find("BrokenSpaceShip");
     }
 
     // 시작시에 껏다 키는 로직은 여기다 작성할것
@@ -173,6 +174,23 @@ public class BattleGameObjectMgr : MonoBehaviour
     {
         m_miniPlanetCtrl.AllToFalse();
     }
+
+    public void RecoverToPrevTimeScale()
+    {
+        if(m_fastButton)
+        {
+            m_fastButton.GetComponent<FastButtonCtrl>().RecoverToPrev();
+        }      
+    }
+
+    public void RecoverToOriginalTimeScale()
+    {
+        if (m_fastButton)
+        {
+            m_fastButton.GetComponent<FastButtonCtrl>().RecoverToOrigin();
+        }
+    }
+
 
     public void ShowShield(PlanetArea area, Turret turret)
     {
