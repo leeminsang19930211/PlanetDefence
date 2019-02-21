@@ -9,6 +9,7 @@ public class SpaceShip_NormalCtrl : SpaceShipCtrl
         m_bulletType = Bullet.Spc_Normal;
         m_bulletPool = BulletPool.SpaceShip;
 
+        m_blasterSound = AudioManager.eSpaceshipSFX.NomalSFX;
 
 
         SpaceShipType = MobType.Normal;

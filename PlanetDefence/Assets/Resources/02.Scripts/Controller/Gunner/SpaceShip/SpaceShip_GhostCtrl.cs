@@ -60,6 +60,8 @@ public class SpaceShip_GhostCtrl : SpaceShipCtrl
    
         SpaceShipType = MobType.GhostShip;
 
+        m_blasterSound = AudioManager.eSpaceshipSFX.GhostSFX;
+
         base.Init();
 
         m_sprite = GetComponent<SpriteRenderer>();

@@ -321,11 +321,15 @@ public class Player : MonoBehaviour
 
     public void UnLock(Turret turret)
     {
+        AudioManager.Inst.playUnlockSFX(AudioManager.eUnlockSFX.BluePrintSFX);
+
         m_turretInfos[(int)turret]._lock = false;
     }
 
     public void UnLock(SpaceShipPart part)
     {
+        AudioManager.Inst.playUnlockSFX(AudioManager.eUnlockSFX.BluePrintSFX);
+
         m_spcPartInfos[(int)part]._lock = false;
     }
 
@@ -481,6 +485,8 @@ public class Player : MonoBehaviour
             m_coin -= LabCoinCosts[LabStartButtonIdx];
             UpdateRsrc();
             m_labInfos[LabStartButtonIdx].stacks += 1;
+
+            AudioManager.Inst.playUnlockSFX(AudioManager.eUnlockSFX.ResearchSFX);
 
             // 추가
             BattleGameObjectMgr.Inst.LabInfosExit();
@@ -702,7 +708,7 @@ public class Player : MonoBehaviour
     {
         BulletData sourceData0 = BulletMgr.Inst.GetSourceBulletData(Bullet.Lv3_Heal);
 
-        (m_bulletDatas[(int)Bullet.Lv3_Heal]).damage = sourceData0.damage + m_labInfos[idx].stacks * 10;
+        (m_bulletDatas[(int)Bullet.Lv3_Heal]).damage = sourceData0.damage + m_labInfos[idx].stacks * 50;
 
         if(m_labInfos[idx].stacks == 1)
         {

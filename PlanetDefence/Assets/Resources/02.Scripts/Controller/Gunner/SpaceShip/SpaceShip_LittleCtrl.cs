@@ -10,6 +10,8 @@ public class SpaceShip_LittleCtrl : SpaceShipCtrl
 
         SpaceShipType = MobType.Little;
 
+        m_blasterSound = AudioManager.eSpaceshipSFX.NomalSFX;
+
         base.Init();
     }
 

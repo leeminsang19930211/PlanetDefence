@@ -11,6 +11,8 @@ public class Turret_Lv1_MissileCtrl : TurretCtrl
         m_bulletPool = BulletPool.Turret;
 
         m_turretType = Turret.Lv1_Missile;
+        m_blasterSound = AudioManager.eBulletSFX.MissileSFX;
+
 
         base.Init();
     }

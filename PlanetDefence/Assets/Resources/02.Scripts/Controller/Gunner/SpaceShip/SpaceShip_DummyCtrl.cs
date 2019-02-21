@@ -12,6 +12,7 @@ public class SpaceShip_DummyCtrl : SpaceShipCtrl
 
         SpaceShipType = MobType.DummyShip;
 
+
         base.Init();
     }
 

@@ -43,6 +43,9 @@ public class Turret_Lv3_HealCtrl : TurretCtrl
 
         m_turretType = Turret.Lv3_Heal;
 
+
+        m_blasterSound = AudioManager.eBulletSFX.HealSFX;
+
         base.Init();
 
         StartCoroutine("HealPlanet");

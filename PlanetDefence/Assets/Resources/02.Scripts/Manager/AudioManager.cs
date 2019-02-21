@@ -98,9 +98,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] ClearSFX = new AudioClip[(int)eClearSFX.Max];
     private AudioSource BGMsource;
     private AudioSource SFXsource;
-
+    // 추가
+    private Camera Camera = null;
    
-
     void OnEnable()
     {
         // 설정으로 볼률설정하면 사용
@@ -117,7 +117,7 @@ public class AudioManager : MonoBehaviour
         SFXsource.outputAudioMixerGroup = SFXmixer;
         SFXsource.volume = SFXvolume;
         SFXsource.playOnAwake = false;
-        SFXsource.loop = false;
+        SFXsource.loop = false;     
     }
 
     public void PlayBGM(eBGM eBGM)
@@ -154,5 +154,37 @@ public class AudioManager : MonoBehaviour
     public void playClearSFX(eClearSFX eClear)
     {
         SFXsource.PlayOneShot(ClearSFX[(int)eClear]);
+    }
+
+    // 추가
+    public void playBulletSFX(Vector3 worldPos, eBulletSFX eBullet)
+    {
+        if (CheckViewPortOut(worldPos))
+            return;
+
+        SFXsource.PlayOneShot(BulletSFX[(int)eBullet]);
+    }
+
+    public void playSpaceShipSFX(Vector3 worldPos, eSpaceshipSFX eSpaceship)
+    {
+        if (CheckViewPortOut(worldPos))
+            return;
+
+        SFXsource.PlayOneShot(SpaceshipSFX[(int)eSpaceship]);
+    }
+
+    public void playExplosionSFX(Vector3 worldPos, eExplosionSFX eExplosion)
+    {
+        if (CheckViewPortOut(worldPos))
+            return;
+
+        SFXsource.PlayOneShot(ExplosionSFX[(int)eExplosion]);
+    }
+
+    private bool CheckViewPortOut(Vector3 worldPos)
+    {
+        Vector2 viewPos = Camera.main.WorldToViewportPoint(worldPos);
+
+        return viewPos.x < -0.5f || viewPos.y < -0.5f || viewPos.x > 1.5f || viewPos.y > 1.5f; // 0.5 는 여유분. 화면 밖에 약간 벗어나도 들리도록.
     }
 }

@@ -14,6 +14,8 @@ public class Turret_Lv3_BerserkerCtrl : TurretCtrl
 
         m_turretType = Turret.Lv3_Berserker;
 
+        m_blasterSound = AudioManager.eBulletSFX.GatlingSFX;
+
         base.Init();
     }
 

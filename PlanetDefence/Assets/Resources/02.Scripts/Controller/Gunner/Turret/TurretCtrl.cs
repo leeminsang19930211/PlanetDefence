@@ -10,6 +10,7 @@ public class TurretCtrl : Gunner
 
     protected float m_planetAngle = 0;
     protected Turret m_turretType = Turret.End;
+    protected AudioManager.eBulletSFX m_blasterSound = AudioManager.eBulletSFX.Max;
 
     public Turret TurretType { get { return m_turretType; } }
 
@@ -45,6 +46,8 @@ public class TurretCtrl : Gunner
 
         TurretMgr.Inst.CheckShieldToShow(BulletPoolIdx);
 
+        m_explosionSound = AudioManager.eExplosionSFX.TurretBoomSFX;
+
         if (Clone)
         {
             UpdateTurretData();
@@ -70,6 +73,12 @@ public class TurretCtrl : Gunner
 
         target = SpaceShipMgr.Inst.FindFirstTargetInFan(m_planetAngle, m_fanAngle, m_trsf.position, m_minDistToAttack);
 
+        if(target != null)
+        {
+            AudioManager.Inst.playBulletSFX(m_trsf.position, m_blasterSound);
+        }
+
+       
         BulletMgr.Inst.FireBullet(m_bulletPool, BulletPoolIdx, m_trsf.position + m_trsf.up * m_fireDistAlignUp, m_trsf.localEulerAngles, this, target);
     }
 }

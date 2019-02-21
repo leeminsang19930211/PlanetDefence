@@ -39,6 +39,9 @@ public class Turret_Lv3_SniperCtrl : TurretCtrl
 
         m_turretType = Turret.Lv3_Sniper;
 
+        m_blasterSound = AudioManager.eBulletSFX.SniperSFX;
+
+
         base.Init();
     }
 

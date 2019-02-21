@@ -46,6 +46,8 @@ public class SpaceShip_BattleCtrl : SpaceShipCtrl
 
         SpaceShipType = MobType.BattleShip;
 
+        m_blasterSound = AudioManager.eSpaceshipSFX.BattleSFX;
+
         base.Init();
     }
 

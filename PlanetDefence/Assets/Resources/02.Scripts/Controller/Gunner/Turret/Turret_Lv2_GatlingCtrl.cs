@@ -11,6 +11,10 @@ public class Turret_Lv2_GatlingCtrl : TurretCtrl
 
         m_turretType = Turret.Lv2_Gatling;
 
+
+        m_blasterSound = AudioManager.eBulletSFX.GatlingSFX;
+
+
         base.Init();
     }
 

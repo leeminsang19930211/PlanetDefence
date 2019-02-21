@@ -26,6 +26,7 @@ public class Gunner : MonoBehaviour
     public float m_fireDelay = 0;           // 총알 발사 딜레이
     public float m_fireDistAlignUp = 0;     // up 방향으로 총알을 쏠 위치까지의 거리
     public UnitHPBarCtrl m_unitHPBarCtrl = null;
+    protected AudioManager.eExplosionSFX m_explosionSound = AudioManager.eExplosionSFX.Max;
 
     protected int m_curHP = 0;
     protected float m_fireDelay_ori = 0;
@@ -125,15 +126,15 @@ public class Gunner : MonoBehaviour
         m_dead = true;
 
         if (Clone)
-        {
-           
+        {           
             _OnDying();
+
+            AudioManager.Inst.playExplosionSFX(m_trsf.position, m_explosionSound);
 
             if (m_maxBullets > 0)
             {
                 ClearBullets();
             }
-
 
             Destroy(this.gameObject);
         }

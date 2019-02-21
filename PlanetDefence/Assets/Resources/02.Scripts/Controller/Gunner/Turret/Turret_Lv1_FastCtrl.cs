@@ -30,6 +30,9 @@ public class Turret_Lv1_FastCtrl : TurretCtrl
 
         m_turretType = Turret.Lv1_Fast;
 
+        m_blasterSound = AudioManager.eBulletSFX.GatlingSFX;
+
+
         base.Init();
     }
 

@@ -8,6 +8,8 @@ public class SpaceShip_PirateCtrl : SpaceShipCtrl
         m_bulletType = Bullet.Spc_Pirate;
         m_bulletPool = BulletPool.SpaceShip;
 
+        m_blasterSound = AudioManager.eSpaceshipSFX.NomalSFX;
+
 
         SpaceShipType = MobType.Pirate;
 

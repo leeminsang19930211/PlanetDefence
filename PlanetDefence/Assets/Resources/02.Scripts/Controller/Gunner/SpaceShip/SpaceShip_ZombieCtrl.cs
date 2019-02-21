@@ -38,6 +38,8 @@ public class SpaceShip_ZombieCtrl : SpaceShipCtrl
 
         SpaceShipType = MobType.ZombieShip;
 
+        m_blasterSound = AudioManager.eSpaceshipSFX.ZombieSFX;
+
         base.Init();
     }
 

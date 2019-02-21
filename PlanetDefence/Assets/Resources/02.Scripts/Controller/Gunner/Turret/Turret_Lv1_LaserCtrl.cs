@@ -13,6 +13,8 @@ public class Turret_Lv1_LaserCtrl : TurretCtrl
 
         m_turretType = Turret.Lv1_Laser;
 
+        m_blasterSound = AudioManager.eBulletSFX.LaserSFX;
+
         base.Init();
     }
 

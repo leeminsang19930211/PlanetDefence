@@ -106,6 +106,15 @@ public class EndingMgr : MonoBehaviour
 
     public void PopDownResultPanel()
     {
+        if(m_clear)
+        {
+            AudioManager.Inst.playClearSFX(AudioManager.eClearSFX.ClearSFX);
+        }
+        else
+        {
+            AudioManager.Inst.playClearSFX(AudioManager.eClearSFX.FailedSFX);
+        }
+
         m_resultPopUpPanel.SetActive(false);
     }
 
@@ -113,8 +122,7 @@ public class EndingMgr : MonoBehaviour
     {
         if (m_clear)
         {
-            Release_Clear();
-            
+            Release_Clear();            
         }
         else
         {
@@ -141,6 +149,8 @@ public class EndingMgr : MonoBehaviour
 
     private void Release_Fail()
     {
+       
+
         Player.Inst.Release_Fail();
         SpaceShipMgr.Inst.Release_Fail();
         TurretMgr.Inst.Release_Fail();

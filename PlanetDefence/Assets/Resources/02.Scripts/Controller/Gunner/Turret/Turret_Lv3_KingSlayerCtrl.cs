@@ -11,6 +11,9 @@ public class Turret_Lv3_KingSlayerCtrl : TurretCtrl
 
         m_turretType = Turret.Lv3_KingSlayer;
 
+        m_blasterSound = AudioManager.eBulletSFX.KingSlayerSFX;
+
+
         base.Init();
     }
 
@@ -26,13 +29,19 @@ public class Turret_Lv3_KingSlayerCtrl : TurretCtrl
 
         target = SpaceShipMgr.Inst.FindBossTargetInFan(m_planetAngle, m_fanAngle, m_trsf.position, m_minDistToAttack);
 
-        if(target != null)
+        if (target != null)
         {
+            AudioManager.Inst.playBulletSFX(m_trsf.position, m_blasterSound);
             BulletMgr.Inst.FireBullet(m_bulletPool, BulletPoolIdx, m_trsf.position + m_trsf.up * m_fireDistAlignUp, m_trsf.localEulerAngles, this, target);
             return;
         }
 
         target = SpaceShipMgr.Inst.FindFirstTargetInFan(m_planetAngle, m_fanAngle, m_trsf.position, m_minDistToAttack);
+
+        if (target != null)
+        {
+            AudioManager.Inst.playBulletSFX(m_trsf.position, m_blasterSound);
+        }
 
         BulletMgr.Inst.FireBullet(m_bulletPool, BulletPoolIdx, m_trsf.position + m_trsf.up * m_fireDistAlignUp, m_trsf.localEulerAngles, this, target);
     }

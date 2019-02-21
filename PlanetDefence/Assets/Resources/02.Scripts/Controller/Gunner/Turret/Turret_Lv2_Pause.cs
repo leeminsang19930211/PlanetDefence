@@ -11,6 +11,8 @@ public class Turret_Lv2_Pause : TurretCtrl
 
         m_turretType = Turret.Lv2_Pause;
 
+        m_blasterSound = AudioManager.eBulletSFX.PauseSFX;
+
         base.Init();
     }
 

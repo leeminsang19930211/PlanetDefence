@@ -11,6 +11,8 @@ public class Turret_Lv3_PoisonCtrl : TurretCtrl
 
         m_turretType = Turret.Lv3_Poison;
 
+        m_blasterSound = AudioManager.eBulletSFX.PoisonSFX;
+
         base.Init();
     }
 

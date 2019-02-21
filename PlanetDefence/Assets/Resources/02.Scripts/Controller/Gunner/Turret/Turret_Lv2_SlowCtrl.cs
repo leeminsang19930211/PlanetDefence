@@ -12,6 +12,8 @@ public class Turret_Lv2_SlowCtrl : TurretCtrl
 
         m_turretType = Turret.Lv2_Slow;
 
+        m_blasterSound = AudioManager.eBulletSFX.SlowSFX;
+
         base.Init();
     }
 

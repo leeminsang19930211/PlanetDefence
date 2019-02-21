@@ -29,6 +29,8 @@ public  class SpaceShipCtrl : Gunner
     public TurretBlueprintDropInfo[] m_turretBlueprintDrops = null;
     public float m_spaceShipBlueprintDropProbability = 0;
     public SpaceShipBlueprintDropInfo[] m_spaceShipBlueprintDrops = null;
+    protected AudioManager.eSpaceshipSFX m_blasterSound = AudioManager.eSpaceshipSFX.Max;
+
 
     private int m_fallingRound = 0;             // 몇번째 낙하인지를 나타내는 값. 0~3 범위를 가진다. 
     private float m_revolvingSpeed_origin = 0;
@@ -108,7 +110,9 @@ public  class SpaceShipCtrl : Gunner
 
         m_curHP += m_growHP * GlobalGameObjectMgr.Inst.CurDay;
 
-        if(Clone)
+        m_explosionSound = AudioManager.eExplosionSFX.SpaceshipBoomSFX;
+
+        if (Clone)
         {
             UpdateSpaceShipData();
         }     
@@ -145,6 +149,11 @@ public  class SpaceShipCtrl : Gunner
         Vector3 angle = m_trsf.localEulerAngles;
 
         angle.z += 180f;
+
+        if(target != null)
+        {
+            AudioManager.Inst.playSpaceShipSFX(m_trsf.position, m_blasterSound);           
+        }
 
         BulletMgr.Inst.FireBullet(m_bulletPool, BulletPoolIdx, m_trsf.position + m_trsf.up * -1f * m_fireDistAlignUp, angle, this, target);
     }
