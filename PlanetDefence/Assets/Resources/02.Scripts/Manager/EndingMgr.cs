@@ -101,7 +101,7 @@ public class EndingMgr : MonoBehaviour
             {
                 m_result = eResult.Fail;
 
-                m_resultPopUpPanel.SetActive(false);
+                m_resultPopUpPanel.SetActive(true);
             }
         }
     }
@@ -167,8 +167,7 @@ public class EndingMgr : MonoBehaviour
     }
 
     private void Release_Fail()
-    {
-      
+    {      
         Player.Inst.Release_Fail();
         SpaceShipMgr.Inst.Release_Fail();
         TurretMgr.Inst.Release_Fail();
@@ -176,12 +175,11 @@ public class EndingMgr : MonoBehaviour
         BulletMgr.Inst.Release_Fail();
         BattleGameObjectMgr.Inst.Release_Fail();
  
-
         GlobalGameObjectMgr.Inst.Battle = false;
-        GlobalGameObjectMgr.Inst.CurDay = 0;
+        GlobalGameObjectMgr.Inst.CurDay = 1;
 
-        FileMgr.Inst.SavePlayerData();
         FileMgr.Inst.SaveGlobaData();
+        FileMgr.Inst.SavePlayerData();
         FileMgr.Inst.SaveTurretData();
     }
 }

@@ -68,18 +68,25 @@ public class PlanetCtrl : MonoBehaviour
             m_curHP = StartHP;
         }
 
-        BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxHP, m_curHP);
+        UpdateHP();
     }
 
     public void _OnNewBattle()
     {
-        m_curHP = m_curHP + m_recoverHP;
-
-        if (m_curHP > m_maxHP)
+        if (m_curHP == 0)
+        {
             m_curHP = m_maxHP;
+        }
+        else
+        {
+            m_curHP = m_curHP + m_recoverHP;
+
+            if (m_curHP > m_maxHP)
+                m_curHP = m_maxHP;
+        }
 
         m_trsf = GetComponent<Transform>();
-        BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxHP, m_curHP);
+        UpdateHP();
     }
 
     public Gunner GetPlanetHit(int idx)
@@ -105,7 +112,7 @@ public class PlanetCtrl : MonoBehaviour
         if (m_curHP <= 0)
             return;
 
-        m_curHP -= damage* 200;
+        m_curHP -= damage;
 
         if (m_curHP <= 0)
         {

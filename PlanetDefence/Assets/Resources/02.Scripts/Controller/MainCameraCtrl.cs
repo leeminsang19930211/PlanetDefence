@@ -88,4 +88,18 @@ public class MainCameraCtrl : MonoBehaviour
         }
     }
 
+    public void _OnNewBattle()
+    {
+        m_satrtDir = Vector3.up;
+        m_curDir = Vector3.up;
+        m_endDir = Vector3.up;
+
+        if (m_transform == null)
+            m_transform = GetComponent<Transform>();
+
+        float leftAngle = MyMath.LeftAngle180(m_transform.up, m_endDir);
+
+        m_transform.RotateAround(new Vector3(0, -1600f, 0), Vector3.forward, leftAngle);    
+    }
 }
+

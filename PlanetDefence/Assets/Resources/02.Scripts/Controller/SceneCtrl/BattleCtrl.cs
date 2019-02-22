@@ -38,15 +38,15 @@ public class BattleCtrl: MonoBehaviour
         {
             GlobalGameObjectMgr.Inst.Battle = true;
 
-            //WavesMob[] infos = GlobalGameObjectMgr.Inst.waveInfos;
+            WavesMob[] infos = GlobalGameObjectMgr.Inst.waveInfos;
 
-            WavesMob[] infos = new WavesMob[1];
+            //WavesMob[] infos = new WavesMob[1];
 
 
-            infos[0].eMobType = MobType.Normal;
-            infos[0].nMobNum = 1;
-            infos[0].fDelayTime = 3f;
-            infos[0].fFirstDelayTime = 0f;
+            //infos[0].eMobType = MobType.Normal;
+            //infos[0].nMobNum = 1;
+            //infos[0].fDelayTime = 3f;
+            //infos[0].fFirstDelayTime = 0f;
 
             //infos[1].eMobType = MobType.Kamikaze;
             //infos[1].nMobNum = 2;

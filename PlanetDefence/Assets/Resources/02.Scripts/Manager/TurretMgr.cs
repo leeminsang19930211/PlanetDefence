@@ -82,6 +82,7 @@ public class TurretMgr : MonoBehaviour
             if (turret.TurretCtrl)
             {
                 turret.TurretCtrl.Die();
+                turret.TurretCtrl = null;
             }
         }
     }

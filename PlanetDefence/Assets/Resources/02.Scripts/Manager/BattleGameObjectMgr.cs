@@ -160,6 +160,8 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_laboratoryPopUp.SetActive(false);
         m_buildPopUp.SetActive(false);
 
+        m_mainCameraCtrl._OnNewBattle();
+
         m_brokenSpaceShip.SetActive(true);
         m_brokenSpaceShip.GetComponent<BrokenSpaceShipCtrl>().Init();
 

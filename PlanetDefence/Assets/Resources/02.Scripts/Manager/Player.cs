@@ -9,9 +9,13 @@ using System.Runtime.Serialization;
 public class Player : MonoBehaviour
 {
     private static Player m_inst = null;
-    private int m_junk = 999;
-    private int m_eleCircuit = 999;
-    private int m_coin = 999;
+    private int m_junk = 600;
+    private int m_eleCircuit = 0;
+    private int m_coin = 0;
+
+    private int m_sourcJunk = 600;
+    private int m_sourcEleCircuit = 0;
+    private int m_sourcCoin = 0;
 
     private TurretInfo[] m_turretInfos = new TurretInfo[(int)Turret.End];
     public LabInfo[] m_labInfos = new LabInfo[(int)Lab.End];
@@ -94,10 +98,9 @@ public class Player : MonoBehaviour
 
     public void Release_Fail()
     {
-        // TEMP
-        m_junk = 999;
-        m_eleCircuit = 999;
-        m_coin = 999;
+        m_junk = m_sourcJunk;
+        m_eleCircuit = m_sourcEleCircuit;
+        m_coin = m_sourcCoin;
 
         for (int i = 0; i < m_labInfos.Length; ++i)
         {

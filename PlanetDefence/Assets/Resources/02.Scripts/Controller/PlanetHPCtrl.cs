@@ -41,7 +41,7 @@ public class PlanetHPCtrl : MonoBehaviour
         m_barImg = m_planetHP_bar?.GetComponent<Image>();
         m_hpTxt = m_planetHp_text?.GetComponent<Text>();
 
-        m_curRatio = 1f;
+        m_curRatio = 0f;
     }
 
     void Update()

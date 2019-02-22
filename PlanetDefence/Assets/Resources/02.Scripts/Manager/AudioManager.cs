@@ -98,8 +98,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] ClearSFX = new AudioClip[(int)eClearSFX.Max];
     private AudioSource BGMsource;
     private AudioSource SFXsource;
-    // 추가
-    private Camera Camera = null;
    
     void OnEnable()
     {

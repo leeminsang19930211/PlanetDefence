@@ -65,7 +65,7 @@ public  class SpaceShipCtrl : Gunner
 
             m_maxHP = spaceShipData.maxHP;
             m_dropJunk = spaceShipData.junkDrops;
-            m_dropJunk = spaceShipData.coinDrops;
+            m_dropCoin = spaceShipData.coinDrops;
         }
     }
                 
