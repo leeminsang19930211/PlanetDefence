@@ -4,12 +4,12 @@ using System.Collections;
 public class Bullet_Lv3_SniperCtrl : BulletCtrl
 {
  
-    protected override void _OnTarget(Gunner target, Vector3 hitPos)
-    {
-        PlayEffect(m_effect_explosion, hitPos);
-        target.HitToDie();
-        gameObject.SetActive(false);
-    }
+    //protected override void _OnTarget(Gunner target, Vector3 hitPos)
+    //{
+    //    PlayEffect(m_effect_explosion, hitPos);
+    //    target.HitToDie();
+    //    gameObject.SetActive(false);
+    //}
 
     private void OnEnable()
     {

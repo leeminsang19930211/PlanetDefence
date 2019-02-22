@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitHPBarCtrl : MonoBehaviour
 {
     public float m_pixelLength = 0;
-    public float m_distFromPos = 0;
+    //public float m_distFromPos = 0;
     public Transform m_targetTrsf = null;
     public Transform m_frontImgTrsf = null;
 
@@ -20,7 +20,7 @@ public class UnitHPBarCtrl : MonoBehaviour
         m_maxScaleX = m_frontImgTrsf.localScale.x;
         m_prevScaleX = m_maxScaleX;
 
-        m_trsf.position = m_targetTrsf.position + m_targetTrsf.up * m_distFromPos;
+        //m_trsf.position += m_targetTrsf.position + m_targetTrsf.up * m_distFromPos;
     }
 
     public void UpdateHP(int curHP, int maxHP)

@@ -10,6 +10,11 @@ public class Bullet_Spc_NormalCtrl : BulletCtrl
         BulletType = Bullet.Spc_Normal;
 
 
+        if( m_damage > 0)
+        {
+
+        }
+
         base.Init();
     }
 

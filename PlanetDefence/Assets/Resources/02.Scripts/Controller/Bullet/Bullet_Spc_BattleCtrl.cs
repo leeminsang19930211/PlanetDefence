@@ -8,8 +8,6 @@ public class Bullet_Spc_BattleCtrl : BulletCtrl
     {
         BulletType = Bullet.Spc_Battle;
 
-
-
         base.Init();
     }
 

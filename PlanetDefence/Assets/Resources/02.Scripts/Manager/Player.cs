@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public LabInfo[] m_labInfos = new LabInfo[(int)Lab.End];
     public SpaceShipPartInfo[] m_spcPartInfos = new SpaceShipPartInfo[(int)SpaceShipPart.End];
 
+    private int m_planetStartHP = -1;
     private int m_sourcePlanetMaxHP = 0;
     private int[] m_sourceTurretJunkCosts = { 10,20,30,40,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50};
     private GlobalData m_globalData = new GlobalData();
@@ -82,6 +83,8 @@ public class Player : MonoBehaviour
 
         SetUpLabProcFuncs();
         UpdateRsrc();
+
+        PlanetCtrl.Inst.StartHP = m_planetStartHP;
     }
 
     public void Release_Clear()
@@ -136,6 +139,7 @@ public class Player : MonoBehaviour
         binFormatter.Serialize(fileStream, m_turretDatas);
         binFormatter.Serialize(fileStream, TurretJunkCosts);
         binFormatter.Serialize(fileStream, Ended);
+        binFormatter.Serialize(fileStream, PlanetCtrl.Inst.CurHP);
 
         fileStream.Close();
 
@@ -166,6 +170,7 @@ public class Player : MonoBehaviour
         m_turretDatas = (TurretData[]) binFormatter.Deserialize(fileStream);
         TurretJunkCosts = (int[])binFormatter.Deserialize(fileStream);
         Ended = (bool)binFormatter.Deserialize(fileStream);
+        m_planetStartHP = (int)binFormatter.Deserialize(fileStream);
 
         fileStream.Close();
 

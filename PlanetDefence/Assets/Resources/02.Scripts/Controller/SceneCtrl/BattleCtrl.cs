@@ -26,7 +26,7 @@ public class BattleCtrl: MonoBehaviour
             SpaceShipMgr.Inst._OnStart();
             Player.Inst._OnStart();
             EndingMgr.Inst._OnStart();
-
+            PlanetCtrl.Inst._OnStart();
 
             m_onStart = true;
         } 
@@ -38,12 +38,15 @@ public class BattleCtrl: MonoBehaviour
         {
             GlobalGameObjectMgr.Inst.Battle = true;
 
-            WavesMob[] infos = GlobalGameObjectMgr.Inst.waveInfos;
+            //WavesMob[] infos = GlobalGameObjectMgr.Inst.waveInfos;
 
-            //infos[0].eMobType = MobType.Normal;
-            //infos[0].nMobNum = 2;
-            //infos[0].fDelayTime = 4f;
-            //infos[0].fFirstDelayTime = 0f;
+            WavesMob[] infos = new WavesMob[1];
+
+
+            infos[0].eMobType = MobType.Normal;
+            infos[0].nMobNum = 1;
+            infos[0].fDelayTime = 3f;
+            infos[0].fFirstDelayTime = 0f;
 
             //infos[1].eMobType = MobType.Kamikaze;
             //infos[1].nMobNum = 2;
@@ -70,10 +73,10 @@ public class BattleCtrl: MonoBehaviour
             //infos[5].fDelayTime = 5f;
             //infos[5].fFirstDelayTime = 2f;
 
-            //infos[1].eMobType = MobType.GhostShip;
-            //infos[1].nMobNum = 2;
-            //infos[1].fDelayTime = 3f;
-            //infos[1].fFirstDelayTime = 5f;
+            //infos[0].eMobType = MobType.GhostShip;
+            //infos[0].nMobNum = 1;
+            //infos[0].fDelayTime = 1f;
+            //infos[0].fFirstDelayTime = 1f;
 
             //infos[7].eMobType = MobType.BattleShip;
             //infos[7].nMobNum = 2;

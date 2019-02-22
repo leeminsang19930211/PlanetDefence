@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlanetCtrl : MonoBehaviour
 {
     public int m_maxHP = 0;
+    public int m_recoverHP = 0;
     public Gunner[] m_planetHits = null;
 
     private int m_curHP = 0;
@@ -27,6 +28,8 @@ public class PlanetCtrl : MonoBehaviour
     {
         get { return m_curHP; }
     }
+
+    public int StartHP { get; set; } = -1;
 
     public int MaxHP
     {
@@ -56,9 +59,25 @@ public class PlanetCtrl : MonoBehaviour
         }
     }
 
-    public void _OnNewBattle()
+    public void _OnStart()
     {
         m_curHP = m_maxHP;
+
+        if(StartHP > 0)
+        {
+            m_curHP = StartHP;
+        }
+
+        BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxHP, m_curHP);
+    }
+
+    public void _OnNewBattle()
+    {
+        m_curHP = m_curHP + m_recoverHP;
+
+        if (m_curHP > m_maxHP)
+            m_curHP = m_maxHP;
+
         m_trsf = GetComponent<Transform>();
         BattleGameObjectMgr.Inst.UpdatePlanetHP(m_maxHP, m_curHP);
     }
@@ -86,7 +105,7 @@ public class PlanetCtrl : MonoBehaviour
         if (m_curHP <= 0)
             return;
 
-        m_curHP -= damage;
+        m_curHP -= damage* 200;
 
         if (m_curHP <= 0)
         {
