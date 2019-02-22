@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     };
     public int[] TurretCircuitCosts =
     {
-        0,0,0,0,1,1,1,1,2,2,2,2,1,1,1,1,2,2,2,2,3,3,3,3
+        0,0,0,0,1,1,1,1,2,2,2,2,1,1,1,1,2,2,2,2,10,5,5,5
     };
     public int[] LabCoinCosts =
     {
