@@ -55,12 +55,12 @@ MonoBehaviour:
   eCardType: 1
   Waves:
   - eMobType: 4
-    nMobNum: 2
-    fDelayTime: 10
-    fFirstDelayTime: 5
+    nMobNum: 4
+    fDelayTime: 6
+    fFirstDelayTime: 15
   - eMobType: 0
     nMobNum: 10
-    fDelayTime: 1
+    fDelayTime: 0.5
     fFirstDelayTime: 20
 --- !u!222 &1871069740519433408
 CanvasRenderer:

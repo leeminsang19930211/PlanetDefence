@@ -25,7 +25,7 @@ public class CardCtrl : MonoBehaviour
     private bool ChoiceRandomCard(CardType eEvnetType)
     {
         // 다시 들어올때 카드위치 고정
-        Contents.position = new Vector3(0, Contents.position.y, Contents.position.z);
+        Contents.position = new Vector3(0,Contents.position.y, Contents.position.z);
 
         for (int i = 0; i < nCardNum; i++)
         {
@@ -37,7 +37,7 @@ public class CardCtrl : MonoBehaviour
         {
             sCardPrefabDir = "03.Prefabs/Card/Normal";
         }
-        else if (eEvnetType == CardType.Boss)
+        else if(eEvnetType == CardType.Boss)
         {
             sCardPrefabDir = "03.Prefabs/Card/Boss";
         }
@@ -51,12 +51,12 @@ public class CardCtrl : MonoBehaviour
 
     private void RandomInstanceCardCreate(int nMaxNum)
     {
-        if (nMaxNum == 0)
+        if(nMaxNum == 0)
         {
             Debug.Log("Cards Loading Error");
         }
 
-        for (int i = 0; i < nCardNum; i++)
+        for (int i = 0; i< nCardNum; i++)
         {
             int nRandomInt = Random.Range(0, nMaxNum);
             GameObject CardPrefab = MonoBehaviour.Instantiate((GameObject)Cards[nRandomInt]);
@@ -75,7 +75,7 @@ public class CardCtrl : MonoBehaviour
             CardsClone[i] = null;
         }
     }
-
+    
     void Awake()
     {
         CardsClone = new GameObject[nCardNum];
@@ -91,15 +91,15 @@ public class CardCtrl : MonoBehaviour
         else if (GlobalGameObjectMgr.Inst.CurDay > GlobalGameObjectMgr.Inst.MaxDay)
         {
             Debug.Log("Day Max Error");
-        }
+        } 
         else if (GlobalGameObjectMgr.Inst.CurDay % nBossDay != 0)
         {
             ChoiceRandomCard(CardType.Normal);
         }
-        else if (nBossEnable && GlobalGameObjectMgr.Inst.CurDay % nBossDay == 0)
+        else if(nBossEnable && GlobalGameObjectMgr.Inst.CurDay % nBossDay == 0)
         {
             ChoiceRandomCard(CardType.Boss);
-        }
+        }        
     }
 
     void OnDisable()

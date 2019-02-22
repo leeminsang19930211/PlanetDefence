@@ -89,6 +89,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioMixerGroup BGMmixer = null;
     [SerializeField] private AudioMixerGroup SFXmixer = null;
+    [SerializeField] private AudioMixerGroup Bulletmixer = null;
     [SerializeField] private AudioClip[] BGM = new AudioClip[(int)eBGM.Max];
     [SerializeField] private AudioClip[] SelectSFX = new AudioClip[(int)eSelectSFX.Max];
     [SerializeField] private AudioClip[] BulletSFX = new AudioClip[(int)eBulletSFX.Max];
@@ -98,24 +99,33 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] ClearSFX = new AudioClip[(int)eClearSFX.Max];
     private AudioSource BGMsource;
     private AudioSource SFXsource;
+    private AudioSource Bulletsource;
+
    
     void OnEnable()
     {
         // 설정으로 볼률설정하면 사용
-        float BGMvolume = 1;
-        float SFXvolume = 1;
+        float BGMVolume = 1;
+        float SFXVolume = 1;
+        float BulletVolume = 1;
 
         BGMsource = gameObject.AddComponent<AudioSource>();
         BGMsource.outputAudioMixerGroup = BGMmixer;
-        BGMsource.volume = BGMvolume;
+        BGMsource.volume = BGMVolume;
         BGMsource.playOnAwake = false;
         BGMsource.loop = true;
 
         SFXsource = gameObject.AddComponent<AudioSource>();
         SFXsource.outputAudioMixerGroup = SFXmixer;
-        SFXsource.volume = SFXvolume;
+        SFXsource.volume = SFXVolume;
         SFXsource.playOnAwake = false;
-        SFXsource.loop = false;     
+        SFXsource.loop = false;
+
+        Bulletsource = gameObject.AddComponent<AudioSource>();
+        Bulletsource.outputAudioMixerGroup = Bulletmixer;
+        Bulletsource.volume = BulletVolume;
+        Bulletsource.playOnAwake = false;
+        Bulletsource.loop = false;
     }
 
     public void PlayBGM(eBGM eBGM)
@@ -131,12 +141,12 @@ public class AudioManager : MonoBehaviour
 
     public void playBulletSFX(eBulletSFX eBullet)
     {
-        SFXsource.PlayOneShot(BulletSFX[(int)eBullet]);
+        Bulletsource.PlayOneShot(BulletSFX[(int)eBullet]);
     }
 
     public void playSpaceShipSFX(eSpaceshipSFX eSpaceship)
     {
-        SFXsource.PlayOneShot(SpaceshipSFX[(int)eSpaceship]);
+        Bulletsource.PlayOneShot(SpaceshipSFX[(int)eSpaceship]);
     }
 
     public void playExplosionSFX(eExplosionSFX eExplosion)
@@ -160,7 +170,7 @@ public class AudioManager : MonoBehaviour
         if (CheckViewPortOut(worldPos))
             return;
 
-        SFXsource.PlayOneShot(BulletSFX[(int)eBullet]);
+        Bulletsource.PlayOneShot(BulletSFX[(int)eBullet]);
     }
 
     public void playSpaceShipSFX(Vector3 worldPos, eSpaceshipSFX eSpaceship)
@@ -168,7 +178,7 @@ public class AudioManager : MonoBehaviour
         if (CheckViewPortOut(worldPos))
             return;
 
-        SFXsource.PlayOneShot(SpaceshipSFX[(int)eSpaceship]);
+        Bulletsource.PlayOneShot(SpaceshipSFX[(int)eSpaceship]);
     }
 
     public void playExplosionSFX(Vector3 worldPos, eExplosionSFX eExplosion)

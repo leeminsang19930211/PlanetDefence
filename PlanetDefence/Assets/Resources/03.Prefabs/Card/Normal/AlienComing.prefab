@@ -56,8 +56,8 @@ MonoBehaviour:
   Waves:
   - eMobType: 0
     nMobNum: 20
-    fDelayTime: 1
-    fFirstDelayTime: 5
+    fDelayTime: 0.5
+    fFirstDelayTime: 15
 --- !u!222 &1871069740519433408
 CanvasRenderer:
   m_ObjectHideFlags: 0

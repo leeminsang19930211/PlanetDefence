@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451350679025480090}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 61, y: 735, z: 0}
+  m_LocalPosition: {x: -282, y: 558, z: 0}
   m_LocalScale: {x: 9, y: 9, z: 1}
   m_Children:
   - {fileID: 7266152972343469984}
@@ -115,7 +115,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.31639862, y: -2.226305}
+  m_Offset: {x: 0.22646475, y: 0.06290436}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -126,7 +126,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 25.882904, y: 23.945412}
+  m_Size: {x: 26.111782, y: 25.29927}
   m_EdgeRadius: 0
 --- !u!114 &7788519732638642647
 MonoBehaviour:
@@ -496,18 +496,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfafef30f7ada92409a91e08666f4532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 90000
+  m_maxHP: 10000
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 3
   m_fireDistAlignUp: 100
   m_unitHPBarCtrl: {fileID: 4043932451152714961}
-  m_growHP: 3000
+  m_growHP: 6000
   m_planetHitDamage: 1000
-  m_dropJunk: 400
-  m_dropEleCircuit: 10
-  m_dropCoin: 150
+  m_dropJunk: 250
+  m_dropEleCircuit: 7
+  m_dropCoin: 50
   m_fallingSpeed: 200
   m_revolvingSpeed: 5
   m_fallingDists:
@@ -524,7 +524,7 @@ MonoBehaviour:
     spaceShip: 0
   - probability: 0.5
     spaceShip: 1
-  m_childrenToCreate: 5
+  m_childrenToCreate: 10
   m_children_MinLength: 50
   m_children_MaxLength: 200
 --- !u!61 &802756354744797207
@@ -667,17 +667,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f93ace16b4c704eada69e5be3ae30f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 90000
+  m_maxHP: 10000
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 2
   m_fireDistAlignUp: 100
   m_unitHPBarCtrl: {fileID: 8378191148211948359}
-  m_growHP: 3000
+  m_growHP: 6000
   m_planetHitDamage: 1000
   m_dropJunk: 500
-  m_dropEleCircuit: 6
+  m_dropEleCircuit: 4
   m_dropCoin: 150
   m_fallingSpeed: 200
   m_revolvingSpeed: 5
@@ -695,7 +695,7 @@ MonoBehaviour:
     spaceShip: 2
   - probability: 0.5
     spaceShip: 4
-  m_duration_visible: 5
+  m_duration_visible: 7
   m_duration_invisible: 2.5
   m_invisibleAlpha: 0.4
 --- !u!61 &6990008836247897803
@@ -838,17 +838,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1277e195fdb1dc44aaf0cc7c1006cb0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 9000
+  m_maxHP: 5000
   m_maxBullets: 15
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 1
   m_fireDistAlignUp: 100
   m_unitHPBarCtrl: {fileID: 8502288890682342835}
-  m_growHP: 500
+  m_growHP: 250
   m_planetHitDamage: 200
-  m_dropJunk: 150
-  m_dropEleCircuit: 5
+  m_dropJunk: 50
+  m_dropEleCircuit: 3
   m_dropCoin: 20
   m_fallingSpeed: 200
   m_revolvingSpeed: 10
@@ -924,7 +924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7638171276214068049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -317, y: 512, z: 0}
+  m_LocalPosition: {x: -387, y: -530, z: 0}
   m_LocalScale: {x: 9, y: 9, z: 1}
   m_Children:
   - {fileID: 4123300354645517111}
@@ -1011,7 +1011,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.7894182, y: 4.718361}
+  m_Offset: {x: -0.0000038146973, y: 4.358037}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1022,7 +1022,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 39.894234, y: 42.726875}
+  m_Size: {x: 50.117508, y: 42.02308}
   m_EdgeRadius: 0
 --- !u!114 &2414191430668195524
 MonoBehaviour:
@@ -1036,17 +1036,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cc2ffa720d3ca4bb6d72b04bd17a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 15000
+  m_maxHP: 8000
   m_maxBullets: 0
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 2
   m_fireDistAlignUp: 0
   m_unitHPBarCtrl: {fileID: 8090626085724825001}
-  m_growHP: 500
+  m_growHP: 250
   m_planetHitDamage: 0
-  m_dropJunk: 100
-  m_dropEleCircuit: 3
+  m_dropJunk: 50
+  m_dropEleCircuit: 1
   m_dropCoin: 20
   m_fallingSpeed: 200
   m_revolvingSpeed: 5
@@ -1096,7 +1096,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7881109615966311043}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -146, y: -306, z: 0}
+  m_LocalPosition: {x: 67, y: -457, z: 0}
   m_LocalScale: {x: 9, y: 9, z: 1}
   m_Children:
   - {fileID: 7301964406150113309}
@@ -1354,17 +1354,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5c50ce0075ca349860278435b80edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHP: 90000
+  m_maxHP: 10000
   m_maxBullets: 10
   m_maxFires: -1
   m_fanAngle: 45
   m_fireDelay: 3
   m_fireDistAlignUp: 100
   m_unitHPBarCtrl: {fileID: 3578139359778778642}
-  m_growHP: 3000
+  m_growHP: 6000
   m_planetHitDamage: 1000
   m_dropJunk: 400
-  m_dropEleCircuit: 6
+  m_dropEleCircuit: 4
   m_dropCoin: 200
   m_fallingSpeed: 200
   m_revolvingSpeed: 5
@@ -1380,9 +1380,9 @@ MonoBehaviour:
   m_spaceShipBlueprintDrops:
   - probability: 1
     spaceShip: 3
-  m_durationForRecovery: 5
-  m_recoveryDelay: 2
-  m_recoveryRate: 0.05
+  m_durationForRecovery: 12
+  m_recoveryDelay: 1
+  m_recoveryRate: 0.01
 --- !u!61 &2051473003017000435
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1429,7 +1429,7 @@ PrefabInstance:
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -1489,7 +1489,7 @@ PrefabInstance:
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_distFromPos
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -1783,7 +1783,7 @@ PrefabInstance:
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -1843,7 +1843,7 @@ PrefabInstance:
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_distFromPos
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -1901,7 +1901,7 @@ PrefabInstance:
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -1961,7 +1961,7 @@ PrefabInstance:
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_distFromPos
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4884685327779827337, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -2019,7 +2019,7 @@ PrefabInstance:
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -2137,7 +2137,7 @@ PrefabInstance:
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 27
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
@@ -2255,7 +2255,7 @@ PrefabInstance:
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 771990411897030679, guid: 245eafaad3292f444833b917795673d6,
         type: 3}
