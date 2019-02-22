@@ -160,7 +160,7 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
-  m_turretBlueprintDropProbability: 1
+  m_turretBlueprintDropProbability: 0.2
   m_turretBlueprintDrops:
   - probability: 0.4
     turret: 4
@@ -332,8 +332,16 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
-  m_turretBlueprintDropProbability: 0
-  m_turretBlueprintDrops: []
+  m_turretBlueprintDropProbability: 0.2
+  m_turretBlueprintDrops:
+  - probability: 0.4
+    turret: 8
+  - probability: 0.4
+    turret: 9
+  - probability: 0.1
+    turret: 16
+  - probability: 0.1
+    turret: 17
   m_spaceShipBlueprintDropProbability: 0
   m_spaceShipBlueprintDrops: []
 --- !u!1 &2222494291067591024
@@ -510,8 +518,12 @@ MonoBehaviour:
   m_fallingDir: {x: 0, y: -1, z: 0}
   m_turretBlueprintDropProbability: 0
   m_turretBlueprintDrops: []
-  m_spaceShipBlueprintDropProbability: 0
-  m_spaceShipBlueprintDrops: []
+  m_spaceShipBlueprintDropProbability: 1
+  m_spaceShipBlueprintDrops:
+  - probability: 0.5
+    spaceShip: 0
+  - probability: 0.5
+    spaceShip: 1
   m_childrenToCreate: 5
   m_children_MinLength: 50
   m_children_MaxLength: 200
@@ -846,8 +858,16 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
-  m_turretBlueprintDropProbability: 0
-  m_turretBlueprintDrops: []
+  m_turretBlueprintDropProbability: 0.5
+  m_turretBlueprintDrops:
+  - probability: 0.25
+    turret: 20
+  - probability: 0.25
+    turret: 21
+  - probability: 0.25
+    turret: 22
+  - probability: 0.25
+    turret: 23
   m_spaceShipBlueprintDropProbability: 0
   m_spaceShipBlueprintDrops: []
 --- !u!61 &653635435863111742
@@ -1036,8 +1056,16 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
-  m_turretBlueprintDropProbability: 0
-  m_turretBlueprintDrops: []
+  m_turretBlueprintDropProbability: 0.2
+  m_turretBlueprintDrops:
+  - probability: 0.4
+    turret: 10
+  - probability: 0.4
+    turret: 11
+  - probability: 0.1
+    turret: 18
+  - probability: 0.1
+    turret: 19
   m_spaceShipBlueprintDropProbability: 0
   m_spaceShipBlueprintDrops: []
 --- !u!1 &7881109615966311043
@@ -1174,8 +1202,16 @@ MonoBehaviour:
   - 300
   m_stayDuration: 1
   m_fallingDir: {x: 0, y: -1, z: 0}
-  m_turretBlueprintDropProbability: 0
-  m_turretBlueprintDrops: []
+  m_turretBlueprintDropProbability: 0.2
+  m_turretBlueprintDrops:
+  - probability: 0.4
+    turret: 2
+  - probability: 0.4
+    turret: 3
+  - probability: 0.1
+    turret: 6
+  - probability: 0.1
+    turret: 7
   m_spaceShipBlueprintDropProbability: 0
   m_spaceShipBlueprintDrops: []
 --- !u!61 &4439385556415162940
@@ -1340,8 +1376,10 @@ MonoBehaviour:
   m_fallingDir: {x: 0, y: -1, z: 0}
   m_turretBlueprintDropProbability: 0
   m_turretBlueprintDrops: []
-  m_spaceShipBlueprintDropProbability: 0
-  m_spaceShipBlueprintDrops: []
+  m_spaceShipBlueprintDropProbability: 1
+  m_spaceShipBlueprintDrops:
+  - probability: 1
+    spaceShip: 3
   m_durationForRecovery: 5
   m_recoveryDelay: 2
   m_recoveryRate: 0.05

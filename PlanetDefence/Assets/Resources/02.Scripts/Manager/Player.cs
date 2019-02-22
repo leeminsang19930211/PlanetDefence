@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private BulletData[] m_bulletDatas = null;
     private SpaceShipData[] m_spaceShipDatas = null;
     private TurretData[] m_turretDatas = null;
+    private int m_maxRsrc = 999;
    
     private delegate void LabProc(int idx);
     LabProc[] m_labProcs = new LabProc[(int)Lab.End];
@@ -304,18 +305,31 @@ public class Player : MonoBehaviour
     public void AddJunk(int junk)
     {
         m_junk += junk;
+
+        if (m_junk > m_maxRsrc)
+            m_junk = m_maxRsrc;
+
         BattleGameObjectMgr.Inst.UpdateJunkCnt(m_junk);
     }
 
     public void AddEleCircuit(int eleCircuit)
     {
         m_eleCircuit += eleCircuit;
+
+        if (m_eleCircuit > m_maxRsrc)
+            m_eleCircuit = m_maxRsrc;
+
+
         BattleGameObjectMgr.Inst.UpdateEleCircuitCnt(m_eleCircuit);
     }
 
     public void AddCoin(int coin)
     {
         m_coin += coin;
+
+        if (m_coin > m_maxRsrc)
+            m_coin = m_maxRsrc;
+
         BattleGameObjectMgr.Inst.UpdateCoinCnt(m_coin);
     }
 
@@ -324,6 +338,8 @@ public class Player : MonoBehaviour
         AudioManager.Inst.playUnlockSFX(AudioManager.eUnlockSFX.BluePrintSFX);
 
         m_turretInfos[(int)turret]._lock = false;
+
+        UnLockLabByTurret(turret);
     }
 
     public void UnLock(SpaceShipPart part)
@@ -383,8 +399,8 @@ public class Player : MonoBehaviour
             return BuyErr.NotEnoughRsrc;
         }
 
-        //m_junk -= TurretJunkCosts[BuildStartButtonIdx];
-        //m_eleCircuit -= TurretCircuitCosts[BuildStartButtonIdx];
+        m_junk -= TurretJunkCosts[BuildStartButtonIdx];
+        m_eleCircuit -= TurretCircuitCosts[BuildStartButtonIdx];
 
         UpdateRsrc();
 
@@ -482,7 +498,7 @@ public class Player : MonoBehaviour
 
         else
         {
-            //m_coin -= LabCoinCosts[LabStartButtonIdx];
+            m_coin -= LabCoinCosts[LabStartButtonIdx];
             UpdateRsrc();
             m_labInfos[LabStartButtonIdx].stacks += 1;
 
@@ -520,7 +536,7 @@ public class Player : MonoBehaviour
 
         else
         {
-            //m_coin -= RepairCoinCosts[RepairStartButtonIdx];
+            m_coin -= RepairCoinCosts[RepairStartButtonIdx];
             UpdateRsrc();
             m_spcPartInfos[RepairStartButtonIdx]._repaired = true;
 
@@ -742,25 +758,33 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < (int)Turret.End; ++i)
         {
-            if(i<= (int)Turret.Lv1_Missile)
+            if(i<= (int)Turret.Lv1_Laser)
             {
                 m_turretInfos[i]._lock = false;
             }
             else
             {
-                m_turretInfos[i]._lock = false;
+                m_turretInfos[i]._lock = true;
             }           
         }
 
         for (int i = 0; i < (int)Lab.End; ++i)
         {
-            m_labInfos[i]._lock = false;
+            if(i <= (int)Lab.IncLaserDuration)
+            {
+                m_labInfos[i]._lock = false;
+            }
+            else
+            {
+                m_labInfos[i]._lock = true;
+            }
+           
             m_labInfos[i].stacks = 0;
         }
 
         for (int i = 0; i < (int)SpaceShipPart.End; i++)
         {
-            m_spcPartInfos[i]._lock = false;
+           m_spcPartInfos[i]._lock = true;
            m_spcPartInfos[i]._repaired = false;
         }
         
@@ -793,5 +817,49 @@ public class Player : MonoBehaviour
         m_labProcs[(int)Lab.IncHealAmount] = LabProc_IncHealAmount;
         m_labProcs[(int)Lab.incBerserkerDamage] = LabProc_incBerserkerDamage;
         m_labProcs[(int)Lab.IncKingSlayerFireSpeed] = LabProc_IncKingSlayerFireSpeed;
+    }
+
+    private void UnLockLabByTurret(Turret turret)
+    {
+        switch (turret)
+        {
+            case Turret.Lv2_Shield:
+                m_labInfos[(int)Lab.DecShieldHitDamage]._lock = false;
+                break;
+            case Turret.Lv2_Poison:
+                m_labInfos[(int)Lab.IncPoisonDotDamage]._lock = false;
+                break;
+            case Turret.Lv2_Slow:
+                m_labInfos[(int)Lab.IncSlowDuration]._lock = false;
+                break;
+            case Turret.Lv2_Pause:
+                m_labInfos[(int)Lab.IncPauseDuration]._lock = false;
+                break;
+            case Turret.Lv3_Shield:
+                m_labInfos[(int)Lab.DecShieldHitDamage]._lock = false;
+                break;
+            case Turret.Lv3_Poison:
+                m_labInfos[(int)Lab.IncPoisonDotDamage]._lock = false;
+                break;
+            case Turret.Lv3_Slow:
+                m_labInfos[(int)Lab.IncSlowDuration]._lock = false;
+                break;
+            case Turret.Lv3_Pause:
+                m_labInfos[(int)Lab.IncPauseDuration]._lock = false;
+                break;
+
+            case Turret.Lv3_Sniper:
+                m_labInfos[(int)Lab.IncSniperFireSpeed]._lock = false;
+                break;
+            case Turret.Lv3_Heal:
+                m_labInfos[(int)Lab.IncHealAmount]._lock = false;
+                break;
+            case Turret.Lv3_Berserker:
+                m_labInfos[(int)Lab.incBerserkerDamage]._lock = false;
+                break;
+            case Turret.Lv3_KingSlayer:
+                m_labInfos[(int)Lab.IncKingSlayerFireSpeed]._lock = false;
+                break;
+        }
     }
 }
