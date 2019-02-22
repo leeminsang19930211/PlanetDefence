@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
         if (dropProbability == 0)
             return;
 
-        if (dropProbability < Random.Range(0, 1)) // 드랍되지 않음
+        if (dropProbability < Random.Range(0, 1f)) // 드랍되지 않음
             return;
 
         List<TurretBlueprintDropInfo> _dropInfos = new List<TurretBlueprintDropInfo>();
@@ -255,7 +255,7 @@ public class Player : MonoBehaviour
         if (dropProbability == 0)
             return;
 
-        if (dropProbability < Random.Range(0, 1)) // 드랍되지 않음
+        if (dropProbability < Random.Range(0, 1f)) // 드랍되지 않음
             return;
 
         List<SpaceShipBlueprintDropInfo> _dropInfos = new List<SpaceShipBlueprintDropInfo>();
