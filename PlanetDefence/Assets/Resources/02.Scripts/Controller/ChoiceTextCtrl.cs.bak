@@ -10,7 +10,7 @@ public class ChoiceTextCtrl : MonoBehaviour
 
     void UpdateDayText()
     {
-        DaysText.text = "Day " + GlobalGameObjectMgr.Inst.CurDay.ToString() + "/" + GlobalGameObjectMgr.Inst.MaxDay.ToString();
+        DaysText.text = GlobalGameObjectMgr.Inst.CurDay.ToString() + "/" + GlobalGameObjectMgr.Inst.MaxDay.ToString();
     }
 
     void OnEnable()
