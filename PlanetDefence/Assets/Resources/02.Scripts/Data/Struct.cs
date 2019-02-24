@@ -103,11 +103,19 @@ public class TurretData_Shield : TurretData
 }
 
 [Serializable]
+public class TurretData_KingSlayer : TurretData
+{
+    public float fireDelay;
+}
+
+
+[Serializable]
 public struct TurretBlueprintDropInfo
 {
     public float probability;
     public Turret turret;
 }
+
 
 [Serializable]
 public struct SpaceShipBlueprintDropInfo

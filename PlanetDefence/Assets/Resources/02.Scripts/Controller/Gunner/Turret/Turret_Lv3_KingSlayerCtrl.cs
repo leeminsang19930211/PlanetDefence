@@ -3,6 +3,28 @@ using System.Collections;
 
 public class Turret_Lv3_KingSlayerCtrl : TurretCtrl
 {
+    public override TurretData TurretData
+    {
+        get
+        {
+            TurretData_KingSlayer turretData = new TurretData_KingSlayer();
+
+            turretData.maxHP = m_maxHP;
+            turretData.fireDelay = m_fireDelay;
+
+            return turretData;
+        }
+
+        set
+        {
+            TurretData_KingSlayer turretData = (TurretData_KingSlayer)value;
+
+            m_maxHP = turretData.maxHP;
+            m_fireDelay = turretData.fireDelay;
+        }
+    }
+
+
     // Start is called before the first frame update
     private void Start()
     {

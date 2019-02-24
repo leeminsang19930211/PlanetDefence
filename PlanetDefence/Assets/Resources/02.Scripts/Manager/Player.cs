@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private int m_coin = 0;
 
     private int m_sourcJunk = 600;
-    private int m_sourcEleCircuit = 0;
+    private int m_sourcEleCircuit= 0;
     private int m_sourcCoin = 0;
 
     private TurretInfo[] m_turretInfos = new TurretInfo[(int)Turret.End];
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     };
     public int[] LabCoinCosts =
     {
-        200,100,100,100,200,200,100,100,100,100,100,100,120,120,120,120,150,150,150,150
+        200,100,100,300,200,200,100,100,100,100,100,100,120,120,120,120,150,150,150,150
     };
     public int[] LabMaxStacks =
     {
@@ -592,7 +592,7 @@ public class Player : MonoBehaviour
             if (sourceDatas[i] == null)
                 continue;
 
-            m_spaceShipDatas[i].maxHP = sourceDatas[i].maxHP - (int)(sourceDatas[i].maxHP * m_labInfos[idx].stacks * 0.1f);
+            m_spaceShipDatas[i].maxHP = sourceDatas[i].maxHP - (int)(sourceDatas[i].maxHP * m_labInfos[idx].stacks * 0.05f);
         }
     }
 
@@ -753,7 +753,11 @@ public class Player : MonoBehaviour
 
     private void LabProc_IncKingSlayerFireSpeed(int idx)
     {
+        TurretData_KingSlayer sourceData0 = (TurretData_KingSlayer)TurretMgr.Inst.GetSourceTurretData(Turret.Lv3_KingSlayer);
 
+        ((TurretData_KingSlayer)m_turretDatas[(int)Turret.Lv3_KingSlayer]).fireDelay = sourceData0.fireDelay - (sourceData0.fireDelay * m_labInfos[idx].stacks * 0.1f);
+
+        TurretMgr.Inst.UpdateTurretDatas();
     }
 
     private void UpdateAllByLabInfos()
