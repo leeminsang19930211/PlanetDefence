@@ -789,6 +789,7 @@ public class BattleGameObjectMgr : MonoBehaviour
 
     public void Launch()
     {
+        PopUpExit();
         m_brokenSpaceShip.GetComponent<BrokenSpaceShipCtrl>().Launch();
     }
 
