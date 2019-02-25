@@ -34,6 +34,8 @@ public class Bullet_Lv2_MissileCtrl : BulletCtrl
 
         foreach (RaycastHit2D hit in hits)
         {
+            if (hit.collider.gameObject == gameObject)
+                continue;
             if (hit.collider.tag == "SPACESHIP_NORMAL")
             {
                 SpaceShipCtrl ctrl = hit.collider.gameObject.GetComponent<SpaceShipCtrl>();

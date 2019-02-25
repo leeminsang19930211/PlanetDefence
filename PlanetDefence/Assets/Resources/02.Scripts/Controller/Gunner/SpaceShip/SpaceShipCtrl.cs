@@ -131,6 +131,7 @@ public  class SpaceShipCtrl : Gunner
 
     protected virtual void _OnPlanet()
     {
+        AudioManager.Inst.playExplosionSFX(m_trsf.position, m_explosionSound);
         PlanetCtrl.Inst.Hit(m_planetHitDamage);
         Die();
     }
