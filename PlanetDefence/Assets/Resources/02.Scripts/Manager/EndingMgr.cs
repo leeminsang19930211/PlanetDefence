@@ -81,6 +81,7 @@ public class EndingMgr : MonoBehaviour
                     else
                     {
                         m_result = eResult.Clear_Last;
+                        BattleGameObjectMgr.Inst.PopUpExit();
                         m_ending30Days.SetActive(true);
                     }
                 }
