@@ -15,20 +15,7 @@ public class BattleTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            SceneLoader.LoadScene("Lobby");
-        }
-
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-   
-        }
-
-        if(Input.GetKeyDown(KeyCode.F3))
-        {
-            FileMgr.Inst.SavePlayerData();
-        }
+     
 
     }
 }

@@ -60,6 +60,10 @@ public class BattleGameObjectMgr : MonoBehaviour
     private GameObject[] m_RepairInfoScrolls;
     private GameObject[] m_RepairImages_Black;
     public GameObject[] m_RepairStartButtons;
+
+    //추가
+    public GameObject m_RepairWarningNoBP;
+
     public GameObject m_RepairWarningAlready;
     private GameObject m_LaunchWarningNotRepaired;
     private GameObject m_LaunchWarning;
@@ -127,6 +131,10 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_RepairInfoScrolls = GameObject.FindGameObjectsWithTag("REPAIRINFO");
         m_RepairImages_Black = GameObject.FindGameObjectsWithTag("REPAIRIMAGE_BLACK");
         m_RepairStartButtons = GameObject.FindGameObjectsWithTag("REPAIRSTARTBUTTON");
+
+        //추가
+        m_RepairWarningNoBP = GameObject.Find("RepairWarningNoBP");
+
         m_RepairWarningAlready = GameObject.Find("RepairWarningAlready");
         m_LaunchWarningNotRepaired = GameObject.Find("LaunchWarningNotRepaired");
         m_LaunchWarning = GameObject.Find("LaunchWarningPanel");
@@ -292,6 +300,10 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_LabWarningNoBP.SetActive(false);
         m_LabWarningMax.SetActive(false);
         m_LabWarningNoRsrc.SetActive(false);
+
+        //추가
+        m_RepairWarningNoBP.SetActive(false);
+
         m_RepairWarningAlready.SetActive(false);
         m_LaunchWarningNotRepaired.SetActive(false);
         m_LaunchWarning.SetActive(false);
@@ -698,6 +710,10 @@ public class BattleGameObjectMgr : MonoBehaviour
         m_LabWarningNoBP.SetActive(false);
         m_LabWarningMax.SetActive(false);
         m_LabWarningNoRsrc.SetActive(false);
+
+        //추가
+        m_RepairWarningNoBP.SetActive(false);
+
         m_RepairWarningAlready.SetActive(false);
         m_LaunchWarningNotRepaired.SetActive(false);
         m_LaunchWarning.SetActive(false);

@@ -526,7 +526,8 @@ public class Player : MonoBehaviour
 
         if (false == Player.Inst.CheckUnLock((SpaceShipPart)RepairStartButtonIdx))
         {
-            BattleGameObjectMgr.Inst.m_LabWarningNoBP.SetActive(true);
+            // 수정
+            BattleGameObjectMgr.Inst.m_RepairWarningNoBP.SetActive(true);
             return RepairErr.NoBP;
         }
 

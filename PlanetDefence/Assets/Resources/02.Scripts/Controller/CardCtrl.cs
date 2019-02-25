@@ -62,6 +62,7 @@ public class CardCtrl : MonoBehaviour
             GameObject CardPrefab = MonoBehaviour.Instantiate((GameObject)Cards[nRandomInt]);
             CardPrefab.name = "Card";
             CardPrefab.transform.SetParent(Contents);
+            CardPrefab.transform.localScale = Vector3.one;
             CardsClone[i] = CardPrefab;
         }
     }
