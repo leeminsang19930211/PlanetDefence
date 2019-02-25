@@ -5,7 +5,6 @@ using UnityEngine;
 public class UnitHPBarCtrl : MonoBehaviour
 {
     public float m_pixelLength = 0;
-    //public float m_distFromPos = 0;
     public Transform m_targetTrsf = null;
     public Transform m_frontImgTrsf = null;
 

@@ -108,7 +108,8 @@ public  class SpaceShipCtrl : Gunner
 
         ChangeState(FirstState);
 
-        m_curHP += m_growHP * GlobalGameObjectMgr.Inst.CurDay;
+        m_maxHP += m_growHP * GlobalGameObjectMgr.Inst.CurDay;
+
 
         m_explosionSound = AudioManager.eExplosionSFX.SpaceshipBoomSFX;
 

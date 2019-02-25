@@ -43,10 +43,10 @@ public class BattleCtrl: MonoBehaviour
             //WavesMob[] infos = new WavesMob[1];
 
 
-            //infos[0].eMobType = MobType.Normal;
+            //infos[0].eMobType = MobType.GhostShip;
             //infos[0].nMobNum = 1;
-            //infos[0].fDelayTime = 3f;
-            //infos[0].fFirstDelayTime = 0f;
+            //infos[0].fDelayTime = 1f;
+            //infos[0].fFirstDelayTime = 1f;
 
             //infos[1].eMobType = MobType.Kamikaze;
             //infos[1].nMobNum = 2;
