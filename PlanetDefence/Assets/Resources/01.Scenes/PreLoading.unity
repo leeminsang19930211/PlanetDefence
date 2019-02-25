@@ -155,13 +155,15 @@ MonoBehaviour:
   BulletSFX:
   - {fileID: 8300000, guid: a79be32da58c3294cb74d185554393fa, type: 3}
   - {fileID: 8300000, guid: 100100e2fc67c0d4c81db4ee35479103, type: 3}
-  - {fileID: 8300000, guid: 39680f354cf5a9f43b4b1d959822bc08, type: 3}
+  - {fileID: 8300000, guid: e4a298f2b5564a34b98d434c6faa8235, type: 3}
   - {fileID: 8300000, guid: 95ee28a5a5b387543b4717e3726d4157, type: 3}
   - {fileID: 8300000, guid: ae99a6ecc8e93c5458eb8d28197a33f1, type: 3}
   - {fileID: 8300000, guid: b6696fca6093b3b40b8869b06486185a, type: 3}
   - {fileID: 8300000, guid: b85088e025f874a479079449ff4f0a59, type: 3}
   - {fileID: 8300000, guid: d7f9785e616c0df4ba5c3315be016999, type: 3}
   - {fileID: 8300000, guid: 8d84c3c1d94e2514b91a68543b134cf2, type: 3}
+  - {fileID: 8300000, guid: 39680f354cf5a9f43b4b1d959822bc08, type: 3}
+  - {fileID: 8300000, guid: f03003ca1afd172489908702636ae5e4, type: 3}
   SpaceshipSFX:
   - {fileID: 8300000, guid: f631a8458501a7847851c001aae9e922, type: 3}
   - {fileID: 8300000, guid: 3f85b3548ab2f3246887a0b198f33e7b, type: 3}

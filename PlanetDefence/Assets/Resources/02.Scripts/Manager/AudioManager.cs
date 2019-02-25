@@ -31,6 +31,8 @@ public class AudioManager : MonoBehaviour
         SniperSFX,
         HealSFX,
         KingSlayerSFX,
+        FastSFX,
+        BerserkerSFX,
         Max
     }
 

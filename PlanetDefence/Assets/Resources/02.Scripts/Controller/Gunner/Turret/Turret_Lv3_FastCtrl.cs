@@ -29,7 +29,7 @@ public class Turret_Lv3_FastCtrl : TurretCtrl
         m_bulletPool = BulletPool.Turret;
 
 
-        m_blasterSound = AudioManager.eBulletSFX.GatlingSFX;
+        m_blasterSound = AudioManager.eBulletSFX.FastSFX;
         m_turretType = Turret.Lv3_Fast;
 
         base.Init();
