@@ -549,6 +549,8 @@ public class Player : MonoBehaviour
             UpdateRsrc();
             m_spcPartInfos[RepairStartButtonIdx]._repaired = true;
 
+            AudioManager.Inst.playUnlockSFX(AudioManager.eUnlockSFX.ResearchSFX);
+
             // 추가
             BattleGameObjectMgr.Inst.RepairInfosExit();
 
