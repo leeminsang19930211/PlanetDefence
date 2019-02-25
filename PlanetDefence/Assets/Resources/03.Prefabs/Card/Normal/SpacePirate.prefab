@@ -56,7 +56,7 @@ MonoBehaviour:
   Waves:
   - eMobType: 2
     nMobNum: 2
-    fDelayTime: 0
+    fDelayTime: 5
     fFirstDelayTime: 15
   - eMobType: 7
     nMobNum: 10
