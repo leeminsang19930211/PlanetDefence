@@ -180,7 +180,7 @@ public class SpaceShipMgr : MonoBehaviour
 
         Transform parentTrsf = GameObject.FindGameObjectWithTag("BATTLESTATIC")?.GetComponent<Transform>();
 
-        CreateSpaceShip(spaceShip, pos, angle, parentTrsf, state);
+        CreateSpaceShip(spaceShip, pos, angle, parentTrsf, 0, state);
 
         return true;
     }
@@ -443,7 +443,7 @@ public class SpaceShipMgr : MonoBehaviour
         {
             while (curSapceShipNum < wrappedWaveInfo.spaceShipNum)
             {
-                CreateSpaceShip(wrappedWaveInfo.spaceShip, parentTrsf);
+                CreateSpaceShip(wrappedWaveInfo.spaceShip, parentTrsf, curSapceShipNum);
 
                 curSapceShipNum += 1;
                 
@@ -452,15 +452,18 @@ public class SpaceShipMgr : MonoBehaviour
         }  
     }
 
-    private void CreateSpaceShip(GameObject source, Transform parentTrsf)
+    private void CreateSpaceShip(GameObject source, Transform parentTrsf, int num)
     {
-        CreateSpaceShip(source, new Vector3(0, 1000f, 0), Quaternion.Euler(0, 0, 0), parentTrsf);
+        CreateSpaceShip(source, new Vector3(0, 1000f, 0), Quaternion.Euler(0, 0, 0), parentTrsf, num);
     }
 
-    private void CreateSpaceShip(GameObject source, Vector3 pos, Quaternion angle, Transform parentTrsf, SpaceShipCtrl.STATE state = SpaceShipCtrl.STATE.FALLING)
+    private void CreateSpaceShip(GameObject source, Vector3 pos, Quaternion angle, Transform parentTrsf,int num, SpaceShipCtrl.STATE state = SpaceShipCtrl.STATE.FALLING)
     {
+        GameObject obj = null;
         SpaceShipCtrl ctrl = null;
-        ctrl = Instantiate(source, pos, angle, parentTrsf)?.GetComponent<SpaceShipCtrl>();
+        obj = Instantiate(source, pos, angle, parentTrsf);
+        obj.GetComponent<SpriteRenderer>().sortingOrder = num;
+        ctrl = obj.GetComponent<SpaceShipCtrl>();
         ctrl.BulletPoolIdx = m_createdSpaceShipCnt;
         ctrl.Clone = true;
         ctrl.FirstState = state;
